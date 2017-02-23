@@ -4,6 +4,6 @@
         xmlns:wpfLabs="clr-namespace:WpfLabs"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <wpfLabs:ContactsTree/>
+        <wpfLabs:ContactsTree ItemsSource="{Binding ContactsTreeSource}" SelectedPeople="ContactsTree_OnSelectedPeople" ShowDetail="ContactsTree_OnShowDetail" CallPhone="ContactsTree_OnCallPhone"/>
     </Grid>
 </Window>

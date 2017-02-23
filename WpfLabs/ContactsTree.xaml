@@ -4,54 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:WpfLabs.Models"
+             xmlns:wpfLabs="clr-namespace:WpfLabs"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
-            <!--内部TextBlock样式-->
-            <Style x:Key="TreeViewItemTextStyle" TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="White"></Setter>
-            </Style>
-            <!-- 针对ToggleButton的默认样式修改 -->
-            <Style TargetType="TreeView">
-                <Setter Property="Background" Value="#02335B"></Setter>
-            </Style>
-            <!-- 针对ToggleButton的默认样式修改 -->
-            <Style x:Key="ButtonFocusVisual">
-                <Setter Property="Control.Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
-                <GradientStop Color="#F3F3F3" Offset="0"/>
-                <GradientStop Color="#EBEBEB" Offset="0.5"/>
-                <GradientStop Color="#DDDDDD" Offset="0.5"/>
-                <GradientStop Color="#CDCDCD" Offset="1"/>
-            </LinearGradientBrush>
-            <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-                <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
-                <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <!--ToggleButton-->
+            <Style TargetType="{x:Type ToggleButton}">
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="Padding" Value="1"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <!--内容横向伸展，支持更大范围选中-->
+                            <ContentPresenter HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#57BDDE"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
-            <!-- 修改TreeViewItem的默认样式 -->
+            <!--TreeItem样式-->
             <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                 <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                 <Setter Property="Padding" Value="1,0,0,0"/>
-                <Setter Property="Cursor" Value="Hand"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -65,24 +50,27 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1" Padding="{TemplateBinding Padding}">
-                                    <ToggleButton x:Name="Expander" SnapsToDevicePixels="true" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ToggleButtonStyle}">
+                                <Border x:Name="Bd" Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                    <ToggleButton x:Name="Expander" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Checked="Node_OnSelected">
                                         <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                     </ToggleButton>
                                 </Border>
-                                <ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+                                <Border Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" x:Name="ItemsHostBorder">
+                                    <ItemsPresenter x:Name="ItemsHost"/>
+                                </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsExpanded" Value="false">
-                                    <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                                    <Setter Property="Visibility" TargetName="ItemsHostBorder" Value="Collapsed"/>
                                 </Trigger>
-                                <Trigger Property="HasItems" Value="false">
+                                <!--<Trigger Property="HasItems" Value="false">
                                     <Setter Property="IsEnabled" TargetName="Expander" Value="False"/>
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="true">
-                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                    <Setter Property="IsExpanded" Value="True"></Setter>
-                                </Trigger>
+                                </Trigger>-->
+                                <!--<Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Background" TargetName="Bd" Value="Red"/>
+                                    <Setter Property="Foreground" TargetName="Expander" Value="Red"/>
+                                </Trigger>-->
+                                <!--todo:待删除，TreeViewItem的IsSelected失效-->
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsSelected" Value="true"/>
@@ -112,7 +100,7 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <TreeView ItemsSource="{Binding ContactsTreeSource}">
+    <TreeView x:Name="ContactsTreeView" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type wpfLabs:ContactsTree}}}">
         <TreeView.ItemTemplate>
             <HierarchicalDataTemplate DataType="{x:Type models:OrganizationModel}" ItemsSource="{Binding OrganizationChildren}">
                 <WrapPanel>
@@ -120,11 +108,43 @@
                     <TextBlock Text="{Binding Name}"></TextBlock>
                 </WrapPanel>
                 <HierarchicalDataTemplate.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type models:PeopleModel}" ItemsSource="{Binding PeopleChildren}">
-                        <WrapPanel>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                            <Image Source="Resources/Telephone.png"></Image>
-                        </WrapPanel>
+                    <HierarchicalDataTemplate DataType="{x:Type models:OrganizationModel}" ItemsSource="{Binding PeopleChildren}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Icon}"></Image>
+                            <TextBlock Grid.Column="1" Text="{Binding Name}"></TextBlock>
+                        </Grid>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:PeopleModel}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition MinWidth="19" Width="Auto"/>
+                                        <ColumnDefinition MaxWidth="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="1" Text="{Binding Name}"></TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <Button Click="ShowDetail_OnClick">
+                                            <Button.Template>
+                                                <ControlTemplate>
+                                                    <Image Source="Resources/Telephone.png"></Image>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                        <Button Click="CallPhone_OnClick">
+                                            <Button.Template>
+                                                <ControlTemplate>
+                                                    <Image Source="Resources/Telephone.png"></Image>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </WrapPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
                     </HierarchicalDataTemplate>
                 </HierarchicalDataTemplate.ItemTemplate>
             </HierarchicalDataTemplate>
