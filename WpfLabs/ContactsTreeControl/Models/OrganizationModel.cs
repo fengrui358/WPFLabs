@@ -14,7 +14,7 @@ namespace WpfLabs.ContactsTreeControl.Models
         private List<OrganizationModel> _organizationChildren;
         private List<PeopleModel> _peopleModel;
 
-        private long Id
+        public long Id
         {
             get { return _id; }
             set { Set(ref _id, value); }

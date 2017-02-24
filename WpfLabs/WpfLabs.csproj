@@ -52,6 +52,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +79,13 @@
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ContactsTreeControl\Models\PeopleModel.cs" />
+    <Compile Include="ExpertPanel\ExpertPanel.xaml.cs">
+      <DependentUpon>ExpertPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpertPanel\ExpertPanelWindow.xaml.cs">
+      <DependentUpon>ExpertPanelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpertPanel\Models\ExpertModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="ContactsTreeControl\ContactsTree.xaml">
@@ -84,6 +93,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContactsTreeControl\ContactsTreeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExpertPanel\ExpertPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExpertPanel\ExpertPanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,7 +154,13 @@
     <Resource Include="ContactsTreeControl\Resources\Telephone_s.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ExpertPanel\" />
+    <Resource Include="ExpertPanel\Resources\TestPortrait.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ExpertPanel\Resources\Telephone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ExpertPanel\Resources\TestPolice.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

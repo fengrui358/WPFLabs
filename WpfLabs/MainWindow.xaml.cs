@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
+using WpfLabs.ExpertPanel;
 
 namespace WpfLabs
 {
@@ -43,7 +44,9 @@ namespace WpfLabs
                     var contactsTreeWindow = new ContactsTreeWindow();
                     contactsTreeWindow.ShowDialog();
                     break;
-                case "":
+                case "ExpertPanel":
+                    var expertPanelWindow = new ExpertPanelWindow();
+                    expertPanelWindow.ShowDialog();
                     break;
             }
         }

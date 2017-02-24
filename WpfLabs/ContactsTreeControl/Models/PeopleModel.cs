@@ -7,7 +7,7 @@ namespace WpfLabs.ContactsTreeControl.Models
         private long _id;
         private string _name;
 
-        private long Id
+        public long Id
         {
             get { return _id; }
             set { Set(ref _id, value); }

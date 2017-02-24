@@ -13,7 +13,7 @@
     <Grid>
         <StackPanel>
             <Button Content="展示通讯录树" Command="{Binding ShowControlWindow}" CommandParameter="ContactsTree" />
-            <Button Content="展示专家面板" Command="{Binding ShowControlWindow}" CommandParameter="ContactsTree" />
+            <Button Content="展示专家面板" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel" />
         </StackPanel>
     </Grid>
 </Window>

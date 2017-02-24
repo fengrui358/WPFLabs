@@ -20,18 +20,14 @@ namespace WpfLabs.ContactsTreeControl
     /// <summary>
     /// ContactsTreeWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ContactsTreeWindow : Window, INotifyPropertyChanged
+    public partial class ContactsTreeWindow : Window
     {
         private List<OrganizationModel> _contactsTreeSource;
 
         public List<OrganizationModel> ContactsTreeSource
         {
             get { return _contactsTreeSource; }
-            set
-            {
-                _contactsTreeSource = value;
-                OnPropertyChanged();
-            }
+            set { _contactsTreeSource = value; }
         }
 
         public ContactsTreeWindow()
@@ -40,7 +36,6 @@ namespace WpfLabs.ContactsTreeControl
 
             DataContext = this;
             InitSource();
-
         }
 
         private void InitSource()
@@ -85,14 +80,6 @@ namespace WpfLabs.ContactsTreeControl
             }
 
             ContactsTreeSource = mockDatas;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void ContactsTree_OnShowDetail(object sender, RoutedPropertyChangedEventArgs<PeopleModel> e)

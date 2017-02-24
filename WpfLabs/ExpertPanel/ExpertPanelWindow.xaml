@@ -1,0 +1,9 @@
+﻿<Window x:Class="WpfLabs.ExpertPanel.ExpertPanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:expertPanel="clr-namespace:WpfLabs.ExpertPanel"
+        Title="ExpertPanelWindow" Height="600" Width="1300">
+    <Grid>
+        <expertPanel:ExpertPanel ItemsSource="{Binding ExpertsSource}"/>
+    </Grid>
+</Window>
