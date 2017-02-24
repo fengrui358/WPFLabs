@@ -106,7 +106,8 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <TreeView x:Name="ContactsTreeView" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type wpfLabs:ContactsTree}}}">
+    <Grid IsSharedSizeScope="True">
+        <TreeView x:Name="ContactsTreeView" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type wpfLabs:ContactsTree}}}">
         <TreeView.ItemTemplate>
             <HierarchicalDataTemplate DataType="{x:Type models:OrganizationModel}" ItemsSource="{Binding OrganizationChildren}">
                 <Grid>
@@ -132,8 +133,8 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition MinWidth="19" Width="Auto"/>
-                                        <ColumnDefinition MaxWidth="200"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="PeopleName"></ColumnDefinition>
+                                        <ColumnDefinition Width="*" SharedSizeGroup="PeopleOperate"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5" FontSize="15"></TextBlock>
                                     <WrapPanel Grid.Column="2">
@@ -160,4 +161,5 @@
             </HierarchicalDataTemplate>
         </TreeView.ItemTemplate>
     </TreeView>
+    </Grid>
 </UserControl>
