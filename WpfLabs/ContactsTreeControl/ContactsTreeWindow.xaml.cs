@@ -43,11 +43,6 @@ namespace WpfLabs.ContactsTreeControl
 
         }
 
-        private void ContactsTree_OnSelectedPeople(PeopleModel obj)
-        {
-            MessageBox.Show("选中" + obj.Name);
-        }
-
         private void InitSource()
         {
             var mockDatas = new List<OrganizationModel>();
@@ -100,14 +95,28 @@ namespace WpfLabs.ContactsTreeControl
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void ContactsTree_OnShowDetail(PeopleModel obj)
+        private void ContactsTree_OnShowDetail(object sender, RoutedPropertyChangedEventArgs<PeopleModel> e)
         {
-            MessageBox.Show("显示详细" + obj.Name);
+            var oldName = e.OldValue != null ? e.OldValue.Name : "空";
+            var newName = e.NewValue.Name;
+
+            MessageBox.Show(string.Format("触发显示详细，旧值：{0}，新值：{1}", oldName, newName));
         }
 
-        private void ContactsTree_OnCallPhone(PeopleModel obj)
+        private void ContactsTree_OnCallPhone(object sender, RoutedPropertyChangedEventArgs<PeopleModel> e)
         {
-            MessageBox.Show("打电话" + obj.Name);
+            var oldName = e.OldValue != null ? e.OldValue.Name : "空";
+            var newName = e.NewValue.Name;
+
+            MessageBox.Show(string.Format("触发打电话，旧值：{0}，新值：{1}", oldName, newName));
+        }
+
+        private void ContactsTree_OnSelectedPeopleChanged(object sender, RoutedPropertyChangedEventArgs<PeopleModel> e)
+        {
+            var oldName = e.OldValue != null ? e.OldValue.Name : "空";
+            var newName = e.NewValue.Name;
+
+            MessageBox.Show(string.Format("触发选中，旧值：{0}，新值：{1}", oldName, newName));
         }
     }
 }

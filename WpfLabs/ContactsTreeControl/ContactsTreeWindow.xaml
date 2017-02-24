@@ -4,6 +4,6 @@
         xmlns:contactsTreeControl="clr-namespace:WpfLabs.ContactsTreeControl"
         Title="ContactsTreeWindow" Height="300" Width="300">
     <Grid>
-        <contactsTreeControl:ContactsTree ItemsSource="{Binding ContactsTreeSource}" SelectedPeople="ContactsTree_OnSelectedPeople" ShowDetail="ContactsTree_OnShowDetail" CallPhone="ContactsTree_OnCallPhone"/>
+        <contactsTreeControl:ContactsTree ItemsSource="{Binding ContactsTreeSource}" SelectedPeopleChanged="ContactsTree_OnSelectedPeopleChanged" ShowDetail="ContactsTree_OnShowDetail" CallPhone="ContactsTree_OnCallPhone"/>
     </Grid>
 </Window>

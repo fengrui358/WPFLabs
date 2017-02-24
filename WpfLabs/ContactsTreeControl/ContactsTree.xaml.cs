@@ -12,27 +12,77 @@ namespace WpfLabs.ContactsTreeControl
     public partial class ContactsTree : UserControl
     {
         /// <summary>
-        /// 当前选中的用户
+        /// 上一次选中联系人
+        /// </summary>
+        private PeopleModel _lastSelectedPeopleModel;
+
+        /// <summary>
+        /// 当前选中的联系人
         /// </summary>
         private PeopleModel _currentSelectedPeopleModel;
 
         /// <summary>
-        /// 触发选中用户
+        /// 上一个打电话联系人
         /// </summary>
-        public event Action<PeopleModel> SelectedPeople;
+        private PeopleModel _lastCallPhonePeopleModel;
+
+        /// <summary>
+        /// 当前打电话联系人
+        /// </summary>
+        private PeopleModel _currentCallPhonePeopleModel;
+
+        /// <summary>
+        /// 上一个显示详细联系人
+        /// </summary>
+        private PeopleModel _lastShowDetailPeopleModel;
+
+        /// <summary>
+        /// 当前显示详细联系人
+        /// </summary>
+        private PeopleModel _currentShowDetailPeopleModel;
+
+        public static readonly RoutedEvent SelectedPeopleChangedEvent =
+            EventManager.RegisterRoutedEvent("SelectedPeopleChanged", RoutingStrategy.Bubble,
+                typeof(RoutedPropertyChangedEventHandler<PeopleModel>), typeof(ContactsTree));
+
+        /// <summary>
+        /// 选中人员变更
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<PeopleModel> SelectedPeopleChanged
+        {
+            add { AddHandler(SelectedPeopleChangedEvent, value); }
+            remove { RemoveHandler(SelectedPeopleChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent ShowDetailEvent =
+            EventManager.RegisterRoutedEvent("ShowDetail", RoutingStrategy.Bubble,
+                typeof(RoutedPropertyChangedEventHandler<PeopleModel>), typeof(ContactsTree));
 
         /// <summary>
         /// 触发显示详细
         /// </summary>
-        public event Action<PeopleModel> ShowDetail;
+        public event RoutedPropertyChangedEventHandler<PeopleModel> ShowDetail
+        {
+            add { AddHandler(ShowDetailEvent, value); }
+            remove { RemoveHandler(ShowDetailEvent, value); }
+        }
+
+        public static readonly RoutedEvent CallPhoneEvent =
+            EventManager.RegisterRoutedEvent("CallPhone", RoutingStrategy.Bubble,
+                typeof(RoutedPropertyChangedEventHandler<PeopleModel>), typeof(ContactsTree));
 
         /// <summary>
         /// 触发打电话
         /// </summary>
-        public event Action<PeopleModel> CallPhone; 
+        public event RoutedPropertyChangedEventHandler<PeopleModel> CallPhone
+        {
+            add { AddHandler(CallPhoneEvent, value); }
+            remove { RemoveHandler(CallPhoneEvent, value); }
+        }
 
         public static readonly DependencyProperty ItemSourcesProperty = DependencyProperty.Register(
-            "ItemsSource", typeof(List<OrganizationModel>), typeof(ContactsTree), new PropertyMetadata(default(List<OrganizationModel>)));
+            "ItemsSource", typeof(List<OrganizationModel>), typeof(ContactsTree),
+            new PropertyMetadata(default(List<OrganizationModel>)));
 
         /// <summary>
         /// 联系人树的数据源
@@ -70,11 +120,7 @@ namespace WpfLabs.ContactsTreeControl
             var people = ((FrameworkElement) sender).DataContext as PeopleModel;
 
             SetCurrentSelectedPeople(people);
-
-            if (ShowDetail != null && people != null)
-            {
-                ShowDetail(people);
-            }
+            SetCurrentShowDetail(people);
         }
 
         /// <summary>
@@ -84,18 +130,14 @@ namespace WpfLabs.ContactsTreeControl
         /// <param name="e"></param>
         private void CallPhone_OnClick(object sender, RoutedEventArgs e)
         {
-            var people = ((FrameworkElement)sender).DataContext as PeopleModel;
+            var people = ((FrameworkElement) sender).DataContext as PeopleModel;
 
             SetCurrentSelectedPeople(people);
-
-            if (CallPhone != null && people != null)
-            {
-                CallPhone(people);
-            }
+            SetCurrentCallPhone(people);
         }
 
         /// <summary>
-        /// 设置当前选中联系人
+        /// 设置当前选中联系人并触发事件
         /// </summary>
         /// <param name="currentPeopleModel"></param>
         private void SetCurrentSelectedPeople(PeopleModel currentPeopleModel)
@@ -103,13 +145,57 @@ namespace WpfLabs.ContactsTreeControl
             //判断选中的节点是否是联系人，如果是才进行后续的操作
             if (currentPeopleModel != null && _currentSelectedPeopleModel != currentPeopleModel)
             {
+                _lastSelectedPeopleModel = _currentSelectedPeopleModel;
                 _currentSelectedPeopleModel = currentPeopleModel;
 
-                //触发事件通知
-                if (SelectedPeople != null)
-                {
-                    SelectedPeople(_currentSelectedPeopleModel);
-                }
+                RoutedPropertyChangedEventArgs<PeopleModel> args =
+                    new RoutedPropertyChangedEventArgs<PeopleModel>(_lastSelectedPeopleModel,
+                        _currentSelectedPeopleModel);
+
+                args.RoutedEvent = SelectedPeopleChangedEvent;
+                RaiseEvent(args);
+            }
+        }
+
+        /// <summary>
+        /// 设置当前打电话的联系人并触发事件
+        /// </summary>
+        /// <param name="currentPeopleModel"></param>
+        private void SetCurrentCallPhone(PeopleModel currentPeopleModel)
+        {
+            //判断选中的节点是否是联系人，如果是才进行后续的操作
+            if (currentPeopleModel != null)
+            {
+                _lastCallPhonePeopleModel = _currentCallPhonePeopleModel;
+                _currentCallPhonePeopleModel = currentPeopleModel;
+
+                RoutedPropertyChangedEventArgs<PeopleModel> args =
+                    new RoutedPropertyChangedEventArgs<PeopleModel>(_lastCallPhonePeopleModel,
+                        _currentCallPhonePeopleModel);
+
+                args.RoutedEvent = CallPhoneEvent;
+                RaiseEvent(args);
+            }
+        }
+
+        /// <summary>
+        /// 设置当前显示详细的联系人并触发事件
+        /// </summary>
+        /// <param name="currentPeopleModel"></param>
+        private void SetCurrentShowDetail(PeopleModel currentPeopleModel)
+        {
+            //判断选中的节点是否是联系人，如果是才进行后续的操作
+            if (currentPeopleModel != null)
+            {
+                _lastShowDetailPeopleModel = _currentShowDetailPeopleModel;
+                _currentShowDetailPeopleModel = currentPeopleModel;
+
+                RoutedPropertyChangedEventArgs<PeopleModel> args =
+                    new RoutedPropertyChangedEventArgs<PeopleModel>(_lastShowDetailPeopleModel,
+                        _currentShowDetailPeopleModel);
+
+                args.RoutedEvent = ShowDetailEvent;
+                RaiseEvent(args);
             }
         }
     }
