@@ -73,10 +73,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\PeopleModel.cs" />
+    <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
+      <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContactsTreeControl\Models\PeopleModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="ContactsTree.xaml">
+    <Page Include="ContactsTreeControl\ContactsTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContactsTreeControl\ContactsTreeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,7 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ContactsTree.xaml.cs">
+    <Compile Include="ContactsTreeControl\ContactsTree.xaml.cs">
       <DependentUpon>ContactsTree.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -97,7 +104,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\OrganizationModel.cs" />
+    <Compile Include="ContactsTreeControl\Models\OrganizationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,8 +133,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Telephone.png" />
-    <Resource Include="Resources\Telephone_s.png" />
+    <Resource Include="ContactsTreeControl\Resources\Telephone.png" />
+    <Resource Include="ContactsTreeControl\Resources\Telephone_s.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

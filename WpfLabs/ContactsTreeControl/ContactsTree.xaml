@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="WpfLabs.ContactsTree"
+﻿<UserControl x:Class="WpfLabs.ContactsTreeControl.ContactsTree"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:models="clr-namespace:WpfLabs.Models"
              xmlns:wpfLabs="clr-namespace:WpfLabs"
+             xmlns:models1="clr-namespace:WpfLabs.ContactsTreeControl.Models"
+             xmlns:contactsTreeControl="clr-namespace:WpfLabs.ContactsTreeControl"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -107,9 +108,9 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid IsSharedSizeScope="True">
-        <TreeView x:Name="ContactsTreeView" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type wpfLabs:ContactsTree}}}">
+        <TreeView x:Name="ContactsTreeView" ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type contactsTreeControl:ContactsTree}}}">
         <TreeView.ItemTemplate>
-            <HierarchicalDataTemplate DataType="{x:Type models:OrganizationModel}" ItemsSource="{Binding OrganizationChildren}">
+            <HierarchicalDataTemplate DataType="{x:Type models1:OrganizationModel}" ItemsSource="{Binding OrganizationChildren}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -119,7 +120,7 @@
                     <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5" FontSize="15"></TextBlock>
                 </Grid>
                 <HierarchicalDataTemplate.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type models:OrganizationModel}" ItemsSource="{Binding PeopleChildren}">
+                    <HierarchicalDataTemplate DataType="{x:Type models1:OrganizationModel}" ItemsSource="{Binding PeopleChildren}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -129,7 +130,7 @@
                             <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5" FontSize="15"></TextBlock>
                         </Grid>
                         <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate DataType="{x:Type models:PeopleModel}">
+                            <DataTemplate DataType="{x:Type models1:PeopleModel}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition MinWidth="19" Width="Auto"/>
