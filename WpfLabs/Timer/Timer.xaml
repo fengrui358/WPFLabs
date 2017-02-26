@@ -28,20 +28,20 @@
                 <RowDefinition Height="6*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Viewbox Grid.Row="1">
+            <Viewbox Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+                <Viewbox.RenderTransform>
+                    <RotateTransform x:Name="TimeLineRotateTransform" Angle="0"></RotateTransform>
+                </Viewbox.RenderTransform>
+                <Viewbox.Triggers>
+                    <EventTrigger RoutedEvent="Viewbox.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="360" RepeatBehavior="Forever" Duration="0:0:59" Storyboard.TargetName="TimeLineRotateTransform" Storyboard.TargetProperty="Angle"></DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Viewbox.Triggers>
                 <Canvas Width="100" Height="100">
-                    <Canvas.RenderTransform>
-                        <RotateTransform x:Name="TimeLineRotateTransform" Angle="0"></RotateTransform>
-                    </Canvas.RenderTransform>
-                    <Canvas.Triggers>
-                        <EventTrigger RoutedEvent="Canvas.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation From="0" To="360" RepeatBehavior="Forever" Duration="0:1:0" Storyboard.TargetName="TimeLineRotateTransform" Storyboard.TargetProperty="Angle"></DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Canvas.Triggers>
                     <Ellipse Width="3" Height="3" Canvas.Left="48.5" Canvas.Top="-1" Panel.ZIndex="100" Fill="White" Opacity="0.7"/>
                     <Ellipse Width="5" Height="5" Canvas.Left="47.5" Canvas.Top="-2" Panel.ZIndex="101" Fill="White">
                         <Ellipse.Effect>
