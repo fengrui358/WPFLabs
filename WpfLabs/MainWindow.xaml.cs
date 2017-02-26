@@ -18,6 +18,7 @@ using GalaSoft.MvvmLight.Command;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.ExpertPanel;
+using WpfLabs.Timer;
 
 namespace WpfLabs
 {
@@ -47,6 +48,10 @@ namespace WpfLabs
                 case "ExpertPanel":
                     var expertPanelWindow = new ExpertPanelWindow();
                     expertPanelWindow.ShowDialog();
+                    break;
+                case "Timer":
+                    var timerWindow = new TimerWindow();
+                    timerWindow.ShowDialog();
                     break;
             }
         }
