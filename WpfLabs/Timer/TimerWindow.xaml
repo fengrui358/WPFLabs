@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="TimerWindow" Height="300" Width="300" Loaded="TimerWindow_OnLoaded">
     <Grid>
-        <local:Timer IsStart="{Binding IsStart}"></local:Timer>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <local:Timer x:Name="Timer" Grid.Row="0" IsStart="{Binding IsStart}"></local:Timer>
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="{Binding ElementName=Timer, Path=TotalSeconds, StringFormat=总耗时:{0}}"></TextBlock>
     </Grid>
 </Window>

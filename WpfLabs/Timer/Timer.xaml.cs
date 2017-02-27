@@ -23,7 +23,7 @@ namespace WpfLabs.Timer
     /// <summary>
     /// Timer.xaml 的交互逻辑
     /// </summary>
-    public partial class Timer : UserControl, INotifyPropertyChanged
+    public partial class Timer : UserControl, INotifyPropertyChanged, IDisposable
     {
         private DateTime _startTime;
         private System.Threading.Timer _timer;
@@ -134,6 +134,16 @@ namespace WpfLabs.Timer
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void Dispose()
+        {
+            if (_timer != null)
+            {
+                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                _timer.Dispose();
+                _timer = null;
+            }
         }
     }
 }
