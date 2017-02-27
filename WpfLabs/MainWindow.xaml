@@ -15,6 +15,7 @@
             <Button Content="展示通讯录树" Command="{Binding ShowControlWindow}" CommandParameter="ContactsTree" />
             <Button Content="展示专家面板" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel" />
             <Button Content="展示计时器面板" Command="{Binding ShowControlWindow}" CommandParameter="Timer" />
+            <Button Content="展示音频播放器" Command="{Binding ShowControlWindow}" CommandParameter="MusicPlayer" />
         </StackPanel>
     </Grid>
 </Window>
