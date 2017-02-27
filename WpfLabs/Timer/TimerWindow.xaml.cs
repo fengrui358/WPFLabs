@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,11 +19,41 @@ namespace WpfLabs.Timer
     /// <summary>
     /// TimerWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class TimerWindow : Window
+    public partial class TimerWindow : Window, INotifyPropertyChanged
     {
+        private bool _isStart;
+
+        /// <summary>
+        /// 是否正在运行
+        /// </summary>
+        public bool IsStart
+        {
+            get { return _isStart; }
+            private set
+            {
+                _isStart = value;
+                OnPropertyChanged();
+            }
+        }
+
         public TimerWindow()
         {
             InitializeComponent();
+
+            DataContext = this;
+        }
+
+        private void TimerWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            IsStart = true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

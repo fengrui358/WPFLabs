@@ -5,14 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WpfLabs.Timer"
              xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             xmlns:converters="clr-namespace:WpfLabs.Timer.Converters"
              mc:Ignorable="d"
              d:DesignHeight="390" d:DesignWidth="480">
+    <UserControl.Resources>
+        <converters:TimerStringConverter x:Key="TimerStringConverter"></converters:TimerStringConverter>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#8B92AE">
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0.9,0">
+                    <GradientStop Color="#515680" Offset="0.6"></GradientStop>
+                    <GradientStop Color="#9C9DB2" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="5*" />
@@ -22,7 +32,13 @@
                 <TextBlock Text="计时器" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
             </Viewbox>
         </Grid>
-        <Grid Grid.Row="1" Background="#6B73A1">
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0.9,1">
+                    <GradientStop Color="#6B73A1" Offset="0.6"></GradientStop>
+                    <GradientStop Color="#C3B8C6" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="6*"></RowDefinition>
@@ -75,7 +91,7 @@
                 <Viewbox Grid.Row="1" SnapsToDevicePixels="True">
                     <Border Width="12" Height="12" Background="White" CornerRadius="6,6,6,6" Padding="1" SnapsToDevicePixels="True">
                         <Viewbox>
-                            <TextBlock SnapsToDevicePixels="True" Foreground="#2CD5CC">00:08:56</TextBlock>
+                            <TextBlock SnapsToDevicePixels="True" Foreground="#2CD5CC" Text="{Binding TotalSeconds, Converter={StaticResource TimerStringConverter}, RelativeSource={RelativeSource AncestorType=local:Timer}, Mode=OneWay}"></TextBlock>
                         </Viewbox>
                     </Border>
                 </Viewbox>

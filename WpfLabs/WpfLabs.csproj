@@ -87,6 +87,7 @@
       <DependentUpon>ExpertPanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpertPanel\Models\ExpertModel.cs" />
+    <Compile Include="Timer\Converters\TimerStringConverter.cs" />
     <Compile Include="Timer\Timer.xaml.cs">
       <DependentUpon>Timer.xaml</DependentUpon>
     </Compile>

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.Timer"
         mc:Ignorable="d"
-        Title="TimerWindow" Height="300" Width="300">
+        Title="TimerWindow" Height="300" Width="300" Loaded="TimerWindow_OnLoaded">
     <Grid>
-        <local:Timer></local:Timer>
+        <local:Timer IsStart="{Binding IsStart}"></local:Timer>
     </Grid>
 </Window>
