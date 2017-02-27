@@ -8,8 +8,38 @@
              xmlns:converters="clr-namespace:WpfLabs.Timer.Converters"
              mc:Ignorable="d"
              d:DesignHeight="390" d:DesignWidth="480">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="local:Timer.Started">
+            <BeginStoryboard x:Name="StartStoryboard">
+                <Storyboard>
+                    <DoubleAnimation From="0" To="360" RepeatBehavior="Forever"
+                                                 Duration="00:01:00"
+                                                 Storyboard.TargetName="TimeLineRotateTransform"
+                                                 Storyboard.TargetProperty="Angle" />
+                    <ColorAnimation Storyboard.TargetName="LeftStopArcColor" Storyboard.TargetProperty="Color" From="#2CD5CC" To="#73A9B7" Duration="00:00:01"></ColorAnimation>
+                    <ColorAnimation Storyboard.TargetName="RightStartArcColor" Storyboard.TargetProperty="Color" From="#2CD5CC" To="#73A9B7" Duration="00:00:01"></ColorAnimation>
+                    <ColorAnimation Storyboard.TargetName="RightStopArcColor" Storyboard.TargetProperty="Color" From="#2CD5CC" To="#B5C4D7" Duration="00:00:01"></ColorAnimation>
+                    <DoubleAnimation Storyboard.TargetName="PointCore" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="00:00:01"></DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="PointEffect" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="00:00:01"></DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="local:Timer.Stoped">
+            <PauseStoryboard BeginStoryboardName="StartStoryboard"></PauseStoryboard>
+            <!--先暂停之前的动画，然后再启动回退动画-->
+            <BeginStoryboard>
+                <Storyboard>
+                    <ColorAnimation Storyboard.TargetName="LeftStopArcColor" Storyboard.TargetProperty="Color" To="#2CD5CC" Duration="00:00:01"></ColorAnimation>
+                    <ColorAnimation Storyboard.TargetName="RightStartArcColor" Storyboard.TargetProperty="Color" To="#2CD5CC" Duration="00:00:01"></ColorAnimation>
+                    <ColorAnimation Storyboard.TargetName="RightStopArcColor" Storyboard.TargetProperty="Color" To="#2CD5CC" Duration="00:00:01"></ColorAnimation>
+                    <DoubleAnimation Storyboard.TargetName="PointCore" Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:01"></DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="PointEffect" Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:01"></DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
     <UserControl.Resources>
-        <converters:TimerStringConverter x:Key="TimerStringConverter"></converters:TimerStringConverter>
+        <converters:TimerStringConverter x:Key="TimerStringConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,8 +49,8 @@
         <Grid Grid.Row="0">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0.9,0">
-                    <GradientStop Color="#515680" Offset="0.6"></GradientStop>
-                    <GradientStop Color="#9C9DB2" Offset="1"></GradientStop>
+                    <GradientStop Color="#515680" Offset="0.6" />
+                    <GradientStop Color="#9C9DB2" Offset="1" />
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RowDefinitions>
@@ -29,54 +59,48 @@
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
             <Viewbox Grid.Row="1">
-                <TextBlock Text="计时器" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="计时器" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
             </Viewbox>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0.9,1">
-                    <GradientStop Color="#6B73A1" Offset="0.6"></GradientStop>
-                    <GradientStop Color="#C3B8C6" Offset="1"></GradientStop>
+                    <GradientStop Color="#6B73A1" Offset="0.6" />
+                    <GradientStop Color="#C3B8C6" Offset="1" />
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="6*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Viewbox Grid.Row="1" RenderTransformOrigin="0.5,0.5">
                 <Viewbox.RenderTransform>
-                    <RotateTransform x:Name="TimeLineRotateTransform" Angle="0"></RotateTransform>
+                    <RotateTransform x:Name="TimeLineRotateTransform" Angle="0" />
                 </Viewbox.RenderTransform>
-                <Viewbox.Triggers>
-                    <EventTrigger RoutedEvent="Viewbox.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation From="0" To="360" RepeatBehavior="Forever" Duration="0:0:59" Storyboard.TargetName="TimeLineRotateTransform" Storyboard.TargetProperty="Angle"></DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Viewbox.Triggers>
                 <Canvas Width="100" Height="100">
-                    <Ellipse Width="3" Height="3" Canvas.Left="48.5" Canvas.Top="-1" Panel.ZIndex="100" Fill="White" Opacity="0.7"/>
-                    <Ellipse Width="5" Height="5" Canvas.Left="47.5" Canvas.Top="-2" Panel.ZIndex="101" Fill="White">
+                    <Ellipse x:Name="PointCore" Width="3" Height="3" Canvas.Left="48.5" Canvas.Top="-1" Panel.ZIndex="100" Fill="White"
+                             Opacity="0" />
+                    <Ellipse x:Name="PointEffect" Width="5" Height="5" Canvas.Left="47" Canvas.Top="-2" Panel.ZIndex="101" Fill="White" Opacity="0">
                         <Ellipse.Effect>
-                            <BlurEffect Radius="5"></BlurEffect>
+                            <BlurEffect Radius="5" />
                         </Ellipse.Effect>
                     </Ellipse>
-                    <ed:Arc ArcThickness="0" ArcThicknessUnit="Pixel" StartAngle="180" EndAngle="361" Fill="#FFF4F4F5" Height="100" Stretch="None" StrokeThickness="1" Width="100">
+                    <ed:Arc ArcThickness="0" ArcThicknessUnit="Pixel" StartAngle="180" EndAngle="361" Fill="#FFF4F4F5"
+                            Height="100" Stretch="None" StrokeThickness="1" Width="100">
                         <ed:Arc.Stroke>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                <GradientStop Offset="0" Color="#2CD5CC"></GradientStop>
-                                <GradientStop Offset="1" Color="#73A9B7"></GradientStop>
+                                <GradientStop Offset="0" Color="#2CD5CC" />
+                                <GradientStop x:Name="LeftStopArcColor" Offset="1" Color="#2CD5CC" />
                             </LinearGradientBrush>
                         </ed:Arc.Stroke>
                     </ed:Arc>
-                    <ed:Arc ArcThickness="0" ArcThicknessUnit="Pixel" StartAngle="0" EndAngle="181" Fill="#FFF4F4F5" Height="100" Stretch="None" StrokeThickness="1" Width="100">
+                    <ed:Arc ArcThickness="0" ArcThicknessUnit="Pixel" StartAngle="0" EndAngle="181" Fill="#FFF4F4F5"
+                            Height="100" Stretch="None" StrokeThickness="1" Width="100">
                         <ed:Arc.Stroke>
                             <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
-                                <GradientStop Offset="0" Color="#73A9B7"></GradientStop>
-                                <GradientStop Offset="1" Color="#B5C4D7"></GradientStop>
+                                <GradientStop x:Name="RightStartArcColor" Offset="0" Color="#2CD5CC" />
+                                <GradientStop x:Name="RightStopArcColor" Offset="1" Color="#2CD5CC" />
                             </LinearGradientBrush>
                         </ed:Arc.Stroke>
                     </ed:Arc>
@@ -84,14 +108,16 @@
             </Viewbox>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="9*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="9*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="1" SnapsToDevicePixels="True">
-                    <Border Width="12" Height="12" Background="White" CornerRadius="6,6,6,6" Padding="1" SnapsToDevicePixels="True">
+                    <Border Width="12" Height="12" Background="White" CornerRadius="6,6,6,6" Padding="1"
+                            SnapsToDevicePixels="True">
                         <Viewbox>
-                            <TextBlock SnapsToDevicePixels="True" Foreground="#2CD5CC" Text="{Binding TotalSeconds, Converter={StaticResource TimerStringConverter}, RelativeSource={RelativeSource AncestorType=local:Timer}, Mode=OneWay}"></TextBlock>
+                            <TextBlock SnapsToDevicePixels="True" Foreground="#2CD5CC"
+                                       Text="{Binding TotalSeconds, Converter={StaticResource TimerStringConverter}, RelativeSource={RelativeSource AncestorType=local:Timer}, Mode=OneWay}" />
                         </Viewbox>
                     </Border>
                 </Viewbox>

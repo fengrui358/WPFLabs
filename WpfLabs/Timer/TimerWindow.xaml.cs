@@ -45,7 +45,17 @@ namespace WpfLabs.Timer
 
         private void TimerWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            IsStart = true;
+            Task.Run(async () =>
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    await Task.Delay(3000);
+                    IsStart = true;
+
+                    await Task.Delay(80 * 1000);
+                    IsStart = false;
+                }
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

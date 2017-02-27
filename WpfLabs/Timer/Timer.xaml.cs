@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -26,7 +27,6 @@ namespace WpfLabs.Timer
     {
         private DateTime _startTime;
         private System.Threading.Timer _timer;
-        private Dispatcher _uiDispatcher;
 
         public static readonly DependencyProperty TotalSecondsProperty = DependencyProperty.Register(
             "TotalSeconds", typeof(long), typeof(Timer), new PropertyMetadata(default(long)));
@@ -60,6 +60,10 @@ namespace WpfLabs.Timer
                 timer.TotalSeconds = 0;
                 timer._startTime = DateTime.Now;
                 timer._timer = new System.Threading.Timer(timer.ChangeTime, null, TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(500));
+
+                //触发开始事件
+                var routedEventArgs = new RoutedEventArgs { RoutedEvent = StartedEvent };
+                timer.RaiseEvent(routedEventArgs);
             }
             //新值变更为False，停止计时器
             else if (!(bool)dependencyPropertyChangedEventArgs.NewValue &&
@@ -68,6 +72,13 @@ namespace WpfLabs.Timer
                 timer._timer.Change(Timeout.Infinite, Timeout.Infinite);
                 timer._timer.Dispose();
                 timer._timer = null;
+
+                //手动更新一次时间
+                timer.ChangeTime(null);
+
+                //触发停止事件
+                var routedEventArgs = new RoutedEventArgs { RoutedEvent = StopedEvent };
+                timer.RaiseEvent(routedEventArgs);
             }
         }
 
@@ -80,10 +91,33 @@ namespace WpfLabs.Timer
             set { SetValue(IsStartProperty, value); }
         }
 
+        public static readonly RoutedEvent StartedEvent =
+            EventManager.RegisterRoutedEvent("Started", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Timer));
+
+        /// <summary>
+        /// 启动事件
+        /// </summary>
+        public event RoutedEventHandler Started
+        {
+            add { AddHandler(StartedEvent, value); }
+            remove { RemoveHandler(StartedEvent, value); }
+        }
+
+        public static readonly RoutedEvent StopedEvent =
+            EventManager.RegisterRoutedEvent("Stoped", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Timer));
+
+        /// <summary>
+        /// 停止事件
+        /// </summary>
+        public event RoutedEventHandler Stoped
+        {
+            add { AddHandler(StopedEvent, value); }
+            remove { RemoveHandler(StopedEvent, value); }
+        }
+
         public Timer()
         {
             InitializeComponent();
-            _uiDispatcher = Dispatcher.CurrentDispatcher;
         }
 
         private void ChangeTime(object obj)
