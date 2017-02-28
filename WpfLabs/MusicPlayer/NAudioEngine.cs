@@ -321,6 +321,7 @@ namespace WpfLabs.MusicPlayer
             }
             if (activeStream != null)
             {
+                inputStream.Sample -= inputStream_Sample;
                 inputStream.Close();
                 inputStream = null;
                 ActiveStream.Close();
@@ -408,6 +409,24 @@ namespace WpfLabs.MusicPlayer
                 }
             }
         }
+
+        public void ClearFile()
+        {
+            pendingWaveformPath = string.Empty;
+            waveformGenerateWorker.CancelAsync();
+
+            Stop();
+
+            SelectionBegin = TimeSpan.Zero;
+            SelectionEnd = TimeSpan.Zero;
+            ChannelPosition = 0;
+
+            StopAndCloseStream();
+
+            CanPlay = false;
+            ChannelLength = 0;
+        }
+
         #endregion
 
         #region Public Properties

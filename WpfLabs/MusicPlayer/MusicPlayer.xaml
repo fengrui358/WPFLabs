@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpfSoundVisualizationLib="clr-namespace:WPFSoundVisualizationLib;assembly=WPFSoundVisualizationLib"
+             xmlns:musicPlayer="clr-namespace:WpfLabs.MusicPlayer"
              mc:Ignorable="d" 
-             d:DesignHeight="390" d:DesignWidth="480">
+             d:DesignHeight="390" d:DesignWidth="480" Unloaded="MusicPlayer_OnUnloaded">
     <UserControl.Resources>
         
     </UserControl.Resources>
@@ -68,15 +69,15 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Slider Grid.Row="0" IsMoveToPointEnabled="True" Margin="10,0,10,0" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" ValueChanged="RangeBase_OnValueChanged"></Slider>
+                        <Slider Grid.Row="0" IsMoveToPointEnabled="True" Margin="10,0,10,0" Minimum="0" Maximum="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" Value="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" ValueChanged="RangeBase_OnValueChanged"></Slider>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="1:53"></TextBlock>
-                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="3:45"></TextBlock>
+                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></TextBlock>
+                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></TextBlock>
                         </Grid>
                     </Grid>
                 </Grid>

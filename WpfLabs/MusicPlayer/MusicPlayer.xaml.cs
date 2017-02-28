@@ -35,9 +35,7 @@ namespace WpfLabs.MusicPlayer
         }
 
         public static readonly DependencyProperty AutoPlayProperty = DependencyProperty.Register(
-            "AutoPlay", typeof(bool), typeof(MusicPlayer), new PropertyMetadata(true, ResourceChangedCallback));
-
-
+            "AutoPlay", typeof(bool), typeof(MusicPlayer), new PropertyMetadata(true));
 
         /// <summary>
         /// 自动播放，当音频文件准备好后立即自动播放
@@ -46,6 +44,42 @@ namespace WpfLabs.MusicPlayer
         {
             get { return (bool) GetValue(AutoPlayProperty); }
             set { SetValue(AutoPlayProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsPlayingProperty = DependencyProperty.Register(
+            "IsPlaying", typeof(bool), typeof(MusicPlayer), new PropertyMetadata(default(bool)));
+
+        /// <summary>
+        /// 是否正在播放
+        /// </summary>
+        public bool IsPlaying
+        {
+            get { return (bool) GetValue(IsPlayingProperty); }
+            private set { SetValue(IsPlayingProperty, value); }
+        }
+
+        public static readonly DependencyProperty ChannelPositionProperty = DependencyProperty.Register(
+            "ChannelPosition", typeof(double), typeof(MusicPlayer), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 当前播放位置
+        /// </summary>
+        public double ChannelPosition
+        {
+            get { return (double) GetValue(ChannelPositionProperty); }
+            private set { SetValue(ChannelPositionProperty, value); }
+        }
+
+        public static readonly DependencyProperty ChannelLengthProperty = DependencyProperty.Register(
+            "ChannelLength", typeof(double), typeof(MusicPlayer), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 音频总长度
+        /// </summary>
+        public double ChannelLength
+        {
+            get { return (double) GetValue(ChannelLengthProperty); }
+            private set { SetValue(ChannelLengthProperty, value); }
         }
 
         public MusicPlayer()
@@ -60,13 +94,14 @@ namespace WpfLabs.MusicPlayer
         {
             switch (e.PropertyName)
             {
+                case "IsPlaying":
+                    IsPlaying = NAudioEngine.Instance.IsPlaying;
+                    break;
                 case "ChannelPosition":
-                    //clockDisplay.Time = TimeSpan.FromSeconds(engine.ChannelPosition);
+                    ChannelPosition = NAudioEngine.Instance.ChannelPosition;
                     break;
                 case "ChannelLength":
-
-                default:
-                    // Do Nothing
+                    ChannelLength = NAudioEngine.Instance.ChannelLength;
                     break;
             }
         }
@@ -89,6 +124,14 @@ namespace WpfLabs.MusicPlayer
                     NAudioEngine.Instance.Play();
                 }
             }
+        }
+
+        private void MusicPlayer_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            NAudioEngine.Instance.Stop();
+
+            //清理之前打开的文件
+            NAudioEngine.Instance.ClearFile();
         }
 
         private void RangeBase_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
