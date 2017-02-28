@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,14 @@ namespace WpfLabs.MusicPlayer
         }
 
         public static readonly DependencyProperty ChannelPositionProperty = DependencyProperty.Register(
-            "ChannelPosition", typeof(double), typeof(MusicPlayer), new PropertyMetadata(default(double)));
+            "ChannelPosition", typeof(double), typeof(MusicPlayer), new PropertyMetadata(default(double), ChannelPositionCallback));
+
+        private static void ChannelPositionCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            //todo:
+            //此处做个算法，如果新值大于旧值，且范围在0.5以内，则认为是程序自动播放更改值，则不做任何处理，否则是人为变化
+            Debug.WriteLine(dependencyPropertyChangedEventArgs.NewValue);
+        }
 
         /// <summary>
         /// 当前播放位置
@@ -132,11 +140,6 @@ namespace WpfLabs.MusicPlayer
 
             //清理之前打开的文件
             NAudioEngine.Instance.ClearFile();
-        }
-
-        private void RangeBase_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            
         }
     }
 }
