@@ -101,6 +101,8 @@
     <Compile Include="MusicPlayer\MusicPlayerWindow.xaml.cs">
       <DependentUpon>MusicPlayerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MusicPlayer\NAudioEngine.cs" />
+    <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="Timer\Converters\TimerStringConverter.cs" />
     <Compile Include="Timer\Timer.xaml.cs">
       <DependentUpon>Timer.xaml</DependentUpon>
@@ -200,7 +202,11 @@
   <ItemGroup>
     <Resource Include="ExpertPanel\Resources\TestPolice.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="MusicPlayer\TestFiles\a1.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,8 +1,9 @@
 ﻿<Window x:Class="WpfLabs.MusicPlayer.MusicPlayerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MusicPlayerWindow" Height="300" Width="300">
+        xmlns:musicPlayer="clr-namespace:WpfLabs.MusicPlayer"
+        Title="MusicPlayerWindow" Height="300" Width="300" Loaded="MusicPlayerWindow_OnLoaded">
     <Grid>
-        
+        <musicPlayer:MusicPlayer SoundResource="{Binding FilePath}"></musicPlayer:MusicPlayer>
     </Grid>
 </Window>
