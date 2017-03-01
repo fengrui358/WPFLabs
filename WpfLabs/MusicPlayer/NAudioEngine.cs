@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -238,7 +240,42 @@ namespace WpfLabs.MusicPlayer
         private void waveformGenerateWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             WaveformGenerationParams waveformParams = e.Argument as WaveformGenerationParams;
-            Mp3FileReader waveformMp3Stream = new Mp3FileReader(waveformParams.Path);
+
+            //var extension = Path.GetExtension(waveformParams.Path);
+            //if (extension == null)
+            //{
+            //    Debug.WriteLine(string.Format("只能播放有标准后缀名的文件，此文件{0}不标准", path));
+            //    return;
+            //}
+
+            ////判断是MP3文件还是Wav
+            //if (extension.Equals(".mp3", StringComparison.InvariantCultureIgnoreCase))
+            //{
+            //    ActiveStream = new Mp3FileReader(waveformParams.Path);
+            //    inputStream = new WaveChannel32(ActiveStream);
+            //    sampleAggregator = new SampleAggregator(fftDataSize);
+            //    inputStream.Sample += inputStream_Sample;
+            //    waveOutDevice.Init(inputStream);
+            //    ChannelLength = inputStream.TotalTime.TotalSeconds;
+            //    //FileTag = TagLib.File.Create(path); FileTag获取专辑图片，不需要专辑图片
+            //    GenerateWaveformData(waveformParams.Path);
+            //    CanPlay = true;
+            //}
+            //else if (extension.Equals(".wav", StringComparison.InvariantCultureIgnoreCase))
+            //{
+            //    ActiveStream = new WaveFileReader(waveformParams.Path);
+            //    inputStream = new WaveChannel32(ActiveStream);
+            //    sampleAggregator = new SampleAggregator(fftDataSize);
+            //    inputStream.Sample += inputStream_Sample;
+
+            //    waveOutDevice.Init(inputStream);
+            //    ChannelLength = inputStream.TotalTime.TotalSeconds;
+            //    //FileTag = TagLib.File.Create(path); FileTag获取专辑图片，不需要专辑图片
+            //    GenerateWaveformData(waveformParams.Path);
+            //    CanPlay = true;
+            //}
+
+            WaveFileReader waveformMp3Stream = new WaveFileReader(waveformParams.Path);
             WaveChannel32 waveformInputStream = new WaveChannel32(waveformMp3Stream);
             waveformInputStream.Sample += waveStream_Sample;
 
@@ -392,15 +429,50 @@ namespace WpfLabs.MusicPlayer
                     {
                         DesiredLatency = 100
                     };
-                    ActiveStream = new Mp3FileReader(path);
-                    inputStream = new WaveChannel32(ActiveStream);
-                    sampleAggregator = new SampleAggregator(fftDataSize);
-                    inputStream.Sample += inputStream_Sample;
-                    waveOutDevice.Init(inputStream);
-                    ChannelLength = inputStream.TotalTime.TotalSeconds;
-                    //FileTag = TagLib.File.Create(path); FileTag获取专辑图片，不需要专辑图片
-                    GenerateWaveformData(path);
-                    CanPlay = true;
+
+                    var extension = Path.GetExtension(path);
+                    if (extension == null)
+                    {
+                        Debug.WriteLine(string.Format("只能播放有标准后缀名的文件，此文件{0}不标准", path));
+                        return;
+                    }
+
+                    //判断是MP3文件还是Wav
+                    if (extension.Equals(".mp3", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        ActiveStream = new Mp3FileReader(path);
+                        inputStream = new WaveChannel32(ActiveStream);
+                        sampleAggregator = new SampleAggregator(fftDataSize);
+                        inputStream.Sample += inputStream_Sample;
+                        waveOutDevice.Init(inputStream);
+                        ChannelLength = inputStream.TotalTime.TotalSeconds;
+                        //FileTag = TagLib.File.Create(path); FileTag获取专辑图片，不需要专辑图片
+                        //GenerateWaveformData(path);
+                        CanPlay = true;
+                    }
+                    else if (extension.Equals(".wav", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        ActiveStream = new WaveFileReader(path);
+                        inputStream = new WaveChannel32(ActiveStream);
+                        sampleAggregator = new SampleAggregator(fftDataSize);
+                        inputStream.Sample += inputStream_Sample;
+
+                        waveOutDevice.Init(inputStream);
+                        ChannelLength = inputStream.TotalTime.TotalSeconds;
+                        //FileTag = TagLib.File.Create(path); FileTag获取专辑图片，不需要专辑图片
+                        //GenerateWaveformData(path);
+                        CanPlay = true;
+                    }
+
+                    //ActiveStream = new Mp3FileReader(path);
+                    //inputStream = new WaveChannel32(ActiveStream);
+                    //sampleAggregator = new SampleAggregator(fftDataSize);
+                    //inputStream.Sample += inputStream_Sample;
+                    //waveOutDevice.Init(inputStream);
+                    //ChannelLength = inputStream.TotalTime.TotalSeconds;
+                    ////FileTag = TagLib.File.Create(path); FileTag获取专辑图片，不需要专辑图片
+                    //GenerateWaveformData(path);
+                    //CanPlay = true;
                 }
                 catch
                 {

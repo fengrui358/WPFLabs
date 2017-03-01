@@ -42,7 +42,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="20, 20, 20, 0" BarCount="21"/>
+                <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="20, 20, 20, 0" BarCount="30"/>
                 <Rectangle Grid.Row="1" RenderTransformOrigin="1,0.5" Opacity="0.3" Margin="20, 0, 20 ,20">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{Binding ElementName=SpectrumAnalyzer}"></VisualBrush>

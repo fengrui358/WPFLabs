@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -94,22 +95,22 @@ namespace WpfLabs.MusicPlayer
         {
             InitializeComponent();
 
-            NAudioEngine.Instance.PropertyChanged += NAudioEngine_PropertyChanged;
-            SpectrumAnalyzer.RegisterSoundPlayer(NAudioEngine.Instance);
+            NAudioSimpleEngine.Instance.PropertyChanged += NAudioSimpleEngine_PropertyChanged;
+            SpectrumAnalyzer.RegisterSoundPlayer(NAudioSimpleEngine.Instance);
         }
 
-        private void NAudioEngine_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void NAudioSimpleEngine_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case "IsPlaying":
-                    IsPlaying = NAudioEngine.Instance.IsPlaying;
+                    IsPlaying = NAudioSimpleEngine.Instance.IsPlaying;
                     break;
                 case "ChannelPosition":
-                    ChannelPosition = NAudioEngine.Instance.ChannelPosition;
+                    ChannelPosition = NAudioSimpleEngine.Instance.ChannelPosition;
                     break;
                 case "ChannelLength":
-                    ChannelLength = NAudioEngine.Instance.ChannelLength;
+                    ChannelLength = NAudioSimpleEngine.Instance.ChannelLength;
                     break;
             }
         }
@@ -123,23 +124,21 @@ namespace WpfLabs.MusicPlayer
             {
                 //todo:各种校验
                 var filePath = dependencyPropertyChangedEventArgs.NewValue.ToString();
+                NAudioSimpleEngine.Instance.OpenFile(filePath);
 
-                NAudioEngine.Instance.OpenFile(dependencyPropertyChangedEventArgs.NewValue.ToString());
-                //NAudioEngine.Instance.OpenFile(filePath);
-
-                if (player.AutoPlay && NAudioEngine.Instance.CanPlay)
+                if (player.AutoPlay && NAudioSimpleEngine.Instance.CanPlay)
                 {
-                    NAudioEngine.Instance.Play();
+                    NAudioSimpleEngine.Instance.Play();
                 }
             }
         }
 
         private void MusicPlayer_OnUnloaded(object sender, RoutedEventArgs e)
         {
-            NAudioEngine.Instance.Stop();
+            NAudioSimpleEngine.Instance.Stop();
 
             //清理之前打开的文件
-            NAudioEngine.Instance.ClearFile();
+            NAudioSimpleEngine.Instance.CloseFile();
         }
     }
 }
