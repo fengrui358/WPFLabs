@@ -276,7 +276,8 @@ namespace WpfLabs.MusicPlayer
         {
             if (IsPlaying && CanPause)
             {
-                _waveOutDevice.Pause();
+                //严重Bug！！！！！！NAudio库的_waveOutDevice.Pause()方法有严重缺陷，用Stop替代！
+                _waveOutDevice.Stop();
                 RefreshPlayingState();
             }
         }
