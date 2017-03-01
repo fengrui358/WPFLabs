@@ -4,6 +4,6 @@
         xmlns:musicPlayer="clr-namespace:WpfLabs.MusicPlayer"
         Title="MusicPlayerWindow" Height="300" Width="300" Loaded="MusicPlayerWindow_OnLoaded">
     <Grid>
-        <musicPlayer:MusicPlayer SoundResource="{Binding FilePath}"></musicPlayer:MusicPlayer>
+        <musicPlayer:MusicPlayer FilePath="{Binding FilePath}"></musicPlayer:MusicPlayer>
     </Grid>
 </Window>

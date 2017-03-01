@@ -23,17 +23,17 @@ namespace WpfLabs.MusicPlayer
     /// </summary>
     public partial class MusicPlayer : UserControl
     {
-        public static readonly DependencyProperty SoundResourceProperty = DependencyProperty.Register(
-            "SoundResource", typeof(string), typeof(MusicPlayer),
+        public static readonly DependencyProperty FilePathProperty = DependencyProperty.Register(
+            "FilePath", typeof(string), typeof(MusicPlayer),
             new PropertyMetadata(default(string), ResourceChangedCallback));
 
         /// <summary>
-        /// 待播放的文件路径，可以是网络路径，也可以是本地路径
+        /// 待播放的文件路径
         /// </summary>
-        public string SoundResource
+        public string FilePath
         {
-            get { return (string) GetValue(SoundResourceProperty); }
-            set { SetValue(SoundResourceProperty, value); }
+            get { return (string) GetValue(FilePathProperty); }
+            set { SetValue(FilePathProperty, value); }
         }
 
         public static readonly DependencyProperty AutoPlayProperty = DependencyProperty.Register(
@@ -60,14 +60,39 @@ namespace WpfLabs.MusicPlayer
             private set { SetValue(IsPlayingProperty, value); }
         }
 
+        public static readonly DependencyProperty CanPlayProperty = DependencyProperty.Register(
+            "CanPlay", typeof(bool), typeof(MusicPlayer), new PropertyMetadata(default(bool)));
+
+        /// <summary>
+        /// 是否允许播放
+        /// </summary>
+        public bool CanPlay
+        {
+            get { return (bool) GetValue(CanPlayProperty); }
+            private set { SetValue(CanPlayProperty, value); }
+        }
+
         public static readonly DependencyProperty ChannelPositionProperty = DependencyProperty.Register(
-            "ChannelPosition", typeof(double), typeof(MusicPlayer), new PropertyMetadata(default(double), ChannelPositionCallback));
+            "ChannelPosition", typeof(double), typeof(MusicPlayer),
+            new PropertyMetadata(default(double), ChannelPositionCallback));
 
         private static void ChannelPositionCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            //todo:
-            //此处做个算法，如果新值大于旧值，且范围在0.5以内，则认为是程序自动播放更改值，则不做任何处理，否则是人为变化
-            Debug.WriteLine(dependencyPropertyChangedEventArgs.NewValue);
+            if (!NAudioSimpleEngine.Instance.CanPlay)
+            {
+                return;
+            }
+
+            //此处做个算法，如果新值大于旧值，且范围在0.5以内，则认为是程序自动播放更改值，则不做任何处理，否则是人为变化，需要暂停播放，然后重置
+            if (Math.Abs((double)dependencyPropertyChangedEventArgs.NewValue - (double)dependencyPropertyChangedEventArgs.OldValue) > 0.5)
+            {
+                if (NAudioSimpleEngine.Instance.IsPlaying)
+                {
+                    NAudioSimpleEngine.Instance.Pause();
+                    NAudioSimpleEngine.Instance.ChannelPosition = (double)dependencyPropertyChangedEventArgs.NewValue;
+                    NAudioSimpleEngine.Instance.Play();
+                }
+            }
         }
 
         /// <summary>
@@ -112,6 +137,9 @@ namespace WpfLabs.MusicPlayer
                 case "ChannelLength":
                     ChannelLength = NAudioSimpleEngine.Instance.ChannelLength;
                     break;
+                case "CanPlay":
+                    CanPlay = NAudioSimpleEngine.Instance.CanPlay;
+                    break;
             }
         }
 
@@ -120,15 +148,18 @@ namespace WpfLabs.MusicPlayer
         {
             var player = (MusicPlayer) dependencyObject;
 
-            if (dependencyPropertyChangedEventArgs.NewValue != null)
+            if (dependencyPropertyChangedEventArgs.NewValue != null &&
+                dependencyPropertyChangedEventArgs.NewValue != dependencyPropertyChangedEventArgs.OldValue)
             {
-                //todo:各种校验
                 var filePath = dependencyPropertyChangedEventArgs.NewValue.ToString();
-                NAudioSimpleEngine.Instance.OpenFile(filePath);
-
-                if (player.AutoPlay && NAudioSimpleEngine.Instance.CanPlay)
+                if (NAudioSimpleEngine.Instance.VerifyFilePath(filePath))
                 {
-                    NAudioSimpleEngine.Instance.Play();
+                    NAudioSimpleEngine.Instance.OpenFile(filePath);
+
+                    if (player.AutoPlay && NAudioSimpleEngine.Instance.CanPlay)
+                    {
+                        NAudioSimpleEngine.Instance.Play();
+                    }
                 }
             }
         }

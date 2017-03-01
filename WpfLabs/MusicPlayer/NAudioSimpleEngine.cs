@@ -108,7 +108,7 @@ namespace WpfLabs.MusicPlayer
             {
                 if (CanPlay)
                 {
-                    //lock (_lockChannelSet)
+                    lock (_lockChannelSet)
                     {
                         double oldValue = ((double)_activeStream.Position / (double)_activeStream.Length) *
                                           _activeStream.TotalTime.TotalSeconds;
@@ -175,7 +175,7 @@ namespace WpfLabs.MusicPlayer
         /// <summary>
         /// 打开文件
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="filePath">文件路径</param>
         public bool OpenFile(string filePath)
         {
             //如果播放文件一样，没必要继续操作
@@ -232,6 +232,22 @@ namespace WpfLabs.MusicPlayer
         }
 
         /// <summary>
+        /// 校验文件路径是否可能播放
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns></returns>
+        public bool VerifyFilePath(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+            {
+                return false;
+            }
+
+            var extension = GetTypeWithExtension(filePath);
+            return extension != AudioFileType.Other;
+        }
+
+        /// <summary>
         /// 停止并关闭文件
         /// </summary>
         public void CloseFile()
@@ -247,6 +263,8 @@ namespace WpfLabs.MusicPlayer
             if (CanStop)
             {
                 _waveOutDevice.Stop();
+                _activeStream.Position = 0;
+
                 RefreshPlayingState();
             }
         }
@@ -289,6 +307,7 @@ namespace WpfLabs.MusicPlayer
         private bool _canPlay;
         private bool _canStop;
         private double _channelLength;
+        private double _channelPosition;
 
         /// <summary>
         /// 刷新播放状态
@@ -323,6 +342,12 @@ namespace WpfLabs.MusicPlayer
             {
                 _channelLength = ChannelLength;
                 OnPropertyChanged("ChannelLength");
+            }
+
+            if (_channelPosition != ChannelPosition)
+            {
+                _channelPosition = ChannelPosition;
+                OnPropertyChanged("ChannelPosition");
             }
         }
 
@@ -393,6 +418,12 @@ namespace WpfLabs.MusicPlayer
             if (!IsPlaying)
             {
                 _updateChannelPositionTimer.Stop();
+            }
+
+            //播放结束需要暂停
+            if (_activeStream != null && _activeStream.CurrentTime >= _activeStream.TotalTime)
+            {
+                Stop();
             }
         }
 

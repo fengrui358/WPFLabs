@@ -52,8 +52,8 @@ namespace WpfLabs.MusicPlayer
 
         private void MusicPlayerWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MusicPlayer", "TestFiles", "a1.mp3");
-            FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MusicPlayer", "TestFiles", "喜洋洋.wav");
+            FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MusicPlayer", "TestFiles", "a1.mp3");
+            //FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MusicPlayer", "TestFiles", "喜洋洋.wav");
         }
     }
 }
