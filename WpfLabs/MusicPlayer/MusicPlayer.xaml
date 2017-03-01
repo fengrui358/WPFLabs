@@ -1,16 +1,17 @@
 ﻿<UserControl x:Class="WpfLabs.MusicPlayer.MusicPlayer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpfSoundVisualizationLib="clr-namespace:WPFSoundVisualizationLib;assembly=WPFSoundVisualizationLib"
              xmlns:musicPlayer="clr-namespace:WpfLabs.MusicPlayer"
              xmlns:converters="clr-namespace:WpfLabs.MusicPlayer.Converters"
-             mc:Ignorable="d" 
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             mc:Ignorable="d"
              d:DesignHeight="390" d:DesignWidth="480" Unloaded="MusicPlayer_OnUnloaded">
     <UserControl.Resources>
-        <converters:IsPlayingConverterToVisibility x:Key="IsPlayingConverterToVisibility"/>
-        <converters:IsPlayingConverterToVisibilityReverse x:Key="IsPlayingConverterToVisibilityReverse"/>
+        <converters:IsPlayingConverterToVisibility x:Key="IsPlayingConverterToVisibility" />
+        <converters:IsPlayingConverterToVisibilityReverse x:Key="IsPlayingConverterToVisibilityReverse" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -32,22 +33,23 @@
             <Viewbox Grid.Row="1">
                 <TextBlock Text="录音" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
             </Viewbox>
-            
+
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="20, 20, 20, 0" BarCount="30"/>
+                <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="20, 20, 20, 0"
+                                                           BarCount="30" />
                 <Rectangle Grid.Row="1" RenderTransformOrigin="1,0.5" Opacity="0.3" Margin="20, 0, 20 ,20">
                     <Rectangle.Fill>
-                        <VisualBrush Visual="{Binding ElementName=SpectrumAnalyzer}"></VisualBrush>
+                        <VisualBrush Visual="{Binding ElementName=SpectrumAnalyzer}" />
                     </Rectangle.Fill>
                     <!--<Rectangle.OpacityMask>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -56,45 +58,120 @@
                         </LinearGradientBrush>
                     </Rectangle.OpacityMask>-->
                     <Rectangle.RenderTransform>
-                        <ScaleTransform ScaleY="-1"></ScaleTransform>
+                        <ScaleTransform ScaleY="-1" />
                     </Rectangle.RenderTransform>
                 </Rectangle>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Slider Grid.Row="0" IsMoveToPointEnabled="True" Margin="10,0,10,0" Minimum="0" Maximum="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" Value="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></Slider>
+                        <Slider Grid.Row="0" IsMoveToPointEnabled="True" Margin="10,0,10,0" Minimum="0"
+                                Maximum="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"
+                                Value="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"
+                                IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" />
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></TextBlock>
-                            <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></TextBlock>
+                            <TextBlock Grid.Column="0" HorizontalAlignment="Left"
+                                       Text="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" />
+                            <TextBlock Grid.Column="2" HorizontalAlignment="Right"
+                                       Text="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" />
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1" IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}">
+                <Grid Grid.Row="1"
+                      IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="后退" Click="Backwards_OnClick"></Button>
-                    <Button Grid.Column="2" Content="播放" Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibilityReverse}, Mode=OneWay}" Click="PlayBtn_OnClick"></Button>
-                    <Button Grid.Column="2" Content="暂停" Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibility}, Mode=OneWay}" Click="PauseBtn_OnClick"></Button>
-                    <Button Grid.Column="3" Content="前进" Click="ForwardBtn_OnClick"></Button>
+                    <Viewbox Grid.Column="1" Margin="5">
+                        <Button Content="后退" Click="Backwards_OnClick" Width="70" Height="60">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid Background="Green">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    RenderTransformOrigin="0.5,0.5">
+                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                            <StackPanel.RenderTransform>
+                                                <RotateTransform Angle="-90" />
+                                            </StackPanel.RenderTransform>
+                                        </StackPanel>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" />
+                            </Button.Effect>
+                        </Button>
+                    </Viewbox>
+                    <Viewbox Grid.Column="2" Margin="5">
+                        <Button Content="播放" Width="100" Height="90"
+                                Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibilityReverse}, Mode=OneWay}"
+                                Click="PlayBtn_OnClick">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid Background="Red">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    Orientation="Horizontal">
+                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
+                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
+                                        </StackPanel>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Viewbox>
+                    <Viewbox Grid.Column="2" Margin="5">
+                        <Button Content="暂停" Width="100" Height="90"
+                                Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibility}, Mode=OneWay}"
+                                Click="PauseBtn_OnClick">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid Background="Red">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    Orientation="Horizontal">
+                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
+                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
+                                        </StackPanel>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Viewbox>
+                    <Viewbox Grid.Column="3" Margin="5">
+                        <Button Content="前进" Click="ForwardBtn_OnClick" Width="70" Height="60">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid Background="Green">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    RenderTransformOrigin="0.5,0.5">
+                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                            <StackPanel.RenderTransform>
+                                                <RotateTransform Angle="90" />
+                                            </StackPanel.RenderTransform>
+                                        </StackPanel>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Viewbox>
                 </Grid>
             </Grid>
         </Grid>
