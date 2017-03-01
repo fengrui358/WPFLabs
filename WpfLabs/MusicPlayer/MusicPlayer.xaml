@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpfSoundVisualizationLib="clr-namespace:WPFSoundVisualizationLib;assembly=WPFSoundVisualizationLib"
              xmlns:musicPlayer="clr-namespace:WpfLabs.MusicPlayer"
+             xmlns:converters="clr-namespace:WpfLabs.MusicPlayer.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="390" d:DesignWidth="480" Unloaded="MusicPlayer_OnUnloaded">
     <UserControl.Resources>
-        
+        <converters:IsPlayingConverterToVisibility x:Key="IsPlayingConverterToVisibility"/>
+        <converters:IsPlayingConverterToVisibilityReverse x:Key="IsPlayingConverterToVisibilityReverse"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -69,7 +71,7 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Slider Grid.Row="0" IsMoveToPointEnabled="True" Margin="10,0,10,0" Minimum="0" Maximum="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" Value="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></Slider>
+                        <Slider Grid.Row="0" IsMoveToPointEnabled="True" Margin="10,0,10,0" Minimum="0" Maximum="{Binding ChannelLength, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" Value="{Binding ChannelPosition, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}"></Slider>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -81,7 +83,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -89,9 +91,10 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="后退"></Button>
-                    <Button Grid.Column="2" Content="播放"></Button>
-                    <Button Grid.Column="3" Content="前进"></Button>
+                    <Button Grid.Column="1" Content="后退" Click="Backwards_OnClick"></Button>
+                    <Button Grid.Column="2" Content="播放" Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibilityReverse}, Mode=OneWay}" Click="PlayBtn_OnClick"></Button>
+                    <Button Grid.Column="2" Content="暂停" Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibility}, Mode=OneWay}" Click="PauseBtn_OnClick"></Button>
+                    <Button Grid.Column="3" Content="前进" Click="ForwardBtn_OnClick"></Button>
                 </Grid>
             </Grid>
         </Grid>

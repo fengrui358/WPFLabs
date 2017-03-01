@@ -8,6 +8,9 @@
              xmlns:converters="clr-namespace:WpfLabs.Timer.Converters"
              mc:Ignorable="d"
              d:DesignHeight="390" d:DesignWidth="480">
+    <UserControl.Resources>
+        <converters:TimerStringConverter x:Key="TimerStringConverter" />
+    </UserControl.Resources>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="local:Timer.Started">
             <BeginStoryboard x:Name="StartStoryboard">
@@ -38,9 +41,6 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-    <UserControl.Resources>
-        <converters:TimerStringConverter x:Key="TimerStringConverter" />
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

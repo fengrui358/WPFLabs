@@ -95,6 +95,7 @@
       <DependentUpon>ExpertPanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpertPanel\Models\ExpertModel.cs" />
+    <Compile Include="MusicPlayer\Converters\PlayStateConverter.cs" />
     <Compile Include="MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>

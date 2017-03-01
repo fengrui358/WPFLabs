@@ -92,6 +92,10 @@ namespace WpfLabs.MusicPlayer
                     NAudioSimpleEngine.Instance.ChannelPosition = (double)dependencyPropertyChangedEventArgs.NewValue;
                     NAudioSimpleEngine.Instance.Play();
                 }
+                else
+                {
+                    NAudioSimpleEngine.Instance.ChannelPosition = (double)dependencyPropertyChangedEventArgs.NewValue;
+                }
             }
         }
 
@@ -170,6 +174,32 @@ namespace WpfLabs.MusicPlayer
 
             //清理之前打开的文件
             NAudioSimpleEngine.Instance.CloseFile();
+        }
+
+        private void PlayBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            NAudioSimpleEngine.Instance.Play();
+        }
+
+        private void PauseBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            NAudioSimpleEngine.Instance.Pause();
+        }
+
+        private void ForwardBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            var currentPosition = ChannelPosition;
+            var newPosition = (currentPosition + 5) > ChannelLength ? ChannelLength : (currentPosition + 5);
+
+            ChannelPosition = newPosition;
+        }
+
+        private void Backwards_OnClick(object sender, RoutedEventArgs e)
+        {
+            var currentPosition = ChannelPosition;
+            var newPosition = (currentPosition - 5) < 0 ? 0 : (currentPosition - 5);
+
+            ChannelPosition = newPosition;
         }
     }
 }
