@@ -37,6 +37,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--按钮样式结束-->
+        
         <!--滑动条样式-->
         <LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
             <GradientStop Color="white" Offset="0"/>
@@ -286,6 +288,54 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--滑动条样式结束-->
+        
+        <!--跳动音符颜色样式-->
+        <!-- Region: SpectrumAnalyzer -->
+        <SolidColorBrush x:Key="ControlBackgroundBrush"
+                     Color="#FFD6D6D6" />
+        <SolidColorBrush x:Key="SpectrumBrush"
+                     Color="#B6DAD6" />
+        <Style TargetType="{x:Type wpfSoundVisualizationLib:SpectrumAnalyzer}">
+            <Setter Property="BarStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type Rectangle}">
+                        <Setter Property="Fill"
+                            Value="{StaticResource SpectrumBrush}" />
+                        <Setter Property="RadiusX"
+                            Value="1" />
+                        <Setter Property="RadiusY"
+                            Value="1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="PeakStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type Rectangle}">
+                        <Setter Property="Fill"
+                            Value="{StaticResource SpectrumBrush}" />
+                        <Setter Property="RadiusX"
+                            Value="1" />
+                        <Setter Property="RadiusY"
+                            Value="1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type wpfSoundVisualizationLib:SpectrumAnalyzer}">
+                        <Border BorderBrush="Transparent"
+                            BorderThickness="1">
+                            <Canvas Name="PART_SpectrumCanvas"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                ClipToBounds="True" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- EndRegion: SpectrumAnalyzer -->
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -327,9 +377,9 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="20, 20, 20, 0"
-                                                           BarCount="30" />
-                <Rectangle Grid.Row="1" RenderTransformOrigin="1,0.5" Opacity="0.3" Margin="20, 0, 20 ,20">
+                <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="10, 6, 10, 0"
+                                                           BarCount="35" BarSpacing="2"/>
+                <Rectangle Grid.Row="1" RenderTransformOrigin="1,0.5" Opacity="0.3" Margin="10, 6, 10, 0">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{Binding ElementName=SpectrumAnalyzer}" />
                     </Rectangle.Fill>
