@@ -12,6 +12,29 @@
     <UserControl.Resources>
         <converters:IsPlayingConverterToVisibility x:Key="IsPlayingConverterToVisibility" />
         <converters:IsPlayingConverterToVisibilityReverse x:Key="IsPlayingConverterToVisibilityReverse" />
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <ContentPresenter />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsEnabled" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Margin" Value="-3" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -91,7 +114,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1"
-                      IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}">
+                      IsEnabled="{Binding CanPlay, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}}" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -100,76 +123,79 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Viewbox Grid.Column="1" Margin="5">
-                        <Button Content="后退" Click="Backwards_OnClick" Width="70" Height="60">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Grid Background="Green">
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                    RenderTransformOrigin="0.5,0.5">
-                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
-                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
-                                            <StackPanel.RenderTransform>
-                                                <RotateTransform Angle="-90" />
-                                            </StackPanel.RenderTransform>
-                                        </StackPanel>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
+                        <Button Click="Backwards_OnClick" Width="70" Height="60">
+                            <Button.Content>
+                                <Grid Background="Green">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                RenderTransformOrigin="0.5,0.5">
+                                        <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                        <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                        <StackPanel.RenderTransform>
+                                            <RotateTransform Angle="-90" />
+                                        </StackPanel.RenderTransform>
+                                    </StackPanel>
+                                </Grid>
+                            </Button.Content>
                             <Button.Effect>
                                 <DropShadowEffect BlurRadius="5" Opacity="0.5" />
                             </Button.Effect>
                         </Button>
                     </Viewbox>
                     <Viewbox Grid.Column="2" Margin="5">
-                        <Button Content="播放" Width="100" Height="90"
+                        <Button Width="100" Height="90"
                                 Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibilityReverse}, Mode=OneWay}"
                                 Click="PlayBtn_OnClick">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Grid Background="Red">
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                    Orientation="Horizontal">
-                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
-                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
-                                        </StackPanel>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
+                            <Button.Content>
+                                <Grid Background="Red">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Orientation="Horizontal" RenderTransformOrigin="0.5,0.5">
+                                        <ed:RegularPolygon PointCount="3" Width="50" Height="44" Fill="White" />
+                                        <StackPanel.RenderTransform>
+                                            <RotateTransform Angle="90" />
+                                        </StackPanel.RenderTransform>
+                                    </StackPanel>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" />
+                            </Button.Effect>
                         </Button>
                     </Viewbox>
                     <Viewbox Grid.Column="2" Margin="5">
-                        <Button Content="暂停" Width="100" Height="90"
+                        <Button Width="100" Height="90"
                                 Visibility="{Binding IsPlaying, RelativeSource={RelativeSource AncestorType=musicPlayer:MusicPlayer}, Converter={StaticResource IsPlayingConverterToVisibility}, Mode=OneWay}"
                                 Click="PauseBtn_OnClick">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Grid Background="Red">
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                    Orientation="Horizontal">
-                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
-                                            <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
-                                        </StackPanel>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
+                            <Button.Content>
+                                <Grid Background="Red">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Orientation="Horizontal">
+                                        <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
+                                        <Rectangle Width="10" Height="40" Fill="White" Margin="3" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" />
+                            </Button.Effect>
                         </Button>
                     </Viewbox>
                     <Viewbox Grid.Column="3" Margin="5">
-                        <Button Content="前进" Click="ForwardBtn_OnClick" Width="70" Height="60">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Grid Background="Green">
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                    RenderTransformOrigin="0.5,0.5">
-                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
-                                            <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
-                                            <StackPanel.RenderTransform>
-                                                <RotateTransform Angle="90" />
-                                            </StackPanel.RenderTransform>
-                                        </StackPanel>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
+                        <Button Click="ForwardBtn_OnClick" Width="70" Height="60">
+                            <Button.Content>
+                                <Grid Background="Green">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                RenderTransformOrigin="0.5,0.5">
+                                        <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                        <ed:RegularPolygon PointCount="3" Width="24" Height="20" Fill="White" />
+                                        <StackPanel.RenderTransform>
+                                            <RotateTransform Angle="90" />
+                                        </StackPanel.RenderTransform>
+                                    </StackPanel>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.5" />
+                            </Button.Effect>
                         </Button>
                     </Viewbox>
                 </Grid>

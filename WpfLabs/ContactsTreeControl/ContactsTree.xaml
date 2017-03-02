@@ -13,13 +13,13 @@
             <!--TreeView-->
             <Style TargetType="{x:Type TreeView}">
                 <Setter Property="Background" Value="#172B44"></Setter>
-                <Setter Property="Cursor" Value="Hand"></Setter>
             </Style>
             <!--ToggleButton-->
             <Style TargetType="{x:Type ToggleButton}">
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="Padding" Value="1"/>
                 <Setter Property="Foreground" Value="#B8BECC"></Setter>
+                <Setter Property="Cursor" Value="Hand"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToggleButton}">
