@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfLabs.Base;
 using WpfLabs.ExpertPanel.Models;
 
 namespace WpfLabs.ExpertPanel
@@ -34,9 +35,33 @@ namespace WpfLabs.ExpertPanel
             set { SetValue(ItemSourcesProperty, value); }
         }
 
+        public static readonly RoutedEvent CallPhoneEvent =
+            EventManager.RegisterRoutedEvent("CallPhone", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<ExpertModel>), typeof(ExpertPanel));
+
+        /// <summary>
+        /// 触发打电话
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<ExpertModel> CallPhone
+        {
+            add { AddHandler(CallPhoneEvent, value); }
+            remove { RemoveHandler(CallPhoneEvent, value); }
+        }
+
         public ExpertPanel()
         {
             InitializeComponent();
+        }
+
+        private void Call_OnClick(object sender, RoutedEventArgs e)
+        {
+            var expert = ((FrameworkElement) sender).DataContext as ExpertModel;
+            if (expert != null)
+            {
+                var args = new RoutedPropertyEventArgs<ExpertModel>(expert);
+                args.RoutedEvent = CallPhoneEvent;
+
+                RaiseEvent(args);
+            }
         }
     }
 }

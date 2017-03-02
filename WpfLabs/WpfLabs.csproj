@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Base\RoutedPropertyEventHandler.cs" />
     <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
