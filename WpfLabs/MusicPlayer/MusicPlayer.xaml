@@ -379,7 +379,7 @@
                 </Grid.RowDefinitions>
                 <wpfSoundVisualizationLib:SpectrumAnalyzer x:Name="SpectrumAnalyzer" Margin="10, 6, 10, 0"
                                                            BarCount="35" BarSpacing="2"/>
-                <Rectangle Grid.Row="1" RenderTransformOrigin="1,0.5" Opacity="0.3" Margin="10, 6, 10, 0">
+                <Rectangle Grid.Row="1" RenderTransformOrigin="1,0.5" Opacity="0.3" Margin="10, 0, 10, 6">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{Binding ElementName=SpectrumAnalyzer}" />
                     </Rectangle.Fill>
