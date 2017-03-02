@@ -109,7 +109,7 @@ namespace WpfLabs.MusicPlayer
         }
 
         public static readonly DependencyProperty ChannelLengthProperty = DependencyProperty.Register(
-            "ChannelLength", typeof(double), typeof(MusicPlayer), new PropertyMetadata(default(double)));
+            "ChannelLength", typeof(double), typeof(MusicPlayer), new PropertyMetadata(100d));
 
         /// <summary>
         /// 音频总长度
