@@ -81,15 +81,15 @@ namespace WpfLabs.ContactsTreeControl
         }
 
         public static readonly DependencyProperty ItemSourcesProperty = DependencyProperty.Register(
-            "ItemsSource", typeof(List<OrganizationModel>), typeof(ContactsTree),
-            new PropertyMetadata(default(List<OrganizationModel>)));
+            "ItemsSource", typeof(IEnumerable<OrganizationModel>), typeof(ContactsTree),
+            new PropertyMetadata(default(IEnumerable<OrganizationModel>)));
 
         /// <summary>
         /// 联系人树的数据源
         /// </summary>
-        public List<OrganizationModel> ItemsSource
+        public IEnumerable<OrganizationModel> ItemsSource
         {
-            get { return (List<OrganizationModel>) GetValue(ItemSourcesProperty); }
+            get { return (IEnumerable<OrganizationModel>)GetValue(ItemSourcesProperty); }
             set { SetValue(ItemSourcesProperty, value); }
         }
 

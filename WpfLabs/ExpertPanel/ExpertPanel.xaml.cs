@@ -23,15 +23,15 @@ namespace WpfLabs.ExpertPanel
     public partial class ExpertPanel : UserControl
     {
         public static readonly DependencyProperty ItemSourcesProperty = DependencyProperty.Register(
-            "ItemsSource", typeof(List<ExpertModel>), typeof(ExpertPanel),
-            new PropertyMetadata(default(List<ExpertModel>)));
+            "ItemsSource", typeof(IEnumerable<ExpertModel>), typeof(ExpertPanel),
+            new PropertyMetadata(default(IEnumerable<ExpertModel>)));
 
         /// <summary>
         /// 专家数据源数据源
         /// </summary>
-        public List<ExpertModel> ItemsSource
+        public IEnumerable<ExpertModel> ItemsSource
         {
-            get { return (List<ExpertModel>) GetValue(ItemSourcesProperty); }
+            get { return (IEnumerable<ExpertModel>)GetValue(ItemSourcesProperty); }
             set { SetValue(ItemSourcesProperty, value); }
         }
 
