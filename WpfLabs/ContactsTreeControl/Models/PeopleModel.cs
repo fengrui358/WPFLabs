@@ -6,6 +6,7 @@ namespace WpfLabs.ContactsTreeControl.Models
     {
         private long _id;
         private string _name;
+        private string _phoneNumber;
 
         public long Id
         {
@@ -17,6 +18,12 @@ namespace WpfLabs.ContactsTreeControl.Models
         {
             get { return _name; }
             set { Set(ref _name, value); }
+        }
+
+        public string PhoneNumber
+        {
+            get { return _phoneNumber; }
+            set { Set(ref _phoneNumber, value); }
         }
     }
 }

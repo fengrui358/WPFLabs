@@ -106,6 +106,12 @@
     <Compile Include="MusicPlayer\NAudioEngine.cs" />
     <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="MusicPlayer\NAudioSimpleEngine.cs" />
+    <Compile Include="PeopleResourcePanel\PeopleResourcePanel.xaml.cs">
+      <DependentUpon>PeopleResourcePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml.cs">
+      <DependentUpon>PeopleResourcePanelWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Timer\Converters\TimerStringConverter.cs" />
     <Compile Include="Timer\Timer.xaml.cs">
       <DependentUpon>Timer.xaml</DependentUpon>
@@ -151,6 +157,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MusicPlayer\MusicPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PeopleResourcePanel\PeopleResourcePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

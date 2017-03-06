@@ -19,6 +19,7 @@ using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.ExpertPanel;
 using WpfLabs.MusicPlayer;
+using WpfLabs.PeopleResourcePanel;
 using WpfLabs.Timer;
 
 namespace WpfLabs
@@ -57,6 +58,10 @@ namespace WpfLabs
                 case "MusicPlayer":
                     var musicPlayerWindow = new MusicPlayerWindow();
                     musicPlayerWindow.ShowDialog();
+                    break;
+                case "PeopleResourcePanel":
+                    var peopleResourcePanelWindow = new PeopleResourcePanelWindow();
+                    peopleResourcePanelWindow.ShowDialog();
                     break;
             }
         }
