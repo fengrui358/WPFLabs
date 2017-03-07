@@ -37,12 +37,12 @@ namespace WpfLabs.PeopleResourcePanel
 
         public static readonly RoutedEvent CallPhoneEvent =
             EventManager.RegisterRoutedEvent("CallPhone", RoutingStrategy.Bubble,
-                typeof(RoutedPropertyChangedEventHandler<PeopleModel>), typeof(PeopleResourcePanel));
+                typeof(RoutedPropertyEventHandler<PeopleModel>), typeof(PeopleResourcePanel));
 
         /// <summary>
         /// 触发打电话
         /// </summary>
-        public event RoutedPropertyChangedEventHandler<PeopleModel> CallPhone
+        public event RoutedPropertyEventHandler<PeopleModel> CallPhone
         {
             add { AddHandler(CallPhoneEvent, value); }
             remove { RemoveHandler(CallPhoneEvent, value); }

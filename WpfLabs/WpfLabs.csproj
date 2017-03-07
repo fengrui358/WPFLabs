@@ -106,6 +106,7 @@
     <Compile Include="MusicPlayer\NAudioEngine.cs" />
     <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="MusicPlayer\NAudioSimpleEngine.cs" />
+    <Compile Include="PeopleResourcePanel\Events\PeopleModelEventArgsConverter.cs" />
     <Compile Include="PeopleResourcePanel\Models\PeopleModel.cs" />
     <Compile Include="PeopleResourcePanel\PeopleResourcePanel.xaml.cs">
       <DependentUpon>PeopleResourcePanel.xaml</DependentUpon>

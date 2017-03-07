@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Command;
+using WpfLabs.Base;
 using WpfLabs.PeopleResourcePanel.Models;
 
 namespace WpfLabs.PeopleResourcePanel
@@ -28,10 +30,13 @@ namespace WpfLabs.PeopleResourcePanel
             set { _peopleModels = value; }
         }
 
+        public RelayCommand<PeopleModel> CallPhoneCommand { get; private set; }
+
         public PeopleResourcePanelWindow()
         {
             InitializeComponent();
 
+            CallPhoneCommand = new RelayCommand<PeopleModel>(CallPhoneHandler);
             DataContext = this;
             InitSource();
         }
@@ -53,6 +58,11 @@ namespace WpfLabs.PeopleResourcePanel
             mockDatas.Add(new PeopleModel { Name = "rain", PhoneNumber = "010-4578678", Portrait = "Resources/TestPortrait.jpg" });
 
             PeopleModels = mockDatas;
+        }
+
+        private void CallPhoneHandler(PeopleModel source)
+        {
+
         }
     }
 }
