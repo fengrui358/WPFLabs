@@ -1,0 +1,9 @@
+﻿<Window x:Class="WpfLabs.PeopleResourcePanel.PeopleResourcePanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:peopleResourcePanel="clr-namespace:WpfLabs.PeopleResourcePanel"
+        Title="PeopleResourcePanelWindow" Height="600" Width="1520">
+    <Grid>
+        <peopleResourcePanel:PeopleResourcePanel ItemsSource="{Binding PeopleModels}"/>
+    </Grid>
+</Window>
