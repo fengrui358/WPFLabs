@@ -106,6 +106,12 @@
     <Compile Include="MusicPlayer\NAudioEngine.cs" />
     <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="MusicPlayer\NAudioSimpleEngine.cs" />
+    <Compile Include="NotifyMsgPresenter\MockDataSource.cs" />
+    <Compile Include="NotifyMsgPresenter\NotifyMsgModel.cs" />
+    <Compile Include="NotifyMsgPresenter\NotifyMsgPresenter.cs" />
+    <Compile Include="NotifyMsgPresenter\NotifyMsgPresenterWindow.xaml.cs">
+      <DependentUpon>NotifyMsgPresenterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PeopleResourcePanel\Events\PeopleModelEventArgsConverter.cs" />
     <Compile Include="PeopleResourcePanel\Models\PeopleModel.cs" />
     <Compile Include="PeopleResourcePanel\PeopleResourcePanel.xaml.cs">
@@ -162,6 +168,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="NotifyMsgPresenter\NotifyMsgPresenterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotifyMsgPresenter\Themes\NotifyMsgPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PeopleResourcePanel\PeopleResourcePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +183,10 @@
     <Page Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Timer\Timer.xaml">
       <SubType>Designer</SubType>

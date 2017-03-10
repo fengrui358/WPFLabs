@@ -19,6 +19,7 @@ using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.ExpertPanel;
 using WpfLabs.MusicPlayer;
+using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.Timer;
 
@@ -62,6 +63,10 @@ namespace WpfLabs
                 case "PeopleResourcePanel":
                     var peopleResourcePanelWindow = new PeopleResourcePanelWindow();
                     peopleResourcePanelWindow.ShowDialog();
+                    break;
+                case "NotifyMsgPresenter":
+                    var notifyMsgPresenterWindow = new NotifyMsgPresenterWindow();
+                    notifyMsgPresenterWindow.ShowDialog();
                     break;
             }
         }

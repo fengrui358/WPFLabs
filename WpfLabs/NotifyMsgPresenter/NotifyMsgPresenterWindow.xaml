@@ -1,0 +1,12 @@
+﻿<Window x:Class="WpfLabs.NotifyMsgPresenter.NotifyMsgPresenterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:notifyMsgPresenter="clr-namespace:WpfLabs.NotifyMsgPresenter"
+        Title="NotifyMsgPresenterWindow" Height="600" Width="1500">
+    <Grid>
+        <Grid Background="AntiqueWhite"></Grid>
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="25">
+            <notifyMsgPresenter:NotifyMsgPresenter Width="263" Background="Transparent" Height="200"/>
+        </Grid>
+    </Grid>
+</Window>

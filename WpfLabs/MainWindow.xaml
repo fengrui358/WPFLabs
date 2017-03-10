@@ -17,6 +17,7 @@
             <Button Content="展示计时器面板" Command="{Binding ShowControlWindow}" CommandParameter="Timer" />
             <Button Content="展示音频播放器" Command="{Binding ShowControlWindow}" CommandParameter="MusicPlayer" />
             <Button Content="展示人员列表" Command="{Binding ShowControlWindow}" CommandParameter="PeopleResourcePanel" />
+            <Button Content="通知窗体" Command="{Binding ShowControlWindow}" CommandParameter="NotifyMsgPresenter" />
         </StackPanel>
     </Grid>
 </Window>
