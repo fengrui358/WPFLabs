@@ -3,6 +3,7 @@
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
             <ResourceDictionary Source="Themes/Generic.xaml"></ResourceDictionary>
+            <ResourceDictionary Source="IconDictionary.xaml"></ResourceDictionary>
         </ResourceDictionary.MergedDictionaries>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:WpfLabs.ViewModel" />
     </ResourceDictionary>

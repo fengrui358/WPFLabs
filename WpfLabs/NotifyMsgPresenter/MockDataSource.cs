@@ -12,9 +12,10 @@ namespace WpfLabs.NotifyMsgPresenter
     /// </summary>
     public class MockDataSource : IDisposable
     {
+        private int _mockIndex = 1;
+
         private int _intervalSecond = 3;
         private System.Threading.Timer _timer;
-        private Random _random = new Random();
 
         /// <summary>
         /// 新消息到达
@@ -31,14 +32,18 @@ namespace WpfLabs.NotifyMsgPresenter
         {
             if (NewMsgReached != null)
             {
-                var newNotifyMsgModel = new NotifyMsgModel
+                for (int i = 0; i < 5; i++)
                 {
-                    Id = _random.Next(1, 1000),
-                    Title = Guid.NewGuid().ToString("N"),
-                    Content = Guid.NewGuid().ToString("N")
-                };
+                    var newNotifyMsgModel = new NotifyMsgModel
+                    {
+                        Id = _mockIndex,
+                        Title = string.Format("第{0}条消息，{1} ", _mockIndex, DateTime.Now) + Guid.NewGuid(),
+                        Content = Guid.NewGuid().ToString("N")
+                    };
 
-                NewMsgReached(newNotifyMsgModel);
+                    _mockIndex++;
+                    NewMsgReached(newNotifyMsgModel);
+                }
             }
         }
 

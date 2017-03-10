@@ -7,11 +7,11 @@
                 <ControlTemplate TargetType="{x:Type local:NotifyMsgPresenter}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}"
+                            BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}" MinHeight="50"
                             Height="{TemplateBinding Height}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Grid Background="Red" />
+                        <Canvas x:Name="PART_Container" Background="Transparent" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

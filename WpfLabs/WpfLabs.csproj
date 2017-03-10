@@ -107,6 +107,9 @@
     <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="MusicPlayer\NAudioSimpleEngine.cs" />
     <Compile Include="NotifyMsgPresenter\MockDataSource.cs" />
+    <Compile Include="NotifyMsgPresenter\NotifyMsgItem.xaml.cs">
+      <DependentUpon>NotifyMsgItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotifyMsgPresenter\NotifyMsgModel.cs" />
     <Compile Include="NotifyMsgPresenter\NotifyMsgPresenter.cs" />
     <Compile Include="NotifyMsgPresenter\NotifyMsgPresenterWindow.xaml.cs">
@@ -145,6 +148,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="IconDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -165,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MusicPlayer\MusicPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotifyMsgPresenter\NotifyMsgItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

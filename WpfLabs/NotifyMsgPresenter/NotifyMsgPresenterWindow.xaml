@@ -6,7 +6,7 @@
     <Grid>
         <Grid Background="AntiqueWhite"></Grid>
         <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="25">
-            <notifyMsgPresenter:NotifyMsgPresenter Width="263" Background="Transparent" Height="200"/>
+            <notifyMsgPresenter:NotifyMsgPresenter Width="263" Background="Transparent" Height="200" DisplaySeconds="12" DelayNextMsgSecond="4"/>
         </Grid>
     </Grid>
 </Window>

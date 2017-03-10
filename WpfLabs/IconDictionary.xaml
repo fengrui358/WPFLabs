@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--邮件图标-->
+    <ControlTemplate x:Key="MailIcon">
+        <Viewbox>
+            <Grid>
+                <Grid Name="backgroundGrid" Width="16" Height="16" Visibility="Collapsed" />
+                <Path Data="M11.352,11.514041L15.829998,15.093997 20.305998,11.514041 31.659012,18.383 0,18.383z M32,1.77002L32,16.700015 21.340009,10.233034z M0,1.77002L10.656001,10.233034 0,16.700015z M0,0L31.659012,0 15.829998,12.664004z" Stretch="Uniform" Fill="#FFFFFFFF" Width="8" Height="8" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+</ResourceDictionary>
