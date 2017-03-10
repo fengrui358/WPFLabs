@@ -37,7 +37,7 @@ namespace WpfLabs.NotifyMsgPresenter
                     var newNotifyMsgModel = new NotifyMsgModel
                     {
                         Id = _mockIndex,
-                        Title = string.Format("第{0}条消息，{1} ", _mockIndex, DateTime.Now) + Guid.NewGuid(),
+                        Title = string.Format("第{0}条消息，{1} ", _mockIndex, DateTime.Now) + Guid.NewGuid() + Guid.NewGuid(),
                         Content = Guid.NewGuid().ToString("N")
                     };
 

@@ -48,22 +48,8 @@ namespace WpfLabs.NotifyMsgPresenter
         /// </summary>
         private Queue<NotifyMsgModel> _msgs = new Queue<NotifyMsgModel>();
 
-        ///// <summary>
-        ///// 最大显示数量
-        ///// </summary>
-        //public int MaxDisplayCount
-        //{
-        //    get { return (int) GetValue(MaxDisplayCountProperty); }
-        //    set { SetValue(MaxDisplayCountProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for MaxDisplayCount.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty MaxDisplayCountProperty =
-        //    DependencyProperty.Register("MaxDisplayCount", typeof(int), typeof(NotifyMsgPresenter),
-        //        new PropertyMetadata(3));
-
         /// <summary>
-        /// 在界面显示并停留的秒数
+        /// 在界面显示并停留的秒数，
         /// </summary>
         public int DisplaySeconds
         {
@@ -74,7 +60,7 @@ namespace WpfLabs.NotifyMsgPresenter
         // Using a DependencyProperty as the backing store for DisplaySeconds.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DisplaySecondsProperty =
             DependencyProperty.Register("DisplaySeconds", typeof(int), typeof(NotifyMsgPresenter),
-                new PropertyMetadata(5, (o, args) => ((NotifyMsgPresenter) o)._displaySeconds = (int) args.NewValue));
+                new PropertyMetadata(5, (o, args) => ((NotifyMsgPresenter) o)._displaySeconds = (int) args.NewValue), value => (int)value >= 5);
 
         /// <summary>
         /// 延迟显示下一条消息的时间
@@ -88,7 +74,7 @@ namespace WpfLabs.NotifyMsgPresenter
         // Using a DependencyProperty as the backing store for DelayNextMsgSecond.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DelayNextMsgSecondProperty =
             DependencyProperty.Register("DelayNextMsgSecond", typeof(int), typeof(NotifyMsgPresenter),
-                new PropertyMetadata(1, (o, args) => ((NotifyMsgPresenter) o)._delayNextMsgSecond = (int) args.NewValue));
+                new PropertyMetadata(1, (o, args) => ((NotifyMsgPresenter) o)._delayNextMsgSecond = (int) args.NewValue), value => (int)value >= 1);
 
         static NotifyMsgPresenter()
         {
