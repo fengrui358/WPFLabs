@@ -123,6 +123,7 @@
     <Compile Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml.cs">
       <DependentUpon>PeopleResourcePanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RunningProcessSpecialHelper.cs" />
     <Compile Include="Timer\Converters\TimerStringConverter.cs" />
     <Compile Include="Timer\Timer.xaml.cs">
       <DependentUpon>Timer.xaml</DependentUpon>

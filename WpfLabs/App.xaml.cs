@@ -18,7 +18,22 @@ namespace WpfLabs
     {
         static App()
         {
-            DispatcherHelper.Initialize();
+            //得到当前打开的窗口实例  
+            var instance = RunningProcessSpecialHelper.RunningInstance(Process.GetCurrentProcess());
+            //保证永远只打开一个窗口实例  
+            if (instance == null)
+            {
+                DispatcherHelper.Initialize();
+            }
+            else
+            {
+                //处理已经存在的窗口实例  
+                RunningProcessSpecialHelper.ActiveRunningInstance(instance);
+
+                //退出
+                Environment.Exit(0);
+            }
+            
         }
 
         protected override void OnStartup(StartupEventArgs e)
