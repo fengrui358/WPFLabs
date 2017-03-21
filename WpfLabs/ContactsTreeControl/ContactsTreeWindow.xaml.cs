@@ -67,7 +67,7 @@ namespace WpfLabs.ContactsTreeControl
                         }
                         else
                         {
-                            peopleModel.Name = "人员" + Guid.NewGuid() + Guid.NewGuid();
+                            peopleModel.Name = "人员" + Guid.NewGuid();
                         }
 
                         childOrganizationModel.PeopleChildren.Add(peopleModel);

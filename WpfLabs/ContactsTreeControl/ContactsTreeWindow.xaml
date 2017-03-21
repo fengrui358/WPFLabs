@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:contactsTreeControl="clr-namespace:WpfLabs.ContactsTreeControl"
-        Title="ContactsTreeWindow" Height="300" Width="300">
+        Title="ContactsTreeWindow" Height="800" Width="1500">
     <Grid>
         <contactsTreeControl:ContactsTree ItemsSource="{Binding ContactsTreeSource}" SelectedPeopleChanged="ContactsTree_OnSelectedPeopleChanged" ShowDetail="ContactsTree_OnShowDetail" CallPhone="ContactsTree_OnCallPhone"/>
     </Grid>

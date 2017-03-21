@@ -88,7 +88,14 @@
     <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ContactsTreeControl\Converters\TreeViewConverter.cs" />
     <Compile Include="ContactsTreeControl\Models\PeopleModel.cs" />
+    <Compile Include="ExpertPanel2\ExpertPanel2.xaml.cs">
+      <DependentUpon>ExpertPanel2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpertPanel2\ExpertPanelWindow2.xaml.cs">
+      <DependentUpon>ExpertPanelWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExpertPanel\ExpertPanel.xaml.cs">
       <DependentUpon>ExpertPanel.xaml</DependentUpon>
     </Compile>
@@ -138,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContactsTreeControl\ContactsTreeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExpertPanel2\ExpertPanel2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExpertPanel2\ExpertPanelWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,6 +267,7 @@
     <Resource Include="ExpertPanel\Resources\TestPolice.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ExpertPanel2\Resources\TestPortrait.jpg" />
     <Content Include="MusicPlayer\TestFiles\a1.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

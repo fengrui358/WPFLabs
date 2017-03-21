@@ -18,6 +18,7 @@ using GalaSoft.MvvmLight.Command;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.ExpertPanel;
+using WpfLabs.ExpertPanel2;
 using WpfLabs.MusicPlayer;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
@@ -51,6 +52,10 @@ namespace WpfLabs
                 case "ExpertPanel":
                     var expertPanelWindow = new ExpertPanelWindow();
                     expertPanelWindow.ShowDialog();
+                    break;
+                case "ExpertPanel2":
+                    var expertPanelWindow2 = new ExpertPanelWindow2();
+                    expertPanelWindow2.ShowDialog();
                     break;
                 case "Timer":
                     var timerWindow = new TimerWindow();
