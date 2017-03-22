@@ -103,6 +103,7 @@
       <DependentUpon>ExpertPanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpertPanel\Models\ExpertModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventType.cs" />
