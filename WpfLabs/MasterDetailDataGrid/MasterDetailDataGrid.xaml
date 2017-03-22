@@ -10,9 +10,13 @@
              d:DesignHeight="175" d:DesignWidth="1580">
     <UserControl.Resources>
         <converters:DataGridRowDetailVisibilityConverter x:Key="DataGridRowDetailVisibilityConverter"/>
+        <DataTemplate x:Key="RowDetailTemplate">
+            <Grid Background="Red" Height="80"></Grid>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <DataGrid Margin="0,5"  ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type masterDetailDataGrid:MasterDetailDataGrid}}}">
+        <DataGrid Margin="0,5"  ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type masterDetailDataGrid:MasterDetailDataGrid}}}"
+                  RowDetailsTemplate="{StaticResource RowDetailTemplate}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="0.3*">
                     <DataGridTemplateColumn.CellTemplate>

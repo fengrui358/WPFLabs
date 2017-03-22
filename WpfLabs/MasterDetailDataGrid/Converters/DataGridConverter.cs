@@ -14,15 +14,30 @@ namespace WpfLabs.MasterDetailDataGrid.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //修改默认的展示子类容的方式
-            //目前的需求只能由Button来改变
-
             return Binding.DoNothing;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool) value ? Visibility.Visible : Visibility.Collapsed;
+        }
+    }
+
+    public class DataGridRowDetailMarginConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            var rowHeight = (double) values[0];
+            var rowMargin = (Thickness) values[1];
+
+            rowMargin.Top += (rowHeight + rowMargin.Bottom);
+
+            return rowMargin;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

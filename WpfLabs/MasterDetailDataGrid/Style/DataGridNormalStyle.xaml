@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WpfLabs.MasterDetailDataGrid.Converters">
+    <converters:DataGridRowDetailMarginConverter x:Key="DataGridRowDetailMarginConverter"/>
+    
     <!--列表框行背景色-->
     <SolidColorBrush x:Key="DgRowNormalBgColor" Color="#FFFFFFFF" />
     <!--列表框正常边框颜色-->
@@ -97,9 +100,16 @@
                                 </SelectiveScrollingGrid>
                             </Border>
                         </Grid>
-                        <DataGridDetailsPresenter Margin="0,150,0,0"
+                        <DataGridDetailsPresenter
                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                  Visibility="{TemplateBinding DetailsVisibility}" />
+                                                  Visibility="{TemplateBinding DetailsVisibility}">
+                            <DataGridDetailsPresenter.Margin>
+                                <MultiBinding Converter="{StaticResource DataGridRowDetailMarginConverter}">
+                                    <Binding Path="RowHeight" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}"></Binding>
+                                    <Binding Path="Margin" RelativeSource="{RelativeSource AncestorType={x:Type DataGridRow}}"></Binding>
+                                </MultiBinding>
+                            </DataGridDetailsPresenter.Margin>
+                        </DataGridDetailsPresenter>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
