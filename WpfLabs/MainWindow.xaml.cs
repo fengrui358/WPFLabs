@@ -19,6 +19,7 @@ using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
+using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MusicPlayer;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
@@ -72,6 +73,10 @@ namespace WpfLabs
                 case "NotifyMsgPresenter":
                     var notifyMsgPresenterWindow = new NotifyMsgPresenterWindow();
                     notifyMsgPresenterWindow.ShowDialog();
+                    break;
+                case "MasterDetailDataGrid":
+                    var masterDetailDataGridWindow = new MasterDetailDataGridWindow();
+                    masterDetailDataGridWindow.ShowDialog();
                     break;
             }
         }

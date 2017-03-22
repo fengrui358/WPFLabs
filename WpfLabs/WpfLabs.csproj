@@ -103,6 +103,28 @@
       <DependentUpon>ExpertPanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpertPanel\Models\ExpertModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
+    <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
+    <Compile Include="MasterDetailDataGrid\Enum\EnumEventType.cs" />
+    <Compile Include="MasterDetailDataGrid\Enum\EnumInjuredStatus.cs" />
+    <Compile Include="MasterDetailDataGrid\Enum\EnumInjuryGrade.cs" />
+    <Compile Include="MasterDetailDataGrid\MasterDetailDataGrid.xaml.cs">
+      <DependentUpon>MasterDetailDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDetailDataGrid\MasterDetailDataGridWindow.xaml.cs">
+      <DependentUpon>MasterDetailDataGridWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterDetailDataGrid\Models\AlarmBaseInfoModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\AlarmExtraInfoModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\AlarmFullInfoModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\AlarmInfoModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\AlarmMajorInfoModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\AlarmTransferModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\IncidentFireControlModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\Incidentinformation.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\IncidentMedicalModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\IncidentPoliceModel.cs" />
+    <Compile Include="MasterDetailDataGrid\Models\IncidentTrafficModel.cs" />
     <Compile Include="MusicPlayer\Converters\PlayStateConverter.cs" />
     <Compile Include="MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
@@ -148,6 +170,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DefaultStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ExpertPanel2\ExpertPanel2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,6 +209,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MasterDetailDataGrid\MasterDetailDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MasterDetailDataGrid\MasterDetailDataGridWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MasterDetailDataGrid\Style\DataGridNormalStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MusicPlayer\MusicPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
