@@ -120,9 +120,6 @@
                             <Setter Property="BorderThickness" Value="0,1,1,1" />
                             <Setter Property="Foreground" Value="{StaticResource DgRowNormalBgColor}" />
                         </Trigger>
-                        <Trigger Property="DetailsVisibility" Value="Visible">
-                            <!--<Setter TargetName="DGR_Grid" Property="Margin" Value="0,0,0,150" />-->
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

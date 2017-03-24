@@ -11,7 +11,13 @@
     <UserControl.Resources>
         <converters:DataGridRowDetailVisibilityConverter x:Key="DataGridRowDetailVisibilityConverter"/>
         <DataTemplate x:Key="RowDetailTemplate">
-            <Grid Background="Red" Height="80"></Grid>
+            <Grid Background="Red" Height="80" Width="1490">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            </Grid>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
