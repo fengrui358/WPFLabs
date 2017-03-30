@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WpfLabs.FlexDataGrid.FlexDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flexDataGrid="clr-namespace:WpfLabs.FlexDataGrid"
+             mc:Ignorable="d"
+             d:DesignHeight="720" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/DataGridNormalStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid Width="560" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type flexDataGrid:FlexDataGrid}}, Path=ItemsSource}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Contacts" Width="*" Binding="{Binding Contacts}"/>
+                <DataGridTextColumn Header="Dispatch time" Width="*" Binding="{Binding DispatchTime}"/>
+                <!--<DataGridTemplateColumn Header="Operate" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Background="Red" Width="70" Orientation="Horizontal" Tag="ShrinkStatus">
+                                <Button Width="10" Margin="0,0,8,0" Click="ButtonBase_OnClick"></Button>
+                                <Button Width="24" Height="24"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <DataGridTemplateColumn Header="Operate" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Background="Red" Width="70" Orientation="Horizontal" Tag="ShrinkStatus">
+                                <Button Width="10" Margin="0,0,8,0" Click="ButtonBase_OnClick"></Button>
+                                <Button Width="24" Height="24"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="WpfLabs.FlexDataGrid.MaskPanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flexDataGrid="clr-namespace:WpfLabs.FlexDataGrid"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="24" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+        </Style>
+    </UserControl.Resources>
+    <!--<UserControl.Template>
+        <ControlTemplate>
+            <Grid x:Name="Container" Width="56" HorizontalAlignment="Right" Background="Red">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <ToggleButton Width="10" Height="24" Margin="0,0,10,0" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked">
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Container" Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="266"></DoubleAnimation>
+                                            <DoubleAnimation Storyboard.TargetName="Button2" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="1"></DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Container" Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="56"></DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                    <Button x:Name="Button2" Opacity="0" Visibility="Collapsed"></Button>
+                    <Button x:Name="Button3" Opacity="0" Visibility="Collapsed"></Button>
+                    <Button x:Name="Button4" Opacity="0" Visibility="Collapsed"></Button>
+                    <Button x:Name="Button5" Opacity="0" Visibility="Collapsed"></Button>
+                    <Button x:Name="Button6" Opacity="0" Visibility="Collapsed"></Button>
+                    <Button></Button>
+                </StackPanel>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Template>-->
+    <Grid x:Name="Container" Width="56" HorizontalAlignment="Right" Background="Red">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <ToggleButton Width="10" Height="24" Margin="0,0,10,0" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type flexDataGrid:MaskPanelControl}}, Path=IsExpanded}">
+                <ToggleButton.Triggers>
+                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Container"
+                                                     Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="266" />
+                                    <!--<DoubleAnimation Storyboard.TargetName="Button2" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="1"></DoubleAnimation>-->
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="Container"
+                                                     Storyboard.TargetProperty="Width" Duration="0:0:0.2" To="56" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </ToggleButton.Triggers>
+            </ToggleButton>
+            <Button Opacity="0" Tag="CollapsedBtn" Visibility="Collapsed" />
+            <Button Opacity="0" Tag="CollapsedBtn" Visibility="Collapsed" />
+            <Button Opacity="0" Tag="CollapsedBtn" Visibility="Collapsed" />
+            <Button Opacity="0" Tag="CollapsedBtn" Visibility="Collapsed" />
+            <Button Opacity="0" Tag="CollapsedBtn" Visibility="Collapsed" />
+            <Button />
+        </StackPanel>
+    </Grid>
+</UserControl>

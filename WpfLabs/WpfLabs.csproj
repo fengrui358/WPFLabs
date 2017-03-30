@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\RoutedPropertyEventHandler.cs" />
+    <Compile Include="Base\TreeHelper.cs" />
     <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +104,16 @@
       <DependentUpon>ExpertPanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpertPanel\Models\ExpertModel.cs" />
+    <Compile Include="FlexDataGrid\FlexDataGrid.xaml.cs">
+      <DependentUpon>FlexDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlexDataGrid\FlexDataGridWindow.xaml.cs">
+      <DependentUpon>FlexDataGridWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlexDataGrid\MaskPanelControl.xaml.cs">
+      <DependentUpon>MaskPanelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlexDataGrid\Models\FlexDataGridItemModel.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -190,6 +201,22 @@
     <Page Include="ExpertPanel\ExpertPanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlexDataGrid\FlexDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlexDataGrid\FlexDataGridWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlexDataGrid\MaskPanelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlexDataGrid\Style\DataGridNormalStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="IconDictionary.xaml">
       <SubType>Designer</SubType>
@@ -313,7 +340,9 @@
     <Resource Include="PeopleResourcePanel\Resources\TestPortrait.jpg" />
     <Resource Include="PeopleResourcePanel\Resources\Dial.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

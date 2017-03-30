@@ -1,0 +1,12 @@
+﻿<Window x:Class="WpfLabs.FlexDataGrid.FlexDataGridWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:flexDataGrid="clr-namespace:WpfLabs.FlexDataGrid"
+        Title="FlexDataGridWindow" Height="900" Width="1000">
+    <Grid>
+        <StackPanel>
+            <flexDataGrid:MaskPanelControl/>
+            <flexDataGrid:FlexDataGrid ItemsSource="{Binding FlexDataGridItemModels}"/>
+        </StackPanel>
+    </Grid>
+</Window>

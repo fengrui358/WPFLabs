@@ -11,15 +11,20 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel>
-            <Button Content="展示通讯录树" Command="{Binding ShowControlWindow}" CommandParameter="ContactsTree" />
-            <Button Content="展示专家面板" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel" />
-            <Button Content="展示专家面板2" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel2" />
-            <Button Content="展示计时器面板" Command="{Binding ShowControlWindow}" CommandParameter="Timer" />
-            <Button Content="展示音频播放器" Command="{Binding ShowControlWindow}" CommandParameter="MusicPlayer" />
-            <Button Content="展示人员列表" Command="{Binding ShowControlWindow}" CommandParameter="PeopleResourcePanel" />
-            <Button Content="通知窗体" Command="{Binding ShowControlWindow}" CommandParameter="NotifyMsgPresenter" />
-            <Button Content="展示MasterDetailDataGrid" Command="{Binding ShowControlWindow}" CommandParameter="MasterDetailDataGrid" />
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel>
+                <Button Content="展示通讯录树" Command="{Binding ShowControlWindow}" CommandParameter="ContactsTree" />
+                <Button Content="展示专家面板" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel" />
+                <Button Content="展示专家面板2" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel2" />
+                <Button Content="展示计时器面板" Command="{Binding ShowControlWindow}" CommandParameter="Timer" />
+                <Button Content="展示音频播放器" Command="{Binding ShowControlWindow}" CommandParameter="MusicPlayer" />
+                <Button Content="展示人员列表" Command="{Binding ShowControlWindow}" CommandParameter="PeopleResourcePanel" />
+                <Button Content="通知窗体" Command="{Binding ShowControlWindow}" CommandParameter="NotifyMsgPresenter" />
+                <Button Content="展示MasterDetailDataGrid" Command="{Binding ShowControlWindow}"
+                        CommandParameter="MasterDetailDataGrid" />
+                <Button Content="展示FlexDataGrid" Command="{Binding ShowControlWindow}"
+                        CommandParameter="FlexDataGrid" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
