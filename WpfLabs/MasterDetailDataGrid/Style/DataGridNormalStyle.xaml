@@ -38,7 +38,7 @@
         <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"/>
         <Setter Property="VerticalGridLinesBrush" Value="{x:Null}"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="RowHeight" Value="50"/>
         <Setter Property="RowHeaderWidth" Value="0"/>
     </Style>

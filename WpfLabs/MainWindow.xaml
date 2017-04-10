@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wpfLabs="clr-namespace:WpfLabs"
         xmlns:contactsTreeControl="clr-namespace:WpfLabs.ContactsTreeControl"
-        Title="MainWindow" Height="370" Width="350">
+        Title="MainWindow" Height="600" Width="400" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5" />
@@ -24,6 +24,7 @@
                         CommandParameter="MasterDetailDataGrid" />
                 <Button Content="展示FlexDataGrid" Command="{Binding ShowControlWindow}"
                         CommandParameter="FlexDataGrid" />
+                <Button Content="展示DataGridDetailListWindow" Command="{Binding ShowControlWindow}" CommandParameter="DataGridDetailListWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

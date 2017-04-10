@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WpfLabs.DataGridDetailList.Converters">
+    <converters:DataGridRowDetailMarginConverter x:Key="DataGridRowDetailMarginConverter" />
+    <Style TargetType="DataGrid">
+        <!--网格线颜色-->
+        <Setter Property="CanUserResizeColumns" Value="false" />
+        <Setter Property="AutoGenerateColumns" Value="false" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="CanUserSortColumns" Value="false" />
+        <Setter Property="CanUserResizeRows" Value="false" />
+        <Setter Property="CanUserReorderColumns" Value="false" />
+        <Setter Property="CanUserAddRows" Value="false" />
+        <Setter Property="CanUserDeleteRows" Value="false" />
+        <Setter Property="IsReadOnly" Value="False" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{StaticResource DgBorderSelectedBgColor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{x:Null}" />
+        <Setter Property="RowHeight" Value="41" />
+        <Setter Property="RowHeaderWidth" Value="0" />
+    </Style>
+
+    <!--标题栏样式-->
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Foreground" Value="{StaticResource TbLabelFgColor}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="41" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <!--<Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1" 
+                             BorderBrush="{x:Null}" 
+                              Width="Auto">-->
+                    <Grid>
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Grid>
+                    <!--</Border>-->
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--行样式触发-->
+    <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="BorderBrush" Value="{StaticResource DgBorderNormalBbColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{StaticResource DgRowNormalBgColor}" />
+        <Setter Property="Foreground" Value="{StaticResource TbContentFgColor}" />
+        <Setter Property="Margin" Value="0,6" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <Grid>
+                        <Grid x:Name="DGR_Grid" SnapsToDevicePixels="True">
+                            <Border CornerRadius="5,4,4,5" Background="#FF57BDDE" HorizontalAlignment="Stretch">
+                                <Border x:Name="DGR_Border"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="0,4,4,0" Margin="0,0,0,0">
+                                    <SelectiveScrollingGrid>
+                                        <SelectiveScrollingGrid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </SelectiveScrollingGrid.ColumnDefinitions>
+                                        <SelectiveScrollingGrid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </SelectiveScrollingGrid.RowDefinitions>
+                                        <DataGridCellsPresenter Grid.Column="1"
+                                                                ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                        <DataGridRowHeader Grid.RowSpan="2"
+                                                           SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                                           Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                    </SelectiveScrollingGrid>
+                                </Border>
+
+                            </Border>
+                        </Grid>
+                        <DataGridDetailsPresenter
+                            SelectiveScrollingGrid.SelectiveScrollingOrientation="Both"
+                            Visibility="{TemplateBinding DetailsVisibility}">
+                            <DataGridDetailsPresenter.Margin>
+                                <MultiBinding Converter="{StaticResource DataGridRowDetailMarginConverter}">
+                                    <Binding Path="RowHeight"
+                                             RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                    <Binding Path="Margin"
+                                             RelativeSource="{RelativeSource AncestorType={x:Type DataGridRow}}" />
+                                </MultiBinding>
+                            </DataGridDetailsPresenter.Margin>
+                        </DataGridDetailsPresenter>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource DgBorderMouseOverColor}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DgBorderSelectedBgColor}" />
+                            <Setter Property="Foreground" Value="{StaticResource DgRowNormalBgColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--单元格样式触发-->
+    <Style TargetType="DataGridCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Grid>
+                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <TextBlock TextAlignment="Center">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DgBorderSelectedBgColor}" />
+                            <Setter Property="Foreground" Value="{StaticResource DgRowNormalBgColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

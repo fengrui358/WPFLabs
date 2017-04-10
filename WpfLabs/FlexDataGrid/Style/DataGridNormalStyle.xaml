@@ -76,7 +76,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Grid>
-                        <Grid SnapsToDevicePixels="True" x:Name="DGR_Grid" Margin="0" Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=RowHeight}" VerticalAlignment="Top">
+                        <Grid SnapsToDevicePixels="True" x:Name="DGR_Grid" Tag="DGR_Grid" Margin="0" Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=RowHeight}" VerticalAlignment="Top">
                             <Border x:Name="BdHeader" CornerRadius="5,4,4,5" Background="#FF57BDDE"
                                     HorizontalAlignment="Left" Width="8"/>
                             <Border x:Name="DGR_Border"
@@ -97,10 +97,10 @@
                                     <DataGridRowHeader Grid.Row="0" Grid.RowSpan="2"
                                                        SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
                                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                                    <!--这个Grid是浮在行上面的一个遮罩-->
-                                    <Grid Tag="DataGridRowMask" Grid.Column="1" Background="Transparent" Visibility="Collapsed"></Grid>
                                 </SelectiveScrollingGrid>
                             </Border>
+                            <!--这个Grid是浮在行上面的一个遮罩-->
+                            <Grid Name="DataGridRowMask" Background="Transparent" Visibility="Collapsed"></Grid>
                         </Grid>
                         <DataGridDetailsPresenter
                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"

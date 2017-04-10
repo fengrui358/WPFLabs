@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
+using WpfLabs.DataGridDetailList;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
@@ -82,6 +83,10 @@ namespace WpfLabs
                 case "FlexDataGrid":
                     var flexDataGridWindow = new FlexDataGridWindow();
                     flexDataGridWindow.ShowDialog();
+                    break;
+                case "DataGridDetailListWindow":
+                    var dataGridDetailListWindow = new DataGridDetailListWindow();
+                    dataGridDetailListWindow.ShowDialog();
                     break;
             }
         }

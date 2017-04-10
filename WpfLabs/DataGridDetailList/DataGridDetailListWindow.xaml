@@ -1,0 +1,37 @@
+﻿<Window x:Class="WpfLabs.DataGridDetailList.DataGridDetailListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dataGridDetailList="clr-namespace:WpfLabs.DataGridDetailList"
+        Title="DataGridDetailListWindow" Height="600" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/DataGridGISViewStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>-->
+            <DataTemplate x:Key="DetailDataTemplate">
+                <ItemsControl
+                    ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type dataGridDetailList:DataGridDetailListWindow}}, Path=TestItemSource2}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid Height="400" Background="Red" />
+                                <TextBlock Text="{Binding}" />
+                                <Grid Height="100" Background="Green" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <DataGrid ItemsSource="{Binding TestItemSource}"
+                  ScrollViewer.CanContentScroll="False"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  RowDetailsTemplate="{StaticResource DetailDataTemplate}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="测试" Binding="{Binding}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

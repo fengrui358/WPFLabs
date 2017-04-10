@@ -91,6 +91,11 @@
     </Compile>
     <Compile Include="ContactsTreeControl\Converters\TreeViewConverter.cs" />
     <Compile Include="ContactsTreeControl\Models\PeopleModel.cs" />
+    <Compile Include="DataGridDetailList\Converters\DataGridRowDetailMarginConverter.cs" />
+    <Compile Include="DataGridDetailList\DataGridDetailListWindow.xaml.cs">
+      <DependentUpon>DataGridDetailListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridDetailList\DataGridDetailType.cs" />
     <Compile Include="ExpertPanel2\ExpertPanel2.xaml.cs">
       <DependentUpon>ExpertPanel2.xaml</DependentUpon>
     </Compile>
@@ -181,6 +186,14 @@
     <Page Include="ContactsTreeControl\ContactsTreeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataGridDetailList\DataGridDetailListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataGridDetailList\Style\DataGridGISViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>

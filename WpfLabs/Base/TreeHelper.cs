@@ -80,7 +80,7 @@ namespace WpfLabs.Base
                         }
                         else
                         {
-                            child = GetVisualChild<T>(v);
+                            child = GetVisualChild<T>(v, Tag);
                         }
                     }
                     else

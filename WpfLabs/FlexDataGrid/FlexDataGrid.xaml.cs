@@ -51,7 +51,10 @@ namespace WpfLabs.FlexDataGrid
 
             //找到DataGrid行中的隐藏遮罩层容器
             var dataGridRow = TreeHelper.FindAncestorNode<DataGridRow>((Control) sender);
-            var gridContainer = TreeHelper.GetVisualChild<Grid>(dataGridRow, "DataGridRowMask");
+
+
+            //var grid = LogicalTreeHelper.FindLogicalNode(dataGridRow, "DataGridRowMask");
+            var gridContainer = TreeHelper.GetVisualChild<Grid>(dataGridRow, "DGR_Grid");
 
             var maskPanelControl = new MaskPanelControl {HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(1)};
             gridContainer.Children.Add(maskPanelControl);
