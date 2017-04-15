@@ -10,16 +10,10 @@ namespace WpfItemsControlSeparator
     /// </summary>
     public partial class MainWindow
     {
-        private ObservableCollection<string> _source = new ObservableCollection<string>();
-
         /// <summary>
         /// 数据源
         /// </summary>
-        public ObservableCollection<string> Source
-        {
-            get { return _source; }
-            set { _source = value; }
-        }
+        public ObservableCollection<string> Source { get; set; } = new ObservableCollection<string>();
 
         public MainWindow()
         {

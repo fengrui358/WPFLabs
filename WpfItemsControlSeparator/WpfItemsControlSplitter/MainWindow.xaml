@@ -1,6 +1,7 @@
 ﻿<Window x:Class="WpfItemsControlSeparator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfItemsControlSeparator="clr-namespace:WpfItemsControlSeparator"
         Title="MainWindow" Height="550" Width="725" WindowStartupLocation="CenterScreen">
     <Grid IsSharedSizeScope="True">
         <Grid.RowDefinitions>
@@ -9,6 +10,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -25,18 +27,13 @@
                                       VerticalAlignment="Stretch">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <Border Name="Bd" Grid.Row="0" Height="1" Background="Red" />
-                                        <TextBlock Grid.Row="1" Text="{Binding}" />
-                                    </Grid>
+                                    <Border Name="Bd" BorderThickness="0,1,0,0" BorderBrush="Red">
+                                        <TextBlock Text="{Binding}" />
+                                    </Border>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
                                                      Value="{x:Null}">
-                                            <Setter TargetName="Bd" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="Bd" Property="BorderThickness" Value="0" />
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>
@@ -59,27 +56,65 @@
                                       VerticalAlignment="Stretch" AlternationCount="{Binding Source.Count}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <Border Name="Bd" Grid.Row="0" Height="1" Background="Red">
-                                            <Border.Style>
-                                                <Style TargetType="{x:Type Border}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger
-                                                            Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="BorderBrush" Value="Red" />
+                                                <Setter Property="BorderThickness" Value="0,1,0,0" />
+                                                <Style.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding Path=(ItemsControl.AlternationIndex), 
                                                    RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}"
-                                                            Value="0">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
-                                        </Border>
-                                        <TextBlock Grid.Row="1" Text="{Binding}" />
-                                    </Grid>
+                                                        Value="0">
+                                                        <Setter Property="BorderThickness" Value="0" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding}"
+                                                   ToolTip="{Binding Path=(ItemsControl.AlternationIndex), 
+                                                   RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" />
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Gray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" SharedSizeGroup="DescriptionGroup" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="按照第二种思路自定义附加属性，这样就不用占用原生ItemsControl的属性了。并且可以用附加属性标记出所有的索引号，供其他场景使用。"
+                               TextWrapping="Wrap" />
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Source}" BorderThickness="1" BorderBrush="Blue"
+                                      VerticalAlignment="Stretch"
+                                      wpfItemsControlSeparator:ItemsControlHelper.MarkIndex="True">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="BorderBrush" Value="Red" />
+                                                <Setter Property="BorderThickness" Value="0,1,0,0" />
+                                                <Style.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding Path=(wpfItemsControlSeparator:ItemsControlHelper.ItemIndex), 
+                                                   RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}"
+                                                        Value="0">
+                                                        <Setter Property="BorderThickness" Value="0" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Grid.Row="1" Text="{Binding}"
+                                                   ToolTip="{Binding Path=(wpfItemsControlSeparator:ItemsControlHelper.ItemIndex), 
+                                                   RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" />
+                                    </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
