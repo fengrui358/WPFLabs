@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
-namespace WpfItemsControlSplitter
+namespace WpfItemsControlSeparator
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -40,6 +41,22 @@ namespace WpfItemsControlSplitter
         private void AppendBtn_OnClick(object sender, RoutedEventArgs e)
         {
             Source.Add(Guid.NewGuid().ToString("N"));
+        }
+
+        private void DeleteFirst_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Source.Any())
+            {
+                Source.RemoveAt(0);
+            }
+        }
+
+        private void DeleteLast_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Source.Any())
+            {
+                Source.RemoveAt(Source.Count - 1);
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfItemsControlSplitter", "WpfItemsControlSplitter\WpfItemsControlSplitter.csproj", "{4517AF6E-132E-4DEF-A450-9A42DC5DD8EE}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfItemsControlSeparator", "WpfItemsControlSplitter\WpfItemsControlSeparator.csproj", "{4517AF6E-132E-4DEF-A450-9A42DC5DD8EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

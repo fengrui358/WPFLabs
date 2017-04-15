@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfItemsControlSplitter.MainWindow"
+﻿<Window x:Class="WpfItemsControlSeparator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="550" Width="725" WindowStartupLocation="CenterScreen">
@@ -90,6 +90,8 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Margin="10" Content="向前插入" Click="InsertBtn_OnClick" />
             <Button Margin="10" Content="向后追加" Click="AppendBtn_OnClick" />
+            <Button Margin="10" Content="从前删除" Click="DeleteFirst_OnClick" />
+            <Button Margin="10" Content="从后删除" Click="DeleteLast_OnClick" />
         </StackPanel>
     </Grid>
 </Window>
