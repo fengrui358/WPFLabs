@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
+using WpfLabs.BindingDemo;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.DataGridDetailList;
@@ -87,6 +88,10 @@ namespace WpfLabs
                 case "DataGridDetailListWindow":
                     var dataGridDetailListWindow = new DataGridDetailListWindow();
                     dataGridDetailListWindow.ShowDialog();
+                    break;
+                case "BindingDemoWindow":
+                    var bindingDemoWindow = new BindingDemoWindow();
+                    bindingDemoWindow.ShowDialog();
                     break;
             }
         }

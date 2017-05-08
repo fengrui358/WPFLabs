@@ -25,6 +25,7 @@
                 <Button Content="展示FlexDataGrid" Command="{Binding ShowControlWindow}"
                         CommandParameter="FlexDataGrid" />
                 <Button Content="展示DataGridDetailListWindow" Command="{Binding ShowControlWindow}" CommandParameter="DataGridDetailListWindow" />
+                <Button Content="展示BindingDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="BindingDemoWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
