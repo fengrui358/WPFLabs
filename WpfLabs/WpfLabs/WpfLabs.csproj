@@ -174,6 +174,9 @@
       <DependentUpon>PeopleResourcePanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RunningProcessSpecialHelper.cs" />
+    <Compile Include="SwapImageDemo\SwapImageDemoWindow.xaml.cs">
+      <DependentUpon>SwapImageDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Timer\Converters\TimerStringConverter.cs" />
     <Compile Include="Timer\Timer.xaml.cs">
       <DependentUpon>Timer.xaml</DependentUpon>
@@ -298,6 +301,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SwapImageDemo\SwapImageDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -354,6 +361,10 @@
     <Resource Include="ExpertPanel\Resources\TestPolice.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="SwapImageDemo\Images\arrow1.png" />
+    <Resource Include="SwapImageDemo\Images\arrow2.png" />
+    <Resource Include="SwapImageDemo\Images\user_icon1.png" />
+    <Resource Include="SwapImageDemo\Images\user_icon2.png" />
     <Resource Include="ExpertPanel2\Resources\TestPortrait.jpg" />
     <Content Include="MusicPlayer\TestFiles\a1.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -26,6 +26,7 @@
                         CommandParameter="FlexDataGrid" />
                 <Button Content="展示DataGridDetailListWindow" Command="{Binding ShowControlWindow}" CommandParameter="DataGridDetailListWindow" />
                 <Button Content="展示BindingDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="BindingDemoWindow" />
+                <Button Content="展示SwapImageDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="SwapImageDemoWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

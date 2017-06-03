@@ -26,6 +26,7 @@ using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MusicPlayer;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
+using WpfLabs.SwapImageDemo;
 using WpfLabs.Timer;
 
 namespace WpfLabs
@@ -92,6 +93,10 @@ namespace WpfLabs
                 case "BindingDemoWindow":
                     var bindingDemoWindow = new BindingDemoWindow();
                     bindingDemoWindow.ShowDialog();
+                    break;
+                case "SwapImageDemoWindow":
+                    var swapImageDemoWindow = new SwapImageDemoWindow();
+                    swapImageDemoWindow.ShowDialog();
                     break;
             }
         }

@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfLabs.SwapImageDemo.SwapImageDemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.SwapImageDemo"
+        mc:Ignorable="d"
+        Title="SwapImageDemoWindow" Height="800" Width="800">
+    <Window.Resources>
+        <Duration x:Key="SwapAnimation">0:0:0.5</Duration>
+        <Style x:Key="ImageVisibleToCollapsed" TargetType="Image">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="{StaticResource SwapAnimation}" Storyboard.TargetProperty="Opacity" From="1" To="0" AutoReverse="True" RepeatBehavior="Forever"></DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ImageCollapsedToVisible" TargetType="Image">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="{StaticResource SwapAnimation}" Storyboard.TargetProperty="Opacity" From="0" To="1" AutoReverse="True" RepeatBehavior="Forever"></DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Stretch="None" Source="Images/arrow1.png" Style="{StaticResource ImageVisibleToCollapsed}"/>
+        <Image Grid.Column="0" Stretch="None" Source="Images/arrow2.png" Style="{StaticResource ImageCollapsedToVisible}"/>
+        <Image Grid.Column="1" Stretch="None" Source="Images/user_icon1.png"/>
+        <Image Grid.Column="1" Stretch="None" Source="Images/user_icon2.png" Style="{StaticResource ImageVisibleToCollapsed}"/>
+    </Grid>
+</Window>
