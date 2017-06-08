@@ -4,5 +4,6 @@
     xmlns:local="clr-namespace:WpfLabs">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../NotifyMsgPresenter/Themes/NotifyMsgPresenter.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="../CircularLoading/Themes/CircularLoadingStyle.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

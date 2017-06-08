@@ -90,6 +90,10 @@
       <DependentUpon>BindingDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BindingDemo\BindingTargetClass.cs" />
+    <Compile Include="CircularLoading\CircularLoading.cs" />
+    <Compile Include="CircularLoading\CircularLoadingWindow.xaml.cs">
+      <DependentUpon>CircularLoadingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
@@ -187,6 +191,14 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="BindingDemo\BindingDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CircularLoading\CircularLoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CircularLoading\Themes\CircularLoadingStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

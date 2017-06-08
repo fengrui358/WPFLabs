@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using WpfLabs.BindingDemo;
+using WpfLabs.CircularLoading;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.DataGridDetailList;
@@ -97,6 +98,10 @@ namespace WpfLabs
                 case "SwapImageDemoWindow":
                     var swapImageDemoWindow = new SwapImageDemoWindow();
                     swapImageDemoWindow.ShowDialog();
+                    break;
+                case "CircularLoadingWindow":
+                    var circularLoadingWindow = new CircularLoadingWindow();
+                    circularLoadingWindow.ShowDialog();
                     break;
             }
         }
