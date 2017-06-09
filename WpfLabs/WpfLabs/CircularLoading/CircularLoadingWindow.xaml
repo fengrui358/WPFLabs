@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="CircularLoadingWindow" Height="300" Width="300">
     <Grid>
-        <local:CircularLoading></local:CircularLoading>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <local:CircularLoading Grid.Row="0" IsActive="{Binding ElementName=LoadingControl, Path=IsChecked}"></local:CircularLoading>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton x:Name="LoadingControl" GroupName="Control" Content="转动" Margin="20" IsChecked="True"/>
+            <RadioButton GroupName="Control" Content="停止" Margin="20"/>
+        </StackPanel>
     </Grid>
 </Window>

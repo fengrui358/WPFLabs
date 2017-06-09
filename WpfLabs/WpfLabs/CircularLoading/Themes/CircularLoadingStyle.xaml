@@ -3,16 +3,25 @@
                     xmlns:local="clr-namespace:WpfLabs.CircularLoading"
                     xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing">
     <Style TargetType="{x:Type local:CircularLoading}">
+        <Setter Property="ShortSegmentBrush" Value="#8F3BC0C3" />
+        <Setter Property="LongSegmentBrush" Value="#433BC0C3" />
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="100" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CircularLoading}">
-                    <Viewbox x:Name="Container" Width="200" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+                    <Viewbox x:Name="Container" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                             Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
                         <Viewbox.RenderTransform>
-                            <RotateTransform x:Name="ContainerAngle" Angle="0"></RotateTransform>
+                            <RotateTransform x:Name="ContainerAngle" Angle="0" />
                         </Viewbox.RenderTransform>
                         <Grid>
-                            <ed:Arc ArcThickness="100" SnapsToDevicePixels="True" ArcThicknessUnit="Pixel" EndAngle="360" Fill="Red" Height="1000" Stretch="None" Stroke="Transparent" StrokeThickness="1" StartAngle="0" Width="1000"/>
-                            <ed:Arc ArcThickness="100" SnapsToDevicePixels="True" ArcThicknessUnit="Pixel" EndAngle="60" Fill="White" Height="1000" Stretch="None" Stroke="White" StrokeThickness="1" StartAngle="-30" Width="1000"/>
+                            <ed:Arc ArcThickness="100" SnapsToDevicePixels="True" ArcThicknessUnit="Pixel"
+                                    EndAngle="360" Fill="{TemplateBinding LongSegmentBrush}" Height="1000" Stretch="None" Stroke="Transparent"
+                                    StrokeThickness="1" StartAngle="0" Width="1000" />
+                            <ed:Arc ArcThickness="100" SnapsToDevicePixels="True" ArcThicknessUnit="Pixel"
+                                    EndAngle="60" Fill="{TemplateBinding ShortSegmentBrush}" Height="1000" Stretch="None" Stroke="White"
+                                    StrokeThickness="1" StartAngle="-30" Width="1000" />
                         </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ActiveStates">
@@ -28,7 +37,9 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation Storyboard.TargetName="ContainerAngle" From="0" To="360" Duration="0:1:0"></DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="ContainerAngle"
+                                                         Storyboard.TargetProperty="Angle" From="0" To="360"
+                                                         Duration="0:0:1" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

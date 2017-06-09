@@ -44,11 +44,78 @@ namespace WpfLabs.CircularLoading
     ///     <MyNamespace:CircularLoading/>
     ///
     /// </summary>
+    [TemplateVisualState(Name = "Inactive", GroupName = "ActiveStates")]
+    [TemplateVisualState(Name = "Active", GroupName = "ActiveStates")]
     public class CircularLoading : Control
     {
+        private List<Action> _deferredActions = new List<Action>();
+
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(CircularLoading), new PropertyMetadata(false, IsActiveChanged));
+
+        public static readonly DependencyProperty ShortSegmentBrushProperty = DependencyProperty.Register(
+            "ShortSegmentBrush", typeof(Brush), typeof(CircularLoading), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public Brush ShortSegmentBrush
+        {
+            get { return (Brush) GetValue(ShortSegmentBrushProperty); }
+            set { SetValue(ShortSegmentBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty LongSegmentBrushProperty = DependencyProperty.Register(
+            "LongSegmentBrush", typeof(Brush), typeof(CircularLoading),
+            new FrameworkPropertyMetadata(new SolidColorBrush(new Color {R = 0x3C, G = 0xD9, B = 0xD5}), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public Brush LongSegmentBrush
+        {
+            get { return (Brush) GetValue(LongSegmentBrushProperty); }
+            set { SetValue(LongSegmentBrushProperty, value); }
+        }
+
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
+        }
+
         static CircularLoading()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CircularLoading), new FrameworkPropertyMetadata(typeof(CircularLoading)));
+        }
+
+        private static void IsActiveChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var circularLoading = dependencyObject as CircularLoading;
+            if (circularLoading == null)
+                return;
+
+            circularLoading.UpdateActiveState();
+        }
+
+        private void UpdateActiveState()
+        {
+            Action action;
+
+            if (IsActive)
+                action = () => VisualStateManager.GoToState(this, "Active", true);
+            else
+                action = () => VisualStateManager.GoToState(this, "Inactive", true);
+
+            if (_deferredActions != null)
+                _deferredActions.Add(action);
+
+            else
+                action();
+        }
+
+        public override void OnApplyTemplate()
+        {
+            //make sure the states get updated
+            UpdateActiveState();
+            base.OnApplyTemplate();
+            if (_deferredActions != null)
+                foreach (var action in _deferredActions)
+                    action();
+            _deferredActions = null;
         }
     }
 }
