@@ -90,6 +90,13 @@
       <DependentUpon>BindingDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BindingDemo\BindingTargetClass.cs" />
+    <Compile Include="CalloutBorder\CalloutBorder.cs" />
+    <Compile Include="CalloutBorder\CalloutBorderStyleWindow.xaml.cs">
+      <DependentUpon>CalloutBorderStyleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CalloutBorder\Converters\BorderConverter.cs" />
+    <Compile Include="CalloutBorder\Converters\CalloutBorderConverters.cs" />
+    <Compile Include="CalloutBorder\Converters\ContentContainerMarginConverter.cs" />
     <Compile Include="CircularLoading\CircularLoading.cs" />
     <Compile Include="CircularLoading\CircularLoadingWindow.xaml.cs">
       <DependentUpon>CircularLoadingWindow.xaml</DependentUpon>
@@ -191,6 +198,14 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="BindingDemo\BindingDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalloutBorder\CalloutBorderStyleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalloutBorder\Themes\CalloutBorderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using WpfLabs.BindingDemo;
+using WpfLabs.CalloutBorder;
 using WpfLabs.CircularLoading;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
@@ -102,6 +103,10 @@ namespace WpfLabs
                 case "CircularLoadingWindow":
                     var circularLoadingWindow = new CircularLoadingWindow();
                     circularLoadingWindow.ShowDialog();
+                    break;
+                case "CalloutBorderStyleWindow":
+                    var calloutBorderStyleWindow = new CalloutBorderStyleWindow();
+                    calloutBorderStyleWindow.ShowDialog();
                     break;
             }
         }
