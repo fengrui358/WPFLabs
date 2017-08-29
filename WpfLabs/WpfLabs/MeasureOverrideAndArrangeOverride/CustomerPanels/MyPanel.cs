@@ -11,6 +11,11 @@ namespace WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanels
         {
             Debug.WriteLine($"Name:{Name};availableSize:{availableSize}");
 
+            foreach (UIElement internalChild in InternalChildren)
+            {
+                internalChild.Measure(availableSize);
+            }
+
             return base.MeasureOverride(availableSize);
         }
 

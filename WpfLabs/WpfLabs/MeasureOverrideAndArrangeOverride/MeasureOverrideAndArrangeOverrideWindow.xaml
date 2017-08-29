@@ -8,13 +8,22 @@
         xmlns:customerControls="clr-namespace:WpfLabs.MeasureOverrideAndArrangeOverride.CustomerControls"
         mc:Ignorable="d"
         Title="MeasureOverrideAndArrangeOverrideWindow" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <Style TargetType="customerControls:MyControl">
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+        </Style>
+    </Window.Resources>
     <TabControl>
         <TabItem Header="测试1">
             <Grid Width="300" Height="500">
                 <customerPanels:MyPanel x:Name="T1OutPanel">
-                    <customerPanels:MyPanel x:Name="T1InnerPanel">
-                        <customerControls:MyControl x:Name="T1Control2"/>
-                        <customerControls:MyControl x:Name="T1Control3"/>
+                    <customerPanels:MyPanel x:Name="T1InnerPanel" Margin="10">
+                        <customerControls:MyControl x:Name="T1Control2" Width="100" Margin="10"/>
+                        <customerControls:MyControl x:Name="T1Control3" Height="100" Margin="10"/>
+                        <customerControls:MyControl x:Name="T1Control4" Width="100" Height="100" Margin="10"/>
+                        <customerControls:MyControl x:Name="T1Control5" Margin="10"/>
                     </customerPanels:MyPanel>
                     <customerControls:MyControl x:Name="T1Control1"/>
                 </customerPanels:MyPanel>
