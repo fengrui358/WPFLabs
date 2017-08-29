@@ -4,12 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.MeasureOverrideAndArrangeOverride"
+        xmlns:customerPanels="clr-namespace:WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanels"
+        xmlns:customerControls="clr-namespace:WpfLabs.MeasureOverrideAndArrangeOverride.CustomerControls"
         mc:Ignorable="d"
         Title="MeasureOverrideAndArrangeOverrideWindow" SizeToContent="WidthAndHeight">
     <TabControl>
         <TabItem Header="测试1">
-            <Grid Width="300" Height="500"></Grid>
+            <Grid Width="300" Height="500">
+                <customerPanels:MyPanel x:Name="T1OutPanel">
+                    <customerPanels:MyPanel x:Name="T1InnerPanel">
+                        <customerControls:MyControl x:Name="T1Control2"/>
+                        <customerControls:MyControl x:Name="T1Control3"/>
+                    </customerPanels:MyPanel>
+                    <customerControls:MyControl x:Name="T1Control1"/>
+                </customerPanels:MyPanel>
+            </Grid>
         </TabItem>
-        <TabItem Header="测试2"/>
+        <TabItem Header="测试2">
+            <customerPanels:MyPanel x:Name="T2OutPanel">
+                <customerPanels:MyPanel x:Name="T2InnerPanel">
+                    <customerControls:MyControl x:Name="T2Control2"/>
+                    <customerControls:MyControl x:Name="T2Control3"/>
+                </customerPanels:MyPanel>
+                <customerControls:MyControl x:Name="T2Control1"/>
+            </customerPanels:MyPanel>
+        </TabItem>
     </TabControl>
 </Window>

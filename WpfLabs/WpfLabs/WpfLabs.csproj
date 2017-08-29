@@ -160,7 +160,8 @@
     <Compile Include="MasterDetailDataGrid\Models\IncidentMedicalModel.cs" />
     <Compile Include="MasterDetailDataGrid\Models\IncidentPoliceModel.cs" />
     <Compile Include="MasterDetailDataGrid\Models\IncidentTrafficModel.cs" />
-    <Compile Include="MeasureOverrideAndArrangeOverride\CustomerPanel\MyPanel.cs" />
+    <Compile Include="MeasureOverrideAndArrangeOverride\CustomerControls\MyControl.cs" />
+    <Compile Include="MeasureOverrideAndArrangeOverride\CustomerPanels\MyPanel.cs" />
     <Compile Include="MeasureOverrideAndArrangeOverride\MeasureOverrideAndArrangeOverrideWindow.xaml.cs">
       <DependentUpon>MeasureOverrideAndArrangeOverrideWindow.xaml</DependentUpon>
     </Compile>
