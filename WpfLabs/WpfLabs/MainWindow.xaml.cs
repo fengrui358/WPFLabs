@@ -25,6 +25,7 @@ using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
 using WpfLabs.MasterDetailDataGrid;
+using WpfLabs.MeasureOverrideAndArrangeOverride;
 using WpfLabs.MusicPlayer;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
@@ -107,6 +108,10 @@ namespace WpfLabs
                 case "CalloutBorderStyleWindow":
                     var calloutBorderStyleWindow = new CalloutBorderStyleWindow();
                     calloutBorderStyleWindow.ShowDialog();
+                    break;
+                case "MeasureOverrideAndArrangeOverrideWindow":
+                    var measureOverrideAndArrangeOverrideWindow = new MeasureOverrideAndArrangeOverrideWindow();
+                    measureOverrideAndArrangeOverrideWindow.ShowDialog();
                     break;
             }
         }

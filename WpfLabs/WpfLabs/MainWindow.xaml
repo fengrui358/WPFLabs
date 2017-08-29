@@ -29,6 +29,7 @@
                 <Button Content="展示SwapImageDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="SwapImageDemoWindow" />
                 <Button Content="展示CircularLoadingWindow" Command="{Binding ShowControlWindow}" CommandParameter="CircularLoadingWindow" />
                 <Button Content="展示CalloutBorderStyleWindow" Command="{Binding ShowControlWindow}" CommandParameter="CalloutBorderStyleWindow" />
+                <Button Content="展示MeasureOverrideAndArrangeOverrideWindow" Command="{Binding ShowControlWindow}" CommandParameter="MeasureOverrideAndArrangeOverrideWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
