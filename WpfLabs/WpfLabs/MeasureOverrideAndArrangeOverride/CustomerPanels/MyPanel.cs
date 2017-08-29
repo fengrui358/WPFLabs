@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanel
+namespace WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanels
 {
     public class MyPanel : Panel
     {
