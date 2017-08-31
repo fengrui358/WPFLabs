@@ -22,6 +22,8 @@ namespace WpfLabs.MeasureOverrideAndArrangeOverride
         public MeasureOverrideAndArrangeOverrideWindow()
         {
             InitializeComponent();
+            StackPanel s = new StackPanel();
+            
         }
     }
 }

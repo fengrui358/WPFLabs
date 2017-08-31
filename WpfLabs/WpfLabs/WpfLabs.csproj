@@ -165,6 +165,7 @@
     <Compile Include="MeasureOverrideAndArrangeOverride\MeasureOverrideAndArrangeOverrideWindow.xaml.cs">
       <DependentUpon>MeasureOverrideAndArrangeOverrideWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MeasureOverrideAndArrangeOverride\MessageDisplayer.cs" />
     <Compile Include="MusicPlayer\Converters\PlayStateConverter.cs" />
     <Compile Include="MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>

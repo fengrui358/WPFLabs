@@ -9,7 +9,7 @@ namespace WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanels
     {
         protected override Size MeasureOverride(Size availableSize)
         {
-            Debug.WriteLine($"Name:{Name};availableSize:{availableSize}");
+            MessageDisplayer.Instance.AppendLine($"Name:{Name};availableSize:{availableSize}");
 
             foreach (UIElement internalChild in InternalChildren)
             {
@@ -21,14 +21,18 @@ namespace WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanels
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            Debug.WriteLine($"Name:{Name};finalSize:{finalSize}");
+            MessageDisplayer.Instance.AppendLine($"Name:{Name};finalSize:{finalSize}");
 
             return base.ArrangeOverride(finalSize);
         }
 
         protected override void OnRender(DrawingContext dc)
         {
-            base.OnRender(dc);
+            Brush background = this.Background;
+            if (background == null)
+                return;
+            Size renderSize = this.RenderSize;
+            dc.DrawRectangle(background, (Pen)null, new Rect(0.0, 0.0, renderSize.Width, renderSize.Height));
         }
     }
 }
