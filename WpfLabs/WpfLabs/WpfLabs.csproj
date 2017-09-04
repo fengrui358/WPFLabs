@@ -137,6 +137,8 @@
       <DependentUpon>MaskPanelControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlexDataGrid\Models\FlexDataGridItemModel.cs" />
+    <Compile Include="Helper\DoubleUtilHelper.cs" />
+    <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -412,9 +414,7 @@
     <Resource Include="PeopleResourcePanel\Resources\TestPortrait.jpg" />
     <Resource Include="PeopleResourcePanel\Resources\Dial.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -23,7 +23,7 @@
         <TextBlock Grid.Row="0" Height="200" Text="{Binding Source={x:Static local:MessageDisplayer.Instance}, Path=Msg}"/>
         <TabControl Grid.Row="1">
             <TabItem Header="测试1">
-                <Grid Width="300" Height="500">
+                <WrapPanel Width="300" Height="500">
                     <customerPanels:MyPanel x:Name="T1OutPanel" Background="AliceBlue">
                         <customerPanels:MyPanel x:Name="T1InnerPanel" Margin="10">
                             <customerControls:MyControl x:Name="T1Control2" Width="100" Margin="10"/>
@@ -33,16 +33,16 @@
                         </customerPanels:MyPanel>
                         <customerControls:MyControl x:Name="T1Control1"/>
                     </customerPanels:MyPanel>
-                </Grid>
+                </WrapPanel>
             </TabItem>
             <TabItem Header="测试2">
-                <customerPanels:MyPanel x:Name="T2OutPanel">
+                <!--<customerPanels:MyPanel x:Name="T2OutPanel">
                     <customerPanels:MyPanel x:Name="T2InnerPanel">
                         <customerControls:MyControl x:Name="T2Control2"/>
                         <customerControls:MyControl x:Name="T2Control3"/>
                     </customerPanels:MyPanel>
                     <customerControls:MyControl x:Name="T2Control1"/>
-                </customerPanels:MyPanel>
+                </customerPanels:MyPanel>-->
             </TabItem>
         </TabControl>
     </Grid>
