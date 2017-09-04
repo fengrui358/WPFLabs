@@ -58,6 +58,11 @@ namespace WpfLabs.MeasureOverrideAndArrangeOverride.CustomerPanels
         {
             MessageDisplayer.Instance.AppendLine($"Name:{Name};finalSize:{finalSize}");
 
+            foreach (UIElement internalChild in InternalChildren)
+            {
+                internalChild.Arrange(new Rect(finalSize));
+            }
+
             return base.ArrangeOverride(finalSize);
         }
 
