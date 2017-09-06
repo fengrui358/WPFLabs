@@ -12,12 +12,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Border Grid.Column="0" Background="Green" Margin="10" Padding="20" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
                 <Button Background="Red"/>
             </Border>
 
-            <local:CalloutBorder Grid.Column="1" Background="Green" Margin="10" Padding="20" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
+            <local:CalloutBorder Grid.Column="1" Placement="Bottom" Background="Green" Margin="10" Padding="20" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
                 <Button Background="Red"/>
             </local:CalloutBorder>
         </Grid>

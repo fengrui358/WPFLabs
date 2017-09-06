@@ -35,12 +35,22 @@ namespace WpfLabs.CalloutBorder
         /// <summary>
         /// 标识箭头的宽
         /// </summary>
-        public static readonly DependencyProperty CalloutWidthProperty = DependencyProperty.Register("CalloutWidth", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsCalloutSizeValid));
+        public static readonly DependencyProperty CalloutWidthProperty = DependencyProperty.Register("CalloutWidth", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsDoubleValid));
 
         /// <summary>
         /// 标识箭头的高
         /// </summary>
-        public static readonly DependencyProperty CalloutHightProperty = DependencyProperty.Register("CalloutHight", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsCalloutSizeValid));
+        public static readonly DependencyProperty CalloutHightProperty = DependencyProperty.Register("CalloutHight", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsDoubleValid));
+
+        /// <summary>
+        /// 标识箭头的水平偏移
+        /// </summary>
+        public static readonly DependencyProperty HorizontalOffsetProperty = DependencyProperty.Register("HorizontalOffset", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsDoubleValid));
+
+        /// <summary>
+        /// 标识箭头的垂直偏移
+        /// </summary>
+        public static readonly DependencyProperty VerticalOffsetProperty = DependencyProperty.Register("VerticalOffset", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsDoubleValid));
 
         /// <summary>
         ///   标识 <see cref="P:System.Windows.Controls.Border.BorderThickness" /> 依赖属性。
@@ -124,6 +134,36 @@ namespace WpfLabs.CalloutBorder
             set
             {
                 this.SetValue(CalloutBorder.CalloutHightProperty, (object)value);
+            }
+        }
+
+        /// <summary>
+        /// 标识箭头的水平偏移
+        /// </summary>
+        public double HorizontalOffset
+        {
+            get
+            {
+                return (double)this.GetValue(CalloutBorder.HorizontalOffsetProperty);
+            }
+            set
+            {
+                this.SetValue(CalloutBorder.HorizontalOffsetProperty, (object)value);
+            }
+        }
+
+        /// <summary>
+        /// 标识箭头的垂直偏移
+        /// </summary>
+        public double VerticalOffset
+        {
+            get
+            {
+                return (double)this.GetValue(CalloutBorder.VerticalOffsetProperty);
+            }
+            set
+            {
+                this.SetValue(CalloutBorder.VerticalOffsetProperty, (object)value);
             }
         }
 
@@ -255,14 +295,33 @@ namespace WpfLabs.CalloutBorder
             if (child != null)
             {
                 Size size4 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
-                Size availableSize = new Size(Math.Max(0.0, constraint.Width - size4.Width), Math.Max(0.0, constraint.Height - size4.Height));
+                Size availableSize = new Size(Math.Max(0.0, constraint.Width - size4.Width),
+                    Math.Max(0.0, constraint.Height - size4.Height));
                 child.Measure(availableSize);
                 Size desiredSize = child.DesiredSize;
                 size1.Width = desiredSize.Width + size4.Width;
                 size1.Height = desiredSize.Height + size4.Height;
             }
             else
+            {
                 size1 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
+            }
+
+            if (IsCalloutValid(this))
+            {
+                switch (Placement)
+                {
+                    case CalloutPlacement.Left:
+                        break;
+                    case CalloutPlacement.Top:
+                        break;
+                    case CalloutPlacement.Right:
+                        break;
+                    case CalloutPlacement.Bottom:
+                        break;
+                }
+            }
+
             return size1;
         }
 
@@ -564,7 +623,7 @@ namespace WpfLabs.CalloutBorder
             border._bottomPenCache = (Pen)null;
         }
 
-        private static bool IsCalloutSizeValid(object value)
+        private static bool IsDoubleValid(object value)
         {
             return (double) value >= 0d;
         }
@@ -582,6 +641,11 @@ namespace WpfLabs.CalloutBorder
         private static Size HelperCollapseThickness(Thickness th)
         {
             return new Size(th.Left + th.Right, th.Top + th.Bottom);
+        }
+
+        private static bool IsCalloutValid(CalloutBorder calloutBorder)
+        {
+            return calloutBorder?.CalloutWidth > 0d && calloutBorder?.CalloutHight > 0d;
         }
 
         private static bool AreUniformCorners(CornerRadius borderRadii)
