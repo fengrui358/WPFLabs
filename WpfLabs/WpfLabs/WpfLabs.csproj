@@ -93,6 +93,10 @@
       <DependentUpon>BindingDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BindingDemo\BindingTargetClass.cs" />
+    <Compile Include="CalloutBorder\CalloutBorder.cs" />
+    <Compile Include="CalloutBorder\CalloutBorderStyleWindow.xaml.cs">
+      <DependentUpon>CalloutBorderStyleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CircularLoading\CircularLoading.cs" />
     <Compile Include="CircularLoading\CircularLoadingWindow.xaml.cs">
       <DependentUpon>CircularLoadingWindow.xaml</DependentUpon>
@@ -130,6 +134,7 @@
       <DependentUpon>MaskPanelControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlexDataGrid\Models\FlexDataGridItemModel.cs" />
+    <Compile Include="Helper\CornerRadiusHelper.cs" />
     <Compile Include="Helper\DoubleUtilHelper.cs" />
     <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
@@ -202,6 +207,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="BindingDemo\BindingDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalloutBorder\CalloutBorderStyleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,9 +408,7 @@
     <Resource Include="PeopleResourcePanel\Resources\TestPortrait.jpg" />
     <Resource Include="PeopleResourcePanel\Resources\Dial.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CalloutBorder\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,14 @@
+﻿<Window x:Class="WpfLabs.CalloutBorder.CalloutBorderStyleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.CalloutBorder"
+        mc:Ignorable="d"
+        Title="CalloutBorderStyleWindow" Height="300" Width="300">
+    <Grid>
+        <local:CalloutBorder>
+            <Button Width="100" Height="50" Background="Red"/>
+        </local:CalloutBorder>
+    </Grid>
+</Window>
