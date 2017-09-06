@@ -7,8 +7,19 @@
         mc:Ignorable="d"
         Title="CalloutBorderStyleWindow" Height="300" Width="300">
     <Grid>
-        <local:CalloutBorder>
-            <Button Width="100" Height="50" Background="Red"/>
-        </local:CalloutBorder>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border Grid.Column="0" Background="Green" Margin="10" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
+                <Button Width="100" Height="50" Background="Red"/>
+            </Border>
+
+            <local:CalloutBorder Grid.Column="1" Background="Green" Margin="10" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
+                <Button Width="100" Height="50" Background="Red"/>
+            </local:CalloutBorder>
+        </Grid>
     </Grid>
 </Window>
