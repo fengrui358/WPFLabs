@@ -5,6 +5,5 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../NotifyMsgPresenter/Themes/NotifyMsgPresenter.xaml"></ResourceDictionary>
         <ResourceDictionary Source="../CircularLoading/Themes/CircularLoadingStyle.xaml"></ResourceDictionary>
-        <ResourceDictionary Source="../CalloutBorder/Themes/CalloutBorderStyle.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
