@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,21 @@ namespace WpfLabs.CalloutBorder
         #endregion
 
         #region 依赖属性
+
+        /// <summary>
+        /// 标识箭头的位置
+        /// </summary>
+        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register("Placement", typeof(CalloutPlacement), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(CalloutPlacement.Left, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)));
+
+        /// <summary>
+        /// 标识箭头的宽
+        /// </summary>
+        public static readonly DependencyProperty CalloutWidthProperty = DependencyProperty.Register("CalloutWidth", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsCalloutSizeValid));
+
+        /// <summary>
+        /// 标识箭头的高
+        /// </summary>
+        public static readonly DependencyProperty CalloutHightProperty = DependencyProperty.Register("CalloutHight", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsCalloutSizeValid));
 
         /// <summary>
         ///   标识 <see cref="P:System.Windows.Controls.Border.BorderThickness" /> 依赖属性。
@@ -65,6 +81,51 @@ namespace WpfLabs.CalloutBorder
         #endregion
 
         #region 属性
+
+        /// <summary>
+        /// 标识箭头的位置
+        /// </summary>
+        public CalloutPlacement Placement
+        {
+            get
+            {
+                return (CalloutPlacement)this.GetValue(CalloutBorder.PlacementProperty);
+            }
+            set
+            {
+                this.SetValue(CalloutBorder.PlacementProperty, (object)value);
+            }
+        }
+
+        /// <summary>
+        /// 标识箭头的宽
+        /// </summary>
+        public double CalloutWidth
+        {
+            get
+            {
+                return (double)this.GetValue(CalloutBorder.CalloutWidthProperty);
+            }
+            set
+            {
+                this.SetValue(CalloutBorder.CalloutWidthProperty, (object)value);
+            }
+        }
+
+        /// <summary>
+        /// 标识箭头的高
+        /// </summary>
+        public double CalloutHight
+        {
+            get
+            {
+                return (double)this.GetValue(CalloutBorder.CalloutHightProperty);
+            }
+            set
+            {
+                this.SetValue(CalloutBorder.CalloutHightProperty, (object)value);
+            }
+        }
 
         /// <summary>
         ///   获取或设置 <see cref="T:System.Windows.Controls.Border" /> 的相对 <see cref="T:System.Windows.Thickness" />。
@@ -176,6 +237,8 @@ namespace WpfLabs.CalloutBorder
         /// </returns>
         protected override Size MeasureOverride(Size constraint)
         {
+            Debug.WriteLine($"Call MeasureOverride:{constraint}");
+
             UIElement child = this.Child;
             Size size1 = new Size();
             Thickness th = this.BorderThickness;
@@ -214,6 +277,7 @@ namespace WpfLabs.CalloutBorder
         /// </returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
+            Debug.WriteLine($"Call ArrangeOverride:{finalSize}");
             Thickness thickness = this.BorderThickness;
 
             //TODO:GetDPI
@@ -288,6 +352,7 @@ namespace WpfLabs.CalloutBorder
         /// </param>
         protected override void OnRender(DrawingContext dc)
         {
+            Debug.WriteLine("Call OnRender:");
             bool useLayoutRounding = this.UseLayoutRounding;
 
             //TODO:GetDPI
@@ -499,6 +564,11 @@ namespace WpfLabs.CalloutBorder
             border._bottomPenCache = (Pen)null;
         }
 
+        private static bool IsCalloutSizeValid(object value)
+        {
+            return (double) value >= 0d;
+        }
+
         private static bool IsThicknessValid(object value)
         {
             return ThicknessHelper.IsValid((Thickness) value, false, false, false, false);
@@ -689,6 +759,31 @@ namespace WpfLabs.CalloutBorder
                     this.LeftBottom = Math.Max(0.0, radii.BottomLeft - num1);
                 }
             }
+        }
+
+        /// <summary>
+        /// 符号位置
+        /// </summary>
+        public enum CalloutPlacement
+        {
+            /// <summary>
+            /// 左
+            /// </summary>
+            Left,
+
+            /// <summary>
+            /// 上
+            /// </summary>
+            Top,
+
+            /// <summary>
+            /// 右
+            /// </summary>
+            Right,
+            /// <summary>
+            /// 底
+            /// </summary>
+            Bottom,
         }
 
         #endregion
