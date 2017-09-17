@@ -111,6 +111,10 @@
       <DependentUpon>DataGridDetailListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataGridDetailList\DataGridDetailType.cs" />
+    <Compile Include="DrawingDemo\ControlRowConverter.cs" />
+    <Compile Include="DrawingDemo\DrawingDemoWindow.xaml.cs">
+      <DependentUpon>DrawingDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExpertPanel2\ExpertPanel2.xaml.cs">
       <DependentUpon>ExpertPanel2.xaml</DependentUpon>
     </Compile>
@@ -241,6 +245,10 @@
     <Page Include="DefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DrawingDemo\DrawingDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExpertPanel2\ExpertPanel2.xaml">
       <SubType>Designer</SubType>

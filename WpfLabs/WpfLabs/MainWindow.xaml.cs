@@ -21,6 +21,7 @@ using WpfLabs.CircularLoading;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.DataGridDetailList;
+using WpfLabs.DrawingDemo;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
@@ -112,6 +113,10 @@ namespace WpfLabs
                 case "MeasureOverrideAndArrangeOverrideWindow":
                     var measureOverrideAndArrangeOverrideWindow = new MeasureOverrideAndArrangeOverrideWindow();
                     measureOverrideAndArrangeOverrideWindow.ShowDialog();
+                    break;
+                case "DrawingDemoWindow":
+                    var drawingDemoWindow = new DrawingDemoWindow();
+                    drawingDemoWindow.ShowDialog();
                     break;
             }
         }
