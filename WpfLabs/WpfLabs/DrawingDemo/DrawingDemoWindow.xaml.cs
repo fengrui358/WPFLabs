@@ -25,6 +25,8 @@ namespace WpfLabs.DrawingDemo
         private double _drawingWidth = 150;
         private double _drawingHeight = 100;
         private double _drawingThickness = 1;
+        private double _radii = 0;
+        private double _protrudingHeight = 0;
 
         public double DrawingWidth
         {
@@ -57,9 +59,35 @@ namespace WpfLabs.DrawingDemo
             get => _drawingThickness;
             set
             {
-                if (Math.Abs(_drawingThickness - value) > Double.Epsilon && value > 0)
+                if (Math.Abs(_drawingThickness - value) > Double.Epsilon && value >= 0)
                 {
                     _drawingThickness = value;
+                    Drawing();
+                }
+            }
+        }
+
+        public double Radii
+        {
+            get => _radii;
+            set
+            {
+                if (Math.Abs(_radii - value) > Double.Epsilon && value >= 0)
+                {
+                    _radii = value;
+                    Drawing();
+                }
+            }
+        }
+
+        public double ProtrudingHeight
+        {
+            get => _protrudingHeight;
+            set
+            {
+                if (Math.Abs(_protrudingHeight - value) > Double.Epsilon && value >= 0)
+                {
+                    _protrudingHeight = value;
                     Drawing();
                 }
             }
@@ -74,32 +102,33 @@ namespace WpfLabs.DrawingDemo
         private void DrawingDemoWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             Drawing();
-            var b = new Border();
         }
 
         private void Drawing()
         {
-            var drawingBrush = new DrawingBrush();
-
-            GeometryDrawing geometry = new GeometryDrawing();
             StreamGeometry streamGeometry = new StreamGeometry();
 
-            var context = streamGeometry.Open();
-            context.BeginFigure(new Point(0, 0), true, true);
-            context.LineTo(new Point(_drawingWidth, 0), true, false);
-            context.LineTo(new Point(_drawingWidth, _drawingHeight), true, false);
-            context.LineTo(new Point(0, _drawingHeight), true, false);
+            using (var context = streamGeometry.Open())
+            {
+                context.BeginFigure(new Point(Radii, 0), true, true);
+                context.LineTo(new Point(_drawingWidth - Radii, 0), true, false);
+                context.ArcTo(new Point(_drawingWidth, Radii), new Size(Radii, Radii), 0, false,
+                    SweepDirection.Clockwise, true, false);
+                context.LineTo(new Point(_drawingWidth, _drawingHeight - Radii), true, false);
+                context.ArcTo(new Point(_drawingWidth - Radii, _drawingHeight), new Size(Radii, Radii), 0, false,
+                    SweepDirection.Clockwise, true, false);
+                context.LineTo(new Point(Radii, _drawingHeight), true, false);
+                context.ArcTo(new Point(0, _drawingHeight - Radii), new Size(Radii, Radii), 0, false,
+                    SweepDirection.Clockwise, true, false);
+                context.LineTo(new Point(0, Radii), true, false);
+                context.ArcTo(new Point(Radii, 0), new Size(Radii, Radii), 0, false,
+                    SweepDirection.Clockwise, true, false);
+            }
 
-            context.Close();
-
-            geometry.Geometry = streamGeometry;
-            geometry.Brush = new SolidColorBrush(Color.FromArgb(40, 155, 155, 155));
-            geometry.Pen = new Pen(Brushes.Black, _drawingThickness);
-
-            drawingBrush.Drawing = geometry;
-            DrawingRectangle.Width = DrawingWidth;
-            DrawingRectangle.Height = DrawingHeight;
-            DrawingRectangle.Fill = drawingBrush;
+            DrawingPath.StrokeThickness = DrawingThickness;
+            DrawingPath.Stroke = new SolidColorBrush(Colors.Black);
+            DrawingPath.Fill = new SolidColorBrush(Color.FromArgb(40, 155, 155, 155));
+            DrawingPath.Data = streamGeometry;
         }
     }
 }
