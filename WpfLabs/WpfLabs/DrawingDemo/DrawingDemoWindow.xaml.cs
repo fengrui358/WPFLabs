@@ -26,7 +26,6 @@ namespace WpfLabs.DrawingDemo
         private double _drawingHeight = 100;
         private double _drawingThickness = 1;
         private double _radii = 0;
-        private double _protrudingHeight = 0;
 
         public double DrawingWidth
         {
@@ -75,19 +74,6 @@ namespace WpfLabs.DrawingDemo
                 if (Math.Abs(_radii - value) > Double.Epsilon && value >= 0)
                 {
                     _radii = value;
-                    Drawing();
-                }
-            }
-        }
-
-        public double ProtrudingHeight
-        {
-            get => _protrudingHeight;
-            set
-            {
-                if (Math.Abs(_protrudingHeight - value) > Double.Epsilon && value >= 0)
-                {
-                    _protrudingHeight = value;
                     Drawing();
                 }
             }
