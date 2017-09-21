@@ -5,21 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.CalloutBorder"
         mc:Ignorable="d"
-        Title="CalloutBorderStyleWindow" Height="300" Width="300">
-    <Grid>
-        <Grid ShowGridLines="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        Title="CalloutBorderStyleWindow" Height="500" Width="500">
+    <Grid x:Name="ContainerGrid" IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="ControlRow" Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <!--BorderThickness-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="BorderThickness：" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Content="{Binding ElementName=BorderThicknessSlider, Path=Minimum}" />
+                <Slider x:Name="BorderThicknessSlider" Grid.Column="2" Maximum="10" Minimum="0" Value="1" />
+                <Label Grid.Column="3" Content="{Binding ElementName=BorderThicknessSlider, Path=Maximum}" />
+            </Grid>
+            <!--Margin-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Margin：" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Content="{Binding ElementName=MarginSlider, Path=Minimum}" />
+                <Slider x:Name="MarginSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="10" />
+                <Label Grid.Column="3" Content="{Binding ElementName=MarginSlider, Path=Maximum}" />
+            </Grid>
+            <!--Padding-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Padding：" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Content="{Binding ElementName=PaddingSlider, Path=Minimum}" />
+                <Slider x:Name="PaddingSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="25" />
+                <Label Grid.Column="3" Content="{Binding ElementName=PaddingSlider, Path=Maximum}" />
+            </Grid>
+            <!--CornerRadius-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="CornerRadius：" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Content="{Binding ElementName=CornerRadiusSlider, Path=Minimum}" />
+                <Slider x:Name="CornerRadiusSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="8" />
+                <Label Grid.Column="3" Content="{Binding ElementName=CornerRadiusSlider, Path=Maximum}" />
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Background="Green" Margin="10" Padding="20" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
-                <Button Background="Red"/>
-            </Border>
+                <Border Grid.Column="0" Background="Green" Margin="{Binding ElementName=MarginSlider, Path=Value}"
+                        Padding="{Binding ElementName=PaddingSlider, Path=Value}"
+                        CornerRadius="{Binding ElementName=CornerRadiusSlider, Path=Value}"
+                        BorderThickness="{Binding ElementName=BorderThicknessSlider, Path=Value}" BorderBrush="Blue">
+                    <Button Background="Red" />
+                </Border>
 
-            <local:CalloutBorder Grid.Column="1" Placement="Bottom" Background="Green" Margin="10" Padding="20" CornerRadius="4" BorderThickness="2" BorderBrush="Blue">
-                <Button Background="Red"/>
-            </local:CalloutBorder>
+                <local:CalloutBorder Grid.Column="1" Placement="Bottom" Background="Green"
+                                     Margin="{Binding ElementName=MarginSlider, Path=Value}"
+                                     Padding="{Binding ElementName=PaddingSlider, Path=Value}"
+                                     CornerRadius="{Binding ElementName=CornerRadiusSlider, Path=Value}"
+                                     BorderThickness="{Binding ElementName=BorderThicknessSlider, Path=Value}"
+                                     BorderBrush="Blue">
+                    <Button Background="Red" />
+                </local:CalloutBorder>
+            </Grid>
         </Grid>
     </Grid>
+
 </Window>
