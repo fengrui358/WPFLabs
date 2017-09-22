@@ -40,7 +40,7 @@ namespace WpfLabs.CalloutBorder
         /// <summary>
         /// 标识箭头的高
         /// </summary>
-        public static readonly DependencyProperty CalloutHightProperty = DependencyProperty.Register("CalloutHight", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsDoubleValid));
+        public static readonly DependencyProperty CalloutHeightProperty = DependencyProperty.Register("CalloutHeight", typeof(double), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsDoubleValid));
 
         /// <summary>
         /// 标识箭头的水平偏移
@@ -125,15 +125,15 @@ namespace WpfLabs.CalloutBorder
         /// <summary>
         /// 标识箭头的高
         /// </summary>
-        public double CalloutHight
+        public double CalloutHeight
         {
             get
             {
-                return (double)this.GetValue(CalloutBorder.CalloutHightProperty);
+                return (double)this.GetValue(CalloutBorder.CalloutHeightProperty);
             }
             set
             {
-                this.SetValue(CalloutBorder.CalloutHightProperty, (object)value);
+                this.SetValue(CalloutBorder.CalloutHeightProperty, (object)value);
             }
         }
 
@@ -645,7 +645,7 @@ namespace WpfLabs.CalloutBorder
 
         private static bool IsCalloutValid(CalloutBorder calloutBorder)
         {
-            return calloutBorder?.CalloutWidth > 0d && calloutBorder?.CalloutHight > 0d;
+            return calloutBorder?.CalloutWidth > 0d && calloutBorder?.CalloutHeight > 0d;
         }
 
         private static bool AreUniformCorners(CornerRadius borderRadii)
