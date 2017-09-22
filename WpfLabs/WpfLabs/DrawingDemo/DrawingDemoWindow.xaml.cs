@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace WpfLabs.DrawingDemo
 {
@@ -115,6 +117,72 @@ namespace WpfLabs.DrawingDemo
             DrawingPath.Stroke = new SolidColorBrush(Colors.Black);
             DrawingPath.Fill = new SolidColorBrush(Color.FromArgb(40, 155, 155, 155));
             DrawingPath.Data = streamGeometry;
+        }
+
+        /// <summary>
+        /// 保存截图
+        /// </summary>
+        /// <param name="ui">控件名称</param>
+        /// <param name="filename">图片文件名</param>
+        public void SaveFrameworkElementToImage(FrameworkElement ui, string filename)
+        {
+            try
+            {
+                var ms = new FileStream(filename, FileMode.Create);
+                var bmp = new RenderTargetBitmap((int)ui.ActualWidth, (int)ui.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+                bmp.Render(ui);
+
+                var ext = Path.GetExtension(filename).ToUpper();
+                BitmapEncoder encoder;
+                switch (ext)
+                {
+                    case "JPG":
+                        encoder = new JpegBitmapEncoder();
+                        break;
+                    case "PNG":
+                        encoder = new PngBitmapEncoder();
+                        break;
+                    case "BMP":
+                        encoder = new BmpBitmapEncoder();
+                        break;
+                    default:
+                        encoder = new BmpBitmapEncoder();
+                        break;
+                }
+
+                encoder.Frames.Add(BitmapFrame.Create(bmp));
+                encoder.Save(ms);
+                ms.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// TODO:
+        /// 测试方法
+        /// </summary>
+        /// <param name="elt"></param>
+        /// <returns></returns>
+        private RenderTargetBitmap RenderVisual(UIElement elt)
+        {
+            PresentationSource source = PresentationSource.FromVisual(elt);
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)elt.RenderSize.Width,
+                (int)elt.RenderSize.Height, 96, 96, PixelFormats.Default);
+
+            VisualBrush sourceBrush = new VisualBrush(elt);
+            DrawingVisual drawingVisual = new DrawingVisual();
+            DrawingContext drawingContext = drawingVisual.RenderOpen();
+            using (drawingContext)
+            {
+                drawingContext.DrawRectangle(sourceBrush, null, new Rect(new Point(0, 0),
+                    new Point(elt.RenderSize.Width, elt.RenderSize.Height)));
+            }
+            rtb.Render(drawingVisual);
+
+            return rtb;
         }
     }
 }
