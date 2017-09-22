@@ -87,11 +87,14 @@
                 <Label Grid.Column="3" Content="15"/>
             </Grid>
             <!--截屏-->
-            <StackPanel Orientation="Horizontal">
-                
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <RadioButton GroupName="ExtGroup" Content="JPG" IsChecked="True" VerticalAlignment="Center" Checked="ExtRadioButton_OnChecked"/>
+                <RadioButton GroupName="ExtGroup" Content="PNG" IsChecked="False" VerticalAlignment="Center" Checked="ExtRadioButton_OnChecked"/>
+                <RadioButton GroupName="ExtGroup" Content="BMP" IsChecked="False" VerticalAlignment="Center" Checked="ExtRadioButton_OnChecked"/>
+                <Button Width="100" Content="截屏并打开" Margin="5,0" Click="SnapButton_OnClick"></Button>
             </StackPanel>
         </StackPanel>
-        <Grid Grid.Row="1">
+        <Grid x:Name="DrawingContainer" Grid.Row="1">
             <Image Stretch="None" Source="{StaticResource DrawingImage}" />
             <Path x:Name="DrawingPath" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>

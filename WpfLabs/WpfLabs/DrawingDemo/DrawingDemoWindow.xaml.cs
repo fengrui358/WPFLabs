@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,6 +29,7 @@ namespace WpfLabs.DrawingDemo
         private double _drawingHeight = 100;
         private double _drawingThickness = 1;
         private double _radii = 0;
+        private string _extName;
 
         public double DrawingWidth
         {
@@ -129,8 +131,9 @@ namespace WpfLabs.DrawingDemo
             try
             {
                 var ms = new FileStream(filename, FileMode.Create);
-                var bmp = new RenderTargetBitmap((int)ui.ActualWidth, (int)ui.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
-                bmp.Render(ui);
+                //var bmp = new RenderTargetBitmap((int)ui.ActualWidth, (int)ui.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+                //bmp.Render(ui);
+                var bmp = RenderVisual(ui);
 
                 var ext = Path.GetExtension(filename).ToUpper();
                 BitmapEncoder encoder;
@@ -168,14 +171,13 @@ namespace WpfLabs.DrawingDemo
         /// <returns></returns>
         private RenderTargetBitmap RenderVisual(UIElement elt)
         {
-            PresentationSource source = PresentationSource.FromVisual(elt);
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)elt.RenderSize.Width,
+            var source = PresentationSource.FromVisual(elt);
+            var rtb = new RenderTargetBitmap((int)elt.RenderSize.Width,
                 (int)elt.RenderSize.Height, 96, 96, PixelFormats.Default);
 
-            VisualBrush sourceBrush = new VisualBrush(elt);
-            DrawingVisual drawingVisual = new DrawingVisual();
-            DrawingContext drawingContext = drawingVisual.RenderOpen();
-            using (drawingContext)
+            var sourceBrush = new VisualBrush(elt);
+            var drawingVisual = new DrawingVisual();
+            using (var drawingContext = drawingVisual.RenderOpen())
             {
                 drawingContext.DrawRectangle(sourceBrush, null, new Rect(new Point(0, 0),
                     new Point(elt.RenderSize.Width, elt.RenderSize.Height)));
@@ -183,6 +185,29 @@ namespace WpfLabs.DrawingDemo
             rtb.Render(drawingVisual);
 
             return rtb;
+        }
+
+        /// <summary>
+        /// 后缀RadioButton切换
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExtRadioButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            _extName = ((RadioButton) sender).Content.ToString();
+        }
+
+        /// <summary>
+        /// 截屏并打开
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SnapButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{Guid.NewGuid():N}.{_extName}");
+
+            SaveFrameworkElementToImage(DrawingContainer, filePath);
+            Process.Start(filePath);
         }
     }
 }
