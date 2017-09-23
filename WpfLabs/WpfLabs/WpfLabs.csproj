@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="FlexDataGrid\Models\FlexDataGridItemModel.cs" />
     <Compile Include="Helper\CornerRadiusHelper.cs" />
+    <Compile Include="Helper\DebugWriterHelper.cs" />
     <Compile Include="Helper\DoubleUtilHelper.cs" />
     <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
@@ -210,6 +211,10 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="WaterMarkDemo\WaterMarkManager.cs" />
+    <Compile Include="WaterMarkDemo\WaterMarkDemoWindow.xaml.cs">
+      <DependentUpon>WaterMarkDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="BindingDemo\BindingDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,6 +363,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Timer\TimerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WaterMarkDemo\WaterMarkDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

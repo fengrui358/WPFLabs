@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Label Content="附加属性:"/>
-            <TextBox x:Name="AttachPropertyTextBox" local:WaterMarkManager.WaterMarkText="测试附加属性水印"/>
+            <TextBox local:WaterMarkManager.WaterMarkText="测试附加属性水印" Initialized="AttachPropertyTextBox_OnInitialized" Loaded="AttachPropertyTextBox_OnLoaded" Unloaded="AttachPropertyTextBox_OnUnloaded"/>
         </StackPanel>
     </Grid>
 </Window>
