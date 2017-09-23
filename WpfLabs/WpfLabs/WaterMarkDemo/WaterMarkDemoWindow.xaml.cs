@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfLabs.Helper;
 
 namespace WpfLabs.WaterMarkDemo
 {
@@ -26,17 +27,17 @@ namespace WpfLabs.WaterMarkDemo
 
         private void AttachPropertyTextBox_OnInitialized(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            DebugWriterHelper.WriterLine("AttachPropertyTextBox_OnInitialized");
         }
 
         private void AttachPropertyTextBox_OnLoaded(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DebugWriterHelper.WriterLine("AttachPropertyTextBox_OnLoaded");
         }
 
         private void AttachPropertyTextBox_OnUnloaded(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DebugWriterHelper.WriterLine("AttachPropertyTextBox_OnUnloaded");
         }
     }
 }

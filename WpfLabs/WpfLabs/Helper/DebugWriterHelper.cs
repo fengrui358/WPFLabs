@@ -9,6 +9,8 @@ namespace WpfLabs.Helper
 {
     public static class DebugWriterHelper
     {
+
+
         public static void WriterLine(string msg)
         {
             Debug.WriteLine($"{DateTime.Now:yyyyMMdd-HH:mm:ss}-【{msg}】");
