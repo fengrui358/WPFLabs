@@ -218,6 +218,7 @@
     <Compile Include="WaterMarkDemo\WaterMarkDemoWindow.xaml.cs">
       <DependentUpon>WaterMarkDemoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WaterMarkDemo\WatermarkTextBehavior.cs" />
     <Page Include="BindingDemo\BindingDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

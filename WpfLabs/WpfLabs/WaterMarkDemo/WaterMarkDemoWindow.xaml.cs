@@ -39,5 +39,20 @@ namespace WpfLabs.WaterMarkDemo
         {
             DebugWriterHelper.WriterLine("AttachPropertyTextBox_OnUnloaded");
         }
+
+        private void BehaviorTextBox_OnInitialized(object sender, EventArgs e)
+        {
+            DebugWriterHelper.WriterLine("BehaviorTextBox_OnInitialized");
+        }
+
+        private void BehaviorTextBox_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DebugWriterHelper.WriterLine("BehaviorTextBox_OnLoaded");
+        }
+
+        private void BehaviorTextBox_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            DebugWriterHelper.WriterLine("BehaviorTextBox_OnUnloaded");
+        }
     }
 }

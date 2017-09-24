@@ -4,21 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.WaterMarkDemo"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="WaterMarkDemoWindow" Height="300" Width="300">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="BehaviorTextBox" TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="local:WatermarkTextBehavior.IsWatermarked" Value="True">
+                    <Setter Property="Foreground" Value="Gray"/>
+                    <Setter Property="FontStyle" Value="Italic"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="附加属性:"/>
+            <Label Grid.Column="0" Content="Attach:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <TextBox Grid.Column="1" local:WaterMarkManager.WaterMarkText="测试附加属性水印" Initialized="AttachPropertyTextBox_OnInitialized" Loaded="AttachPropertyTextBox_OnLoaded" Unloaded="AttachPropertyTextBox_OnUnloaded"/>
         </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Behavior:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Style="{StaticResource BehaviorTextBox}" Initialized="BehaviorTextBox_OnInitialized" Loaded="BehaviorTextBox_OnLoaded" Unloaded="BehaviorTextBox_OnUnloaded">
+                <i:Interaction.Behaviors>
+                    <local:WatermarkTextBehavior Text="测试行为水印"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </Grid>
+        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="焦点移除" Margin="10"/>
     </Grid>
 </Window>

@@ -29,7 +29,6 @@ namespace BOL_Model
         private IncidentPoliceModel _incidentPolice;
         private IncidentTrafficModel _incidentTraffic;
         private IncidentFireControlModel _incidentFireControl;
-        private List<IncidentMedicalModel> _incidentMedicalList;
         private IncidentMedicalModel _incidentMedical;
 
         /// <summary>
