@@ -31,6 +31,7 @@
                 <Button Content="展示CalloutBorderStyleWindow" Command="{Binding ShowControlWindow}" CommandParameter="CalloutBorderStyleWindow" />
                 <Button Content="展示MeasureOverrideAndArrangeOverrideWindow" Command="{Binding ShowControlWindow}" CommandParameter="MeasureOverrideAndArrangeOverrideWindow" />
                 <Button Content="展示DrawingDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="DrawingDemoWindow" />
+                <Button Content="展示WaterMarkDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="WaterMarkDemoWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

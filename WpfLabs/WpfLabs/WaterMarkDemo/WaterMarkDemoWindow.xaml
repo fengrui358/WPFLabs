@@ -12,9 +12,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Label Content="附加属性:"/>
-            <TextBox local:WaterMarkManager.WaterMarkText="测试附加属性水印" Initialized="AttachPropertyTextBox_OnInitialized" Loaded="AttachPropertyTextBox_OnLoaded" Unloaded="AttachPropertyTextBox_OnUnloaded"/>
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="附加属性:"/>
+            <TextBox Grid.Column="1" local:WaterMarkManager.WaterMarkText="测试附加属性水印" Initialized="AttachPropertyTextBox_OnInitialized" Loaded="AttachPropertyTextBox_OnLoaded" Unloaded="AttachPropertyTextBox_OnUnloaded"/>
+        </Grid>
     </Grid>
 </Window>

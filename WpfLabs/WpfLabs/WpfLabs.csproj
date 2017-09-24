@@ -141,6 +141,9 @@
     <Compile Include="Helper\CornerRadiusHelper.cs" />
     <Compile Include="Helper\DebugWriterHelper.cs" />
     <Compile Include="Helper\DoubleUtilHelper.cs" />
+    <Compile Include="Helper\LogWindow.xaml.cs">
+      <DependentUpon>LogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
@@ -286,6 +289,10 @@
     <Page Include="FlexDataGrid\Style\DataGridNormalStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Helper\LogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IconDictionary.xaml">
       <SubType>Designer</SubType>

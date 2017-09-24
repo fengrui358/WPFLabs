@@ -32,6 +32,7 @@ using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.SwapImageDemo;
 using WpfLabs.Timer;
+using WpfLabs.WaterMarkDemo;
 
 namespace WpfLabs
 {
@@ -117,6 +118,10 @@ namespace WpfLabs
                 case "DrawingDemoWindow":
                     var drawingDemoWindow = new DrawingDemoWindow();
                     drawingDemoWindow.ShowDialog();
+                    break;
+                case "WaterMarkDemoWindow":
+                    var waterMarkDemoWindow = new WaterMarkDemoWindow();
+                    waterMarkDemoWindow.ShowDialog();
                     break;
             }
         }
