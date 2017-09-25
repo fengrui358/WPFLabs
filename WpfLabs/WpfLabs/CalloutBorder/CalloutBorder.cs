@@ -22,6 +22,11 @@ namespace WpfLabs.CalloutBorder
         private StreamGeometry _borderGeometryCache;
         private StreamGeometry _backgroundGeometryCache;
         private bool _useComplexRenderCodePath;
+        private double _actualCalloutWidth;
+        private double _actualCalloutHeight;
+        private double? _actualHorizontalOffset;
+        private double? _actualVerticalOffset;
+        private bool _isShowCallout;
 
         #endregion
 
@@ -277,7 +282,7 @@ namespace WpfLabs.CalloutBorder
         /// </returns>
         protected override Size MeasureOverride(Size constraint)
         {
-            Debug.WriteLine($"Call MeasureOverride:{constraint}");
+            DebugWriterHelper.WriterLine($"Call MeasureOverride:{constraint}");
 
             UIElement child = this.Child;
             Size size1 = new Size();
@@ -290,36 +295,51 @@ namespace WpfLabs.CalloutBorder
             //    th = new Thickness(UIElement.RoundLayoutValue(th.Left, dpi.DpiScaleX), UIElement.RoundLayoutValue(th.Top, dpi.DpiScaleY), UIElement.RoundLayoutValue(th.Right, dpi.DpiScaleX), UIElement.RoundLayoutValue(th.Bottom, dpi.DpiScaleY));
             //}
 
+            //Thickness的宽和高
             Size size2 = CalloutBorder.HelperCollapseThickness(th);
+            //Padding的宽和高
             Size size3 = CalloutBorder.HelperCollapseThickness(this.Padding);
+
+            //测量小箭头的实际尺寸
+            if (Placement == CalloutPlacement.Top || Placement == CalloutPlacement.Bottom)
+            {
+                var residualWidth= constraint.Width - size2.Width - HorizontalOffset;
+                var residualHeight = constraint.Height - size2.Height;
+                //todo:高度貌似要加上边和角度算最终的高度
+                if (residualWidth > 0 && residualHeight > 0)
+                {
+                    _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
+                    _actualCalloutHeight = Math.Min(residualHeight, CalloutHeight);
+                    _isShowCallout = true;
+                }
+            }
+            else
+            {
+                var residualHeight = constraint.Height - size2.Height - VerticalOffset;
+                var residualWidth = constraint.Width - size2.Width;
+                if (residualHeight > 0 && residualWidth > 0)
+                {
+                    _actualCalloutHeight = Math.Min(residualHeight, CalloutHeight);
+                    _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
+                    _isShowCallout = true;
+                }
+            }
+
+            //箭头的宽和高
+            //Size size4 = 
             if (child != null)
             {
-                Size size4 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
-                Size availableSize = new Size(Math.Max(0.0, constraint.Width - size4.Width),
-                    Math.Max(0.0, constraint.Height - size4.Height));
+                Size size5 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
+                Size availableSize = new Size(Math.Max(0.0, constraint.Width - size5.Width),
+                    Math.Max(0.0, constraint.Height - size5.Height));
                 child.Measure(availableSize);
                 Size desiredSize = child.DesiredSize;
-                size1.Width = desiredSize.Width + size4.Width;
-                size1.Height = desiredSize.Height + size4.Height;
+                size1.Width = desiredSize.Width + size5.Width;
+                size1.Height = desiredSize.Height + size5.Height;
             }
             else
             {
                 size1 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
-            }
-
-            if (IsCalloutValid(this))
-            {
-                switch (Placement)
-                {
-                    case CalloutPlacement.Left:
-                        break;
-                    case CalloutPlacement.Top:
-                        break;
-                    case CalloutPlacement.Right:
-                        break;
-                    case CalloutPlacement.Bottom:
-                        break;
-                }
             }
 
             return size1;
@@ -336,7 +356,7 @@ namespace WpfLabs.CalloutBorder
         /// </returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            Debug.WriteLine($"Call ArrangeOverride:{finalSize}");
+            DebugWriterHelper.WriterLine($"Call ArrangeOverride:{finalSize}");
             Thickness thickness = this.BorderThickness;
 
             //TODO:GetDPI
@@ -411,7 +431,7 @@ namespace WpfLabs.CalloutBorder
         /// </param>
         protected override void OnRender(DrawingContext dc)
         {
-            Debug.WriteLine("Call OnRender:");
+            DebugWriterHelper.WriterLine("Call OnRender:");
             bool useLayoutRounding = this.UseLayoutRounding;
 
             //TODO:GetDPI
@@ -621,6 +641,11 @@ namespace WpfLabs.CalloutBorder
             border._rightPenCache = (Pen)null;
             border._topPenCache = (Pen)null;
             border._bottomPenCache = (Pen)null;
+            border._actualCalloutWidth = 0d;
+            border._actualCalloutHeight = 0d;
+            border._actualHorizontalOffset = null;
+            border._actualVerticalOffset = null;
+            border._isShowCallout = false;
         }
 
         private static bool IsDoubleValid(object value)
@@ -641,11 +666,6 @@ namespace WpfLabs.CalloutBorder
         private static Size HelperCollapseThickness(Thickness th)
         {
             return new Size(th.Left + th.Right, th.Top + th.Bottom);
-        }
-
-        private static bool IsCalloutValid(CalloutBorder calloutBorder)
-        {
-            return calloutBorder?.CalloutWidth > 0d && calloutBorder?.CalloutHeight > 0d;
         }
 
         private static bool AreUniformCorners(CornerRadius borderRadii)
