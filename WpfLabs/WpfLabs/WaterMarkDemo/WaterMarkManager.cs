@@ -41,17 +41,14 @@ namespace WpfLabs.WaterMarkDemo
 
         private static void TextBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            throw new NotImplementedException();
         }
 
         private static void TextBoxOnGotFocus(object sender, RoutedEventArgs routedEventArgs)
         {
-            throw new NotImplementedException();
         }
 
         private static void TextBoxOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
         {
-            throw new NotImplementedException();
         }
 
         [AttachedPropertyBrowsableForType(typeof(TextBox))]
