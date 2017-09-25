@@ -305,7 +305,7 @@ namespace WpfLabs.CalloutBorder
             {
                 var residualWidth= constraint.Width - size2.Width - HorizontalOffset;
                 var residualHeight = constraint.Height - size2.Height;
-                //todo:高度貌似要加上边和角度算最终的高度
+                //todo:高度貌似要加上边和角度算最终的高度 
                 if (residualWidth > 0 && residualHeight > 0)
                 {
                     _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
