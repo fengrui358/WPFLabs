@@ -70,11 +70,11 @@ namespace WpfLabs.Helper
                     {
                         if (string.IsNullOrEmpty(LogTextBox.Text))
                         {
-                            LogTextBox.Text = $"{DateTime.Now:yyyyMMdd-HH:mm:ss}-【{msg}】";
+                            LogTextBox.Text = $"{DateTime.Now:yyyyMMdd-HH:mm:ss ffff} 【{msg}】";
                         }
                         else
                         {
-                            LogTextBox.AppendText($"{Environment.NewLine}{DateTime.Now:yyyyMMdd-HH:mm:ss}-【{msg}】");
+                            LogTextBox.AppendText($"{Environment.NewLine}{DateTime.Now:yyyyMMdd-HH:mm:ss ffff} 【{msg}】");
                         }
                     }
                 );

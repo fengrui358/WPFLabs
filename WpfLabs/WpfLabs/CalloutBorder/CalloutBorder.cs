@@ -299,37 +299,69 @@ namespace WpfLabs.CalloutBorder
             Size size2 = CalloutBorder.HelperCollapseThickness(th);
             //Padding的宽和高
             Size size3 = CalloutBorder.HelperCollapseThickness(this.Padding);
+            //箭头的宽和高
+            Size size4 = new Size(0, 0);
 
             //测量小箭头的实际尺寸
-            if (Placement == CalloutPlacement.Top || Placement == CalloutPlacement.Bottom)
+            if (CalloutHeight > 0 && CalloutWidth > 0)
             {
-                var residualWidth= constraint.Width - size2.Width - HorizontalOffset;
-                var residualHeight = constraint.Height - size2.Height;
-                //todo:高度貌似要加上边和角度算最终的高度 
-                if (residualWidth > 0 && residualHeight > 0)
+                double calloutThicknessHeight = 0d;
+
+                if (Placement == CalloutPlacement.Top || Placement == CalloutPlacement.Bottom)
                 {
-                    _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
-                    _actualCalloutHeight = Math.Min(residualHeight, CalloutHeight);
-                    _isShowCallout = true;
+                    var residualWidth = constraint.Width - size2.Width - HorizontalOffset;
+                    double residualHeight = 0d;
+
+                    if (Placement == CalloutPlacement.Top)
+                    {
+                        calloutThicknessHeight = th.Top * th.Top;
+                        residualHeight = constraint.Height - calloutThicknessHeight - th.Bottom;
+                    }
+                    else if(Placement == CalloutPlacement.Bottom)
+                    {
+                        calloutThicknessHeight = th.Bottom * th.Bottom;
+                        residualHeight = constraint.Height - calloutThicknessHeight - th.Top;
+                    }
+
+                    if (residualWidth > 0 && residualHeight > 0)
+                    {
+                        _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
+                        _actualCalloutHeight = Math.Min(residualHeight, CalloutHeight);
+                        _isShowCallout = true;
+
+                        size4 = new Size(_actualCalloutWidth, _actualCalloutHeight + calloutThicknessHeight);
+                    }
                 }
-            }
-            else
-            {
-                var residualHeight = constraint.Height - size2.Height - VerticalOffset;
-                var residualWidth = constraint.Width - size2.Width;
-                if (residualHeight > 0 && residualWidth > 0)
+                else
                 {
-                    _actualCalloutHeight = Math.Min(residualHeight, CalloutHeight);
-                    _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
-                    _isShowCallout = true;
+                    var residualWidth = constraint.Height - size2.Height - VerticalOffset;
+                    double residualHeight = 0d;
+
+                    if (Placement == CalloutPlacement.Left)
+                    {
+                        calloutThicknessHeight = th.Left * th.Left;
+                        residualHeight = constraint.Width - calloutThicknessHeight - th.Right;
+                    }
+                    else if (Placement == CalloutPlacement.Right)
+                    {
+                        calloutThicknessHeight = th.Right * th.Right;
+                        residualHeight = constraint.Width - calloutThicknessHeight - th.Left;
+                    }
+
+                    if (residualHeight > 0 && residualWidth > 0)
+                    {
+                        _actualCalloutHeight = Math.Min(residualHeight, CalloutHeight);
+                        _actualCalloutWidth = Math.Min(residualWidth, CalloutWidth);
+                        _isShowCallout = true;
+
+                        size4 = new Size(_actualCalloutHeight + calloutThicknessHeight, _actualCalloutWidth);
+                    }
                 }
             }
 
-            //箭头的宽和高
-            //Size size4 = 
             if (child != null)
             {
-                Size size5 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
+                Size size5 = new Size(size2.Width + size3.Width + size4.Width, size2.Height + size3.Height + size4.Height);
                 Size availableSize = new Size(Math.Max(0.0, constraint.Width - size5.Width),
                     Math.Max(0.0, constraint.Height - size5.Height));
                 child.Measure(availableSize);
@@ -339,7 +371,7 @@ namespace WpfLabs.CalloutBorder
             }
             else
             {
-                size1 = new Size(size2.Width + size3.Width, size2.Height + size3.Height);
+                size1 = new Size(size2.Width + size3.Width + size4.Width, size2.Height + size3.Height + size4.Height);
             }
 
             return size1;
@@ -867,7 +899,7 @@ namespace WpfLabs.CalloutBorder
             /// <summary>
             /// 底
             /// </summary>
-            Bottom,
+            Bottom
         }
 
         #endregion

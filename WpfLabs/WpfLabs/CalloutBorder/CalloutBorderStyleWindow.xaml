@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.CalloutBorder"
         mc:Ignorable="d"
+        x:Name="RootContainer"
         Title="CalloutBorderStyleWindow" Height="600" Width="600">
     <Grid x:Name="ContainerGrid" IsSharedSizeScope="True">
         <Grid.RowDefinitions>
@@ -90,6 +91,12 @@
                 <Slider x:Name="CalloutHeightSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="10" />
                 <Label Grid.Column="3" Content="{Binding ElementName=CalloutHeightSlider, Path=Maximum}" />
             </Grid>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Content="Left" IsChecked="True" Checked="PlacementRadioButton_OnChecked"/>
+                <RadioButton Content="Top" Checked="PlacementRadioButton_OnChecked"/>
+                <RadioButton Content="Right" Checked="PlacementRadioButton_OnChecked"/>
+                <RadioButton Content="Bottom" Checked="PlacementRadioButton_OnChecked"/>
+            </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid ShowGridLines="True">
@@ -105,11 +112,14 @@
                     <Button Background="Red" />
                 </Border>
 
-                <local:CalloutBorder Grid.Column="1" Placement="Bottom" Background="Green"
+                <local:CalloutBorder Grid.Column="1" Background="Green"
                                      Margin="{Binding ElementName=MarginSlider, Path=Value}"
                                      Padding="{Binding ElementName=PaddingSlider, Path=Value}"
                                      CornerRadius="{Binding ElementName=CornerRadiusSlider, Path=Value}"
                                      BorderThickness="{Binding ElementName=BorderThicknessSlider, Path=Value}"
+                                     Placement="{Binding ElementName=RootContainer, Path=Placement}"
+                                     CalloutWidth="{Binding ElementName=CalloutWidthSlider, Path=Value}"
+                                     CalloutHeight="{Binding ElementName=CalloutHeightSlider, Path=Value}"
                                      BorderBrush="Blue">
                     <Button Background="Red" />
                 </local:CalloutBorder>
