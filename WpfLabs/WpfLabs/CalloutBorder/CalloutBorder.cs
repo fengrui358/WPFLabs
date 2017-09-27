@@ -28,6 +28,7 @@ namespace WpfLabs.CalloutBorder
         private double? _actualVerticalOffset;
         private bool _isShowCallout;
         private double _calloutThicknessHeight;
+        private Radii? _radiiOuter;
 
         #endregion
 
@@ -304,18 +305,22 @@ namespace WpfLabs.CalloutBorder
             //测量小箭头的实际尺寸
             if (CalloutHeight > 0 && CalloutWidth > 0)
             {
+                _radiiOuter = new CalloutBorder.Radii(CornerRadius, th, true);
+
                 if (Placement == CalloutPlacement.Top || Placement == CalloutPlacement.Bottom)
                 {
-                    var residualWidth = constraint.Width - size2.Width - HorizontalOffset;
+                    double residualWidth = 0d;
                     double residualHeight = 0d;
 
                     if (Placement == CalloutPlacement.Top)
                     {
+                        residualWidth = constraint.Width - HorizontalOffset - _radiiOuter.Value.LeftTop - _radiiOuter.Value.RightTop;
                         _calloutThicknessHeight = Math.Sqrt(th.Top * th.Top * 2);
                         residualHeight = constraint.Height - _calloutThicknessHeight - th.Bottom;
                     }
                     else if(Placement == CalloutPlacement.Bottom)
                     {
+                        residualWidth = constraint.Width - HorizontalOffset - _radiiOuter.Value.LeftBottom - _radiiOuter.Value.RightBottom;
                         _calloutThicknessHeight = Math.Sqrt(th.Bottom * th.Bottom * 2);
                         residualHeight = constraint.Height - _calloutThicknessHeight - th.Top;
                     }
@@ -329,16 +334,18 @@ namespace WpfLabs.CalloutBorder
                 }
                 else
                 {
-                    var residualWidth = constraint.Height - size2.Height - VerticalOffset;
+                    double residualWidth = 0d;
                     double residualHeight = 0d;
 
                     if (Placement == CalloutPlacement.Left)
                     {
+                        residualWidth = constraint.Height - VerticalOffset - _radiiOuter.Value.TopLeft - _radiiOuter.Value.BottomLeft;
                         _calloutThicknessHeight = Math.Sqrt(th.Left * th.Left * 2);
                         residualHeight = constraint.Width - _calloutThicknessHeight - th.Right;
                     }
                     else if (Placement == CalloutPlacement.Right)
                     {
+                        residualWidth = constraint.Height - VerticalOffset - _radiiOuter.Value.TopRight - _radiiOuter.Value.BottomRight;
                         _calloutThicknessHeight = Math.Sqrt(th.Right * th.Right * 2);
                         residualHeight = constraint.Width - _calloutThicknessHeight - th.Left;
                     }
@@ -471,11 +478,14 @@ namespace WpfLabs.CalloutBorder
                     this._backgroundGeometryCache = (StreamGeometry)null;
                 if (!DoubleUtilHelper.IsZero(rect1.Width) && !DoubleUtilHelper.IsZero(rect1.Height))
                 {
-                    CalloutBorder.Radii radii2 = new CalloutBorder.Radii(cornerRadius, thickness, true);
+                    if (_radiiOuter == null)
+                    {
+                        _radiiOuter = new CalloutBorder.Radii(cornerRadius, thickness, true);
+                    }
                     StreamGeometry streamGeometry2 = new StreamGeometry();
                     using (StreamGeometryContext ctx = streamGeometry2.Open())
                     {
-                        CalloutBorder.GenerateGeometry(ctx, rect1, radii2);
+                        CalloutBorder.GenerateGeometry(ctx, rect1, _radiiOuter.Value);
                         if (streamGeometry1 != null)
                             CalloutBorder.GenerateGeometry(ctx, rect2, radii1);
                     }
@@ -502,9 +512,9 @@ namespace WpfLabs.CalloutBorder
         protected override void OnRender(DrawingContext dc)
         {
             DebugWriterHelper.WriterLine("Call OnRender:");
-            bool useLayoutRounding = this.UseLayoutRounding;
 
             //TODO:GetDPI
+            //bool useLayoutRounding = this.UseLayoutRounding;
             //DpiScale dpi = this.GetDpi();
             if (this._useComplexRenderCodePath)
             {
@@ -523,6 +533,8 @@ namespace WpfLabs.CalloutBorder
                 Thickness borderThickness = this.BorderThickness;
                 CornerRadius cornerRadius = this.CornerRadius;
                 double topLeft1 = cornerRadius.TopLeft;
+
+                //flag:左上角半径不为0
                 bool flag = !DoubleUtilHelper.IsZero(topLeft1);
                 Brush borderBrush;
                 Size renderSize;
@@ -676,27 +688,49 @@ namespace WpfLabs.CalloutBorder
                 //    }
                 //}
                 //else
+                //{
+
+                if (!_isShowCallout)
                 {
                     point1_1 = new Point(borderThickness.Left, borderThickness.Top);
                     // ISSUE: explicit reference operation
                     // ISSUE: variable of a reference type
 
                     renderSize = this.RenderSize;
-                    double x = renderSize.Width - borderThickness.Right;
-                    renderSize = this.RenderSize;
-                    double y = renderSize.Height - borderThickness.Bottom;
+                    double px2 = renderSize.Width - borderThickness.Right;
+                    double py2 = renderSize.Height - borderThickness.Bottom;
                     // ISSUE: explicit reference operation
-                    point2 = new Point(x, y);
-                }
-                if (point2.X <= point1_1.X || point2.Y <= point1_1.Y)
-                    return;
-                if (flag)
-                {
-                    double topLeft2 = new CalloutBorder.Radii(cornerRadius, borderThickness, false).TopLeft;
-                    dc.DrawRoundedRectangle(background, (Pen)null, new Rect(point1_1, point2), topLeft2, topLeft2);
+                    point2 = new Point(px2, py2);
+
+                    //}
+                    if (point2.X <= point1_1.X || point2.Y <= point1_1.Y)
+                        return;
+                    if (flag)
+                    {
+                        double topLeft2 = new CalloutBorder.Radii(cornerRadius, borderThickness, false).TopLeft;
+                        dc.DrawRoundedRectangle(background, (Pen)null, new Rect(point1_1, point2), topLeft2, topLeft2);
+                    }
+                    else
+                    {
+                        dc.DrawRectangle(background, (Pen)null, new Rect(point1_1, point2));
+                    }
                 }
                 else
-                    dc.DrawRectangle(background, (Pen)null, new Rect(point1_1, point2));
+                {
+                    switch (Placement)
+                    {
+                        case CalloutPlacement.Top:
+                            point1_1 = new Point(_radiiOuter.Value.LeftTop, );
+
+                            break;
+                        case CalloutPlacement.Bottom:
+                            break;
+                        case CalloutPlacement.Left:
+                            break;
+                        case CalloutPlacement.Right:
+                            break;
+                    }
+                }
             }
         }
 
