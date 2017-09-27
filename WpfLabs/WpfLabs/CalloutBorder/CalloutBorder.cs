@@ -720,7 +720,7 @@ namespace WpfLabs.CalloutBorder
                     switch (Placement)
                     {
                         case CalloutPlacement.Top:
-                            point1_1 = new Point(_radiiOuter.Value.LeftTop, );
+                            point1_1 = new Point(_radiiOuter.Value.LeftTop, _actualHorizontalOffset);
 
                             break;
                         case CalloutPlacement.Bottom:
