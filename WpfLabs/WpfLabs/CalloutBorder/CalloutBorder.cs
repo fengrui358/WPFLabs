@@ -766,27 +766,39 @@ namespace WpfLabs.CalloutBorder
                                 case CalloutPlacement.Top:
                                     var tp1 = new Point(borderThickness.Left, _calloutThicknessHeight + _actualCalloutHeight);
                                     ctx.BeginFigure(tp1, true, true);
+                                    //callout起始点
                                     var tp2 = new Point(tp1.X + HorizontalOffset, tp1.Y);
                                     ctx.LineTo(tp2, false, true);
                                     var tp3 = new Point(tp2.X + _actualCalloutWidth / 2, _calloutThicknessHeight);
                                     ctx.LineTo(tp3, false, true);
                                     var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
                                     ctx.LineTo(tp4, false, true);
+                                    //callout结束点
                                     var tp5 = new Point(renderSize.Width - borderThickness.Left - borderThickness.Right, tp4.Y);
                                     ctx.LineTo(tp5, false, false);
                                     var tp6 = new Point(tp5.X, renderSize.Height - borderThickness.Bottom);
                                     ctx.LineTo(tp6, false, false);
                                     var tp7 = new Point(borderThickness.Left, tp6.Y);
                                     ctx.LineTo(tp7, false, false);
-
-                                    //var tp6 = new Point(tp5.X,
-                                    //    _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
-                                    //    _radiiOuter.Value.TopRight);
-                                    //ctx.LineTo(tp6, false, false);
-                                    //var tp7 = new Point(tp6.X, RenderSize.Height - borderThickness.Bottom);
-
                                     break;
                                 case CalloutPlacement.Bottom:
+                                    var bp1 = new Point(borderThickness.Left, borderThickness.Top);
+                                    ctx.BeginFigure(bp1, true, true);
+                                    var bp2 = new Point(renderSize.Width - borderThickness.Right, bp1.Y);
+                                    ctx.LineTo(bp2, false, false);
+                                    var bp3 = new Point(bp2.X,
+                                        renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight);
+                                    ctx.LineTo(bp3, false, false);
+                                    //callout起始点
+                                    var bp4 = new Point(borderThickness.Left + HorizontalOffset + _actualCalloutWidth, bp3.Y);
+                                    ctx.LineTo(bp4, false, true);
+                                    var bp5 = new Point(borderThickness.Left + HorizontalOffset + _actualCalloutWidth / 2, renderSize.Height - _calloutThicknessHeight);
+                                    ctx.LineTo(bp5, false, true);
+                                    var bp6 = new Point(borderThickness.Left + HorizontalOffset, bp4.Y);
+                                    ctx.LineTo(bp6, false, true);
+                                    //callout结束点
+                                    var bp7 = new Point(borderThickness.Left, bp6.Y);
+                                    ctx.LineTo(bp7, false, false);
                                     break;
                                 case CalloutPlacement.Left:
                                     break;
