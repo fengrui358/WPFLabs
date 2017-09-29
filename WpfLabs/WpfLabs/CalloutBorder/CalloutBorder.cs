@@ -27,6 +27,7 @@ namespace WpfLabs.CalloutBorder
         private bool _isShowCallout;
         private double _calloutThicknessHeight;
         private Radii? _radiiOuter;
+        private Radii? _radiiInner;
 
         #endregion
 
@@ -70,14 +71,14 @@ namespace WpfLabs.CalloutBorder
         /// <returns>
         ///   <see cref="P:System.Windows.Controls.Border.Padding" /> 依赖项属性的标识符。
         /// </returns>
-        public static readonly DependencyProperty PaddingProperty = DependencyProperty.Register("Padding", typeof(Thickness), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata((object)new Thickness(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender), new ValidateValueCallback(CalloutBorder.IsThicknessValid));
+        public static readonly DependencyProperty PaddingProperty = DependencyProperty.Register("Padding", typeof(Thickness), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata((object)new Thickness(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsThicknessValid));
         /// <summary>
         ///   标识 <see cref="P:System.Windows.Controls.Border.CornerRadius" /> 依赖属性。
         /// </summary>
         /// <returns>
         ///   <see cref="P:System.Windows.Controls.Border.CornerRadius" /> 依赖项属性的标识符。
         /// </returns>
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata((object)new CornerRadius(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender), new ValidateValueCallback(CalloutBorder.IsCornerRadiusValid));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(CalloutBorder), (PropertyMetadata)new FrameworkPropertyMetadata((object)new CornerRadius(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(CalloutBorder.OnClearPenCache)), new ValidateValueCallback(CalloutBorder.IsCornerRadiusValid));
         /// <summary>
         ///   标识 <see cref="P:System.Windows.Controls.Border.BorderBrush" /> 依赖属性。
         /// </summary>
@@ -462,18 +463,24 @@ namespace WpfLabs.CalloutBorder
             }
             if (this._useComplexRenderCodePath)
             {
-                CalloutBorder.Radii radii1 = new CalloutBorder.Radii(cornerRadius, thickness, false);
+                _radiiInner = new CalloutBorder.Radii(cornerRadius, thickness, false);
                 StreamGeometry streamGeometry1 = (StreamGeometry)null;
                 if (!DoubleUtilHelper.IsZero(rect2.Width) && !DoubleUtilHelper.IsZero(rect2.Height))
                 {
                     streamGeometry1 = new StreamGeometry();
                     using (StreamGeometryContext ctx = streamGeometry1.Open())
-                        CalloutBorder.GenerateGeometry(ctx, rect2, radii1);
+                    {
+                        CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
+                    }
+                        
                     streamGeometry1.Freeze();
                     this._backgroundGeometryCache = streamGeometry1;
                 }
                 else
+                {
                     this._backgroundGeometryCache = (StreamGeometry)null;
+                }
+
                 if (!DoubleUtilHelper.IsZero(rect1.Width) && !DoubleUtilHelper.IsZero(rect1.Height))
                 {
                     if (_radiiOuter == null)
@@ -485,13 +492,16 @@ namespace WpfLabs.CalloutBorder
                     {
                         CalloutBorder.GenerateGeometry(ctx, rect1, _radiiOuter.Value);
                         if (streamGeometry1 != null)
-                            CalloutBorder.GenerateGeometry(ctx, rect2, radii1);
+                            CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
                     }
+
                     streamGeometry2.Freeze();
                     this._borderGeometryCache = streamGeometry2;
                 }
                 else
+                {
                     this._borderGeometryCache = (StreamGeometry)null;
+                }
             }
             else
             {
@@ -705,7 +715,12 @@ namespace WpfLabs.CalloutBorder
                         return;
                     if (flag)
                     {
-                        double topLeft2 = new CalloutBorder.Radii(cornerRadius, borderThickness, false).TopLeft;
+                        if (_radiiInner == null)
+                        {
+                            _radiiInner = new CalloutBorder.Radii(cornerRadius, borderThickness, false);
+                        }
+
+                        double topLeft2 = _radiiInner.Value.TopLeft;
                         dc.DrawRoundedRectangle(background, (Pen)null, new Rect(point1_1, point2), topLeft2, topLeft2);
                     }
                     else
@@ -719,6 +734,11 @@ namespace WpfLabs.CalloutBorder
 
                     if (flag)
                     {
+                        if (_radiiInner == null)
+                        {
+                            _radiiInner = new CalloutBorder.Radii(cornerRadius, borderThickness, false);
+                        }
+
                         //圆弧无边框
                         var streamGeometry = new StreamGeometry();
                         using (StreamGeometryContext ctx = streamGeometry.Open())
@@ -736,24 +756,29 @@ namespace WpfLabs.CalloutBorder
                                     var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
                                     ctx.LineTo(tp4, false, false);
                                     //callout结束点
-                                    var tp5 = new Point(renderSize.Width - _radiiOuter.Value.RightTop, _radiiOuter.Value.TopRight);
-                                    ctx.ArcTo(tp5, new Size(_radiiOuter.Value.RightTop, _radiiOuter.Value.TopRight), 0,
-                                        true, SweepDirection.Clockwise, false, false);
-                                    var tp6 = new Point(tp5.X, renderSize.Height - _radiiOuter.Value.BottomRight);
-                                    ctx.LineTo(tp6, false, false);
-                                    var tp7 = new Point(tp4.X, renderSize.Height - borderThickness.Bottom);
-                                    ctx.ArcTo(tp7,
-                                        new Size(_radiiOuter.Value.RightBottom, _radiiOuter.Value.BottomRight), 0, true,
+                                    var tp5 = new Point(renderSize.Width - _radiiOuter.Value.RightTop, tp2.Y);
+                                    ctx.LineTo(tp5, false, false);
+                                    var tp6 = new Point(renderSize.Width - borderThickness.Right,
+                                        _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                                        _radiiOuter.Value.TopRight);
+                                    ctx.ArcTo(tp6, new Size(_radiiInner.Value.RightTop, _radiiInner.Value.TopRight), 0,
+                                        false, SweepDirection.Clockwise, false, false);
+                                    var tp7 = new Point(tp6.X, renderSize.Height - _radiiOuter.Value.BottomRight);
+                                    ctx.LineTo(tp7, false, false);
+                                    var tp8 = new Point(renderSize.Width - _radiiOuter.Value.RightBottom, renderSize.Height - borderThickness.Bottom);
+                                    ctx.ArcTo(tp8,
+                                        new Size(_radiiInner.Value.RightBottom, _radiiInner.Value.BottomRight), 0, false,
                                         SweepDirection.Clockwise, false, false);
-                                    var tp8 = new Point(_radiiOuter.Value.LeftBottom, tp7.Y);
-                                    ctx.LineTo(tp8, false, false);
-                                    var tp9 = new Point(borderThickness.Left, tp6.Y);
-                                    ctx.ArcTo(tp9, new Size(_radiiOuter.Value.LeftBottom, _radiiOuter.Value.BottomLeft),
-                                        0, true, SweepDirection.Clockwise, false, false);
-                                    var tp10 = new Point(borderThickness.Left, _radiiOuter.Value.TopLeft);
-                                    ctx.LineTo(tp10, false, false);
-                                    ctx.ArcTo(tp1, new Size(_radiiOuter.Value.LeftTop, _radiiOuter.Value.TopLeft),
-                                        0, true, SweepDirection.Clockwise, false, false);
+                                    var tp9 = new Point(_radiiOuter.Value.LeftBottom, tp8.Y);
+                                    ctx.LineTo(tp9, false, false);
+                                    var tp10 = new Point(borderThickness.Left, renderSize.Height - _radiiOuter.Value.BottomLeft);
+                                    ctx.ArcTo(tp10, new Size(_radiiInner.Value.LeftBottom, _radiiInner.Value.BottomLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var tp11 = new Point(tp10.X, _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                                                                 _radiiOuter.Value.TopLeft);
+                                    ctx.LineTo(tp11, false, false);
+                                    ctx.ArcTo(tp1, new Size(_radiiInner.Value.LeftTop, _radiiInner.Value.TopLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
                                     break;
                                 case CalloutPlacement.Bottom:
                                     var bp1 = new Point(borderThickness.Left, borderThickness.Top);
@@ -929,6 +954,8 @@ namespace WpfLabs.CalloutBorder
             border._actualCalloutWidth = 0d;
             border._actualCalloutHeight = 0d;
             border._isShowCallout = false;
+            border._radiiOuter = null;
+            border._radiiInner = null;
         }
 
         private static bool IsDoubleValid(object value)

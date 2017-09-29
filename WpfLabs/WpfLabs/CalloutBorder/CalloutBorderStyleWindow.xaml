@@ -62,7 +62,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="CornerRadius：" HorizontalAlignment="Right" />
                 <Label Grid.Column="1" Content="{Binding ElementName=CornerRadiusSlider, Path=Minimum}" />
-                <Slider x:Name="CornerRadiusSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="8" />
+                <Slider x:Name="CornerRadiusSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="20" />
                 <Label Grid.Column="3" Content="{Binding ElementName=CornerRadiusSlider, Path=Maximum}" />
             </Grid>
             <!--HorizontalOffset-->
