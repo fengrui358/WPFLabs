@@ -548,117 +548,278 @@ namespace WpfLabs.CalloutBorder
                 Size renderSize;
                 if (!ThicknessHelper.IsZero(borderThickness) && (borderBrush = this.BorderBrush) != null)
                 {
-                    Pen pen1 = this._leftPenCache;
-                    if (pen1 == null)
+                    if (!_isShowCallout)
                     {
-                        pen1 = new Pen();
-                        pen1.Brush = borderBrush;
-                        //TODO:GetDPI
-                        //pen1.Thickness = !useLayoutRounding ? borderThickness.Left : UIElement.RoundLayoutValue(borderThickness.Left, dpi.DpiScaleX);
-                        pen1.Thickness = borderThickness.Left;
-                        if (borderBrush.IsFrozen)
-                            pen1.Freeze();
-                        this._leftPenCache = pen1;
-                    }
-                    if (ThicknessHelper.IsUniform(borderThickness))
-                    {
-                        double num = pen1.Thickness * 0.5;
-                        Rect rectangle = new Rect(new Point(num, num), new Point(this.RenderSize.Width - num, this.RenderSize.Height - num));
-                        if (flag)
-                            dc.DrawRoundedRectangle((Brush)null, pen1, rectangle, topLeft1, topLeft1);
+                        Pen pen1 = this._leftPenCache;
+                        if (pen1 == null)
+                        {
+                            pen1 = new Pen();
+                            pen1.Brush = borderBrush;
+                            //TODO:GetDPI
+                            //pen1.Thickness = !useLayoutRounding ? borderThickness.Left : UIElement.RoundLayoutValue(borderThickness.Left, dpi.DpiScaleX);
+                            pen1.Thickness = borderThickness.Left;
+                            if (borderBrush.IsFrozen)
+                                pen1.Freeze();
+                            this._leftPenCache = pen1;
+                        }
+                        if (ThicknessHelper.IsUniform(borderThickness))
+                        {
+                            double num = pen1.Thickness * 0.5;
+                            Rect rectangle = new Rect(new Point(num, num),
+                                new Point(this.RenderSize.Width - num, this.RenderSize.Height - num));
+                            if (flag)
+                                dc.DrawRoundedRectangle((Brush) null, pen1, rectangle, topLeft1, topLeft1);
+                            else
+                                dc.DrawRectangle((Brush) null, pen1, rectangle);
+                        }
                         else
-                            dc.DrawRectangle((Brush)null, pen1, rectangle);
+                        {
+                            if (DoubleUtilHelper.GreaterThan(borderThickness.Left, 0.0))
+                            {
+                                double x1 = pen1.Thickness * 0.5;
+                                DrawingContext drawingContext = dc;
+                                Pen pen2 = pen1;
+                                Point point0 = new Point(x1, 0.0);
+                                double x2 = x1;
+                                renderSize = this.RenderSize;
+                                double height = renderSize.Height;
+                                Point point1 = new Point(x2, height);
+                                drawingContext.DrawLine(pen2, point0, point1);
+                            }
+                            if (DoubleUtilHelper.GreaterThan(borderThickness.Right, 0.0))
+                            {
+                                Pen pen2 = this._rightPenCache;
+                                if (pen2 == null)
+                                {
+                                    pen2 = new Pen();
+                                    pen2.Brush = borderBrush;
+                                    //TODO:GetDPI
+                                    //pen2.Thickness = !useLayoutRounding ? borderThickness.Right : UIElement.RoundLayoutValue(borderThickness.Right, dpi.DpiScaleX);
+                                    pen2.Thickness = borderThickness.Right;
+                                    if (borderBrush.IsFrozen)
+                                        pen2.Freeze();
+                                    this._rightPenCache = pen2;
+                                }
+                                double num = pen2.Thickness * 0.5;
+                                DrawingContext drawingContext = dc;
+                                Pen pen3 = pen2;
+                                renderSize = this.RenderSize;
+                                Point point0 = new Point(renderSize.Width - num, 0.0);
+                                renderSize = this.RenderSize;
+                                double x = renderSize.Width - num;
+                                renderSize = this.RenderSize;
+                                double height = renderSize.Height;
+                                Point point1 = new Point(x, height);
+                                drawingContext.DrawLine(pen3, point0, point1);
+                            }
+                            if (DoubleUtilHelper.GreaterThan(borderThickness.Top, 0.0))
+                            {
+                                Pen pen2 = this._topPenCache;
+                                if (pen2 == null)
+                                {
+                                    pen2 = new Pen();
+                                    pen2.Brush = borderBrush;
+                                    //TODO:GetDPI
+                                    //pen2.Thickness = !useLayoutRounding ? borderThickness.Top : UIElement.RoundLayoutValue(borderThickness.Top, dpi.DpiScaleY);
+                                    pen2.Thickness = borderThickness.Top;
+                                    if (borderBrush.IsFrozen)
+                                        pen2.Freeze();
+                                    this._topPenCache = pen2;
+                                }
+                                double y = pen2.Thickness * 0.5;
+                                DrawingContext drawingContext = dc;
+                                Pen pen3 = pen2;
+                                Point point0 = new Point(0.0, y);
+                                renderSize = this.RenderSize;
+                                Point point1 = new Point(renderSize.Width, y);
+                                drawingContext.DrawLine(pen3, point0, point1);
+                            }
+                            if (DoubleUtilHelper.GreaterThan(borderThickness.Bottom, 0.0))
+                            {
+                                Pen pen2 = this._bottomPenCache;
+                                if (pen2 == null)
+                                {
+                                    pen2 = new Pen();
+                                    pen2.Brush = borderBrush;
+                                    //TODO:GetDPI
+                                    //pen2.Thickness = !useLayoutRounding ? borderThickness.Bottom : UIElement.RoundLayoutValue(borderThickness.Bottom, dpi.DpiScaleY);
+                                    pen2.Thickness = borderThickness.Bottom;
+                                    if (borderBrush.IsFrozen)
+                                        pen2.Freeze();
+                                    this._bottomPenCache = pen2;
+                                }
+                                double num = pen2.Thickness * 0.5;
+                                DrawingContext drawingContext = dc;
+                                Pen pen3 = pen2;
+                                double x = 0.0;
+                                renderSize = this.RenderSize;
+                                double y1 = renderSize.Height - num;
+                                Point point0 = new Point(x, y1);
+                                renderSize = this.RenderSize;
+                                double width = renderSize.Width;
+                                renderSize = this.RenderSize;
+                                double y2 = renderSize.Height - num;
+                                Point point1 = new Point(width, y2);
+                                drawingContext.DrawLine(pen3, point0, point1);
+                            }
+                        }
                     }
                     else
                     {
-                        if (DoubleUtilHelper.GreaterThan(borderThickness.Left, 0.0))
+                        //只想写一次逻辑，就还是使用复杂模式的逻辑
+
+                        //绘制边框
+                        if (_radiiInner == null)
                         {
-                            double x1 = pen1.Thickness * 0.5;
-                            DrawingContext drawingContext = dc;
-                            Pen pen2 = pen1;
-                            Point point0 = new Point(x1, 0.0);
-                            double x2 = x1;
-                            renderSize = this.RenderSize;
-                            double height = renderSize.Height;
-                            Point point1 = new Point(x2, height);
-                            drawingContext.DrawLine(pen2, point0, point1);
+                            _radiiInner = new CalloutBorder.Radii(cornerRadius, borderThickness, false);
                         }
-                        if (DoubleUtilHelper.GreaterThan(borderThickness.Right, 0.0))
+
+                        var radiiInner = _radiiInner.Value;
+
+                        var streamGeometry = new StreamGeometry();
+                        using (StreamGeometryContext ctx = streamGeometry.Open())
                         {
-                            Pen pen2 = this._rightPenCache;
-                            if (pen2 == null)
+                            switch (Placement)
                             {
-                                pen2 = new Pen();
-                                pen2.Brush = borderBrush;
-                                //TODO:GetDPI
-                                //pen2.Thickness = !useLayoutRounding ? borderThickness.Right : UIElement.RoundLayoutValue(borderThickness.Right, dpi.DpiScaleX);
-                                pen2.Thickness = borderThickness.Right;
-                                if (borderBrush.IsFrozen)
-                                    pen2.Freeze();
-                                this._rightPenCache = pen2;
+                                case CalloutPlacement.Top:
+                                    var tp1 = new Point(radiiOuter.LeftTop, _calloutThicknessHeight + _actualCalloutHeight);
+                                    ctx.BeginFigure(tp1, true, true);
+                                    //callout起始点
+                                    var tp2 = new Point(tp1.X + HorizontalOffset, tp1.Y);
+                                    ctx.LineTo(tp2, false, false);
+                                    var tp3 = new Point(tp2.X + _actualCalloutWidth / 2, _calloutThicknessHeight);
+                                    ctx.LineTo(tp3, false, false);
+                                    var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
+                                    ctx.LineTo(tp4, false, false);
+                                    //callout结束点
+                                    var tp5 = new Point(renderSize.Width - radiiOuter.RightTop, tp2.Y);
+                                    ctx.LineTo(tp5, false, false);
+                                    var tp6 = new Point(renderSize.Width - borderThickness.Right,
+                                        _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                                        radiiOuter.TopRight);
+                                    ctx.ArcTo(tp6, new Size(radiiInner.RightTop, radiiInner.TopRight), 0,
+                                        false, SweepDirection.Clockwise, false, false);
+                                    var tp7 = new Point(tp6.X, renderSize.Height - radiiOuter.BottomRight);
+                                    ctx.LineTo(tp7, false, false);
+                                    var tp8 = new Point(renderSize.Width - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
+                                    ctx.ArcTo(tp8,
+                                        new Size(radiiInner.RightBottom, radiiInner.BottomRight), 0, false,
+                                        SweepDirection.Clockwise, false, false);
+                                    var tp9 = new Point(radiiOuter.LeftBottom, tp8.Y);
+                                    ctx.LineTo(tp9, false, false);
+                                    var tp10 = new Point(borderThickness.Left, renderSize.Height - radiiOuter.BottomLeft);
+                                    ctx.ArcTo(tp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var tp11 = new Point(tp10.X, _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                                                                 radiiOuter.TopLeft);
+                                    ctx.LineTo(tp11, false, false);
+                                    ctx.ArcTo(tp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    break;
+                                case CalloutPlacement.Bottom:
+                                    var bp1 = new Point(radiiOuter.LeftTop, borderThickness.Top);
+                                    ctx.BeginFigure(bp1, true, true);
+                                    var bp2 = new Point(renderSize.Width - radiiOuter.RightTop, bp1.Y);
+                                    ctx.LineTo(bp2, false, false);
+                                    var bp3 = new Point(renderSize.Width - borderThickness.Right, radiiOuter.TopRight);
+                                    ctx.ArcTo(bp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var bp4 = new Point(bp3.X,
+                                        renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight +
+                                        borderThickness.Bottom - radiiOuter.BottomRight);
+                                    ctx.LineTo(bp4, false, false);
+                                    var bp5 = new Point(
+                                        renderSize.Width - radiiOuter.RightBottom,
+                                        renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight);
+                                    ctx.ArcTo(bp5, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var bp6 = new Point(radiiOuter.LeftBottom + HorizontalOffset + _actualCalloutWidth, bp5.Y);
+                                    ctx.LineTo(bp6, false, false);
+                                    var bp7 = new Point(radiiOuter.LeftBottom + HorizontalOffset + _actualCalloutWidth / 2, renderSize.Height - _calloutThicknessHeight);
+                                    ctx.LineTo(bp7, false, false);
+                                    var bp8 = new Point(radiiOuter.LeftBottom + HorizontalOffset, bp6.Y);
+                                    ctx.LineTo(bp8, false, false);
+                                    var bp9 = new Point(radiiOuter.LeftBottom, bp6.Y);
+                                    ctx.LineTo(bp9, false, false);
+                                    var bp10 = new Point(borderThickness.Left, renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight +
+                                                                               borderThickness.Bottom - radiiOuter.BottomLeft);
+                                    ctx.ArcTo(bp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var bp11 = new Point(bp10.X, radiiOuter.TopLeft);
+                                    ctx.LineTo(bp11, false, false);
+                                    ctx.ArcTo(bp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    break;
+                                case CalloutPlacement.Left:
+                                    var lp1 = new Point(_calloutThicknessHeight + _actualCalloutHeight - borderThickness.Left + radiiOuter.LeftTop, borderThickness.Top);
+                                    ctx.BeginFigure(lp1, true, true);
+                                    var lp2 = new Point(renderSize.Width - radiiOuter.RightTop, lp1.Y);
+                                    ctx.LineTo(lp2, false, false);
+                                    var lp3 = new Point(renderSize.Width - borderThickness.Right, radiiOuter.TopRight);
+                                    ctx.ArcTo(lp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var lp4 = new Point(lp3.X, renderSize.Height - radiiOuter.BottomRight);
+                                    ctx.LineTo(lp4, false, false);
+                                    var lp5 = new Point(renderSize.Width - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
+                                    ctx.ArcTo(lp5, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var lp6 = new Point(_calloutThicknessHeight + _actualCalloutHeight - borderThickness.Left + radiiOuter.LeftBottom, lp5.Y);
+                                    ctx.LineTo(lp6, false, false);
+                                    var lp7 = new Point(_calloutThicknessHeight + _actualCalloutHeight, renderSize.Height - radiiOuter.BottomLeft);
+                                    ctx.ArcTo(lp7, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var lp8 = new Point(lp7.X,
+                                        radiiOuter.TopLeft + VerticalOffset + _actualCalloutWidth);
+                                    ctx.LineTo(lp8, false, false);
+                                    var lp9 = new Point(_calloutThicknessHeight,
+                                        radiiOuter.TopLeft + VerticalOffset + _actualCalloutWidth / 2);
+                                    ctx.LineTo(lp9, false, false);
+                                    var lp10 = new Point(lp8.X, radiiOuter.TopLeft + VerticalOffset);
+                                    ctx.LineTo(lp10, false, false);
+                                    var lp11 = new Point(lp10.X, radiiOuter.TopLeft);
+                                    ctx.LineTo(lp11, false, false);
+                                    ctx.ArcTo(lp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    break;
+                                case CalloutPlacement.Right:
+                                    var rp1 = new Point(radiiOuter.LeftTop, borderThickness.Top);
+                                    ctx.BeginFigure(rp1, true, true);
+                                    var rp2 = new Point(
+                                        renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight +
+                                        borderThickness.Right - radiiOuter.RightTop, rp1.Y);
+                                    ctx.LineTo(rp2, false, false);
+                                    var rp3 = new Point(
+                                        renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight,
+                                        radiiOuter.TopRight);
+                                    ctx.ArcTo(rp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var rp4 = new Point(rp3.X, radiiOuter.TopRight + VerticalOffset);
+                                    ctx.LineTo(rp4, false, false);
+                                    var rp5 = new Point(renderSize.Width - _calloutThicknessHeight, radiiOuter.TopRight + VerticalOffset + _actualCalloutWidth / 2);
+                                    ctx.LineTo(rp5, false, false);
+                                    var rp6 = new Point(rp4.X, radiiOuter.TopRight + VerticalOffset + _actualCalloutWidth);
+                                    ctx.LineTo(rp6, false, false);
+                                    var rp7 = new Point(rp6.X, renderSize.Height - radiiOuter.BottomRight);
+                                    ctx.LineTo(rp7, false, false);
+                                    var rp8 = new Point(renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight +
+                                                        borderThickness.Right - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
+                                    ctx.ArcTo(rp8, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var rp9 = new Point(radiiOuter.LeftBottom, rp8.Y);
+                                    ctx.LineTo(rp9, false, false);
+                                    var rp10 = new Point(borderThickness.Left, renderSize.Height - radiiOuter.BottomLeft);
+                                    ctx.ArcTo(rp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    var rp11 = new Point(rp10.X, radiiOuter.TopLeft);
+                                    ctx.LineTo(rp11, false, false);
+                                    ctx.ArcTo(rp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                                        0, false, SweepDirection.Clockwise, false, false);
+                                    break;
                             }
-                            double num = pen2.Thickness * 0.5;
-                            DrawingContext drawingContext = dc;
-                            Pen pen3 = pen2;
-                            renderSize = this.RenderSize;
-                            Point point0 = new Point(renderSize.Width - num, 0.0);
-                            renderSize = this.RenderSize;
-                            double x = renderSize.Width - num;
-                            renderSize = this.RenderSize;
-                            double height = renderSize.Height;
-                            Point point1 = new Point(x, height);
-                            drawingContext.DrawLine(pen3, point0, point1);
                         }
-                        if (DoubleUtilHelper.GreaterThan(borderThickness.Top, 0.0))
-                        {
-                            Pen pen2 = this._topPenCache;
-                            if (pen2 == null)
-                            {
-                                pen2 = new Pen();
-                                pen2.Brush = borderBrush;
-                                //TODO:GetDPI
-                                //pen2.Thickness = !useLayoutRounding ? borderThickness.Top : UIElement.RoundLayoutValue(borderThickness.Top, dpi.DpiScaleY);
-                                pen2.Thickness = borderThickness.Top;
-                                if (borderBrush.IsFrozen)
-                                    pen2.Freeze();
-                                this._topPenCache = pen2;
-                            }
-                            double y = pen2.Thickness * 0.5;
-                            DrawingContext drawingContext = dc;
-                            Pen pen3 = pen2;
-                            Point point0 = new Point(0.0, y);
-                            renderSize = this.RenderSize;
-                            Point point1 = new Point(renderSize.Width, y);
-                            drawingContext.DrawLine(pen3, point0, point1);
-                        }
-                        if (DoubleUtilHelper.GreaterThan(borderThickness.Bottom, 0.0))
-                        {
-                            Pen pen2 = this._bottomPenCache;
-                            if (pen2 == null)
-                            {
-                                pen2 = new Pen();
-                                pen2.Brush = borderBrush;
-                                //TODO:GetDPI
-                                //pen2.Thickness = !useLayoutRounding ? borderThickness.Bottom : UIElement.RoundLayoutValue(borderThickness.Bottom, dpi.DpiScaleY);
-                                pen2.Thickness = borderThickness.Bottom;
-                                if (borderBrush.IsFrozen)
-                                    pen2.Freeze();
-                                this._bottomPenCache = pen2;
-                            }
-                            double num = pen2.Thickness * 0.5;
-                            DrawingContext drawingContext = dc;
-                            Pen pen3 = pen2;
-                            double x = 0.0;
-                            renderSize = this.RenderSize;
-                            double y1 = renderSize.Height - num;
-                            Point point0 = new Point(x, y1);
-                            renderSize = this.RenderSize;
-                            double width = renderSize.Width;
-                            renderSize = this.RenderSize;
-                            double y2 = renderSize.Height - num;
-                            Point point1 = new Point(width, y2);
-                            drawingContext.DrawLine(pen3, point0, point1);
-                        }
+                        streamGeometry.Freeze();
+
+                        dc.DrawGeometry(background, null, streamGeometry);
                     }
                 }
                 Brush background = this.Background;
