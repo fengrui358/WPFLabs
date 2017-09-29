@@ -24,8 +24,6 @@ namespace WpfLabs.CalloutBorder
         private bool _useComplexRenderCodePath;
         private double _actualCalloutWidth;
         private double _actualCalloutHeight;
-        private double? _actualHorizontalOffset;
-        private double? _actualVerticalOffset;
         private bool _isShowCallout;
         private double _calloutThicknessHeight;
         private Radii? _radiiOuter;
@@ -717,18 +715,88 @@ namespace WpfLabs.CalloutBorder
                 }
                 else
                 {
-                    switch (Placement)
-                    {
-                        case CalloutPlacement.Top:
-                            point1_1 = new Point(_radiiOuter.Value.LeftTop, _actualHorizontalOffset);
+                    renderSize = this.RenderSize;
 
-                            break;
-                        case CalloutPlacement.Bottom:
-                            break;
-                        case CalloutPlacement.Left:
-                            break;
-                        case CalloutPlacement.Right:
-                            break;
+                    if (flag)
+                    {
+                        //圆弧无边框
+                        var streamGeometry = new StreamGeometry();
+                        using (StreamGeometryContext ctx = streamGeometry.Open())
+                        {
+                            switch (Placement)
+                            {
+                                case CalloutPlacement.Top:
+                                    var tp1 = new Point(_radiiOuter.Value.LeftTop, _calloutThicknessHeight + _actualCalloutHeight);
+                                    ctx.BeginFigure(tp1, true, true);
+                                    var tp2 = new Point(tp1.X + HorizontalOffset, tp1.Y);
+                                    ctx.LineTo(tp2, false, false);
+                                    var tp3 = new Point(tp2.X + _actualCalloutWidth / 2, _calloutThicknessHeight);
+                                    ctx.LineTo(tp3, false, false);
+                                    var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
+                                    ctx.LineTo(tp4, false, false);
+                                    var tp5 = new Point(RenderSize.Width - _radiiOuter.Value.LeftTop - _radiiOuter.Value.RightTop, tp1.Y);
+                                    ctx.LineTo(tp5, false, false);
+                                    var tp6 = new Point(RenderSize.Width - borderThickness.Right,
+                                        _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                                        _radiiOuter.Value.TopRight);
+                                    ctx.LineTo(tp6, false, false);
+                                    var tp7 = new Point(tp6.X, RenderSize.Height - borderThickness.Bottom);
+
+                                    break;
+                                case CalloutPlacement.Bottom:
+                                    break;
+                                case CalloutPlacement.Left:
+                                    break;
+                                case CalloutPlacement.Right:
+                                    break;
+                            }
+                        }
+                        streamGeometry.Freeze();
+
+                        dc.DrawGeometry(background, null, streamGeometry);
+                    }
+                    else
+                    {
+                        //矩形无边框
+                        var streamGeometry = new StreamGeometry();
+                        using (StreamGeometryContext ctx = streamGeometry.Open())
+                        {
+                            switch (Placement)
+                            {
+                                case CalloutPlacement.Top:
+                                    var tp1 = new Point(borderThickness.Left, _calloutThicknessHeight + _actualCalloutHeight);
+                                    ctx.BeginFigure(tp1, true, true);
+                                    var tp2 = new Point(tp1.X + HorizontalOffset, tp1.Y);
+                                    ctx.LineTo(tp2, false, true);
+                                    var tp3 = new Point(tp2.X + _actualCalloutWidth / 2, _calloutThicknessHeight);
+                                    ctx.LineTo(tp3, false, true);
+                                    var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
+                                    ctx.LineTo(tp4, false, true);
+                                    var tp5 = new Point(renderSize.Width - borderThickness.Left - borderThickness.Right, tp4.Y);
+                                    ctx.LineTo(tp5, false, false);
+                                    var tp6 = new Point(tp5.X, renderSize.Height - borderThickness.Bottom);
+                                    ctx.LineTo(tp6, false, false);
+                                    var tp7 = new Point(borderThickness.Left, tp6.Y);
+                                    ctx.LineTo(tp7, false, false);
+
+                                    //var tp6 = new Point(tp5.X,
+                                    //    _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                                    //    _radiiOuter.Value.TopRight);
+                                    //ctx.LineTo(tp6, false, false);
+                                    //var tp7 = new Point(tp6.X, RenderSize.Height - borderThickness.Bottom);
+
+                                    break;
+                                case CalloutPlacement.Bottom:
+                                    break;
+                                case CalloutPlacement.Left:
+                                    break;
+                                case CalloutPlacement.Right:
+                                    break;
+                            }
+                        }
+                        streamGeometry.Freeze();
+
+                        dc.DrawGeometry(background, null, streamGeometry);
                     }
                 }
             }
@@ -747,8 +815,6 @@ namespace WpfLabs.CalloutBorder
             border._bottomPenCache = (Pen)null;
             border._actualCalloutWidth = 0d;
             border._actualCalloutHeight = 0d;
-            border._actualHorizontalOffset = null;
-            border._actualVerticalOffset = null;
             border._isShowCallout = false;
         }
 

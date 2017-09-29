@@ -65,6 +65,32 @@
                 <Slider x:Name="CornerRadiusSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="8" />
                 <Label Grid.Column="3" Content="{Binding ElementName=CornerRadiusSlider, Path=Maximum}" />
             </Grid>
+            <!--HorizontalOffset-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="HorizontalOffset：" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Content="{Binding ElementName=HorizontalOffsetSlider, Path=Minimum}" />
+                <Slider x:Name="HorizontalOffsetSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="50" />
+                <Label Grid.Column="3" Content="{Binding ElementName=HorizontalOffsetSlider, Path=Maximum}" />
+            </Grid>
+            <!--VerticalOffset-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="VerticalOffset：" HorizontalAlignment="Right" />
+                <Label Grid.Column="1" Content="{Binding ElementName=VerticalOffsetSlider, Path=Minimum}" />
+                <Slider x:Name="VerticalOffsetSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="50" />
+                <Label Grid.Column="3" Content="{Binding ElementName=VerticalOffsetSlider, Path=Maximum}" />
+            </Grid>
             <!--CalloutWidth-->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -75,7 +101,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="CalloutWidth：" HorizontalAlignment="Right" />
                 <Label Grid.Column="1" Content="{Binding ElementName=CalloutWidthSlider, Path=Minimum}" />
-                <Slider x:Name="CalloutWidthSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="10" />
+                <Slider x:Name="CalloutWidthSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="50" />
                 <Label Grid.Column="3" Content="{Binding ElementName=CalloutWidthSlider, Path=Maximum}" />
             </Grid>
             <!--CalloutHeight-->
@@ -88,7 +114,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="CalloutHeight：" HorizontalAlignment="Right" />
                 <Label Grid.Column="1" Content="{Binding ElementName=CalloutHeightSlider, Path=Minimum}" />
-                <Slider x:Name="CalloutHeightSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="10" />
+                <Slider x:Name="CalloutHeightSlider" Grid.Column="2" Minimum="0" Value="0" Maximum="50" />
                 <Label Grid.Column="3" Content="{Binding ElementName=CalloutHeightSlider, Path=Maximum}" />
             </Grid>
             <StackPanel Orientation="Horizontal">
@@ -118,6 +144,8 @@
                                      CornerRadius="{Binding ElementName=CornerRadiusSlider, Path=Value}"
                                      BorderThickness="{Binding ElementName=BorderThicknessSlider, Path=Value}"
                                      Placement="{Binding ElementName=RootContainer, Path=Placement}"
+                                     HorizontalOffset="{Binding ElementName=HorizontalOffsetSlider, Path=Value}"
+                                     VerticalOffset="{Binding ElementName=VerticalOffsetSlider, Path=Value}"
                                      CalloutWidth="{Binding ElementName=CalloutWidthSlider, Path=Value}"
                                      CalloutHeight="{Binding ElementName=CalloutHeightSlider, Path=Value}"
                                      BorderBrush="Blue">
