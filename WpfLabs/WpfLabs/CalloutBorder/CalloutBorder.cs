@@ -464,43 +464,63 @@ namespace WpfLabs.CalloutBorder
             if (this._useComplexRenderCodePath)
             {
                 _radiiInner = new CalloutBorder.Radii(cornerRadius, thickness, false);
-                StreamGeometry streamGeometry1 = (StreamGeometry)null;
-                if (!DoubleUtilHelper.IsZero(rect2.Width) && !DoubleUtilHelper.IsZero(rect2.Height))
+
+                if (!_isShowCallout)
                 {
-                    streamGeometry1 = new StreamGeometry();
-                    using (StreamGeometryContext ctx = streamGeometry1.Open())
+                    StreamGeometry streamGeometry1 = (StreamGeometry)null;
+                    if (!DoubleUtilHelper.IsZero(rect2.Width) && !DoubleUtilHelper.IsZero(rect2.Height))
                     {
-                        CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
+                        streamGeometry1 = new StreamGeometry();
+                        using (StreamGeometryContext ctx = streamGeometry1.Open())
+                        {
+                            CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
+                        }
+
+                        streamGeometry1.Freeze();
+                        this._backgroundGeometryCache = streamGeometry1;
                     }
-                        
-                    streamGeometry1.Freeze();
-                    this._backgroundGeometryCache = streamGeometry1;
+                    else
+                    {
+                        this._backgroundGeometryCache = (StreamGeometry)null;
+                    }
+
+                    if (!DoubleUtilHelper.IsZero(rect1.Width) && !DoubleUtilHelper.IsZero(rect1.Height))
+                    {
+                        if (_radiiOuter == null)
+                        {
+                            _radiiOuter = new CalloutBorder.Radii(cornerRadius, thickness, true);
+                        }
+                        StreamGeometry streamGeometry2 = new StreamGeometry();
+                        using (StreamGeometryContext ctx = streamGeometry2.Open())
+                        {
+                            CalloutBorder.GenerateGeometry(ctx, rect1, _radiiOuter.Value);
+                            if (streamGeometry1 != null)
+                                CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
+                        }
+
+                        streamGeometry2.Freeze();
+                        this._borderGeometryCache = streamGeometry2;
+                    }
+                    else
+                    {
+                        this._borderGeometryCache = (StreamGeometry)null;
+                    }
                 }
                 else
-                {
-                    this._backgroundGeometryCache = (StreamGeometry)null;
-                }
-
-                if (!DoubleUtilHelper.IsZero(rect1.Width) && !DoubleUtilHelper.IsZero(rect1.Height))
                 {
                     if (_radiiOuter == null)
                     {
                         _radiiOuter = new CalloutBorder.Radii(cornerRadius, thickness, true);
                     }
-                    StreamGeometry streamGeometry2 = new StreamGeometry();
-                    using (StreamGeometryContext ctx = streamGeometry2.Open())
+
+                    var streamGeometryInner = new StreamGeometry();
+                    using (StreamGeometryContext ctx = streamGeometryInner.Open())
                     {
-                        CalloutBorder.GenerateGeometry(ctx, rect1, _radiiOuter.Value);
-                        if (streamGeometry1 != null)
-                            CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
+                        CalloutBorder.GenerateGeometry(ctx, rect2, _radiiInner.Value);
                     }
 
-                    streamGeometry2.Freeze();
-                    this._borderGeometryCache = streamGeometry2;
-                }
-                else
-                {
-                    this._borderGeometryCache = (StreamGeometry)null;
+                    streamGeometryInner.Freeze();
+                    this._backgroundGeometryCache = streamGeometryInner;
                 }
             }
             else
@@ -677,149 +697,149 @@ namespace WpfLabs.CalloutBorder
                         var radiiInner = _radiiInner.Value;
 
                         var streamGeometry = new StreamGeometry();
-                        using (StreamGeometryContext ctx = streamGeometry.Open())
-                        {
-                            switch (Placement)
-                            {
-                                case CalloutPlacement.Top:
-                                    var tp1 = new Point(radiiOuter.LeftTop, _calloutThicknessHeight + _actualCalloutHeight);
-                                    ctx.BeginFigure(tp1, true, true);
-                                    //callout起始点
-                                    var tp2 = new Point(tp1.X + HorizontalOffset, tp1.Y);
-                                    ctx.LineTo(tp2, false, false);
-                                    var tp3 = new Point(tp2.X + _actualCalloutWidth / 2, _calloutThicknessHeight);
-                                    ctx.LineTo(tp3, false, false);
-                                    var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
-                                    ctx.LineTo(tp4, false, false);
-                                    //callout结束点
-                                    var tp5 = new Point(renderSize.Width - radiiOuter.RightTop, tp2.Y);
-                                    ctx.LineTo(tp5, false, false);
-                                    var tp6 = new Point(renderSize.Width - borderThickness.Right,
-                                        _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
-                                        radiiOuter.TopRight);
-                                    ctx.ArcTo(tp6, new Size(radiiInner.RightTop, radiiInner.TopRight), 0,
-                                        false, SweepDirection.Clockwise, false, false);
-                                    var tp7 = new Point(tp6.X, renderSize.Height - radiiOuter.BottomRight);
-                                    ctx.LineTo(tp7, false, false);
-                                    var tp8 = new Point(renderSize.Width - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
-                                    ctx.ArcTo(tp8,
-                                        new Size(radiiInner.RightBottom, radiiInner.BottomRight), 0, false,
-                                        SweepDirection.Clockwise, false, false);
-                                    var tp9 = new Point(radiiOuter.LeftBottom, tp8.Y);
-                                    ctx.LineTo(tp9, false, false);
-                                    var tp10 = new Point(borderThickness.Left, renderSize.Height - radiiOuter.BottomLeft);
-                                    ctx.ArcTo(tp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var tp11 = new Point(tp10.X, _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
-                                                                 radiiOuter.TopLeft);
-                                    ctx.LineTo(tp11, false, false);
-                                    ctx.ArcTo(tp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    break;
-                                case CalloutPlacement.Bottom:
-                                    var bp1 = new Point(radiiOuter.LeftTop, borderThickness.Top);
-                                    ctx.BeginFigure(bp1, true, true);
-                                    var bp2 = new Point(renderSize.Width - radiiOuter.RightTop, bp1.Y);
-                                    ctx.LineTo(bp2, false, false);
-                                    var bp3 = new Point(renderSize.Width - borderThickness.Right, radiiOuter.TopRight);
-                                    ctx.ArcTo(bp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var bp4 = new Point(bp3.X,
-                                        renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight +
-                                        borderThickness.Bottom - radiiOuter.BottomRight);
-                                    ctx.LineTo(bp4, false, false);
-                                    var bp5 = new Point(
-                                        renderSize.Width - radiiOuter.RightBottom,
-                                        renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight);
-                                    ctx.ArcTo(bp5, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var bp6 = new Point(radiiOuter.LeftBottom + HorizontalOffset + _actualCalloutWidth, bp5.Y);
-                                    ctx.LineTo(bp6, false, false);
-                                    var bp7 = new Point(radiiOuter.LeftBottom + HorizontalOffset + _actualCalloutWidth / 2, renderSize.Height - _calloutThicknessHeight);
-                                    ctx.LineTo(bp7, false, false);
-                                    var bp8 = new Point(radiiOuter.LeftBottom + HorizontalOffset, bp6.Y);
-                                    ctx.LineTo(bp8, false, false);
-                                    var bp9 = new Point(radiiOuter.LeftBottom, bp6.Y);
-                                    ctx.LineTo(bp9, false, false);
-                                    var bp10 = new Point(borderThickness.Left, renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight +
-                                                                               borderThickness.Bottom - radiiOuter.BottomLeft);
-                                    ctx.ArcTo(bp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var bp11 = new Point(bp10.X, radiiOuter.TopLeft);
-                                    ctx.LineTo(bp11, false, false);
-                                    ctx.ArcTo(bp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    break;
-                                case CalloutPlacement.Left:
-                                    var lp1 = new Point(_calloutThicknessHeight + _actualCalloutHeight - borderThickness.Left + radiiOuter.LeftTop, borderThickness.Top);
-                                    ctx.BeginFigure(lp1, true, true);
-                                    var lp2 = new Point(renderSize.Width - radiiOuter.RightTop, lp1.Y);
-                                    ctx.LineTo(lp2, false, false);
-                                    var lp3 = new Point(renderSize.Width - borderThickness.Right, radiiOuter.TopRight);
-                                    ctx.ArcTo(lp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var lp4 = new Point(lp3.X, renderSize.Height - radiiOuter.BottomRight);
-                                    ctx.LineTo(lp4, false, false);
-                                    var lp5 = new Point(renderSize.Width - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
-                                    ctx.ArcTo(lp5, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var lp6 = new Point(_calloutThicknessHeight + _actualCalloutHeight - borderThickness.Left + radiiOuter.LeftBottom, lp5.Y);
-                                    ctx.LineTo(lp6, false, false);
-                                    var lp7 = new Point(_calloutThicknessHeight + _actualCalloutHeight, renderSize.Height - radiiOuter.BottomLeft);
-                                    ctx.ArcTo(lp7, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var lp8 = new Point(lp7.X,
-                                        radiiOuter.TopLeft + VerticalOffset + _actualCalloutWidth);
-                                    ctx.LineTo(lp8, false, false);
-                                    var lp9 = new Point(_calloutThicknessHeight,
-                                        radiiOuter.TopLeft + VerticalOffset + _actualCalloutWidth / 2);
-                                    ctx.LineTo(lp9, false, false);
-                                    var lp10 = new Point(lp8.X, radiiOuter.TopLeft + VerticalOffset);
-                                    ctx.LineTo(lp10, false, false);
-                                    var lp11 = new Point(lp10.X, radiiOuter.TopLeft);
-                                    ctx.LineTo(lp11, false, false);
-                                    ctx.ArcTo(lp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    break;
-                                case CalloutPlacement.Right:
-                                    var rp1 = new Point(radiiOuter.LeftTop, borderThickness.Top);
-                                    ctx.BeginFigure(rp1, true, true);
-                                    var rp2 = new Point(
-                                        renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight +
-                                        borderThickness.Right - radiiOuter.RightTop, rp1.Y);
-                                    ctx.LineTo(rp2, false, false);
-                                    var rp3 = new Point(
-                                        renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight,
-                                        radiiOuter.TopRight);
-                                    ctx.ArcTo(rp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var rp4 = new Point(rp3.X, radiiOuter.TopRight + VerticalOffset);
-                                    ctx.LineTo(rp4, false, false);
-                                    var rp5 = new Point(renderSize.Width - _calloutThicknessHeight, radiiOuter.TopRight + VerticalOffset + _actualCalloutWidth / 2);
-                                    ctx.LineTo(rp5, false, false);
-                                    var rp6 = new Point(rp4.X, radiiOuter.TopRight + VerticalOffset + _actualCalloutWidth);
-                                    ctx.LineTo(rp6, false, false);
-                                    var rp7 = new Point(rp6.X, renderSize.Height - radiiOuter.BottomRight);
-                                    ctx.LineTo(rp7, false, false);
-                                    var rp8 = new Point(renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight +
-                                                        borderThickness.Right - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
-                                    ctx.ArcTo(rp8, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var rp9 = new Point(radiiOuter.LeftBottom, rp8.Y);
-                                    ctx.LineTo(rp9, false, false);
-                                    var rp10 = new Point(borderThickness.Left, renderSize.Height - radiiOuter.BottomLeft);
-                                    ctx.ArcTo(rp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    var rp11 = new Point(rp10.X, radiiOuter.TopLeft);
-                                    ctx.LineTo(rp11, false, false);
-                                    ctx.ArcTo(rp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
-                                        0, false, SweepDirection.Clockwise, false, false);
-                                    break;
-                            }
-                        }
-                        streamGeometry.Freeze();
+                        //using (StreamGeometryContext ctx = streamGeometry.Open())
+                        //{
+                        //    switch (Placement)
+                        //    {
+                        //        case CalloutPlacement.Top:
+                        //            var tp1 = new Point(radiiOuter.LeftTop, _calloutThicknessHeight + _actualCalloutHeight);
+                        //            ctx.BeginFigure(tp1, true, true);
+                        //            //callout起始点
+                        //            var tp2 = new Point(tp1.X + HorizontalOffset, tp1.Y);
+                        //            ctx.LineTo(tp2, false, false);
+                        //            var tp3 = new Point(tp2.X + _actualCalloutWidth / 2, _calloutThicknessHeight);
+                        //            ctx.LineTo(tp3, false, false);
+                        //            var tp4 = new Point(tp2.X + _actualCalloutWidth, tp2.Y);
+                        //            ctx.LineTo(tp4, false, false);
+                        //            //callout结束点
+                        //            var tp5 = new Point(renderSize.Width - radiiOuter.RightTop, tp2.Y);
+                        //            ctx.LineTo(tp5, false, false);
+                        //            var tp6 = new Point(renderSize.Width - borderThickness.Right,
+                        //                _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                        //                radiiOuter.TopRight);
+                        //            ctx.ArcTo(tp6, new Size(radiiInner.RightTop, radiiInner.TopRight), 0,
+                        //                false, SweepDirection.Clockwise, false, false);
+                        //            var tp7 = new Point(tp6.X, renderSize.Height - radiiOuter.BottomRight);
+                        //            ctx.LineTo(tp7, false, false);
+                        //            var tp8 = new Point(renderSize.Width - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
+                        //            ctx.ArcTo(tp8,
+                        //                new Size(radiiInner.RightBottom, radiiInner.BottomRight), 0, false,
+                        //                SweepDirection.Clockwise, false, false);
+                        //            var tp9 = new Point(radiiOuter.LeftBottom, tp8.Y);
+                        //            ctx.LineTo(tp9, false, false);
+                        //            var tp10 = new Point(borderThickness.Left, renderSize.Height - radiiOuter.BottomLeft);
+                        //            ctx.ArcTo(tp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var tp11 = new Point(tp10.X, _calloutThicknessHeight + _actualCalloutHeight - borderThickness.Top +
+                        //                                         radiiOuter.TopLeft);
+                        //            ctx.LineTo(tp11, false, false);
+                        //            ctx.ArcTo(tp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            break;
+                        //        case CalloutPlacement.Bottom:
+                        //            var bp1 = new Point(radiiOuter.LeftTop, borderThickness.Top);
+                        //            ctx.BeginFigure(bp1, true, true);
+                        //            var bp2 = new Point(renderSize.Width - radiiOuter.RightTop, bp1.Y);
+                        //            ctx.LineTo(bp2, false, false);
+                        //            var bp3 = new Point(renderSize.Width - borderThickness.Right, radiiOuter.TopRight);
+                        //            ctx.ArcTo(bp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var bp4 = new Point(bp3.X,
+                        //                renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight +
+                        //                borderThickness.Bottom - radiiOuter.BottomRight);
+                        //            ctx.LineTo(bp4, false, false);
+                        //            var bp5 = new Point(
+                        //                renderSize.Width - radiiOuter.RightBottom,
+                        //                renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight);
+                        //            ctx.ArcTo(bp5, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var bp6 = new Point(radiiOuter.LeftBottom + HorizontalOffset + _actualCalloutWidth, bp5.Y);
+                        //            ctx.LineTo(bp6, false, false);
+                        //            var bp7 = new Point(radiiOuter.LeftBottom + HorizontalOffset + _actualCalloutWidth / 2, renderSize.Height - _calloutThicknessHeight);
+                        //            ctx.LineTo(bp7, false, false);
+                        //            var bp8 = new Point(radiiOuter.LeftBottom + HorizontalOffset, bp6.Y);
+                        //            ctx.LineTo(bp8, false, false);
+                        //            var bp9 = new Point(radiiOuter.LeftBottom, bp6.Y);
+                        //            ctx.LineTo(bp9, false, false);
+                        //            var bp10 = new Point(borderThickness.Left, renderSize.Height - _calloutThicknessHeight - _actualCalloutHeight +
+                        //                                                       borderThickness.Bottom - radiiOuter.BottomLeft);
+                        //            ctx.ArcTo(bp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var bp11 = new Point(bp10.X, radiiOuter.TopLeft);
+                        //            ctx.LineTo(bp11, false, false);
+                        //            ctx.ArcTo(bp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            break;
+                        //        case CalloutPlacement.Left:
+                        //            var lp1 = new Point(_calloutThicknessHeight + _actualCalloutHeight - borderThickness.Left + radiiOuter.LeftTop, borderThickness.Top);
+                        //            ctx.BeginFigure(lp1, true, true);
+                        //            var lp2 = new Point(renderSize.Width - radiiOuter.RightTop, lp1.Y);
+                        //            ctx.LineTo(lp2, false, false);
+                        //            var lp3 = new Point(renderSize.Width - borderThickness.Right, radiiOuter.TopRight);
+                        //            ctx.ArcTo(lp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var lp4 = new Point(lp3.X, renderSize.Height - radiiOuter.BottomRight);
+                        //            ctx.LineTo(lp4, false, false);
+                        //            var lp5 = new Point(renderSize.Width - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
+                        //            ctx.ArcTo(lp5, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var lp6 = new Point(_calloutThicknessHeight + _actualCalloutHeight - borderThickness.Left + radiiOuter.LeftBottom, lp5.Y);
+                        //            ctx.LineTo(lp6, false, false);
+                        //            var lp7 = new Point(_calloutThicknessHeight + _actualCalloutHeight, renderSize.Height - radiiOuter.BottomLeft);
+                        //            ctx.ArcTo(lp7, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var lp8 = new Point(lp7.X,
+                        //                radiiOuter.TopLeft + VerticalOffset + _actualCalloutWidth);
+                        //            ctx.LineTo(lp8, false, false);
+                        //            var lp9 = new Point(_calloutThicknessHeight,
+                        //                radiiOuter.TopLeft + VerticalOffset + _actualCalloutWidth / 2);
+                        //            ctx.LineTo(lp9, false, false);
+                        //            var lp10 = new Point(lp8.X, radiiOuter.TopLeft + VerticalOffset);
+                        //            ctx.LineTo(lp10, false, false);
+                        //            var lp11 = new Point(lp10.X, radiiOuter.TopLeft);
+                        //            ctx.LineTo(lp11, false, false);
+                        //            ctx.ArcTo(lp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            break;
+                        //        case CalloutPlacement.Right:
+                        //            var rp1 = new Point(radiiOuter.LeftTop, borderThickness.Top);
+                        //            ctx.BeginFigure(rp1, true, true);
+                        //            var rp2 = new Point(
+                        //                renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight +
+                        //                borderThickness.Right - radiiOuter.RightTop, rp1.Y);
+                        //            ctx.LineTo(rp2, false, false);
+                        //            var rp3 = new Point(
+                        //                renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight,
+                        //                radiiOuter.TopRight);
+                        //            ctx.ArcTo(rp3, new Size(radiiInner.RightTop, radiiInner.TopRight),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var rp4 = new Point(rp3.X, radiiOuter.TopRight + VerticalOffset);
+                        //            ctx.LineTo(rp4, false, false);
+                        //            var rp5 = new Point(renderSize.Width - _calloutThicknessHeight, radiiOuter.TopRight + VerticalOffset + _actualCalloutWidth / 2);
+                        //            ctx.LineTo(rp5, false, false);
+                        //            var rp6 = new Point(rp4.X, radiiOuter.TopRight + VerticalOffset + _actualCalloutWidth);
+                        //            ctx.LineTo(rp6, false, false);
+                        //            var rp7 = new Point(rp6.X, renderSize.Height - radiiOuter.BottomRight);
+                        //            ctx.LineTo(rp7, false, false);
+                        //            var rp8 = new Point(renderSize.Width - _calloutThicknessHeight - _actualCalloutHeight +
+                        //                                borderThickness.Right - radiiOuter.RightBottom, renderSize.Height - borderThickness.Bottom);
+                        //            ctx.ArcTo(rp8, new Size(radiiInner.RightBottom, radiiInner.BottomRight),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var rp9 = new Point(radiiOuter.LeftBottom, rp8.Y);
+                        //            ctx.LineTo(rp9, false, false);
+                        //            var rp10 = new Point(borderThickness.Left, renderSize.Height - radiiOuter.BottomLeft);
+                        //            ctx.ArcTo(rp10, new Size(radiiInner.LeftBottom, radiiInner.BottomLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            var rp11 = new Point(rp10.X, radiiOuter.TopLeft);
+                        //            ctx.LineTo(rp11, false, false);
+                        //            ctx.ArcTo(rp1, new Size(radiiInner.LeftTop, radiiInner.TopLeft),
+                        //                0, false, SweepDirection.Clockwise, false, false);
+                        //            break;
+                        //    }
+                        //}
+                        //streamGeometry.Freeze();
 
-                        dc.DrawGeometry(background, null, streamGeometry);
+                        //dc.DrawGeometry(background, null, streamGeometry);
                     }
                 }
                 Brush background = this.Background;
@@ -1271,6 +1291,248 @@ namespace WpfLabs.CalloutBorder
             double height3 = point9.Y - point7.Y;
             if (!DoubleUtilHelper.IsZero(width3) || !DoubleUtilHelper.IsZero(height3))
                 ctx.ArcTo(point7, new Size(width3, height3), 0.0, false, SweepDirection.Clockwise, true, false);
+            ctx.LineTo(point8, true, false);
+            double x4 = point1.X;
+            point9 = rect.TopLeft;
+            double x5 = point9.X;
+            double width4 = x4 - x5;
+            double y4 = point8.Y;
+            point9 = rect.TopLeft;
+            double y5 = point9.Y;
+            double height4 = y4 - y5;
+            if (DoubleUtilHelper.IsZero(width4) && DoubleUtilHelper.IsZero(height4))
+                return;
+            ctx.ArcTo(point1, new Size(width4, height4), 0.0, false, SweepDirection.Clockwise, true, false);
+        }
+
+        /// <summary>
+        /// 带小尖角
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="rect"></param>
+        /// <param name="radii"></param>
+        /// <param name="calloutBorder"></param>
+        /// <param name="isOutter"></param>
+        private static void GenerateGeometryWithCallout(StreamGeometryContext ctx, Rect rect, CalloutBorder.Radii radii,
+            CalloutBorder calloutBorder, bool isOutter)
+        {
+            Point point1 = new Point(radii.LeftTop, 0.0);
+            Point point2 = new Point(rect.Width - radii.RightTop, 0.0);
+            Point point3 = new Point(rect.Width, radii.TopRight);
+            Point point4 = new Point(rect.Width, rect.Height - radii.BottomRight);
+            Point point5 = new Point(rect.Width - radii.RightBottom, rect.Height);
+            Point point6 = new Point(radii.LeftBottom, rect.Height);
+            Point point7 = new Point(0.0, rect.Height - radii.BottomLeft);
+            Point point8 = new Point(0.0, radii.TopLeft);
+
+            Point calloutP1 = new Point();
+            Point calloutP2 = new Point();
+            Point calloutP3 = new Point();
+
+            if (point1.X > point2.X)
+            {
+                double num = radii.LeftTop / (radii.LeftTop + radii.RightTop) * rect.Width;
+                point1.X = num;
+                point2.X = num;
+            }
+            if (point3.Y > point4.Y)
+            {
+                double num = radii.TopRight / (radii.TopRight + radii.BottomRight) * rect.Height;
+                point3.Y = num;
+                point4.Y = num;
+            }
+            if (point5.X < point6.X)
+            {
+                double num = radii.LeftBottom / (radii.LeftBottom + radii.RightBottom) * rect.Width;
+                point5.X = num;
+                point6.X = num;
+            }
+            if (point7.Y < point8.Y)
+            {
+                double num = radii.TopLeft / (radii.TopLeft + radii.BottomLeft) * rect.Height;
+                point7.Y = num;
+                point8.Y = num;
+            }
+            // ISSUE: explicit reference operation
+            // ISSUE: variable of a reference type
+            Point point9 = rect.TopLeft;
+            double x1 = point9.X;
+            point9 = rect.TopLeft;
+            double y1 = point9.Y;
+            // ISSUE: explicit reference operation
+            Vector vector = new Vector(x1, y1);
+            point1 += vector;
+            point2 += vector;
+            point3 += vector;
+            point4 += vector;
+            point5 += vector;
+            point6 += vector;
+            point7 += vector;
+            point8 += vector;
+
+            //根据小箭头数据调整各个点的位置
+            switch (calloutBorder.Placement)
+            {
+                case CalloutPlacement.Top:
+                    //下移1,2,3,8号点的Y轴
+                    var vectorTop = new Vector(0,
+                        calloutBorder._actualCalloutHeight + calloutBorder._calloutThicknessHeight -
+                        calloutBorder.BorderThickness.Top);
+                    point1 += vectorTop;
+                    point2 += vectorTop;
+                    point3 += vectorTop;
+                    point8 += vectorTop;
+
+                    calloutP1 = new Point(point1.X + calloutBorder.HorizontalOffset, point1.Y);
+                    calloutP3 = new Point(calloutP1.X + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth, calloutP1.Y);
+                    if (isOutter)
+                    {
+                        calloutP2 = new Point(
+                            calloutP1.X + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2,
+                            calloutP1.Y + calloutBorder.BorderThickness.Top - calloutBorder._actualCalloutHeight -
+                            calloutBorder._calloutThicknessHeight);
+                    }
+                    else
+                    {
+                        calloutP2 = new Point(
+                            calloutP1.X + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2,
+                            calloutP1.Y - calloutBorder._actualCalloutHeight);
+                    }
+
+                    break;
+                case CalloutPlacement.Bottom:
+                    //上移4，5,6,7号点的Y轴
+                    var vectorBottpm = new Vector(0,
+                        calloutBorder._actualCalloutHeight + calloutBorder._calloutThicknessHeight -
+                        calloutBorder.BorderThickness.Bottom);
+                    point4 -= vectorBottpm;
+                    point5 -= vectorBottpm;
+                    point6 -= vectorBottpm;
+                    point7 -= vectorBottpm;
+
+                    calloutP1 = new Point(point6.X + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth, point6.Y);
+                    calloutP3 = new Point(calloutP1.X + calloutBorder.HorizontalOffset, calloutP1.Y);
+                    if (isOutter)
+                    {
+                        calloutP2 = new Point(
+                            calloutP1.X + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2,
+                            calloutP1.Y - calloutBorder.BorderThickness.Bottom + calloutBorder._actualCalloutHeight +
+                            calloutBorder._calloutThicknessHeight);
+                    }
+                    else
+                    {
+                        calloutP2 = new Point(
+                            calloutP1.X + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2,
+                            calloutP1.Y + calloutBorder._actualCalloutHeight);
+                    }
+
+                    break;
+                case CalloutPlacement.Left:
+                    //右移1,6,7,8号点的X轴
+                    var vectorLeft = new Vector(calloutBorder._actualCalloutHeight + calloutBorder._calloutThicknessHeight -
+                                                calloutBorder.BorderThickness.Left, 0);
+
+                    point1 += vectorLeft;
+                    point6 += vectorLeft;
+                    point7 += vectorLeft;
+                    point8 += vectorLeft;
+
+                    calloutP1 = new Point(point8.X, point8.Y + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth);
+                    calloutP3 = new Point(calloutP1.X, point8.Y + calloutBorder.HorizontalOffset);
+                    if (isOutter)
+                    {
+                        calloutP2 = new Point(
+                            calloutP1.X + calloutBorder.BorderThickness.Left - calloutBorder._actualCalloutHeight -
+                            calloutBorder._calloutThicknessHeight,
+                            point8.Y + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2);
+                    }
+                    else
+                    {
+                        calloutP2 = new Point(calloutP1.X - calloutBorder._actualCalloutHeight,
+                            point8.Y + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2);
+                    }
+                    break;
+                case CalloutPlacement.Right:
+                    //左移2,3,4,5号点的X轴
+                    var vectorRight = new Vector(calloutBorder._actualCalloutHeight + calloutBorder._calloutThicknessHeight -
+                                                calloutBorder.BorderThickness.Right, 0);
+
+                    point2 -= vectorRight;
+                    point3 -= vectorRight;
+                    point4 -= vectorRight;
+                    point5 -= vectorRight;
+
+                    calloutP1 = new Point(point3.X, point3.Y + calloutBorder.HorizontalOffset);
+                    calloutP3 = new Point(calloutP1.X, point3.Y + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth);
+                    if (isOutter)
+                    {
+                        calloutP2 = new Point(
+                            calloutP1.X + calloutBorder.BorderThickness.Right - calloutBorder._actualCalloutHeight -
+                            calloutBorder._calloutThicknessHeight,
+                            point3.Y + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2);
+                    }
+                    else
+                    {
+                        calloutP2 = new Point(calloutP1.X - calloutBorder._actualCalloutHeight,
+                            point3.Y + calloutBorder.HorizontalOffset + calloutBorder._actualCalloutWidth / 2);
+                    }
+
+                    break;
+            }
+
+            ctx.BeginFigure(point1, true, true);
+            if (calloutBorder.Placement == CalloutPlacement.Top)
+            {
+                ctx.LineTo(calloutP1, true, false);
+                ctx.LineTo(calloutP2, true, false);
+                ctx.LineTo(calloutP3, true, false);
+            }
+            ctx.LineTo(point2, true, false);
+            point9 = rect.TopRight;
+            double width1 = point9.X - point2.X;
+            double y2 = point3.Y;
+            point9 = rect.TopRight;
+            double y3 = point9.Y;
+            double height1 = y2 - y3;
+            if (!DoubleUtilHelper.IsZero(width1) || !DoubleUtilHelper.IsZero(height1))
+                ctx.ArcTo(point3, new Size(width1, height1), 0.0, false, SweepDirection.Clockwise, true, false);
+
+            if (calloutBorder.Placement == CalloutPlacement.Right)
+            {
+                ctx.LineTo(calloutP1, true, false);
+                ctx.LineTo(calloutP2, true, false);
+                ctx.LineTo(calloutP3, true, false);
+            }
+            ctx.LineTo(point4, true, false);
+            point9 = rect.BottomRight;
+            double width2 = point9.X - point5.X;
+            point9 = rect.BottomRight;
+            double height2 = point9.Y - point4.Y;
+            if (!DoubleUtilHelper.IsZero(width2) || !DoubleUtilHelper.IsZero(height2))
+                ctx.ArcTo(point5, new Size(width2, height2), 0.0, false, SweepDirection.Clockwise, true, false);
+
+            if (calloutBorder.Placement == CalloutPlacement.Bottom)
+            {
+                ctx.LineTo(calloutP1, true, false);
+                ctx.LineTo(calloutP2, true, false);
+                ctx.LineTo(calloutP3, true, false);
+            }
+            ctx.LineTo(point6, true, false);
+            double x2 = point6.X;
+            point9 = rect.BottomLeft;
+            double x3 = point9.X;
+            double width3 = x2 - x3;
+            point9 = rect.BottomLeft;
+            double height3 = point9.Y - point7.Y;
+            if (!DoubleUtilHelper.IsZero(width3) || !DoubleUtilHelper.IsZero(height3))
+                ctx.ArcTo(point7, new Size(width3, height3), 0.0, false, SweepDirection.Clockwise, true, false);
+
+            if (calloutBorder.Placement == CalloutPlacement.Left)
+            {
+                ctx.LineTo(calloutP1, true, false);
+                ctx.LineTo(calloutP2, true, false);
+                ctx.LineTo(calloutP3, true, false);
+            }
             ctx.LineTo(point8, true, false);
             double x4 = point1.X;
             point9 = rect.TopLeft;
