@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -116,8 +117,8 @@ namespace WpfLabs.DrawingDemo
             }
 
             DrawingPath.StrokeThickness = DrawingThickness;
-            DrawingPath.Stroke = new SolidColorBrush(Colors.Black);
-            DrawingPath.Fill = new SolidColorBrush(Color.FromArgb(40, 155, 155, 155));
+            DrawingPath.Stroke = new SolidColorBrush(Colors.Blue);
+            DrawingPath.Fill = new SolidColorBrush(Color.FromArgb(30,255,0,0));
             DrawingPath.Data = streamGeometry;
         }
 
@@ -131,21 +132,22 @@ namespace WpfLabs.DrawingDemo
             try
             {
                 var ms = new FileStream(filename, FileMode.Create);
-                //var bmp = new RenderTargetBitmap((int)ui.ActualWidth, (int)ui.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
-                //bmp.Render(ui);
-                var bmp = RenderVisual(ui);
+                var bmp = new RenderTargetBitmap((int)ui.ActualWidth, (int)ui.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
+                bmp.Render(ui);
+                
+                //var bmp = RenderVisual(ui);
 
                 var ext = Path.GetExtension(filename).ToUpper();
                 BitmapEncoder encoder;
                 switch (ext)
                 {
-                    case "JPG":
+                    case ".JPG":
                         encoder = new JpegBitmapEncoder();
                         break;
-                    case "PNG":
+                    case ".PNG":
                         encoder = new PngBitmapEncoder();
                         break;
-                    case "BMP":
+                    case ".BMP":
                         encoder = new BmpBitmapEncoder();
                         break;
                     default:
@@ -161,30 +163,6 @@ namespace WpfLabs.DrawingDemo
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        /// <summary>
-        /// TODO:
-        /// 测试方法
-        /// </summary>
-        /// <param name="elt"></param>
-        /// <returns></returns>
-        private RenderTargetBitmap RenderVisual(UIElement elt)
-        {
-            var source = PresentationSource.FromVisual(elt);
-            var rtb = new RenderTargetBitmap((int)elt.RenderSize.Width,
-                (int)elt.RenderSize.Height, 96, 96, PixelFormats.Default);
-
-            var sourceBrush = new VisualBrush(elt);
-            var drawingVisual = new DrawingVisual();
-            using (var drawingContext = drawingVisual.RenderOpen())
-            {
-                drawingContext.DrawRectangle(sourceBrush, null, new Rect(new Point(0, 0),
-                    new Point(elt.RenderSize.Width, elt.RenderSize.Height)));
-            }
-            rtb.Render(drawingVisual);
-
-            return rtb;
         }
 
         /// <summary>
