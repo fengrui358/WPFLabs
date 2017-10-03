@@ -28,6 +28,7 @@ using WpfLabs.FlexDataGrid;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
 using WpfLabs.MusicPlayer;
+using WpfLabs.MutliUiThreadingDemo;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.SwapImageDemo;
@@ -118,10 +119,14 @@ namespace WpfLabs
                 case "DrawingDemoWindow":
                     var drawingDemoWindow = new DrawingDemoWindow();
                     drawingDemoWindow.ShowDialog();
-                    break;
+                    break; 
                 case "WaterMarkDemoWindow":
                     var waterMarkDemoWindow = new WaterMarkDemoWindow();
                     waterMarkDemoWindow.ShowDialog();
+                    break;
+                case "MutliUiThreadingDemoWindow":
+                    var mutliUiThreadingDemoWindow = new MutliUiThreadingDemoWindow();
+                    mutliUiThreadingDemoWindow.ShowDialog();
                     break;
             }
         }

@@ -184,6 +184,13 @@
     <Compile Include="MusicPlayer\NAudioEngine.cs" />
     <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="MusicPlayer\NAudioSimpleEngine.cs" />
+    <Compile Include="MutliUiThreadingDemo\MutliUiThreadingDemoWindow.xaml.cs">
+      <DependentUpon>MutliUiThreadingDemoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MutliUiThreadingDemo\OtherUiThreadingWindow.xaml.cs">
+      <DependentUpon>OtherUiThreadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MutliUiThreadingDemo\RunWindowHelper.cs" />
     <Compile Include="NotifyMsgPresenter\MockDataSource.cs" />
     <Compile Include="NotifyMsgPresenter\NotifyMsgItem.xaml.cs">
       <DependentUpon>NotifyMsgItem.xaml</DependentUpon>
@@ -335,6 +342,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MusicPlayer\MusicPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MutliUiThreadingDemo\MutliUiThreadingDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MutliUiThreadingDemo\OtherUiThreadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

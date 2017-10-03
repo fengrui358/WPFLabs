@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfLabs.MutliUiThreadingDemo.OtherUiThreadingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="OtherUiThreadingWindow" Height="300" Width="300" Loaded="OtherUiThreadingWindow_OnLoaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock x:Name="MainThreadingInfo" />
+            <TextBlock x:Name="OtherThreadingInfo" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="100" Height="50" Content="弹窗" Margin="15" Click="RunNewWindow_OnClick" />
+            <Button Width="100" Height="50" Content="Ui线程占用" Margin="15" Click="TakeupUiThreading_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>
