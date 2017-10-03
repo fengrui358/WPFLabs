@@ -27,15 +27,12 @@ namespace WpfLabs.MutliUiThreadingDemo
         private void TakeupUiThreading_OnClick(object sender, RoutedEventArgs e)
         {
             var i = 10;
-            IsEnabled = false;
 
             while (i > 0)
             {
                 Thread.Sleep(1000);
                 i--;
             }
-
-            IsEnabled = true;
         }
     }
 }

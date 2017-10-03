@@ -191,6 +191,8 @@
       <DependentUpon>OtherUiThreadingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MutliUiThreadingDemo\RunWindowHelper.cs" />
+    <Compile Include="MutliUiThreadingDemo\VisualTargetPresentationSource.cs" />
+    <Compile Include="MutliUiThreadingDemo\VisualWrapper.cs" />
     <Compile Include="NotifyMsgPresenter\MockDataSource.cs" />
     <Compile Include="NotifyMsgPresenter\NotifyMsgItem.xaml.cs">
       <DependentUpon>NotifyMsgItem.xaml</DependentUpon>

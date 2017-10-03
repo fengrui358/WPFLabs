@@ -3,18 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mutliUiThreadingDemo="clr-namespace:WpfLabs.MutliUiThreadingDemo"
         mc:Ignorable="d"
-        Title="MutliUiThreadingDemoWindow" Height="300" Width="300">
+        Title="MutliUiThreadingDemoWindow" Height="300" Width="300" Loaded="MutliUiThreadingDemoWindow_OnLoaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock x:Name="MainThreadingInfo" />
+            <Button Width="100" Height="50" Content="占用Ui线程" Click="TakeupUiThreading_OnClick" />
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Button Width="100" Height="50" Content="弹窗" Click="RunNewWindow_OnClick" />
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="下面的文本使用单独的线程处理，不受Ui线程占用的影响，但是单独创建的Ui线程控件不知道如何相应事件，相当于是只能看，不能Input" Foreground="Red"
+                       TextWrapping="Wrap" />
+            <TextBlock x:Name="ThreadingInfo" />
+            <mutliUiThreadingDemo:VisualWrapper x:Name="VisualWrapper" />
         </StackPanel>
     </Grid>
 </Window>
