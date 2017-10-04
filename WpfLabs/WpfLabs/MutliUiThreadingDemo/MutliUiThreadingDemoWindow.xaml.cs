@@ -11,7 +11,7 @@ namespace WpfLabs.MutliUiThreadingDemo
     /// <summary>
     /// MutliUiThreadingDemoWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MutliUiThreadingDemoWindow : Window
+    public partial class MutliUiThreadingDemoWindow
     {
         private readonly AutoResetEvent _event = new AutoResetEvent(false);
         private Thread _otherThreading;
@@ -21,19 +21,15 @@ namespace WpfLabs.MutliUiThreadingDemo
         {
             InitializeComponent();
 
-            this.Closed += (sender, args) =>
+            Closed += (sender, args) =>
             {
                 _otherThreading = null;
+                _otherDispatcher.BeginInvoke(new Action(Dispatcher.ExitAllFrames));
                 _otherDispatcher = null;
             };
         }
 
         private void RunNewWindow_OnClick(object sender, RoutedEventArgs e)
-        {
-            RunWindowHelper.RunNewWindowAsync<OtherUiThreadingWindow>();
-        }
-
-        private void RunNewWindowNotUi_OnClick(object sender, RoutedEventArgs e)
         {
             RunWindowHelper.RunNewWindowAsync<OtherUiThreadingWindow>();
         }
@@ -77,7 +73,7 @@ namespace WpfLabs.MutliUiThreadingDemo
 
         private void ElementOnOtherUiThread(object arg)
         {
-            _otherDispatcher = Dispatcher;
+            _otherDispatcher = Dispatcher.CurrentDispatcher;
             // Create the VisualTargetPresentationSource and then signal the
             // calling thread, so that it can continue without waiting for us.
             HostVisual hostVisual = (HostVisual)arg;
@@ -96,6 +92,7 @@ namespace WpfLabs.MutliUiThreadingDemo
                 while (true)
                 {
                     await Task.Delay(50);
+
                     txt.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         txt.Text = $"控件线程：{Thread.CurrentThread.ManagedThreadId}--{Guid.NewGuid():N}";
@@ -110,7 +107,7 @@ namespace WpfLabs.MutliUiThreadingDemo
 
             // Run a dispatcher for this worker thread.  This is the central
             // processing loop for WPF.
-            System.Windows.Threading.Dispatcher.Run();
+            Dispatcher.Run();
         }
     }
 }
