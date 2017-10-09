@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -36,6 +37,7 @@ namespace WpfLabs.MutliUiThreadingDemo
 
         private void TakeupUiThreading_OnClick(object sender, RoutedEventArgs e)
         {
+            Cursor = Cursors.Wait;
             var i = 10;
 
             while (i > 0)
@@ -43,6 +45,7 @@ namespace WpfLabs.MutliUiThreadingDemo
                 Thread.Sleep(1000);
                 i--;
             }
+            Cursor = null;
         }
 
         private void MutliUiThreadingDemoWindow_OnLoaded(object sender, RoutedEventArgs e)

@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WpfLabs.MutliUiThreadingDemo
 {
@@ -28,11 +30,15 @@ namespace WpfLabs.MutliUiThreadingDemo
         {
             var i = 10;
 
+            Cursor = Cursors.Wait;
+
             while (i > 0)
             {
                 Thread.Sleep(1000);
                 i--;
             }
+
+            Cursor = null;
         }
     }
 }
