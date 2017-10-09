@@ -34,6 +34,7 @@ namespace WpfLabs.MutliUiThreadingDemo
                 // 但由于此处不需要结果，故用null
                 tc.SetResult(null);
             });
+            t.IsBackground = true;
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             // 新线程启动后，将Task实例返回
