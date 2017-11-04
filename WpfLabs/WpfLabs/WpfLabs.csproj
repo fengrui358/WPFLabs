@@ -106,6 +106,36 @@
     </Compile>
     <Compile Include="ContactsTreeControl\Converters\TreeViewConverter.cs" />
     <Compile Include="ContactsTreeControl\Models\PeopleModel.cs" />
+    <Compile Include="CustomPixelShaderDemo\Converter\EffectToStringConverter.cs" />
+    <Compile Include="CustomPixelShaderDemo\Converter\PaintSourceConverter.cs" />
+    <Compile Include="CustomPixelShaderDemo\CustomPixelShaderDemo.xaml.cs">
+      <DependentUpon>CustomPixelShaderDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomPixelShaderDemo\Effects\BandedSwirlEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\BloomEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\BrightExtractEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\ColorKeyAlphaEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\ColorToneEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\ContrastAdjustEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\DirectionalBlurEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\EffectUriHelper.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\EmbossedEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\GloomEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\GrayscaleEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\GrowablePoissonDiskEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\InvertColorEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\LightStreakEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\MagnifyEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\MonochromeEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\PinchEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\PixelateEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\RippleEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\SharpenEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\SmoothMagnifyEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\SwirlEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\ToneMappingEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\ToonShaderEffect.cs" />
+    <Compile Include="CustomPixelShaderDemo\Effects\ZoomBlurEffect.cs" />
     <Compile Include="DataGridDetailList\Converters\DataGridRowDetailMarginConverter.cs" />
     <Compile Include="DataGridDetailList\DataGridDetailListWindow.xaml.cs">
       <DependentUpon>DataGridDetailListWindow.xaml</DependentUpon>
@@ -145,6 +175,7 @@
       <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\ThicknessHelper.cs" />
+    <Compile Include="Helper\WPFUriHelper.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -249,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContactsTreeControl\ContactsTreeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomPixelShaderDemo\CustomPixelShaderDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -415,6 +450,30 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\BandedSwirl.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Grayscale.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Bloom.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\BrightExtract.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\ColorKeyAlpha.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\ColorTone.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\ContrastAdjust.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\DirectionalBlur.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Embossed.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Gloom.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\GrowablePoissonDisk.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\InvertColor.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\LightStreak.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Magnify.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Monochrome.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Pinch.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Pixelate.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Ripple.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Sharpen.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\SmoothMagnify.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\Swirl.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\ToneMapping.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\ToonShader.ps" />
+    <Resource Include="CustomPixelShaderDemo\ShaderSource\ZoomBlur.ps" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -439,6 +498,39 @@
     <Resource Include="ExpertPanel\Resources\TestPolice.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="paint\01.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\02.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\03.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\04.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\05.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\06.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\07.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\08.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\09.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="paint\11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="SwapImageDemo\Images\arrow1.png" />
     <Resource Include="SwapImageDemo\Images\arrow2.png" />
     <Resource Include="SwapImageDemo\Images\user_icon1.png" />

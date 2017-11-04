@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfLabs.CustomPixelShaderDemo.CustomPixelShaderDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:WpfLabs.CustomPixelShaderDemo.Converter"
+        mc:Ignorable="d"
+        Title="CustomPixelShaderDemo" Loaded="CustomPixelShaderDemo_OnLoaded"
+        WindowStartupLocation="CenterScreen" Width="600" Height="400">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converter:PaintSourceConverter x:Key="PaintSourceConverter"/>
+            <converter:EffectToStringConverter x:Key="EffectToStringConverter"/>
+            <DataTemplate x:Key="EffectToStringDataTemplate" DataType="ShaderEffect">
+                <TextBlock Text="{Binding Converter={StaticResource EffectToStringConverter}}"></TextBlock>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="图画"/>
+            <ListBox x:Name="PaintsContainer" ItemsSource="{Binding Paints}"/>
+        </StackPanel>
+        <Image x:Name="Img" Grid.Column="1" Stretch="Uniform" Source="{Binding ElementName=PaintsContainer, Path=SelectedItem, Converter={StaticResource PaintSourceConverter}, Mode=OneWay}"/>
+        <StackPanel Grid.Column="2" >
+            <Button Content="清理" Click="CleanBtn_OnClick"/>
+            <ListBox ItemsSource="{Binding Effects}" SelectedItem="{Binding SelectedEffect}" ItemTemplate="{StaticResource EffectToStringDataTemplate}"/>
+        </StackPanel>
+    </Grid>
+</Window>

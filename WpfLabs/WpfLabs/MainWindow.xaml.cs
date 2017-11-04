@@ -128,6 +128,10 @@ namespace WpfLabs
                     var mutliUiThreadingDemoWindow = new MutliUiThreadingDemoWindow();
                     mutliUiThreadingDemoWindow.ShowDialog();
                     break;
+                case "CustomPixelShaderDemo":
+                    var customPixelShaderDemo = new CustomPixelShaderDemo.CustomPixelShaderDemo();
+                    customPixelShaderDemo.ShowDialog();
+                    break;
             }
         }
     }
