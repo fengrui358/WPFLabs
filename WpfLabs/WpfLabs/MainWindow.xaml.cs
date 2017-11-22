@@ -25,6 +25,7 @@ using WpfLabs.DrawingDemo;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
+using WpfLabs.GifShowDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
 using WpfLabs.MusicPlayer;
@@ -131,6 +132,10 @@ namespace WpfLabs
                 case "CustomPixelShaderDemo":
                     var customPixelShaderDemo = new CustomPixelShaderDemo.CustomPixelShaderDemo();
                     customPixelShaderDemo.ShowDialog();
+                    break;
+                case "GifShowDemoWindow":
+                    var gifShowDemoWindow = new GifShowDemoWindow();
+                    gifShowDemoWindow.ShowDialog();
                     break;
             }
         }
