@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -55,6 +56,8 @@ namespace WpfLabs
 
         private void OnShowControlWindow(string controlName)
         {
+            this.Effect = new BlurEffect();
+
             switch (controlName)
             {
                 case "ContactsTree":
@@ -138,6 +141,8 @@ namespace WpfLabs
                     gifShowDemoWindow.ShowDialog();
                     break;
             }
+
+            this.Effect = null;
         }
     }
 }
