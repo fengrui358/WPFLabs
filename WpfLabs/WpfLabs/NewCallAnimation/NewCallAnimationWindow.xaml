@@ -31,6 +31,7 @@
         <Style x:Key="AnswerButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="450"/>
             <Setter Property="Height" Value="60"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Background" Value="#3BD864"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -69,11 +70,13 @@
                 <Grid Width="422" Height="422" Margin="0,30,0,0" >
                     <Image gif:ImageBehavior.AnimatedSource="CircularDiffusion.gif" gif:ImageBehavior.RepeatBehavior="Forever"/>
                     <Image Source="circle_bg.png" Stretch="None"/>
+                    <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60" Foreground="White"/>
                 </Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0">
-                    <Image Stretch="None" Margin="0,0,10,0" Source="cellphone.png"/>
+                <Grid Margin="0,14,0,0" HorizontalAlignment="Center">
+                    <Image Width="30" Height="30" HorizontalAlignment="Left" Stretch="None" Margin="-40,0,0,0" Source="cellphone.png"/>
                     <TextBlock FontSize="26" MaxWidth="420" Style="{StaticResource DarkTextBlockStyle}" Text="138-1866-2735" />
-                </StackPanel>
+                </Grid>
+
                 <TextBlock MaxWidth="420" Style="{StaticResource NormalTextBlockStyle}" Margin="0,10,0,0" Text="Matthew Robertson" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                     <Border Style="{StaticResource SplitLineStyle}"/>
