@@ -93,6 +93,20 @@
                 <Grid Width="422" Height="422" Margin="0,30,0,0" >
                     <Image gif:ImageBehavior.AnimatedSource="CircularDiffusion.gif" gif:ImageBehavior.RepeatBehavior="Forever"/>
                     <Image Source="circle_bg.png" Stretch="None"/>
+                    <Image Source="circle_dotted_line.png" Stretch="None">
+                        <Image.LayoutTransform>
+                            <RotateTransform x:Name="CircleDotted" CenterX="0.5" CenterY="0.5"/>
+                        </Image.LayoutTransform>
+                        <Image.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="CircleDotted" TargetProperty="Angle">
+                                        <DoubleAnimation From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever" FillBehavior="HoldEnd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Image.Triggers>    
+                    </Image>
                     <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60" Foreground="White"/>
                 </Grid>
                 <Grid Margin="0,14,0,0" HorizontalAlignment="Center">

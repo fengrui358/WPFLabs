@@ -518,6 +518,7 @@
     <Resource Include="NewCallAnimation\btn_icon_call.png" />
     <Resource Include="NewCallAnimation\CircularDiffusion.gif" />
     <Resource Include="NewCallAnimation\circle_bg.png" />
+    <Resource Include="NewCallAnimation\circle_dotted_line.png" />
     <Content Include="paint\01.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
