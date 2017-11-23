@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="NewCallAnimationWindow" Height="1000" Width="800">
     <Window.Resources>
+        <SolidColorBrush x:Key="PressedColor" Color="#00B03D"/>
         <Style x:Key="NormalTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -38,6 +39,18 @@
                     <ControlTemplate TargetType="Button">
                         <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Path Width="450" Height="60" Data="M29.999998,2.2737368E-13 L420,2.2737368E-13 C436.56854,-1.7881391E-06 450,13.431456 450,29.999998 450,46.568541 436.56854,59.999998 420,59.999998 L29.999998,59.999998 C13.431458,59.999998 0,46.568541 0,29.999998 0,13.431456 13.431458,-1.7881391E-06 29.999998,2.2737368E-13 z" Fill="{TemplateBinding Background}" Stretch="Fill"/>
+                            <Grid x:Name="PressedEffect" SnapsToDevicePixels="True" Width="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource PressedColor}"/>
+                                <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Fill="{StaticResource PressedColor}"/>
+                                <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource PressedColor}"/>
+                            </Grid>
                             <Image x:Name="AnswerImg" Stretch="None" Source="btn_icon_call.png" />
                         </Grid>
                         <ControlTemplate.Triggers>
@@ -46,6 +59,16 @@
                                     <BeginStoryboard>
                                         <Storyboard TargetName="AnswerImg" TargetProperty="Margin">
                                             <ThicknessAnimation From="-5,0,0,0" To="5,0,0,0" Duration="0:0:0.05" AutoReverse="True" RepeatBehavior="Forever"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Click">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="PressedEffect">
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="30" To="450" Duration="0:0:0.5" FillBehavior="Stop"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.5" FillBehavior="Stop"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger.Actions>
