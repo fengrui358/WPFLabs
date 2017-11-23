@@ -4,11 +4,107 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.NewCallAnimation"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="NewCallAnimationWindow" Height="1000" Width="800">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="NormalTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="Foreground" Value="#75828E"/>
+        </Style>
+        <Style x:Key="DarkTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockStyle}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="#333333"/>
+        </Style>
+        <Style x:Key="SplitLineStyle" TargetType="Border">
+            <Setter Property="Background" Value="#DAE1E9"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="1"/>
+        </Style>
+        <Style x:Key="VerticalSplitLineStyle" TargetType="Border">
+            <Setter Property="Background" Value="#DAE1E9"/>
+            <Setter Property="Width" Value="1"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+        <Style x:Key="AnswerButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Background" Value="#3BD864"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Path Width="450" Height="60" Data="M29.999998,2.2737368E-13 L420,2.2737368E-13 C436.56854,-1.7881391E-06 450,13.431456 450,29.999998 450,46.568541 436.56854,59.999998 420,59.999998 L29.999998,59.999998 C13.431458,59.999998 0,46.568541 0,29.999998 0,13.431456 13.431458,-1.7881391E-06 29.999998,2.2737368E-13 z" Fill="{TemplateBinding Background}" Stretch="Fill"/>
+                            <Image x:Name="AnswerImg" Stretch="None" Source="btn_icon_call.png" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="AnswerImg" TargetProperty="Margin">
+                                            <ThicknessAnimation From="-5,0,0,0" To="5,0,0,0" Duration="0:0:0.05" AutoReverse="True" RepeatBehavior="Forever"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#62EA86"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid SnapsToDevicePixels="True" Width="780" Height="750">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.RowSpan="2" CornerRadius="8" Background="White">
+            <StackPanel>
+                <Grid Width="422" Height="422" Margin="0,30,0,0" >
+                    <Image gif:ImageBehavior.AnimatedSource="CircularDiffusion.gif" gif:ImageBehavior.RepeatBehavior="Forever"/>
+                    <Image Source="circle_bg.png" Stretch="None"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0">
+                    <Image Stretch="None" Margin="0,0,10,0" Source="cellphone.png"/>
+                    <TextBlock FontSize="26" MaxWidth="420" Style="{StaticResource DarkTextBlockStyle}" Text="138-1866-2735" />
+                </StackPanel>
+                <TextBlock MaxWidth="420" Style="{StaticResource NormalTextBlockStyle}" Margin="0,10,0,0" Text="Matthew Robertson" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <Border Style="{StaticResource SplitLineStyle}"/>
+                    <Image Stretch="None" VerticalAlignment="Center" Margin="17,0" Source="location.png"/>
+                    <Border Style="{StaticResource SplitLineStyle}"/>
+                </StackPanel>
+                <TextBlock MaxWidth="420" Style="{StaticResource NormalTextBlockStyle}" Margin="0,10,0,0" Text="736 Shawnee Ave, Kansas City, KS 66105" />
+                <StackPanel Margin="0,40,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Grid Width="160" Height="50">
+                        <TextBlock Style="{StaticResource DarkTextBlockStyle}" VerticalAlignment="Top"
+                                   Text="173234323" />
+                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" VerticalAlignment="Bottom"
+                                   Text="Llamada total" />
+                    </Grid>
+                    <Border Style="{StaticResource VerticalSplitLineStyle}"/>
+                    <Grid Width="160" Height="50">
+                        <TextBlock Style="{StaticResource DarkTextBlockStyle}" VerticalAlignment="Top"
+                                   Text="91" />
+                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" VerticalAlignment="Bottom"
+                                   Text="Llamada válido" />
+                    </Grid>
+                    <Border Style="{StaticResource VerticalSplitLineStyle}"/>
+                    <Grid Width="160" Height="50">
+                        <TextBlock Style="{StaticResource DarkTextBlockStyle}" VerticalAlignment="Top"
+                                   Text="82" />
+                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" VerticalAlignment="Bottom"
+                                   Text="Llamada inválido" />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Button Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AnswerButtonStyle}"/>
     </Grid>
 </Window>

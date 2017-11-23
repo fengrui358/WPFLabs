@@ -31,6 +31,7 @@ using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
 using WpfLabs.MusicPlayer;
 using WpfLabs.MutliUiThreadingDemo;
+using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.SwapImageDemo;
@@ -139,6 +140,10 @@ namespace WpfLabs
                 case "GifShowDemoWindow":
                     var gifShowDemoWindow = new GifShowDemoWindow();
                     gifShowDemoWindow.ShowDialog();
+                    break;
+                case "NewCallAnimationWindow":
+                    var newCallAnimationWindow = new NewCallAnimationWindow();
+                    newCallAnimationWindow.ShowDialog();
                     break;
             }
 

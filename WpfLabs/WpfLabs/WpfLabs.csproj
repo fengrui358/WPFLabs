@@ -513,6 +513,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GifShowDemo\Test.gif" />
+    <Resource Include="NewCallAnimation\cellphone.png" />
+    <Resource Include="NewCallAnimation\location.png" />
+    <Resource Include="NewCallAnimation\btn_icon_call.png" />
+    <Resource Include="NewCallAnimation\CircularDiffusion.gif" />
+    <Resource Include="NewCallAnimation\circle_bg.png" />
     <Content Include="paint\01.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
