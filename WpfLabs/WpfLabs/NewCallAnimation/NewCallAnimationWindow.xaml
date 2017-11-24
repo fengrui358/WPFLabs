@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.NewCallAnimation"
+        xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="NewCallAnimationWindow" Height="1000" Width="800">
@@ -92,15 +93,57 @@
             <StackPanel>
                 <Grid Width="422" Height="422" Margin="0,30,0,0" >
                     <Image gif:ImageBehavior.AnimatedSource="CircularDiffusion.gif" gif:ImageBehavior.RepeatBehavior="Forever"/>
-                    <Image Source="circle_bg.png" Stretch="None"/>
-                    <Image Source="circle_dotted_line.png" Stretch="None">
-                        <Image.LayoutTransform>
-                            <RotateTransform x:Name="CircleDotted" CenterX="0.5" CenterY="0.5"/>
-                        </Image.LayoutTransform>
+                    <!--<Image Source="circle_bg.png" Stretch="None"/>-->
+                    <Ellipse x:Name="CenterEllipse" Width="218" Height="218">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush GradientOrigin="-0.2,0" RadiusX="2">
+                                <GradientStop Offset="0.4" Color="#A7C8FB"/>
+                                <GradientStop Offset="1" Color="#B3F3F6"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                        <Ellipse.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="CenterEllipse" options:Freeze="True">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" RepeatBehavior="Forever" FillBehavior="HoldEnd">
+                                            <EasingDoubleKeyFrame Value="250" KeyTime="0:0:0.467">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <PowerEase Power="12" EasingMode="EaseIn"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                            <EasingDoubleKeyFrame Value="218" KeyTime="0:0:0.8">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <PowerEase Power="12" EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                            <DiscreteDoubleKeyFrame Value="218" KeyTime="0:0:2"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" RepeatBehavior="Forever" FillBehavior="HoldEnd">
+                                            <EasingDoubleKeyFrame Value="250" KeyTime="0:0:0.467">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <PowerEase Power="12" EasingMode="EaseIn"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                            <EasingDoubleKeyFrame Value="218" KeyTime="0:0:0.8">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <PowerEase Power="12" EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                            <DiscreteDoubleKeyFrame Value="218" KeyTime="0:0:2"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Ellipse.Triggers>
+                    </Ellipse>
+                    <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <RotateTransform x:Name="CircleDotted"/>
+                        </Image.RenderTransform>
                         <Image.Triggers>
                             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                 <BeginStoryboard>
-                                    <Storyboard TargetName="CircleDotted" TargetProperty="Angle">
+                                    <Storyboard TargetName="CircleDotted" TargetProperty="Angle" options:Freeze="True">
                                         <DoubleAnimation From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever" FillBehavior="HoldEnd"/>
                                     </Storyboard>
                                 </BeginStoryboard>
