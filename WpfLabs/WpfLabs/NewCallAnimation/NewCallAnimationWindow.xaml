@@ -173,12 +173,12 @@
                                                     <PowerEase Power="{StaticResource PowerKey}" EasingMode="EaseIn"/>
                                                 </EasingDoubleKeyFrame.EasingFunction>
                                             </EasingDoubleKeyFrame>
-                                            <EasingDoubleKeyFrame Value="218" KeyTime="0:0:0.8">
+                                            <EasingDoubleKeyFrame Value="218" KeyTime="0:0:1.2">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <PowerEase Power="{StaticResource PowerKey}" EasingMode="EaseOut"/>
                                                 </EasingDoubleKeyFrame.EasingFunction>
                                             </EasingDoubleKeyFrame>
-                                            <DiscreteDoubleKeyFrame Value="218" KeyTime="0:0:2.04"/>
+                                            <DiscreteDoubleKeyFrame Value="218" KeyTime="0:0:2"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" RepeatBehavior="Forever" FillBehavior="HoldEnd">
                                             <EasingDoubleKeyFrame Value="248" KeyTime="0:0:0.467">
@@ -186,12 +186,12 @@
                                                     <PowerEase Power="{StaticResource PowerKey}" EasingMode="EaseIn"/>
                                                 </EasingDoubleKeyFrame.EasingFunction>
                                             </EasingDoubleKeyFrame>
-                                            <EasingDoubleKeyFrame Value="218" KeyTime="0:0:0.8">
+                                            <EasingDoubleKeyFrame Value="218" KeyTime="0:0:1.2">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <PowerEase Power="{StaticResource PowerKey}" EasingMode="EaseOut"/>
                                                 </EasingDoubleKeyFrame.EasingFunction>
                                             </EasingDoubleKeyFrame>
-                                            <DiscreteDoubleKeyFrame Value="218" KeyTime="0:0:2.04"/>
+                                            <DiscreteDoubleKeyFrame Value="218" KeyTime="0:0:2"/>
                                         </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
