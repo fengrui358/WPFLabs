@@ -13,7 +13,6 @@
         <SolidColorBrush x:Key="PressedColor" Color="#00B03D" />
         <system:Double x:Key="PowerKey">12</system:Double>
         <KeyTime x:Key="ToBigTimeKey">0:0:0.6</KeyTime>
-        <KeyTime x:Key="ToSmallTimeKey">0:0:1.2</KeyTime>
         <KeyTime x:Key="TotalTimeKey">0:0:2</KeyTime>
         <Style x:Key="NormalTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
@@ -113,8 +112,7 @@
                     <Grid Grid.Column="0" Width="422" Height="422">
                         <Image gif:ImageBehavior.AnimatedSource="CircularDiffusion.gif"
                                gif:ImageBehavior.RepeatBehavior="Forever" />
-                        <Grid>
-                            <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
+                        <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <RotateTransform x:Name="CircleDotted" />
                             </Image.RenderTransform>
@@ -130,55 +128,6 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-                            <Grid.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard TargetName="CenterEllipse" options:Freeze="True">
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width"
-                                                                           RepeatBehavior="Forever"
-                                                                           FillBehavior="HoldEnd">
-                                                <EasingDoubleKeyFrame Value="248"
-                                                                      KeyTime="{StaticResource ToBigTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseIn" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame Value="218"
-                                                                      KeyTime="{StaticResource ToSmallTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseOut" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                                <DiscreteDoubleKeyFrame Value="218"
-                                                                        KeyTime="{StaticResource TotalTimeKey}" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height"
-                                                                           RepeatBehavior="Forever"
-                                                                           FillBehavior="HoldEnd">
-                                                <EasingDoubleKeyFrame Value="248"
-                                                                      KeyTime="{StaticResource ToBigTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseIn" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame Value="218"
-                                                                      KeyTime="{StaticResource ToSmallTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseOut" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                                <DiscreteDoubleKeyFrame Value="218"
-                                                                        KeyTime="{StaticResource TotalTimeKey}" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Grid.Triggers>
-                        </Grid>
                         <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
                     </Grid>
@@ -195,8 +144,7 @@
                                     <BeginStoryboard>
                                         <Storyboard TargetName="CenterEllipse" options:Freeze="True">
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width"
-                                                                           RepeatBehavior="Forever"
-                                                                           FillBehavior="HoldEnd">
+                                                                           RepeatBehavior="Forever">
                                                 <EasingDoubleKeyFrame Value="248"
                                                                       KeyTime="{StaticResource ToBigTimeKey}">
                                                     <EasingDoubleKeyFrame.EasingFunction>
@@ -205,18 +153,15 @@
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                                 <EasingDoubleKeyFrame Value="218"
-                                                                      KeyTime="{StaticResource ToSmallTimeKey}">
+                                                                      KeyTime="{StaticResource TotalTimeKey}">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <PowerEase Power="{StaticResource PowerKey}"
                                                                    EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <DiscreteDoubleKeyFrame Value="218"
-                                                                        KeyTime="{StaticResource TotalTimeKey}" />
                                             </DoubleAnimationUsingKeyFrames>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height"
-                                                                           RepeatBehavior="Forever"
-                                                                           FillBehavior="HoldEnd">
+                                                                           RepeatBehavior="Forever">
                                                 <EasingDoubleKeyFrame Value="248"
                                                                       KeyTime="{StaticResource ToBigTimeKey}">
                                                     <EasingDoubleKeyFrame.EasingFunction>
@@ -225,14 +170,12 @@
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                                 <EasingDoubleKeyFrame Value="218"
-                                                                      KeyTime="{StaticResource ToSmallTimeKey}">
+                                                                      KeyTime="{StaticResource TotalTimeKey}">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <PowerEase Power="{StaticResource PowerKey}"
                                                                    EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <DiscreteDoubleKeyFrame Value="218"
-                                                                        KeyTime="{StaticResource TotalTimeKey}" />
                                             </DoubleAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -257,7 +200,6 @@
                         </Image>
                         <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
-
                     </Grid>
                 </Grid>
 
