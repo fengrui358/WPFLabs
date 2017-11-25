@@ -11,9 +11,6 @@
         Title="NewCallAnimationWindow" Height="1000" Width="1000">
     <Window.Resources>
         <SolidColorBrush x:Key="PressedColor" Color="#00B03D" />
-        <system:Double x:Key="PowerKey">12</system:Double>
-        <KeyTime x:Key="ToBigTimeKey">0:0:0.6</KeyTime>
-        <KeyTime x:Key="TotalTimeKey">0:0:2</KeyTime>
         <Style x:Key="NormalTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -116,17 +113,6 @@
                             <Image.RenderTransform>
                                 <RotateTransform x:Name="CircleDotted" />
                             </Image.RenderTransform>
-                            <Image.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard TargetName="CircleDotted" TargetProperty="Angle"
-                                                    options:Freeze="True">
-                                            <DoubleAnimation From="0" To="360" Duration="0:0:1"
-                                                             RepeatBehavior="Forever" FillBehavior="HoldEnd" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Image.Triggers>
                         </Image>
                         <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
@@ -139,68 +125,68 @@
                                     <GradientStop Offset="1" Color="#B3F3F6" />
                                 </RadialGradientBrush>
                             </Ellipse.Fill>
-                            <Ellipse.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard TargetName="CenterEllipse" options:Freeze="True">
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width"
-                                                                           RepeatBehavior="Forever">
-                                                <EasingDoubleKeyFrame Value="248"
-                                                                      KeyTime="{StaticResource ToBigTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseIn" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame Value="218"
-                                                                      KeyTime="{StaticResource TotalTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseOut" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height"
-                                                                           RepeatBehavior="Forever">
-                                                <EasingDoubleKeyFrame Value="248"
-                                                                      KeyTime="{StaticResource ToBigTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseIn" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame Value="218"
-                                                                      KeyTime="{StaticResource TotalTimeKey}">
-                                                    <EasingDoubleKeyFrame.EasingFunction>
-                                                        <PowerEase Power="{StaticResource PowerKey}"
-                                                                   EasingMode="EaseOut" />
-                                                    </EasingDoubleKeyFrame.EasingFunction>
-                                                </EasingDoubleKeyFrame>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Ellipse.Triggers>
                         </Ellipse>
                         <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <RotateTransform x:Name="CircleDotted2" />
                             </Image.RenderTransform>
-                            <Image.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard TargetName="CircleDotted2" TargetProperty="Angle"
-                                                    options:Freeze="True">
-                                            <DoubleAnimation From="0" To="360" Duration="0:0:1"
-                                                             RepeatBehavior="Forever" FillBehavior="HoldEnd" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Image.Triggers>
                         </Image>
                         <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
                     </Grid>
+                    <Grid.Resources>
+                        <system:Double x:Key="PowerKey">12</system:Double>
+                        <KeyTime x:Key="ToBigTimeKey">0:0:0.6</KeyTime>
+                        <KeyTime x:Key="TotalTimeKey">0:0:2</KeyTime>
+                    </Grid.Resources>
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard options:Freeze="True">
+                                    <!--中心光圈伸缩动画-->
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse" Storyboard.TargetProperty="Width"
+                                                                   RepeatBehavior="Forever">
+                                        <EasingDoubleKeyFrame Value="248"
+                                                              KeyTime="{StaticResource ToBigTimeKey}">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <PowerEase Power="{StaticResource PowerKey}"
+                                                           EasingMode="EaseIn" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                        <EasingDoubleKeyFrame Value="218"
+                                                              KeyTime="{StaticResource TotalTimeKey}">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <PowerEase Power="{StaticResource PowerKey}"
+                                                           EasingMode="EaseOut" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse" Storyboard.TargetProperty="Height"
+                                                                   RepeatBehavior="Forever">
+                                        <EasingDoubleKeyFrame Value="248"
+                                                              KeyTime="{StaticResource ToBigTimeKey}">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <PowerEase Power="{StaticResource PowerKey}"
+                                                           EasingMode="EaseIn" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                        <EasingDoubleKeyFrame Value="218"
+                                                              KeyTime="{StaticResource TotalTimeKey}">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <PowerEase Power="{StaticResource PowerKey}"
+                                                           EasingMode="EaseOut" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <!--时间刻度旋转动画-->
+                                    <DoubleAnimation Storyboard.TargetName="CircleDotted" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:1"
+                                                     RepeatBehavior="Forever" />
+                                    <DoubleAnimation Storyboard.TargetName="CircleDotted2" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:1"
+                                                     RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
                 </Grid>
 
                 <Grid Margin="0,14,0,0" HorizontalAlignment="Center">
