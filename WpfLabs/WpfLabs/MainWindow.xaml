@@ -38,6 +38,7 @@
                 <Button Content="展示CustomPixelShaderDemo" Command="{Binding ShowControlWindow}" CommandParameter="CustomPixelShaderDemo" />
                 <Button Content="展示GifShowDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="GifShowDemoWindow" />
                 <Button Content="展示NewCallAnimationWindow" Command="{Binding ShowControlWindow}" CommandParameter="NewCallAnimationWindow" />
+                <Button Content="展示GenerateBitmapDemo" Command="{Binding ShowControlWindow}" CommandParameter="GenerateBitmapDemo" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
