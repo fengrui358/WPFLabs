@@ -172,6 +172,10 @@
       <DependentUpon>MaskPanelControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlexDataGrid\Models\FlexDataGridItemModel.cs" />
+    <Compile Include="FontFamilyDemo\FontFamilyDemoWindow.xaml.cs">
+      <DependentUpon>FontFamilyDemoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FontFamilyDemo\FontFamilyDemoWindowViewModel.cs" />
     <Compile Include="GenerateBitmapDemo\GenerateBitmapDemo.xaml.cs">
       <DependentUpon>GenerateBitmapDemo.xaml</DependentUpon>
     </Compile>
@@ -346,6 +350,10 @@
     <Page Include="FlexDataGrid\Style\DataGridNormalStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FontFamilyDemo\FontFamilyDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GenerateBitmapDemo\GenerateBitmapDemo.xaml">
       <SubType>Designer</SubType>

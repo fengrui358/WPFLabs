@@ -26,6 +26,7 @@ using WpfLabs.DrawingDemo;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
+using WpfLabs.FontFamilyDemo;
 using WpfLabs.GifShowDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
@@ -144,6 +145,10 @@ namespace WpfLabs
                 case "NewCallAnimationWindow":
                     var newCallAnimationWindow = new NewCallAnimationWindow();
                     newCallAnimationWindow.ShowDialog();
+                    break;
+                case "FontFamilyDemoWindow":
+                    var fontFamilyDemoWindow = new FontFamilyDemoWindow();
+                    fontFamilyDemoWindow.ShowDialog();
                     break;
             }
 

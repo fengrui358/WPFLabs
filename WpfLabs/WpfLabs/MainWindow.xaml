@@ -39,6 +39,7 @@
                 <Button Content="展示GifShowDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="GifShowDemoWindow" />
                 <Button Content="展示NewCallAnimationWindow" Command="{Binding ShowControlWindow}" CommandParameter="NewCallAnimationWindow" />
                 <Button Content="展示GenerateBitmapDemo" Command="{Binding ShowControlWindow}" CommandParameter="GenerateBitmapDemo" />
+                <Button Content="展示FontFamilyDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="FontFamilyDemoWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
