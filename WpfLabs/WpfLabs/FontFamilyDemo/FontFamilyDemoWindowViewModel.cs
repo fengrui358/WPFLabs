@@ -5,7 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
+using FontStyle = System.Windows.FontStyle;
 
 namespace WpfLabs.FontFamilyDemo
 {
@@ -59,6 +61,14 @@ namespace WpfLabs.FontFamilyDemo
             set { Set(ref _selectedFontStretch, value); }
         }
 
+        private List<FontFamily> _systemFontFamilies;
+
+        public List<FontFamily> SystemFontFamilies
+        {
+            get { return _systemFontFamilies; }
+            set { Set(ref _systemFontFamilies, value); }
+        }
+
         public FontFamilyDemoWindowViewModel()
         {
             var tempFontWeights = new Dictionary<string, FontWeight>();
@@ -93,6 +103,14 @@ namespace WpfLabs.FontFamilyDemo
             FontStretches = tempFontStretches;
             SelectedFontStretch = FontStretches
                 .FirstOrDefault(s => s.Key.Equals("Normal", StringComparison.OrdinalIgnoreCase));
+
+            var tempSystemFontFamilies = new List<FontFamily>();
+            foreach (var systemFontFamily in Fonts.SystemFontFamilies)
+            {
+                tempSystemFontFamilies.Add(systemFontFamily);
+            }
+
+            SystemFontFamilies = tempSystemFontFamilies;
         }
     }
 }

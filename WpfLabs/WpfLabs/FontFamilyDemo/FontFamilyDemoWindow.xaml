@@ -7,7 +7,34 @@
         mc:Ignorable="d"
         Title="FontFamilyDemoWindow" Height="800" Width="1000">
     <Window.Resources>
-
+        <DataTemplate x:Key="FontFamilyDataTemplate" DataType="FontFamily">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Path=Source}" VerticalAlignment="Center"
+                       ToolTip="{Binding ElementName=SystemFontFamilyTb, Path=ActualHeight, StringFormat={}{高度:0:2F}}"
+                       FontFamily="{Binding ElementName=SystemFontFamilyTb, Path=FontFamily, Mode=OneWay}"
+                       FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
+                       FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
+                       FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"
+                       FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}" />
+                <Grid Height="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight}" Margin="5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Width="1" Background="Blue" VerticalAlignment="Stretch"/>
+                    <TextBlock Grid.Row="1" Foreground="Blue" VerticalAlignment="Center" Text="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight, StringFormat={}{0:F2}}"/>
+                    <Border Grid.Row="2" Width="1" Background="Blue" VerticalAlignment="Stretch"/>
+                </Grid>
+                <TextBlock x:Name="SystemFontFamilyTb" Text="0123456789abcABC你好" VerticalAlignment="Center"
+                           FontFamily="{Binding}" ToolTip="{Binding Source}"
+                           FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
+                           FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
+                           FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"
+                           FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}">
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -59,7 +86,7 @@
                        FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
                        FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"
                        FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}" />
-                <Grid Height="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight}">
+                <Grid Height="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight}" Margin="5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
@@ -74,8 +101,12 @@
                            FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
                            FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
                            FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"
-                           FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}" />
+                           FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}">
+                </TextBlock>
             </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="系统字体">
+            <ListView ItemsSource="{Binding SystemFontFamilies}" ItemTemplate="{StaticResource FontFamilyDataTemplate}"/>
         </GroupBox>
     </Grid>
 </Window>
