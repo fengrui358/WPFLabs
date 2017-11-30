@@ -26,7 +26,7 @@
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <Label Content="FontSize:" />
                     <Slider x:Name="FontSizeSlider" Width="200" Value="15" Maximum="100" Minimum="1" Interval="1"
-                            AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" />
+                            AutoToolTipPlacement="TopLeft" />
                     <TextBox Margin="5,0" VerticalAlignment="Center"
                              Text="{Binding ElementName=FontSizeSlider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
@@ -51,11 +51,31 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="自定义字体">
-            <TextBlock Text="0123456789abcABC你好"
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Aileron" VerticalAlignment="Center"
+                       ToolTip="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight, StringFormat={}{高度:0:2F}}"
+                       FontFamily="{Binding ElementName=CustomFontFamilyTb, Path=FontFamily, Mode=OneWay}"
                        FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
                        FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
                        FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"
                        FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}" />
+                <Grid Height="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Width="1" Background="Blue" VerticalAlignment="Stretch"/>
+                    <TextBlock Grid.Row="1" Foreground="Blue" VerticalAlignment="Center" Text="{Binding ElementName=CustomFontFamilyTb, Path=ActualHeight, StringFormat={}{0:F2}}"/>
+                    <Border Grid.Row="2" Width="1" Background="Blue" VerticalAlignment="Stretch"/>
+                </Grid>
+                <TextBlock x:Name="CustomFontFamilyTb" Text="0123456789abcABC你好" VerticalAlignment="Center"
+                           FontFamily="pack://application:,,,/WpfLabs;component/FontFamilyDemo/#Aileron"
+                           FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
+                           FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
+                           FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"
+                           FontStretch="{Binding ElementName=FontStretchCb, Path=SelectedValue, Mode=OneWay}" />
+            </StackPanel>
         </GroupBox>
     </Grid>
 </Window>

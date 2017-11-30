@@ -506,6 +506,8 @@
     <Resource Include="CustomPixelShaderDemo\ShaderSource\ToneMapping.ps" />
     <Resource Include="CustomPixelShaderDemo\ShaderSource\ToonShader.ps" />
     <Resource Include="CustomPixelShaderDemo\ShaderSource\ZoomBlur.ps" />
+    <Resource Include="FontFamilyDemo\Aileron-Thin.ttf" />
+    <Resource Include="FontFamilyDemo\Aileron-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
