@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="FontFamilyDemoWindow" Height="800" Width="1000">
     <Window.Resources>
+        <local:TextFormattingModeConverter x:Key="TextFormattingModeConverter"/>
         <DataTemplate x:Key="FontFamilyDataTemplate" DataType="FontFamily">
             <StackPanel Orientation="Horizontal">
                 <Label Content="{Binding Path=Source}" VerticalAlignment="Center"
@@ -27,6 +28,7 @@
                     <Border Grid.Row="2" Width="1" Background="Blue" VerticalAlignment="Stretch"/>
                 </Grid>
                 <TextBlock x:Name="SystemFontFamilyTb" Text="0123456789abcABC你好" VerticalAlignment="Center"
+                           TextOptions.TextFormattingMode="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay, Converter={StaticResource TextFormattingModeConverter}}"
                            FontFamily="{Binding}" ToolTip="{Binding Source}"
                            FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
                            FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
@@ -98,6 +100,7 @@
                 </Grid>
                 <TextBlock x:Name="CustomFontFamilyTb" Text="0123456789abcABC你好" VerticalAlignment="Center"
                            FontFamily="pack://application:,,,/WpfLabs;component/FontFamilyDemo/#Aileron"
+                           TextOptions.TextFormattingMode="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay, Converter={StaticResource TextFormattingModeConverter}}"
                            FontSize="{Binding ElementName=FontSizeSlider, Path=Value, Mode=OneWay}"
                            FontStyle="{Binding ElementName=FontStyleCb, Path=SelectedValue, Mode=OneWay}"
                            FontWeight="{Binding ElementName=FontWeightCb, Path=SelectedValue, Mode=OneWay}"

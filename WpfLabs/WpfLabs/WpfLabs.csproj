@@ -176,6 +176,7 @@
       <DependentUpon>FontFamilyDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FontFamilyDemo\FontFamilyDemoWindowViewModel.cs" />
+    <Compile Include="FontFamilyDemo\TextFormattingModeConverter.cs" />
     <Compile Include="GenerateBitmapDemo\GenerateBitmapDemo.xaml.cs">
       <DependentUpon>GenerateBitmapDemo.xaml</DependentUpon>
     </Compile>
