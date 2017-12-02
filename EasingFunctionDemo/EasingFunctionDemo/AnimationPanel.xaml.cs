@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using EasingFunctionDemo.EasingFunctionConfigs;
 
 namespace EasingFunctionDemo
@@ -11,7 +13,7 @@ namespace EasingFunctionDemo
     /// </summary>
     public partial class AnimationPanel
     {
-        public DoubleAnimation DoubleAnimation { get; set; }
+        public Storyboard Storyboard { get; set; }
 
         public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(
             "EasingFunction", typeof(EasingFunctionConfig), typeof(AnimationPanel),
@@ -54,7 +56,15 @@ namespace EasingFunctionDemo
 
         private void SetNewAnimation()
         {
-            DoubleAnimation = new DoubleAnimation
+            if(Storyboard == null)
+            {
+                Storyboard = new Storyboard();
+            }
+
+            Storyboard.Stop();
+            Storyboard.Children.Clear();
+
+            var doubleAnimation = new DoubleAnimation
             {
                 From = 0,
                 To = 240,
@@ -62,7 +72,22 @@ namespace EasingFunctionDemo
                 RepeatBehavior = RepeatBehavior.Forever,
                 EasingFunction = EasingFunction?.ConfigEasingFunction
             };
-            Rec.BeginAnimation(Canvas.LeftProperty, DoubleAnimation);
+            Storyboard.SetTargetName(doubleAnimation, nameof(Rec));
+            Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(Canvas.LeftProperty));
+            Storyboard.Children.Add(doubleAnimation);
+
+            var colorAnimation = new ColorAnimation()
+            {
+                From = Colors.Red,
+                To = Colors.Blue,
+                Duration = TimeSpan.FromSeconds(4),
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            Storyboard.SetTargetName(colorAnimation, nameof(Rec));
+            Storyboard.SetTargetProperty(colorAnimation, new PropertyPath("(Shape.Fill).(SolidColorBrush.Color)"));
+            Storyboard.Children.Add(colorAnimation);
+
+            Storyboard.Begin(Rec);
         }
     }
 }

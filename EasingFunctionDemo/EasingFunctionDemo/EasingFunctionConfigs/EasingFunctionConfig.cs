@@ -28,18 +28,20 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                             OnConfigEasingFunctionChanged;
                     }
 
-                    var newEasingFunctionConfigUi =
-                        new EasingFunctionConfigUi((EasingFunctionBase) _configEasingFunction);
-                    newEasingFunctionConfigUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
-                    ConfigUi = newEasingFunctionConfigUi;
+                    if (_configEasingFunction != null)
+                    {
+                        var newEasingFunctionConfigUi =
+                            new EasingFunctionConfigUi((EasingFunctionBase)_configEasingFunction);
+                        newEasingFunctionConfigUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
+                        ConfigUi = newEasingFunctionConfigUi;
+                    }
+                    
                     RaisePropertyChanged();
                 }
             }
         }
 
         public event EventHandler ConfigEasingFunctionChanged;
-
-        public IEasingFunction RuningEasingFunction { get; }
 
         private UIElement _configUi;
 
@@ -49,19 +51,14 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
             private set { Set(ref _configUi, value); }
         }
 
-        public bool IsNew { get; }
-        public void Config()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Confirm()
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetEasingFunctionType(Type easingFunctionType)
         {
+            if (easingFunctionType == null)
+            {
+                ConfigEasingFunction = null;
+                return;
+            }
+
             if (ConfigEasingFunction == null)
             {
                 ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);

@@ -111,6 +111,7 @@ namespace EasingFunctionDemo
         /// </summary>
         private void AddNewEasingFunction()
         {
+            SelectedEasingFunctionType = null;
             Config = new EasingFunctionConfig();
             SelectedEasingFunctionType = EasingFunctionTypes.First();
         }

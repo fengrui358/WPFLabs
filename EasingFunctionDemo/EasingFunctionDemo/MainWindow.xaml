@@ -44,6 +44,7 @@
             </ListBox>
             <StackPanel Grid.Row="1">
                 <ContentControl Content="{Binding Config.ConfigUi}" Margin="10"/>
+                
                 <local:AnimationPanel Margin="10" EasingFunction="{Binding Config}" />
             </StackPanel>
         </Grid>
