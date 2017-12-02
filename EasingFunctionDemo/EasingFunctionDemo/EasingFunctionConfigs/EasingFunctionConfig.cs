@@ -21,11 +21,23 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 if (_configEasingFunction != value)
                 {
                     _configEasingFunction = value;
-                    ConfigUi = new EasingFunctionConfigUi((EasingFunctionBase) _configEasingFunction);
+                    var ui = ConfigUi as EasingFunctionConfigUi;
+                    if (ui != null)
+                    {
+                        ui.ConfigEasingFunctionChanged -=
+                            OnConfigEasingFunctionChanged;
+                    }
+
+                    var newEasingFunctionConfigUi =
+                        new EasingFunctionConfigUi((EasingFunctionBase) _configEasingFunction);
+                    newEasingFunctionConfigUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
+                    ConfigUi = newEasingFunctionConfigUi;
                     RaisePropertyChanged();
                 }
             }
         }
+
+        public event EventHandler ConfigEasingFunctionChanged;
 
         public IEasingFunction RuningEasingFunction { get; }
 
@@ -58,6 +70,11 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
             {
                 ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
             }
+        }
+
+        private void OnConfigEasingFunctionChanged(object sender, EventArgs args)
+        {
+            ConfigEasingFunctionChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

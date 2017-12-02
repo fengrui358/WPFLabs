@@ -22,7 +22,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="EasingMode" HorizontalAlignment="Right"/>
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource EasingModeDataProvider}}"
-                      SelectedItem="{Binding EasingMode, Mode=TwoWay}" />
+                      SelectedItem="{Binding EasingMode, Mode=TwoWay}" SelectionChanged="Selector_OnSelectionChanged"/>
         </Grid>
     </WrapPanel>
 </UserControl>

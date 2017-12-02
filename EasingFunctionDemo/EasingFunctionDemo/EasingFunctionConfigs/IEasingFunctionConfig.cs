@@ -12,6 +12,11 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         IEasingFunction ConfigEasingFunction { get; }
 
         /// <summary>
+        /// 配置发生变化
+        /// </summary>
+        event EventHandler ConfigEasingFunctionChanged;
+
+        /// <summary>
         /// 用于运行的缓动函数
         /// </summary>
         IEasingFunction RuningEasingFunction { get; }

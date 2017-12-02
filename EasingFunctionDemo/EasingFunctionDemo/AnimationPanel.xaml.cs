@@ -1,35 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using EasingFunctionDemo.EasingFunctionConfigs;
 
 namespace EasingFunctionDemo
 {
     /// <summary>
     /// AnimationPanel.xaml 的交互逻辑
     /// </summary>
-    public partial class AnimationPanel : UserControl
+    public partial class AnimationPanel
     {
         public DoubleAnimation DoubleAnimation { get; set; }
 
         public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(
-            "EasingFunction", typeof(IEasingFunction), typeof(AnimationPanel), new FrameworkPropertyMetadata(EasingFunctionPropertyChanged));
+            "EasingFunction", typeof(EasingFunctionConfig), typeof(AnimationPanel),
+            new FrameworkPropertyMetadata(EasingFunctionPropertyChanged));
 
-        public IEasingFunction EasingFunction
+        public EasingFunctionConfig EasingFunction
         {
-            get { return (IEasingFunction) GetValue(EasingFunctionProperty); }
-            set { SetValue(EasingFunctionProperty, value); }
+            get => (EasingFunctionConfig) GetValue(EasingFunctionProperty);
+            set => SetValue(EasingFunctionProperty, value);
         }
 
         public AnimationPanel()
@@ -40,15 +31,38 @@ namespace EasingFunctionDemo
         private static void EasingFunctionPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var animationPanel = (AnimationPanel) d;
-            animationPanel.DoubleAnimation = new DoubleAnimation
+            var oldEasingFunctionConfig = e.OldValue as EasingFunctionConfig;
+            var newEasingFunctionConfig = e.NewValue as EasingFunctionConfig;
+
+            if (oldEasingFunctionConfig != null)
+            {
+                oldEasingFunctionConfig.ConfigEasingFunctionChanged -= animationPanel.OnEasingFunctionConfigChanged;
+            }
+
+            if (newEasingFunctionConfig != null)
+            {
+                newEasingFunctionConfig.ConfigEasingFunctionChanged += animationPanel.OnEasingFunctionConfigChanged;
+            }
+
+            animationPanel.SetNewAnimation();
+        }
+
+        private void OnEasingFunctionConfigChanged(object sender, EventArgs args)
+        {
+            SetNewAnimation();
+        }
+
+        private void SetNewAnimation()
+        {
+            DoubleAnimation = new DoubleAnimation
             {
                 From = 0,
                 To = 240,
                 Duration = TimeSpan.FromSeconds(4),
                 RepeatBehavior = RepeatBehavior.Forever,
-                EasingFunction = (IEasingFunction) e.NewValue
+                EasingFunction = EasingFunction?.ConfigEasingFunction
             };
-            animationPanel.Rec.BeginAnimation(Canvas.LeftProperty, animationPanel.DoubleAnimation);
+            Rec.BeginAnimation(Canvas.LeftProperty, DoubleAnimation);
         }
     }
 }

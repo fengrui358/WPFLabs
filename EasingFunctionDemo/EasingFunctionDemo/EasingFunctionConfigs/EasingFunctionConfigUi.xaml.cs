@@ -25,6 +25,8 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
     {
         public EasingFunctionBase EasingFunctionBase { get; private set; }
 
+        public event EventHandler ConfigEasingFunctionChanged;
+
         public EasingFunctionConfigUi(EasingFunctionBase easingFunction)
         {
             EasingFunctionBase = easingFunction;
@@ -66,8 +68,18 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 Grid.SetColumn(tb, 1);
                 grid.Children.Add(tb);
 
+                tb.TextChanged += (sender, args) =>
+                {
+                    ConfigEasingFunctionChanged?.Invoke(this, EventArgs.Empty);
+                };
+
                 Container.Children.Add(grid);
             }
+        }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ConfigEasingFunctionChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
