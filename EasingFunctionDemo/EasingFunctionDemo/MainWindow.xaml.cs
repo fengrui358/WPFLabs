@@ -22,14 +22,6 @@ namespace EasingFunctionDemo
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<IEasingFunction> _allEasingFunctions;
-
-        public List<IEasingFunction> AllEasingFunctions
-        {
-            get { return _allEasingFunctions; }
-            set { _allEasingFunctions = value; }
-        }
-
         public MainWindow()
         {
             InitializeComponent();

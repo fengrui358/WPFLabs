@@ -46,12 +46,12 @@ namespace EasingFunctionDemo
             set { Set(ref _runningConfigs, value); }
         }
 
-        private List<Type> _easingFunctionTypes;
+        private ObservableCollection<Type> _easingFunctionTypes;
 
         /// <summary>
         /// 缓动函数类型
         /// </summary>
-        public List<Type> EasingFunctionTypes
+        public ObservableCollection<Type> EasingFunctionTypes
         {
             get { return _easingFunctionTypes; }
             set { Set(ref _easingFunctionTypes, value); }
@@ -86,9 +86,11 @@ namespace EasingFunctionDemo
 
         public MainWindowViewModel()
         {
-            EasingFunctionTypes = Assembly.GetAssembly(typeof(IEasingFunction)).GetTypes()
+            EasingFunctionTypes = new ObservableCollection<Type>(Assembly.GetAssembly(typeof(IEasingFunction))
+                .GetTypes()
                 .Where(s => typeof(IEasingFunction).IsAssignableFrom(s) &&
-                            !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList();
+                            !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList());
+            EasingFunctionTypes.Add(typeof(ReverseEase));
 
             IEasingFunction n = new BackEase();
             n = new BounceEase();

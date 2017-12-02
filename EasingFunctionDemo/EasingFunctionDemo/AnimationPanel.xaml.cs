@@ -35,22 +35,20 @@ namespace EasingFunctionDemo
         public AnimationPanel()
         {
             InitializeComponent();
-
-            DoubleAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 240,
-                Duration = TimeSpan.FromSeconds(4),
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-
-            Rec.BeginAnimation(Canvas.LeftProperty, DoubleAnimation);
         }
 
         private static void EasingFunctionPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var animationPanel = (AnimationPanel) d;
-            animationPanel.DoubleAnimation.EasingFunction = (IEasingFunction) e.NewValue;
+            animationPanel.DoubleAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 240,
+                Duration = TimeSpan.FromSeconds(4),
+                RepeatBehavior = RepeatBehavior.Forever,
+                EasingFunction = (IEasingFunction) e.NewValue
+            };
+            animationPanel.Rec.BeginAnimation(Canvas.LeftProperty, animationPanel.DoubleAnimation);
         }
     }
 }
