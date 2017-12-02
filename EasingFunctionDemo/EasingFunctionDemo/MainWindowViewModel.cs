@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Media.Animation;
 using EasingFunctionDemo.EasingFunctionConfigs;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace EasingFunctionDemo
 {
@@ -64,14 +65,52 @@ namespace EasingFunctionDemo
         public Type SelectedEasingFunctionType
         {
             get { return _selectedEasingFunctionType; }
-            set { Set(ref _selectedEasingFunctionType, value); }
+            set
+            {
+                if (_selectedEasingFunctionType != value)
+                {
+                    if (Config == null)
+                    {
+                        Config = new EasingFunctionConfig();
+                    }
+
+                    _selectedEasingFunctionType = value;
+                    Config.SetEasingFunctionType(_selectedEasingFunctionType);
+
+                    RaisePropertyChanged();
+                }
+            }
         }
+
+        public RelayCommand AddNewEasingFunctionCommand { get; private set; }
 
         public MainWindowViewModel()
         {
             EasingFunctionTypes = Assembly.GetAssembly(typeof(IEasingFunction)).GetTypes()
                 .Where(s => typeof(IEasingFunction).IsAssignableFrom(s) &&
                             !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList();
+
+            IEasingFunction n = new BackEase();
+            n = new BounceEase();
+            n = new CircleEase();
+            n = new CubicEase();
+            n = new ElasticEase();
+            n = new ExponentialEase();
+            n = new QuadraticEase();
+            n = new PowerEase();
+            n = new QuinticEase();
+            n = new SineEase();
+
+            AddNewEasingFunctionCommand = new RelayCommand(AddNewEasingFunction);
+        }
+
+        /// <summary>
+        /// 添加一个新的缓动函数
+        /// </summary>
+        private void AddNewEasingFunction()
+        {
+            Config = new EasingFunctionConfig();
+            SelectedEasingFunctionType = EasingFunctionTypes.First();
         }
     }
 }

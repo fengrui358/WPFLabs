@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media.Animation;
 
 namespace EasingFunctionDemo.EasingFunctionConfigs
@@ -34,5 +35,11 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         /// 配置确认
         /// </summary>
         void Confirm();
+
+        /// <summary>
+        /// 设置缓动函数类型
+        /// </summary>
+        /// <param name="easingFunctionType"></param>
+        void SetEasingFunctionType(Type easingFunctionType);
     }
 }

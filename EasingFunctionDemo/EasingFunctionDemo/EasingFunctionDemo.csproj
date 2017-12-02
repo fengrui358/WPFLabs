@@ -70,6 +70,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EasingFunctionConfigs\EasingFunctionConfig.cs" />
+    <Compile Include="EasingFunctionConfigs\EasingFunctionConfigUi.xaml.cs">
+      <DependentUpon>EasingFunctionConfigUi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EasingFunctionConfigs\IEasingFunctionConfig.cs" />
     <Compile Include="EasingFunctionTypeConverter.cs" />
     <Compile Include="GraphPanel.xaml.cs">
@@ -78,6 +81,10 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="TestEasingFunction.cs" />
     <Page Include="AnimationPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EasingFunctionConfigs\EasingFunctionConfigUi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

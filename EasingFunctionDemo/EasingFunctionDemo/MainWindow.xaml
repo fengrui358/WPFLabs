@@ -26,7 +26,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="动画时长："/>
                 <TextBox MinWidth="50" Text="{Binding AnimationSeconds}" IsReadOnly="True" VerticalAlignment="Center"/>
-                <Button Content="添加动画" Margin="20,0"/>
+                <Button Content="添加动画" Margin="20,0" Command="{Binding AddNewEasingFunctionCommand, Mode=OneWay}"/>
                 <Button Content="运行动画" Margin="20,0"/>
             </StackPanel>
         </Grid>
@@ -35,13 +35,16 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ListBox ItemsSource="{Binding EasingFunctionTypes}" ItemTemplate="{StaticResource EasingFunctionTypeKey}">
+            <ListBox ItemsSource="{Binding EasingFunctionTypes}" ItemTemplate="{StaticResource EasingFunctionTypeKey}" SelectedItem="{Binding SelectedEasingFunctionType, Mode=TwoWay}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="300"/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
+            <StackPanel Grid.Row="1">
+                <ContentControl Content="{Binding Config.ConfigUi}" Margin="10"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
