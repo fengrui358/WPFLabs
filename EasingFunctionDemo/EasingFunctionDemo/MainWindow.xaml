@@ -30,7 +30,7 @@
                 <Button Content="运行动画" Margin="20,0"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1" Width="300">
+        <Grid Grid.Column="1" Width="300" Margin="0,0,30,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -44,7 +44,7 @@
             </ListBox>
             <StackPanel Grid.Row="1">
                 <ContentControl Content="{Binding Config.ConfigUi}" Margin="10"/>
-                
+                <local:GraphPanel Margin="10" EasingFunction="{Binding Config}"/>
                 <local:AnimationPanel Margin="10" EasingFunction="{Binding Config}" />
             </StackPanel>
         </Grid>

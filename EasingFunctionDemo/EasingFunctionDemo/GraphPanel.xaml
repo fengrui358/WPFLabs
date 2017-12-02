@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EasingFunctionDemo"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="280">
-    <Canvas HorizontalAlignment="Center" VerticalAlignment="Stretch">
-            
-    </Canvas>
+             d:DesignHeight="300" d:DesignWidth="280"
+             Height="300" Width="280">
+    <Border BorderThickness="1" BorderBrush="Blue">
+        <Canvas x:Name="Container" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Path x:Name="EasingFunctionGraphPath" StrokeThickness="1" Stroke="Blue"/>
+        </Canvas>
+    </Border>
 </UserControl>
