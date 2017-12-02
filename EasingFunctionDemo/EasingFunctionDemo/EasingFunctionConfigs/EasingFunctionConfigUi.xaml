@@ -15,10 +15,14 @@
         </ObjectDataProvider>
     </UserControl.Resources>
     <WrapPanel x:Name="Container">
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="EasingMode" />
-            <ComboBox ItemsSource="{Binding Source={StaticResource EasingModeDataProvider}}"
-                          SelectedItem="{Binding EasingMode, Mode=TwoWay}" />
-        </StackPanel>
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="EasingMode" HorizontalAlignment="Right"/>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource EasingModeDataProvider}}"
+                      SelectedItem="{Binding EasingMode, Mode=TwoWay}" />
+        </Grid>
     </WrapPanel>
 </UserControl>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,6 +31,7 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
             InitializeComponent();
 
             DataContext = EasingFunctionBase;
+            CreateUi();
         }
 
         /// <summary>
@@ -36,7 +39,35 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         /// </summary>
         private void CreateUi()
         {
-            
+            if (Container.Children.Count > 1)
+            {
+                Container.Children.RemoveRange(1, Container.Children.Count);
+            }
+
+            var properties = EasingFunctionBase.GetType()
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            foreach (var propertyInfo in properties)
+            {
+                var grid = new Grid {Margin = new Thickness(5, 0, 5, 0)};
+                grid.ColumnDefinitions.Add(new ColumnDefinition {MinWidth = 100, Width = GridLength.Auto});
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+                var label = new Label {Content = propertyInfo.Name, HorizontalAlignment = HorizontalAlignment.Right};
+                Grid.SetColumn(label, 0);
+                grid.Children.Add(label);
+
+                var tb = new TextBox {VerticalAlignment = VerticalAlignment.Center, MinWidth = 100};
+                var binding = new Binding(propertyInfo.Name)
+                {
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                };
+                tb.SetBinding(TextBox.TextProperty, binding);
+                Grid.SetColumn(tb, 1);
+                grid.Children.Add(tb);
+
+                Container.Children.Add(grid);
+            }
         }
     }
 }
