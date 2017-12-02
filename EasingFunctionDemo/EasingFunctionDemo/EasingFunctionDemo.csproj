@@ -79,7 +79,6 @@
       <DependentUpon>GraphPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="TestEasingFunction.cs" />
     <Page Include="AnimationPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

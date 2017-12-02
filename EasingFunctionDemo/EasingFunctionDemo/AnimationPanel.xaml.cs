@@ -21,17 +21,36 @@ namespace EasingFunctionDemo
     /// </summary>
     public partial class AnimationPanel : UserControl
     {
+        public DoubleAnimation DoubleAnimation { get; set; }
+
+        public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(
+            "EasingFunction", typeof(IEasingFunction), typeof(AnimationPanel), new FrameworkPropertyMetadata(EasingFunctionPropertyChanged));
+
+        public IEasingFunction EasingFunction
+        {
+            get { return (IEasingFunction) GetValue(EasingFunctionProperty); }
+            set { SetValue(EasingFunctionProperty, value); }
+        }
+
         public AnimationPanel()
         {
             InitializeComponent();
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.From = 0;
-            doubleAnimation.To = 240;
-            doubleAnimation.Duration = TimeSpan.FromSeconds(4);
-            doubleAnimation.EasingFunction = new TestEasingFunction();
+            DoubleAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 240,
+                Duration = TimeSpan.FromSeconds(4),
+                RepeatBehavior = RepeatBehavior.Forever
+            };
 
-            Rec.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+            Rec.BeginAnimation(Canvas.LeftProperty, DoubleAnimation);
+        }
+
+        private static void EasingFunctionPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var animationPanel = (AnimationPanel) d;
+            animationPanel.DoubleAnimation.EasingFunction = (IEasingFunction) e.NewValue;
         }
     }
 }
