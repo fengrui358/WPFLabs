@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,23 +17,21 @@ using System.Windows.Shapes;
 namespace EasingFunctionDemo
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// AnimationPanel.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AnimationPanel : UserControl
     {
-        private List<IEasingFunction> _allEasingFunctions;
-
-        public List<IEasingFunction> AllEasingFunctions
-        {
-            get { return _allEasingFunctions; }
-            set { _allEasingFunctions = value; }
-        }
-
-        public MainWindow()
+        public AnimationPanel()
         {
             InitializeComponent();
-            
-            DataContext = new MainWindowViewModel();
+
+            DoubleAnimation doubleAnimation = new DoubleAnimation();
+            doubleAnimation.From = 0;
+            doubleAnimation.To = 240;
+            doubleAnimation.Duration = TimeSpan.FromSeconds(4);
+            doubleAnimation.EasingFunction = new TestEasingFunction();
+
+            Rec.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
         }
     }
 }
