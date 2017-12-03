@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -73,7 +74,8 @@ namespace EasingFunctionDemo
                 Storyboard.CurrentTimeInvalidated += StoryboardOnCurrentTimeInvalidated;
             }
 
-            Storyboard.Stop();
+            Storyboard.Stop(Rec);
+            Storyboard.Remove(Rec);
             Storyboard.Children.Clear();
 
             var doubleAnimation = new DoubleAnimation
@@ -88,7 +90,7 @@ namespace EasingFunctionDemo
             Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(Canvas.LeftProperty));
             Storyboard.Children.Add(doubleAnimation);
 
-            var colorAnimation = new ColorAnimation()
+            var colorAnimation = new ColorAnimation
             {
                 From = Colors.Red,
                 To = Colors.Blue,
@@ -99,7 +101,7 @@ namespace EasingFunctionDemo
             Storyboard.SetTargetProperty(colorAnimation, new PropertyPath("(Shape.Fill).(SolidColorBrush.Color)"));
             Storyboard.Children.Add(colorAnimation);
 
-            Storyboard.Begin(Rec);
+            Storyboard.Begin(Rec, true);
         }
 
         private void StoryboardOnCurrentTimeInvalidated(object sender, EventArgs eventArgs)
