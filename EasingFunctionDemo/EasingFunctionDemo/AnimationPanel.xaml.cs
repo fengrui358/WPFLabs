@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using EasingFunctionDemo.EasingFunctionConfigs;
 
 namespace EasingFunctionDemo
@@ -23,6 +22,15 @@ namespace EasingFunctionDemo
         {
             get => (EasingFunctionConfig) GetValue(EasingFunctionProperty);
             set => SetValue(EasingFunctionProperty, value);
+        }
+
+        public static readonly DependencyProperty CurrentProgressProperty = DependencyProperty.Register(
+            "CurrentProgress", typeof(double), typeof(AnimationPanel), new PropertyMetadata(default(double)));
+
+        public double CurrentProgress
+        {
+            get => (double) GetValue(CurrentProgressProperty);
+            set => SetValue(CurrentProgressProperty, value);
         }
 
         public AnimationPanel()
@@ -59,6 +67,7 @@ namespace EasingFunctionDemo
             if(Storyboard == null)
             {
                 Storyboard = new Storyboard();
+                Storyboard.CurrentTimeInvalidated += StoryboardOnCurrentTimeInvalidated;
             }
 
             Storyboard.Stop();
@@ -88,6 +97,15 @@ namespace EasingFunctionDemo
             Storyboard.Children.Add(colorAnimation);
 
             Storyboard.Begin(Rec);
+        }
+
+        private void StoryboardOnCurrentTimeInvalidated(object sender, EventArgs eventArgs)
+        {
+            var clock = (Clock) sender;
+            if (clock?.CurrentProgress != null)
+            {
+                CurrentProgress = clock.CurrentProgress.Value;
+            }
         }
     }
 }

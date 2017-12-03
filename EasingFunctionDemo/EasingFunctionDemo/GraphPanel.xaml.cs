@@ -16,8 +16,6 @@ namespace EasingFunctionDemo
         private const double YCoordinateCoefficient = 2 / 3d;
         private const int TimePrecision = 5;
         private const int TotalMilliSeconds = 4 * 1000;
-        private const double TimeCoefficient = 240d / ((double) TotalMilliSeconds / TimePrecision);
-        private const double EasingFunctionTimeCoefficient = 1d / TotalMilliSeconds;
         private readonly int[] _milliSecondsUnit = new int[TotalMilliSeconds / TimePrecision];
 
         private readonly Point _startPoint = new Point(20,
@@ -104,10 +102,10 @@ namespace EasingFunctionDemo
                     {
                         foreach (int t in _milliSecondsUnit)
                         {
-                            var easeComputerValue = easingFunctionBase.Ease(t * EasingFunctionTimeCoefficient);
+                            var easeComputerValue = easingFunctionBase.Ease((double) t / TotalMilliSeconds);
 
-                            var vector = StandardByCoefficient(new Vector(t * TimeCoefficient,
-                                4));
+                            var vector = StandardByCoefficient(new Vector((double) t / TotalMilliSeconds * 240,
+                                easeComputerValue * -240));
 
                             context.LineTo(_startPoint + vector, true, false);
                         }
