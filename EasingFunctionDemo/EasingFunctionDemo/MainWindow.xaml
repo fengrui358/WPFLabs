@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Window.Resources>
-        <local:EasingFunctionTypeConverter x:Key="EasingFunctionTypeConverter"/>
         <DataTemplate x:Key="EasingFunctionTypeKey" DataType="{x:Type system:Type}">
             <TextBlock Text="{Binding Name}"/>
         </DataTemplate>
@@ -42,11 +41,13 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
-            <StackPanel Grid.Row="1">
-                <ContentControl Content="{Binding Config.ConfigUi}" Margin="10"/>
-                <local:GraphPanel Margin="10" EasingFunction="{Binding Config}"/>
-                <local:AnimationPanel Margin="10" EasingFunction="{Binding Config}" />
-            </StackPanel>
+            <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" VerticalAlignment="Top">
+                <StackPanel>
+                    <ContentControl Content="{Binding Config.ConfigUi}" Margin="10"/>
+                    <local:GraphPanel Margin="10" EasingFunction="{Binding Config}" CurrentProgress="{Binding ElementName=AnimationPanel, Path=CurrentProgress, Mode=OneWay}"/>
+                    <local:AnimationPanel x:Name="AnimationPanel" Margin="10" EasingFunction="{Binding Config}" />
+                </StackPanel>
+            </Border>
         </Grid>
     </Grid>
 </Window>

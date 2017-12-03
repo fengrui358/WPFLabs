@@ -7,9 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="280"
              Height="300" Width="280">
-    <Border BorderThickness="1" BorderBrush="Blue">
+    <Border>
         <Canvas x:Name="Container" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Path x:Name="EasingFunctionGraphPath" StrokeThickness="1" Stroke="Blue"/>
+            <Path x:Name="RunningFunctionGraphPath" StrokeThickness="1" Stroke="Red"/>
         </Canvas>
     </Border>
 </UserControl>

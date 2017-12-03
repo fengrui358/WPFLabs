@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
@@ -12,15 +11,15 @@ namespace EasingFunctionDemo
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private int _animationSeconds = 4;
+        private int _animationSeconds = ConstData.TotalMilliSeconds;
 
         /// <summary>
-        /// 动画时长，默认4s
+        /// 动画时长
         /// </summary>
         public int AnimationSeconds
         {
-            get { return _animationSeconds; }
-            set { Set(ref _animationSeconds, value); }
+            get => _animationSeconds;
+            set => Set(ref _animationSeconds, value);
         }
 
         private EasingFunctionConfig _config;
@@ -30,8 +29,8 @@ namespace EasingFunctionDemo
         /// </summary>
         public EasingFunctionConfig Config
         {
-            get { return _config; }
-            set { Set(ref _config, value); }
+            get => _config;
+            set => Set(ref _config, value);
         }
 
         private ObservableCollection<EasingFunctionConfig> _runningConfigs =
@@ -42,8 +41,8 @@ namespace EasingFunctionDemo
         /// </summary>
         public ObservableCollection<EasingFunctionConfig> RunningConfigs
         {
-            get { return _runningConfigs; }
-            set { Set(ref _runningConfigs, value); }
+            get => _runningConfigs;
+            set => Set(ref _runningConfigs, value);
         }
 
         private ObservableCollection<Type> _easingFunctionTypes;
@@ -53,8 +52,8 @@ namespace EasingFunctionDemo
         /// </summary>
         public ObservableCollection<Type> EasingFunctionTypes
         {
-            get { return _easingFunctionTypes; }
-            set { Set(ref _easingFunctionTypes, value); }
+            get => _easingFunctionTypes;
+            set => Set(ref _easingFunctionTypes, value);
         }
 
         private Type _selectedEasingFunctionType;
@@ -64,45 +63,38 @@ namespace EasingFunctionDemo
         /// </summary>
         public Type SelectedEasingFunctionType
         {
-            get { return _selectedEasingFunctionType; }
+            get => _selectedEasingFunctionType;
             set
             {
-                if (_selectedEasingFunctionType != value)
+                if (_selectedEasingFunctionType == value)
                 {
-                    if (Config == null)
-                    {
-                        Config = new EasingFunctionConfig();
-                    }
-
-                    _selectedEasingFunctionType = value;
-                    Config.SetEasingFunctionType(_selectedEasingFunctionType);
-
-                    RaisePropertyChanged();
+                    return;
                 }
+
+                if (Config == null)
+                {
+                    Config = new EasingFunctionConfig();
+                }
+
+                _selectedEasingFunctionType = value;
+                Config.SetEasingFunctionType(_selectedEasingFunctionType);
+
+                RaisePropertyChanged();
             }
         }
 
-        public RelayCommand AddNewEasingFunctionCommand { get; private set; }
+        public RelayCommand AddNewEasingFunctionCommand { get; }
 
         public MainWindowViewModel()
         {
             EasingFunctionTypes = new ObservableCollection<Type>(Assembly.GetAssembly(typeof(IEasingFunction))
                 .GetTypes()
                 .Where(s => typeof(IEasingFunction).IsAssignableFrom(s) &&
-                            !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList());
-            EasingFunctionTypes.Add(typeof(ReverseEase));
-
-            IEasingFunction n = new BackEase();
-            n = new BounceEase();
-            n = new CircleEase();
-            n = new CubicEase();
-            n = new ElasticEase();
-            n = new ExponentialEase();
-            n = new QuadraticEase();
-            n = new PowerEase();
-            n = new QuinticEase();
-            n = new SineEase();
-
+                            !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList())
+            {
+                typeof(ReverseEase)
+            };
+            
             AddNewEasingFunctionCommand = new RelayCommand(AddNewEasingFunction);
         }
 

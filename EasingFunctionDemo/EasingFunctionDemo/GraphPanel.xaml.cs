@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -15,8 +18,8 @@ namespace EasingFunctionDemo
         private const double XCoordinateCoefficient = 1d;
         private const double YCoordinateCoefficient = 2 / 3d;
         private const int TimePrecision = 5;
-        private const int TotalMilliSeconds = 4 * 1000;
-        private readonly int[] _milliSecondsUnit = new int[TotalMilliSeconds / TimePrecision];
+        private readonly int[] _milliSecondsUnit = new int[ConstData.TotalMilliSeconds / TimePrecision];
+        private readonly List<double> _runningMilliSecondsUnit = new List<double>();
 
         private readonly Point _startPoint = new Point(20,
             (240 * YCoordinateCoefficient) + (300 - 240 * YCoordinateCoefficient) / 2);
@@ -31,11 +34,20 @@ namespace EasingFunctionDemo
             set => SetValue(EasingFunctionProperty, value);
         }
 
+        public static readonly DependencyProperty CurrentProgressProperty = DependencyProperty.Register(
+            "CurrentProgress", typeof(double), typeof(GraphPanel), new FrameworkPropertyMetadata(OnCurrentProgressChanged));
+
+        public double CurrentProgress
+        {
+            get => (double)GetValue(CurrentProgressProperty);
+            set => SetValue(CurrentProgressProperty, value);
+        }
+
         public GraphPanel()
         {
             InitializeComponent();
 
-            for (int i = 0; i < TotalMilliSeconds / TimePrecision; i++)
+            for (int i = 0; i < ConstData.TotalMilliSeconds / TimePrecision; i++)
             {
                 _milliSecondsUnit[i] = i * TimePrecision;
             }
@@ -102,11 +114,7 @@ namespace EasingFunctionDemo
                     {
                         foreach (int t in _milliSecondsUnit)
                         {
-                            var easeComputerValue = easingFunctionBase.Ease((double) t / TotalMilliSeconds);
-
-                            var vector = StandardByCoefficient(new Vector((double) t / TotalMilliSeconds * 240,
-                                easeComputerValue * -240));
-
+                            var vector = GetChangeVectorByTime(t);
                             context.LineTo(_startPoint + vector, true, false);
                         }
                     }
@@ -114,6 +122,66 @@ namespace EasingFunctionDemo
 
                 EasingFunctionGraphPath.Data = streamGeometry;
             }
+        }
+
+        private static void OnCurrentProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var graphPanel = (GraphPanel)d;
+
+            if (graphPanel.EasingFunction?.ConfigEasingFunction != null)
+            {
+                var easingFunctionBase = graphPanel.EasingFunction.ConfigEasingFunction as EasingFunctionBase;
+                if (easingFunctionBase != null)
+                {
+                    if (graphPanel.RunningFunctionGraphPath.Data == null)
+                    {
+                        graphPanel.RunningFunctionGraphPath.Data = new StreamGeometry();
+                    }
+                    var streamGeometry = (StreamGeometry) graphPanel.RunningFunctionGraphPath.Data;
+                    streamGeometry.Clear();
+
+                    var newTime = (double)e.NewValue;
+
+                    using (var context = streamGeometry.Open())
+                    {
+                        var runningMilliSecondsUnit = graphPanel._runningMilliSecondsUnit;
+                        if (runningMilliSecondsUnit.Any())
+                        {
+                            var lastTime = runningMilliSecondsUnit.Last();                           
+
+                            if (newTime < lastTime)
+                            {
+                                runningMilliSecondsUnit.Clear();
+                            }
+                        }
+
+                        runningMilliSecondsUnit.Add(newTime);
+
+                        context.BeginFigure(graphPanel._startPoint, false, false);
+
+                        foreach (var t in runningMilliSecondsUnit)
+                        {
+                            var vector = graphPanel.GetChangeVectorByTime(t);
+                            context.LineTo(graphPanel._startPoint + vector, true, false);
+                        }
+                    }
+                }
+            }
+        }
+
+        private Vector GetChangeVectorByTime(double milliseconds)
+        {
+            var easingFunctionBase = EasingFunction?.ConfigEasingFunction as EasingFunctionBase;
+            if (easingFunctionBase != null)
+            {
+                var easeComputerValue = easingFunctionBase.Ease(milliseconds / ConstData.TotalMilliSeconds);
+
+                var vector = StandardByCoefficient(new Vector(milliseconds / ConstData.TotalMilliSeconds * 240,
+                    easeComputerValue * -240));
+                return vector;
+            }
+
+            return new Vector();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,6 +13,8 @@ namespace EasingFunctionDemo
     /// </summary>
     public partial class AnimationPanel
     {
+        private const int TotalMilliSeconds = 4 * 1000;
+
         public Storyboard Storyboard { get; set; }
 
         public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(
@@ -30,7 +33,7 @@ namespace EasingFunctionDemo
         public double CurrentProgress
         {
             get => (double) GetValue(CurrentProgressProperty);
-            set => SetValue(CurrentProgressProperty, value);
+            private set => SetValue(CurrentProgressProperty, value);
         }
 
         public AnimationPanel()
@@ -102,9 +105,12 @@ namespace EasingFunctionDemo
         private void StoryboardOnCurrentTimeInvalidated(object sender, EventArgs eventArgs)
         {
             var clock = (Clock) sender;
-            if (clock?.CurrentProgress != null)
+            if (clock?.CurrentTime != null)
             {
-                CurrentProgress = clock.CurrentProgress.Value;
+                var cycleMilliseconds = clock.CurrentTime.Value.TotalMilliseconds - ConstData.TotalMilliSeconds *
+                        Math.Floor(clock.CurrentTime.Value.TotalMilliseconds / ConstData.TotalMilliSeconds);
+
+                CurrentProgress = cycleMilliseconds;
             }
         }
     }

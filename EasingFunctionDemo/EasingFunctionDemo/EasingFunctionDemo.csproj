@@ -69,12 +69,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConstData.cs" />
     <Compile Include="EasingFunctionConfigs\EasingFunctionConfig.cs" />
     <Compile Include="EasingFunctionConfigs\EasingFunctionConfigUi.xaml.cs">
       <DependentUpon>EasingFunctionConfigUi.xaml</DependentUpon>
     </Compile>
     <Compile Include="EasingFunctionConfigs\IEasingFunctionConfig.cs" />
-    <Compile Include="EasingFunctionTypeConverter.cs" />
     <Compile Include="GraphPanel.xaml.cs">
       <DependentUpon>GraphPanel.xaml</DependentUpon>
     </Compile>
