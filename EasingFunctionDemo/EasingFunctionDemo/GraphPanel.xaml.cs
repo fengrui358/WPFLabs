@@ -128,42 +128,39 @@ namespace EasingFunctionDemo
         {
             var graphPanel = (GraphPanel)d;
 
-            if (graphPanel.EasingFunction?.ConfigEasingFunction != null)
+            var easingFunctionBase = graphPanel.EasingFunction?.ConfigEasingFunction as EasingFunctionBase;
+            if (easingFunctionBase != null)
             {
-                var easingFunctionBase = graphPanel.EasingFunction.ConfigEasingFunction as EasingFunctionBase;
-                if (easingFunctionBase != null)
+                if (graphPanel.RunningFunctionGraphPath.Data == null)
                 {
-                    if (graphPanel.RunningFunctionGraphPath.Data == null)
+                    graphPanel.RunningFunctionGraphPath.Data = new StreamGeometry();
+                }
+                var streamGeometry = (StreamGeometry) graphPanel.RunningFunctionGraphPath.Data;
+                streamGeometry.Clear();
+
+                var newTime = (double)e.NewValue;
+
+                using (var context = streamGeometry.Open())
+                {
+                    var runningMilliSecondsUnit = graphPanel._runningMilliSecondsUnit;
+                    if (runningMilliSecondsUnit.Any())
                     {
-                        graphPanel.RunningFunctionGraphPath.Data = new StreamGeometry();
+                        var lastTime = runningMilliSecondsUnit.Last();                           
+
+                        if (newTime < lastTime)
+                        {
+                            runningMilliSecondsUnit.Clear();
+                        }
                     }
-                    var streamGeometry = (StreamGeometry) graphPanel.RunningFunctionGraphPath.Data;
-                    streamGeometry.Clear();
 
-                    var newTime = (double)e.NewValue;
+                    runningMilliSecondsUnit.Add(newTime);
 
-                    using (var context = streamGeometry.Open())
+                    context.BeginFigure(graphPanel._startPoint, false, false);
+
+                    foreach (var t in runningMilliSecondsUnit)
                     {
-                        var runningMilliSecondsUnit = graphPanel._runningMilliSecondsUnit;
-                        if (runningMilliSecondsUnit.Any())
-                        {
-                            var lastTime = runningMilliSecondsUnit.Last();                           
-
-                            if (newTime < lastTime)
-                            {
-                                runningMilliSecondsUnit.Clear();
-                            }
-                        }
-
-                        runningMilliSecondsUnit.Add(newTime);
-
-                        context.BeginFigure(graphPanel._startPoint, false, false);
-
-                        foreach (var t in runningMilliSecondsUnit)
-                        {
-                            var vector = graphPanel.GetChangeVectorByTime(t);
-                            context.LineTo(graphPanel._startPoint + vector, true, false);
-                        }
+                        var vector = graphPanel.GetChangeVectorByTime(t);
+                        context.LineTo(graphPanel._startPoint + vector, true, false);
                     }
                 }
             }
