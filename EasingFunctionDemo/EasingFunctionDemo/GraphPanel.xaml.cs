@@ -213,12 +213,12 @@ namespace EasingFunctionDemo
                     var t = milliseconds / ConstData.TotalMilliSeconds;
 
                     //公式参考：https://www.cnblogs.com/hnfxs/p/3148483.html
-                    var value = _startPoint.Y * Math.Pow(1 - t, 3) +
-                                3 * _bezierControlPoint1.Y * t * Math.Pow(1 - t, 2) +
-                                3 * _bezierControlPoint2.Y * Math.Pow(t, 2) * (1 - t) + _endPoint.Y * Math.Pow(t, 3);
+                    var value = new Vector(_startPoint.X, _startPoint.Y) * Math.Pow(1 - t, 3) +
+                            3 * new Vector(_bezierControlPoint1.X, _bezierControlPoint1.Y) * t * Math.Pow(1 - t, 2) +
+                            3 * new Vector(_bezierControlPoint2.X, _bezierControlPoint2.Y) * Math.Pow(t, 2) * (1 - t) +
+                            new Vector(_endPoint.X, _endPoint.Y) * Math.Pow(t, 3);
 
-                    Debug.WriteLine(value);
-                    return new Vector(milliseconds / ConstData.TotalMilliSeconds * 240 * XCoordinateCoefficient, value - _startPoint.Y);
+                    return new Vector(value.X - _startPoint.X, value.Y - _startPoint.Y);
                 }
             }
 
