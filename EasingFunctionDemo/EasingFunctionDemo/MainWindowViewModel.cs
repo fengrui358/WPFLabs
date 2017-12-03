@@ -95,7 +95,7 @@ namespace EasingFunctionDemo
                 typeof(ReverseEase),
                 typeof(SplineKeyFrameConfigModel)
             };
-            
+
             AddNewEasingFunctionCommand = new RelayCommand(AddNewEasingFunction);
         }
 

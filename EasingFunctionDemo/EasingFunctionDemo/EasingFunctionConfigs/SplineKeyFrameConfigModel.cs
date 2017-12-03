@@ -14,7 +14,13 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         public double ControlPoint1X
         {
             get => _controlPoint1X;
-            set => Set(ref _controlPoint1X, value);
+            set
+            {
+                if (value >= 0 && value <= 1)
+                {
+                    Set(ref _controlPoint1X, value);
+                }
+            }
         }
 
         private double _controlPoint1Y;
@@ -22,7 +28,13 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         public double ControlPoint1Y
         {
             get => _controlPoint1Y;
-            set => Set(ref _controlPoint1Y, value);
+            set
+            {
+                if (value >= 0 && value <= 1)
+                {
+                    Set(ref _controlPoint1Y, value);
+                }
+            }
         }
 
         private double _controlPoint2X = 1;
@@ -30,7 +42,13 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         public double ControlPoint2X
         {
             get => _controlPoint2X;
-            set => Set(ref _controlPoint2X, value);
+            set
+            {
+                if (value >= 0 && value <= 1)
+                {
+                    Set(ref _controlPoint2X, value);
+                }
+            }
         }
 
         private double _controlPoint2Y;
@@ -38,7 +56,13 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         public double ControlPoint2Y
         {
             get => _controlPoint2Y;
-            set => Set(ref _controlPoint2Y, value);
+            set
+            {
+                if (value >= 0 && value <= 1)
+                {
+                    Set(ref _controlPoint2Y, value);
+                }
+            }
         }
     }
 }

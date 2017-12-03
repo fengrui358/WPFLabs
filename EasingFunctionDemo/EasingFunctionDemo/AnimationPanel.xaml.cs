@@ -78,17 +78,45 @@ namespace EasingFunctionDemo
             Storyboard.Remove(Rec);
             Storyboard.Children.Clear();
 
-            var doubleAnimation = new DoubleAnimation
+            if (!EasingFunction.IsSplineKeyFrame)
             {
-                From = 0,
-                To = 240,
-                Duration = TimeSpan.FromSeconds(4),
-                RepeatBehavior = RepeatBehavior.Forever,
-                EasingFunction = EasingFunction?.ConfigEasingFunction
-            };
-            Storyboard.SetTargetName(doubleAnimation, nameof(Rec));
-            Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(Canvas.LeftProperty));
-            Storyboard.Children.Add(doubleAnimation);
+                var doubleAnimation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 240,
+                    Duration = TimeSpan.FromSeconds(4),
+                    RepeatBehavior = RepeatBehavior.Forever,
+                    EasingFunction = EasingFunction?.ConfigEasingFunction
+                };
+                Storyboard.SetTargetName(doubleAnimation, nameof(Rec));
+                Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(Canvas.LeftProperty));
+                Storyboard.Children.Add(doubleAnimation);
+            }
+            else
+            {
+                var doubleAnimationUsingKeyFrames = new DoubleAnimationUsingKeyFrames
+                {
+                    Duration = TimeSpan.FromSeconds(4),
+                    RepeatBehavior = RepeatBehavior.Forever,
+                };
+
+                var discreteDoubleKeyFramed= new DiscreteDoubleKeyFrame(0, TimeSpan.FromSeconds(0));
+                var splineDoubleKeyFrame = new SplineDoubleKeyFrame
+                {
+                    Value = 240,
+                    KeyTime = TimeSpan.FromSeconds(4),
+                    KeySpline = new KeySpline(EasingFunction.SplineKeyFrameConfig.ControlPoint1X,
+                        EasingFunction.SplineKeyFrameConfig.ControlPoint1Y,
+                        EasingFunction.SplineKeyFrameConfig.ControlPoint2X,
+                        EasingFunction.SplineKeyFrameConfig.ControlPoint2Y)
+                };
+
+                doubleAnimationUsingKeyFrames.KeyFrames.Add(discreteDoubleKeyFramed);
+                doubleAnimationUsingKeyFrames.KeyFrames.Add(splineDoubleKeyFrame);
+                Storyboard.SetTargetName(doubleAnimationUsingKeyFrames, nameof(Rec));
+                Storyboard.SetTargetProperty(doubleAnimationUsingKeyFrames, new PropertyPath(Canvas.LeftProperty));
+                Storyboard.Children.Add(doubleAnimationUsingKeyFrames);
+            }
 
             var colorAnimation = new ColorAnimation
             {
