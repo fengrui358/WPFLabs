@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.CodeDom;
 using System.Windows;
 using System.Windows.Media.Animation;
 using GalaSoft.MvvmLight;
@@ -15,7 +12,7 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
 
         public IEasingFunction ConfigEasingFunction
         {
-            get { return _configEasingFunction; }
+            get => _configEasingFunction;
             private set
             {
                 if (_configEasingFunction != value)
@@ -30,12 +27,45 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
 
                     if (_configEasingFunction != null)
                     {
+                        SplineKeyFrameConfig = null;
+
                         var newEasingFunctionConfigUi =
                             new EasingFunctionConfigUi((EasingFunctionBase)_configEasingFunction);
                         newEasingFunctionConfigUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
                         ConfigUi = newEasingFunctionConfigUi;
                     }
                     
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        private SplineKeyFrameConfigModel _splineKeyFrameConfig;
+
+        public SplineKeyFrameConfigModel SplineKeyFrameConfig
+        {
+            get => _splineKeyFrameConfig;
+            private set
+            {
+                if (_splineKeyFrameConfig != value)
+                {
+                    _splineKeyFrameConfig = value;
+                    var ui = ConfigUi as SplineKeyFrameConfigUi;
+                    if (ui != null)
+                    {
+                        ui.ConfigEasingFunctionChanged -=
+                            OnConfigEasingFunctionChanged;
+                    }
+
+                    if (_splineKeyFrameConfig != null)
+                    {
+                        ConfigEasingFunction = null;
+
+                        var newUi = new SplineKeyFrameConfigUi(_splineKeyFrameConfig);
+                        newUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
+                        ConfigUi = newUi;
+                    }
+
                     RaisePropertyChanged();
                 }
             }
@@ -59,15 +89,24 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 return;
             }
 
-            if (ConfigEasingFunction == null)
+            if (easingFunctionType == typeof(SplineKeyFrameConfigModel))
             {
-                ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
+                SplineKeyFrameConfig = new SplineKeyFrameConfigModel();
             }
-            else if(ConfigEasingFunction.GetType() != easingFunctionType)
+            else
             {
-                ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
-            }
+                if (ConfigEasingFunction == null)
+                {
+                    ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
+                }
+                else if (ConfigEasingFunction.GetType() != easingFunctionType)
+                {
+                    ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
+                }
+            }            
         }
+
+        public bool IsSplineKeyFrame => SplineKeyFrameConfig != null;
 
         private void OnConfigEasingFunctionChanged(object sender, EventArgs args)
         {

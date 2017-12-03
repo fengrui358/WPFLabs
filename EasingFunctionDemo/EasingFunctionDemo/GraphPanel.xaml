@@ -7,10 +7,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="280"
              Height="300" Width="280">
-    <Border>
-        <Canvas x:Name="Container" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name="Container" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Path x:Name="EasingFunctionGraphPath" StrokeThickness="1" Stroke="Blue"/>
             <Path x:Name="RunningFunctionGraphPath" StrokeThickness="1" Stroke="Red"/>
         </Canvas>
-    </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Label Content="Time:"/>
+                <TextBlock x:Name="TimeLabel" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Label Content="Value:"/>
+                <TextBlock x:Name="ValueLabel" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </UserControl>

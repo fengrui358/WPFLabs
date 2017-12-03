@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -109,14 +110,22 @@ namespace EasingFunctionDemo
                 {
                     context.BeginFigure(_startPoint, false, false);
 
-                    var easingFunctionBase = EasingFunction.ConfigEasingFunction as EasingFunctionBase;
-                    if (easingFunctionBase != null)
+                    if (!EasingFunction.IsSplineKeyFrame)
                     {
-                        foreach (int t in _milliSecondsUnit)
+                        var easingFunctionBase = EasingFunction.ConfigEasingFunction as EasingFunctionBase;
+                        if (easingFunctionBase != null)
                         {
-                            var vector = GetChangeVectorByTime(t);
-                            context.LineTo(_startPoint + vector, true, false);
+                            foreach (var t in _milliSecondsUnit)
+                            {
+                                var vector = GetChangeVectorByTime(t);
+                                context.LineTo(_startPoint + vector, true, false);
+                            }
                         }
+                    }
+                    else
+                    {
+                        var splineKeyFrameConfig = EasingFunction.SplineKeyFrameConfig;
+
                     }
                 }
 
@@ -157,10 +166,18 @@ namespace EasingFunctionDemo
 
                     context.BeginFigure(graphPanel._startPoint, false, false);
 
-                    foreach (var t in runningMilliSecondsUnit)
+                    for (int i = 0; i < runningMilliSecondsUnit.Count; i++)
                     {
-                        var vector = graphPanel.GetChangeVectorByTime(t);
-                        context.LineTo(graphPanel._startPoint + vector, true, false);
+                        var vector = graphPanel.GetChangeVectorByTime(runningMilliSecondsUnit[i]);
+
+                        var currentPoint = graphPanel._startPoint + vector;
+                        if (i + 1 == runningMilliSecondsUnit.Count)
+                        {
+                            graphPanel.TimeLabel.Text = newTime.ToString("F2");
+                            graphPanel.ValueLabel.Text = (-vector.Y / YCoordinateCoefficient).ToString("F2");
+                        }
+
+                        context.LineTo(currentPoint, true, false);
                     }
                 }
             }

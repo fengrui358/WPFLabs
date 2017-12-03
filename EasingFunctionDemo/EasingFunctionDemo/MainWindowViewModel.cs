@@ -92,7 +92,8 @@ namespace EasingFunctionDemo
                 .Where(s => typeof(IEasingFunction).IsAssignableFrom(s) &&
                             !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList())
             {
-                typeof(ReverseEase)
+                typeof(ReverseEase),
+                typeof(SplineKeyFrameConfigModel)
             };
             
             AddNewEasingFunctionCommand = new RelayCommand(AddNewEasingFunction);

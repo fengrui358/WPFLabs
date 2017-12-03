@@ -12,6 +12,11 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         IEasingFunction ConfigEasingFunction { get; }
 
         /// <summary>
+        /// 样条关键帧动画配置
+        /// </summary>
+        SplineKeyFrameConfigModel SplineKeyFrameConfig { get; }
+
+        /// <summary>
         /// 配置发生变化
         /// </summary>
         event EventHandler ConfigEasingFunctionChanged;
@@ -26,5 +31,10 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         /// </summary>
         /// <param name="easingFunctionType"></param>
         void SetEasingFunctionType(Type easingFunctionType);
+
+        /// <summary>
+        /// 是否是三次贝塞尔曲线控制的样条关键帧动画
+        /// </summary>
+        bool IsSplineKeyFrame { get; }
     }
 }
