@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -25,6 +24,11 @@ namespace EasingFunctionDemo
         private readonly Point _startPoint = new Point(20,
             (240 * YCoordinateCoefficient) + (300 - 240 * YCoordinateCoefficient) / 2);
 
+        private readonly Point _endPoint;
+        private readonly Vector _endPointVector = new Vector(240, -240 * YCoordinateCoefficient);
+        private Point _bezierControlPoint1;
+        private Point _bezierControlPoint2;
+
         public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(
             "EasingFunction", typeof(EasingFunctionConfig), typeof(GraphPanel),
             new FrameworkPropertyMetadata(EasingFunctionPropertyChanged));
@@ -46,6 +50,7 @@ namespace EasingFunctionDemo
 
         public GraphPanel()
         {
+            _endPoint = _startPoint + _endPointVector;
             InitializeComponent();
 
             for (int i = 0; i < ConstData.TotalMilliSeconds / TimePrecision; i++)
@@ -125,14 +130,14 @@ namespace EasingFunctionDemo
                     else
                     {
                         var splineKeyFrameConfig = EasingFunction.SplineKeyFrameConfig;
-                        var endPointVector = new Vector(240, -240 * YCoordinateCoefficient);
-                        var endPoint = _startPoint + endPointVector;
+                        _bezierControlPoint1 =
+                            _startPoint + new Vector(splineKeyFrameConfig.ControlPoint1X * _endPointVector.X,
+                                splineKeyFrameConfig.ControlPoint1Y * _endPointVector.Y);
+                        _bezierControlPoint2 =
+                            _startPoint + new Vector(splineKeyFrameConfig.ControlPoint2X * _endPointVector.X,
+                                splineKeyFrameConfig.ControlPoint2Y * _endPointVector.Y);
 
-                        context.BezierTo(_startPoint + new Vector(splineKeyFrameConfig.ControlPoint1X * endPointVector.X,
-                                splineKeyFrameConfig.ControlPoint1Y * endPointVector.Y),
-                            _startPoint + new Vector(splineKeyFrameConfig.ControlPoint2X * endPointVector.X,
-                                splineKeyFrameConfig.ControlPoint2Y * endPointVector.Y),
-                            endPoint, true, false);
+                        context.BezierTo(_bezierControlPoint1, _bezierControlPoint2, _endPoint, true, false);
                     }
                 }
 
@@ -142,64 +147,79 @@ namespace EasingFunctionDemo
 
         private static void OnCurrentProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var graphPanel = (GraphPanel)d;
+            var graphPanel = (GraphPanel) d;
 
-            var easingFunctionBase = graphPanel.EasingFunction?.ConfigEasingFunction as EasingFunctionBase;
-            if (easingFunctionBase != null)
+            if (graphPanel.RunningFunctionGraphPath.Data == null)
             {
-                if (graphPanel.RunningFunctionGraphPath.Data == null)
+                graphPanel.RunningFunctionGraphPath.Data = new StreamGeometry();
+            }
+            var streamGeometry = (StreamGeometry) graphPanel.RunningFunctionGraphPath.Data;
+            streamGeometry.Clear();
+
+            var newTime = (double) e.NewValue;
+
+            using (var context = streamGeometry.Open())
+            {
+                var runningMilliSecondsUnit = graphPanel._runningMilliSecondsUnit;
+                if (runningMilliSecondsUnit.Any())
                 {
-                    graphPanel.RunningFunctionGraphPath.Data = new StreamGeometry();
+                    var lastTime = runningMilliSecondsUnit.Last();
+
+                    if (newTime < lastTime)
+                    {
+                        runningMilliSecondsUnit.Clear();
+                    }
                 }
-                var streamGeometry = (StreamGeometry) graphPanel.RunningFunctionGraphPath.Data;
-                streamGeometry.Clear();
 
-                var newTime = (double)e.NewValue;
+                runningMilliSecondsUnit.Add(newTime);
 
-                using (var context = streamGeometry.Open())
+                context.BeginFigure(graphPanel._startPoint, false, false);
+
+                for (var i = 0; i < runningMilliSecondsUnit.Count; i++)
                 {
-                    var runningMilliSecondsUnit = graphPanel._runningMilliSecondsUnit;
-                    if (runningMilliSecondsUnit.Any())
-                    {
-                        var lastTime = runningMilliSecondsUnit.Last();                           
+                    var vector = graphPanel.GetChangeVectorByTime(runningMilliSecondsUnit[i]);
 
-                        if (newTime < lastTime)
-                        {
-                            runningMilliSecondsUnit.Clear();
-                        }
+                    var currentPoint = graphPanel._startPoint + vector;
+                    if (i + 1 == runningMilliSecondsUnit.Count)
+                    {
+                        graphPanel.TimeLabel.Text = newTime.ToString("F2");
+                        graphPanel.ValueLabel.Text = (-vector.Y / YCoordinateCoefficient).ToString("F2");
                     }
 
-                    runningMilliSecondsUnit.Add(newTime);
-
-                    context.BeginFigure(graphPanel._startPoint, false, false);
-
-                    for (int i = 0; i < runningMilliSecondsUnit.Count; i++)
-                    {
-                        var vector = graphPanel.GetChangeVectorByTime(runningMilliSecondsUnit[i]);
-
-                        var currentPoint = graphPanel._startPoint + vector;
-                        if (i + 1 == runningMilliSecondsUnit.Count)
-                        {
-                            graphPanel.TimeLabel.Text = newTime.ToString("F2");
-                            graphPanel.ValueLabel.Text = (-vector.Y / YCoordinateCoefficient).ToString("F2");
-                        }
-
-                        context.LineTo(currentPoint, true, false);
-                    }
+                    context.LineTo(currentPoint, true, false);
                 }
             }
         }
 
         private Vector GetChangeVectorByTime(double milliseconds)
         {
-            var easingFunctionBase = EasingFunction?.ConfigEasingFunction as EasingFunctionBase;
-            if (easingFunctionBase != null)
+            if (!EasingFunction.IsSplineKeyFrame)
             {
-                var easeComputerValue = easingFunctionBase.Ease(milliseconds / ConstData.TotalMilliSeconds);
+                var easingFunctionBase = EasingFunction?.ConfigEasingFunction as EasingFunctionBase;
+                if (easingFunctionBase != null)
+                {
+                    var easeComputerValue = easingFunctionBase.Ease(milliseconds / ConstData.TotalMilliSeconds);
 
-                var vector = StandardByCoefficient(new Vector(milliseconds / ConstData.TotalMilliSeconds * 240,
-                    easeComputerValue * -240));
-                return vector;
+                    var vector = StandardByCoefficient(new Vector(milliseconds / ConstData.TotalMilliSeconds * 240,
+                        easeComputerValue * -240));
+                    return vector;
+                }
+            }
+            else
+            {
+                var splineKeyFrameConfig = EasingFunction?.SplineKeyFrameConfig;
+                if (splineKeyFrameConfig != null)
+                {
+                    var t = milliseconds / ConstData.TotalMilliSeconds;
+
+                    //公式参考：https://www.cnblogs.com/hnfxs/p/3148483.html
+                    var value = _startPoint.Y * Math.Pow(1 - t, 3) +
+                                3 * _bezierControlPoint1.Y * t * Math.Pow(1 - t, 2) +
+                                3 * _bezierControlPoint2.Y * Math.Pow(t, 2) * (1 - t) + _endPoint.Y * Math.Pow(t, 3);
+
+                    Debug.WriteLine(value);
+                    return new Vector(milliseconds / ConstData.TotalMilliSeconds * 240 * XCoordinateCoefficient, value - _startPoint.Y);
+                }
             }
 
             return new Vector();
