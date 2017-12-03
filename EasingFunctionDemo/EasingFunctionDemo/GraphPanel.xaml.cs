@@ -102,7 +102,7 @@ namespace EasingFunctionDemo
 
         private void DrawingGraph()
         {
-            if (EasingFunction?.ConfigEasingFunction != null)
+            if (EasingFunction?.ConfigEasingFunction != null || EasingFunction?.SplineKeyFrameConfig != null)
             {
                 var streamGeometry = new StreamGeometry();
                 
@@ -125,7 +125,14 @@ namespace EasingFunctionDemo
                     else
                     {
                         var splineKeyFrameConfig = EasingFunction.SplineKeyFrameConfig;
+                        var endPointVector = new Vector(240, -240 * YCoordinateCoefficient);
+                        var endPoint = _startPoint + endPointVector;
 
+                        context.BezierTo(_startPoint + new Vector(splineKeyFrameConfig.ControlPoint1X * endPointVector.X,
+                                splineKeyFrameConfig.ControlPoint1Y * endPointVector.Y),
+                            _startPoint + new Vector(splineKeyFrameConfig.ControlPoint2X * endPointVector.X,
+                                splineKeyFrameConfig.ControlPoint2Y * endPointVector.Y),
+                            endPoint, true, false);
                     }
                 }
 

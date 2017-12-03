@@ -64,6 +64,8 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                         var newUi = new SplineKeyFrameConfigUi(_splineKeyFrameConfig);
                         newUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
                         ConfigUi = newUi;
+
+                        ConfigEasingFunctionChanged?.Invoke(this, EventArgs.Empty);
                     }
 
                     RaisePropertyChanged();
