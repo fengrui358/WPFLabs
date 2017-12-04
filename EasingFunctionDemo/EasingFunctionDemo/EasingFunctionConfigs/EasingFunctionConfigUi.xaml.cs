@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Animation;
+using Xceed.Wpf.Toolkit;
 
 namespace EasingFunctionDemo.EasingFunctionConfigs
 {
@@ -47,17 +48,17 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 Grid.SetColumn(label, 0);
                 grid.Children.Add(label);
 
-                var tb = new TextBox {VerticalAlignment = VerticalAlignment.Center, MinWidth = 100};
+                var integerUpDown = new IntegerUpDown {VerticalAlignment = VerticalAlignment.Center, MinWidth = 100};
                 var binding = new Binding(propertyInfo.Name)
                 {
                     Mode = BindingMode.TwoWay,
                     UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
                 };
-                tb.SetBinding(TextBox.TextProperty, binding);
-                Grid.SetColumn(tb, 1);
-                grid.Children.Add(tb);
+                integerUpDown.SetBinding(IntegerUpDown.ValueProperty, binding);
+                Grid.SetColumn(integerUpDown, 1);
+                grid.Children.Add(integerUpDown);
 
-                tb.TextChanged += (sender, args) =>
+                integerUpDown.ValueChanged += (sender, args) =>
                 {
                     ConfigEasingFunctionChanged?.Invoke(this, EventArgs.Empty);
                 };

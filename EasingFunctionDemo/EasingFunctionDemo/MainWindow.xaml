@@ -29,7 +29,7 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
-            <ContentControl Content="{Binding Config.ConfigUi}" Margin="10" HorizontalAlignment="Left"/>
+            <ContentControl Content="{Binding Config.ConfigUi}" Margin="10" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <Viewbox Grid.Column="1" Margin="20">
             <Border Width="320" BorderThickness="1" BorderBrush="Gray" VerticalAlignment="Center">
