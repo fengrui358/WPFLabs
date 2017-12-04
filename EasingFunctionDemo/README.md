@@ -1,7 +1,5 @@
 # WPF动画速率效果
 
-标签（空格分隔）： WPF
-
 ---
 
 在WPF中使用动画的情况非常多，而要让动画变得生动往往要使用一些变速动画，WPF也内置了很方便的缓动函数来实现这一功能。
@@ -13,4 +11,4 @@
 ![](http://images2017.cnblogs.com/blog/282687/201712/282687-20171204225859191-414960056.gif)
 
 > 工具代码下载地址：<https://github.com/fengrui358/WPFLabs/tree/master/EasingFunctionDemo>
-三次贝塞尔曲线控制参考：<https://www.cnblogs.com/hnfxs/p/3148483.html>
+> 三次贝塞尔曲线控制参考：<https://www.cnblogs.com/hnfxs/p/3148483.html>
