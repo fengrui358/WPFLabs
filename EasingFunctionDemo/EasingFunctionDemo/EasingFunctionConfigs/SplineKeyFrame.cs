@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 
 namespace EasingFunctionDemo.EasingFunctionConfigs
 {
-    public class SplineKeyFrameConfigModel : ObservableObject
+    public class SplineKeyFrame : ObservableObject
     {
         private double _controlPoint1X;
 

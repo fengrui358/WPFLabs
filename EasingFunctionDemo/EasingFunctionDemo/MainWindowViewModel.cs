@@ -83,8 +83,6 @@ namespace EasingFunctionDemo
             }
         }
 
-        public RelayCommand AddNewEasingFunctionCommand { get; }
-
         public MainWindowViewModel()
         {
             EasingFunctionTypes = new ObservableCollection<Type>(Assembly.GetAssembly(typeof(IEasingFunction))
@@ -93,20 +91,9 @@ namespace EasingFunctionDemo
                             !(s == typeof(IEasingFunction) || s == typeof(EasingFunctionBase))).ToList())
             {
                 typeof(ReverseEase),
-                typeof(SplineKeyFrameConfigModel)
+                typeof(SplineKeyFrame)
             };
-
-            AddNewEasingFunctionCommand = new RelayCommand(AddNewEasingFunction);
-        }
-
-        /// <summary>
-        /// 添加一个新的缓动函数
-        /// </summary>
-        private void AddNewEasingFunction()
-        {
-            SelectedEasingFunctionType = null;
-            Config = new EasingFunctionConfig();
-            SelectedEasingFunctionType = EasingFunctionTypes.First();
+            
         }
     }
 }

@@ -40,9 +40,9 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
             }
         }
 
-        private SplineKeyFrameConfigModel _splineKeyFrameConfig;
+        private SplineKeyFrame _splineKeyFrameConfig;
 
-        public SplineKeyFrameConfigModel SplineKeyFrameConfig
+        public SplineKeyFrame SplineKeyFrameConfig
         {
             get => _splineKeyFrameConfig;
             private set
@@ -91,9 +91,9 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 return;
             }
 
-            if (easingFunctionType == typeof(SplineKeyFrameConfigModel))
+            if (easingFunctionType == typeof(SplineKeyFrame))
             {
-                SplineKeyFrameConfig = new SplineKeyFrameConfigModel();
+                SplineKeyFrameConfig = new SplineKeyFrame();
             }
             else
             {

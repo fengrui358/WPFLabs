@@ -14,8 +14,6 @@ namespace EasingFunctionDemo
     /// </summary>
     public partial class AnimationPanel
     {
-        private const int TotalMilliSeconds = 4 * 1000;
-
         public Storyboard Storyboard { get; set; }
 
         public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(

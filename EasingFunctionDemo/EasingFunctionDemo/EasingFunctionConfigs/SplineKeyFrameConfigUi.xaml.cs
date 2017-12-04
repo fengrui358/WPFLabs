@@ -7,11 +7,11 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
     /// </summary>
     public partial class SplineKeyFrameConfigUi
     {
-        public SplineKeyFrameConfigModel SplineKeyFrameConfigModel { get; }
+        public SplineKeyFrame SplineKeyFrameConfigModel { get; }
 
         public event EventHandler ConfigEasingFunctionChanged;
 
-        public SplineKeyFrameConfigUi(SplineKeyFrameConfigModel splineKeyFrameConfigModel)
+        public SplineKeyFrameConfigUi(SplineKeyFrame splineKeyFrameConfigModel)
         {
             SplineKeyFrameConfigModel = splineKeyFrameConfigModel;
             InitializeComponent();

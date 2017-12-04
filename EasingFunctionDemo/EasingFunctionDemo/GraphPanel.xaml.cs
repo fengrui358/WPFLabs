@@ -16,13 +16,12 @@ namespace EasingFunctionDemo
     public partial class GraphPanel
     {
         private const double XCoordinateCoefficient = 1d;
-        private const double YCoordinateCoefficient = 2 / 3d;
-        private const int TimePrecision = 5;
+        private const double YCoordinateCoefficient = 1d;
+        private const int TimePrecision = 10;
         private readonly int[] _milliSecondsUnit = new int[ConstData.TotalMilliSeconds / TimePrecision];
         private readonly List<double> _runningMilliSecondsUnit = new List<double>();
 
-        private readonly Point _startPoint = new Point(20,
-            (240 * YCoordinateCoefficient) + (300 - 240 * YCoordinateCoefficient) / 2);
+        private readonly Point _startPoint;
 
         private readonly Point _endPoint;
         private readonly Vector _endPointVector = new Vector(240, -240 * YCoordinateCoefficient);
@@ -50,8 +49,11 @@ namespace EasingFunctionDemo
 
         public GraphPanel()
         {
-            _endPoint = _startPoint + _endPointVector;
             InitializeComponent();
+
+            _startPoint = new Point(20,
+                (240 * YCoordinateCoefficient) + (460 - 240 * YCoordinateCoefficient) / 2);
+            _endPoint = _startPoint + _endPointVector;
 
             for (int i = 0; i < ConstData.TotalMilliSeconds / TimePrecision; i++)
             {

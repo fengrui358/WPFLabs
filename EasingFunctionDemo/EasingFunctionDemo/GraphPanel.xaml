@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EasingFunctionDemo"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="280"
-             Height="300" Width="280">
+             d:DesignHeight="500" d:DesignWidth="280"
+             Height="500" Width="280">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,7 +16,7 @@
             <Path x:Name="EasingFunctionGraphPath" StrokeThickness="1" Stroke="Blue"/>
             <Path x:Name="RunningFunctionGraphPath" StrokeThickness="1" Stroke="Red"/>
         </Canvas>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

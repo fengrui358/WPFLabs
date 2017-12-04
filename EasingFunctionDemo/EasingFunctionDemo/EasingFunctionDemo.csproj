@@ -75,7 +75,7 @@
       <DependentUpon>EasingFunctionConfigUi.xaml</DependentUpon>
     </Compile>
     <Compile Include="EasingFunctionConfigs\IEasingFunctionConfig.cs" />
-    <Compile Include="EasingFunctionConfigs\SplineKeyFrameConfigModel.cs" />
+    <Compile Include="EasingFunctionConfigs\SplineKeyFrame.cs" />
     <Compile Include="EasingFunctionConfigs\SplineKeyFrameConfigUi.xaml.cs">
       <DependentUpon>SplineKeyFrameConfigUi.xaml</DependentUpon>
     </Compile>

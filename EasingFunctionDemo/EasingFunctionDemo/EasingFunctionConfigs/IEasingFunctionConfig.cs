@@ -14,7 +14,7 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
         /// <summary>
         /// 样条关键帧动画配置
         /// </summary>
-        SplineKeyFrameConfigModel SplineKeyFrameConfig { get; }
+        SplineKeyFrame SplineKeyFrameConfig { get; }
 
         /// <summary>
         /// 配置发生变化
