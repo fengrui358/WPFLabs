@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -27,6 +27,12 @@ namespace EasingFunctionDemo
         private readonly Vector _endPointVector = new Vector(240, -240 * YCoordinateCoefficient);
         private Point _bezierControlPoint1;
         private Point _bezierControlPoint2;
+
+        private Ellipse _controlPoint1;
+        private Ellipse _controlPoint2;
+
+        private Line _controlLine1;
+        private Line _controlLine2;
 
         public static readonly DependencyProperty EasingFunctionProperty = DependencyProperty.Register(
             "EasingFunction", typeof(EasingFunctionConfig), typeof(GraphPanel),
@@ -140,6 +146,39 @@ namespace EasingFunctionDemo
                                 splineKeyFrameConfig.ControlPoint2Y * _endPointVector.Y);
 
                         context.BezierTo(_bezierControlPoint1, _bezierControlPoint2, _endPoint, true, false);
+
+                        //绘制控制点
+                        if (_controlPoint1 == null)
+                        {
+                            _controlPoint1 = new Ellipse {Width = 6, Height = 6, Fill = Brushes.DarkOrange};
+                            Container.Children.Add(_controlPoint1);
+
+                            _controlLine1 = new Line {Stroke = Brushes.DarkOrange, StrokeThickness = 1};
+                            Container.Children.Add(_controlLine1);
+                        }
+
+                        Canvas.SetLeft(_controlPoint1, _bezierControlPoint1.X -3);
+                        Canvas.SetTop(_controlPoint1, _bezierControlPoint1.Y - 3);
+                        _controlLine1.X1 = _bezierControlPoint1.X;
+                        _controlLine1.Y1 = _bezierControlPoint1.Y;
+                        _controlLine1.X2 = _startPoint.X;
+                        _controlLine1.Y2 = _startPoint.Y;
+
+                        if (_controlPoint2 == null)
+                        {
+                            _controlPoint2 = new Ellipse { Width = 6, Height = 6, Fill = Brushes.DarkCyan };
+                            Container.Children.Add(_controlPoint2);
+
+                            _controlLine2 = new Line { Stroke = Brushes.DarkCyan, StrokeThickness = 1 };
+                            Container.Children.Add(_controlLine2);
+                        }
+
+                        Canvas.SetLeft(_controlPoint2, _bezierControlPoint2.X - 3);
+                        Canvas.SetTop(_controlPoint2, _bezierControlPoint2.Y -3);
+                        _controlLine2.X1 = _bezierControlPoint2.X;
+                        _controlLine2.Y1 = _bezierControlPoint2.Y;
+                        _controlLine2.X2 = _endPoint.X;
+                        _controlLine2.Y2 = _endPoint.Y;
                     }
                 }
 
