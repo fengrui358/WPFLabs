@@ -11,4 +11,5 @@
 ![](http://images2017.cnblogs.com/blog/282687/201712/282687-20171204225859191-414960056.gif)
 
 > 工具代码下载地址：<https://github.com/fengrui358/WPFLabs/tree/master/EasingFunctionDemo>
+>
 > 三次贝塞尔曲线控制参考：<https://www.cnblogs.com/hnfxs/p/3148483.html>
