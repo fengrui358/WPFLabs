@@ -148,6 +148,8 @@
     <Compile Include="DrawingDemo\DrawingDemoWindow.xaml.cs">
       <DependentUpon>DrawingDemoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DrawingDemo\PathImageHelper.cs" />
+    <Compile Include="DrawingDemo\PathImage\PathImage.cs" />
     <Compile Include="ExpertPanel2\ExpertPanel2.xaml.cs">
       <DependentUpon>ExpertPanel2.xaml</DependentUpon>
     </Compile>
@@ -318,6 +320,10 @@
     <Page Include="DrawingDemo\DrawingDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrawingDemo\PathImage\Themes\PathImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="ExpertPanel2\ExpertPanel2.xaml">
       <SubType>Designer</SubType>

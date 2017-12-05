@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:drawingDemo="clr-namespace:WpfLabs.DrawingDemo"
+        xmlns:pathImage="clr-namespace:WpfLabs.DrawingDemo.PathImage"
         mc:Ignorable="d"
         x:Name="WindowContainer"
         Title="DrawingDemoWindow" Height="520" Width="500" Loaded="DrawingDemoWindow_OnLoaded">
     <Window.Resources>
-        <GeometryDrawing x:Key="GeometryDrawing" Brush="Black" 
+
+        <GeometryDrawing x:Key="GeometryDrawing" x:Shared="false" Brush="Black"
                          Geometry="M17.4010091,2.94507943 C14.2281486,2.9384444 11.3128247,1.83815521 8.99635683,0 C6.67877517,1.83427434 3.76852524,2.9384444 0.598882401,2.94507943 C-1.51375905,9.94391517 2.12219701,17.4672943 8.99907946,20 C15.8776945,17.4672943 19.5141456,9.94391517 17.4008854,2.94507943 L17.4010091,2.94507943 Z M1,9.45501932 L8.31978684,9.45501932 L8.31978684,1 C10.500457,2.54208963 13.0117877,3.42515717 15.6663644,3.58387646 C16.12041,5.51491661 16.1108907,7.52849625 15.6386083,9.45501932 L8.31978684,9.45501932 L8.31978684,17.9996323 L8.31870073,18 C4.55749726,16.4679605 1.92186715,13.2200369 1,9.45501932 Z" />
-        <DrawingImage x:Key="DrawingImage" Drawing="{StaticResource GeometryDrawing}" presentationOptions:Freeze="True"/>
+        <DrawingImage x:Key="DrawingImage" x:Shared="false" Drawing="{StaticResource GeometryDrawing}" presentationOptions:Freeze="True" />
         <drawingDemo:ControlRowConverter x:Key="ControlRowConverter" />
     </Window.Resources>
     <Grid x:Name="ContainerGrid" IsSharedSizeScope="True">
@@ -100,8 +102,19 @@
         </StackPanel>
         <Border Grid.Row="1">
             <Grid x:Name="DrawingContainer">
-                <Image Source="{StaticResource DrawingImage}" Width="100" Height="100"/>
-                <Path x:Name="DrawingPath" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{StaticResource DrawingImage}"
+                       Width="{Binding ElementName=DrawingPath, Path=ActualWidth}"
+                       Height="{Binding ElementName=DrawingPath, Path=ActualHeight}"
+                       drawingDemo:PathImageHelper.ImageForeground="Red"/>
+                <Image Grid.Column="1" Source="{StaticResource DrawingImage}"
+                       Width="{Binding ElementName=DrawingPath, Path=ActualWidth}"
+                       Height="{Binding ElementName=DrawingPath, Path=ActualHeight}"
+                       drawingDemo:PathImageHelper.ImageForeground="Blue"/>
+                <Path Grid.Column="0" Grid.ColumnSpan="2" x:Name="DrawingPath" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Grid>
         </Border>
     </Grid>
