@@ -6,14 +6,27 @@ namespace WpfLabs.DrawingDemo
 {
     public static class PathImageHelper
     {
+        /// <summary>
+        /// 矢量图片前景色
+        /// </summary>
         public static readonly DependencyProperty ImageForegroundProperty = DependencyProperty.RegisterAttached(
             "ImageForeground", typeof(Brush), typeof(PathImageHelper), new PropertyMetadata(default(Brush), OnImageForegroundChanged));
 
+        /// <summary>
+        /// 矢量图片前景色
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static Brush GetImageForeground(DependencyObject obj)
         {
             return (Brush) obj.GetValue(ImageForegroundProperty);
         }
 
+        /// <summary>
+        /// 矢量图片前景色
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
         public static void SetImageForeground(DependencyObject obj, Brush value)
         {
             obj.SetValue(ImageForegroundProperty, value);
@@ -37,28 +50,6 @@ namespace WpfLabs.DrawingDemo
                     }
                 }
             }
-
-            //if ((Brush)args.NewValue)
-            //{
-            //    //var itemsControl = dependencyObject as ItemsControl;
-            //    //if (itemsControl != null)
-            //    //{
-            //    //    itemsControl.ItemContainerGenerator.StatusChanged -= ItemContainerGeneratorOnStatusChanged;
-            //    //    itemsControl.ItemContainerGenerator.ItemsChanged -= ItemContainerGeneratorOnItemsChanged;
-
-            //    //    itemsControl.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
-            //    //    itemsControl.ItemContainerGenerator.ItemsChanged += ItemContainerGeneratorOnItemsChanged;
-            //    //}
-            //}
-            //else
-            //{
-            //    //var itemsControl = dependencyObject as ItemsControl;
-            //    //if (itemsControl != null)
-            //    //{
-            //    //    itemsControl.ItemContainerGenerator.StatusChanged -= ItemContainerGeneratorOnStatusChanged;
-            //    //    itemsControl.ItemContainerGenerator.ItemsChanged -= ItemContainerGeneratorOnItemsChanged;
-            //    //}
-            //}
         }
     }
 }
