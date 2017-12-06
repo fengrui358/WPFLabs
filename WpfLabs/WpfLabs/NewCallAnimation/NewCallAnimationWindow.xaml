@@ -117,7 +117,7 @@
                         <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
                     </Grid>
-                    <local:RotateTimer x:Name="RotateTimer" Grid.Column="1"/>
+                    <local:RotateTimer x:Name="RotateTimer" Grid.Column="1" IsActive="True"/>
                 </Grid>
                 <Grid Margin="0,14,0,0" HorizontalAlignment="Center">
                     <Image Width="30" Height="30" HorizontalAlignment="Left" Stretch="None" Margin="-40,0,0,0"

@@ -8,46 +8,84 @@
              d:DesignHeight="422" d:DesignWidth="422">
     <UserControl.Resources>
         <system:Double x:Key="PowerKey">12</system:Double>
-        <KeyTime x:Key="ToBigTimeKey">0:0:0.6</KeyTime>
+        <KeyTime x:Key="ToBigTimeKey">0:0:0.466667</KeyTime>
+        <KeyTime x:Key="ToSmallTimeKey">0:0:0.8</KeyTime>
         <KeyTime x:Key="TotalTimeKey">0:0:2</KeyTime>
+        <KeyTime x:Key="Border1StartTimeKey">0:0:0.466667</KeyTime>
+        <KeyTime x:Key="Border1ToBigTimeKey">0:0:0.733333</KeyTime>
+        <KeyTime x:Key="Border1ToSmallTimeKey">0:0:1</KeyTime>
+        <KeyTime x:Key="Border2StartTimeKey">0:0:0.666667</KeyTime>
+        <KeyTime x:Key="Border2ToBigTimeKey">0:0:0.933333</KeyTime>
+        <KeyTime x:Key="Border2ToSmallTimeKey">0:0:1.2</KeyTime>
+        <KeyTime x:Key="Border3StartTimeKey">0:0:0.866667</KeyTime>
+        <KeyTime x:Key="Border3ToBigTimeKey">0:0:1.133333</KeyTime>
+        <KeyTime x:Key="Border3ToSmallTimeKey">0:0:1.4</KeyTime>
+
         <Storyboard x:Key="Rotate">
             <!--中心光圈伸缩动画-->
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse"
                                            Storyboard.TargetProperty="Width"
                                            RepeatBehavior="Forever">
-                <EasingDoubleKeyFrame Value="248"
+                <SplineDoubleKeyFrame Value="248" KeySpline="0.83,0,0.99,0.24"
                                       KeyTime="{StaticResource ToBigTimeKey}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <PowerEase Power="{StaticResource PowerKey}"
-                                   EasingMode="EaseIn" />
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame Value="218"
-                                      KeyTime="{StaticResource TotalTimeKey}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <PowerEase Power="{StaticResource PowerKey}"
-                                   EasingMode="EaseOut" />
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+                </SplineDoubleKeyFrame>
+                <SplineDoubleKeyFrame Value="218" KeySpline="0.16,0.85,0.42,1"
+                                      KeyTime="{StaticResource ToSmallTimeKey}">
+                </SplineDoubleKeyFrame>
+                <DiscreteDoubleKeyFrame Value="218" KeyTime="{StaticResource TotalTimeKey}"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse"
-                                           Storyboard.TargetProperty="Height"
-                                           RepeatBehavior="Forever">
-                <EasingDoubleKeyFrame Value="248"
-                                      KeyTime="{StaticResource ToBigTimeKey}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <PowerEase Power="{StaticResource PowerKey}"
-                                   EasingMode="EaseIn" />
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame Value="218"
-                                      KeyTime="{StaticResource TotalTimeKey}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <PowerEase Power="{StaticResource PowerKey}"
-                                   EasingMode="EaseOut" />
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <!--外层光圈1-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="StrokeThickness" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border1StartTimeKey}" Value="5"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToBigTimeKey}" Value="12"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToSmallTimeKey}" Value="2"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="Width" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border1StartTimeKey}" Value="260"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToSmallTimeKey}" Value="400"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border1StartTimeKey}" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToSmallTimeKey}" Value="0"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <!--外层光圈2-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border2" Storyboard.TargetProperty="StrokeThickness" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border2StartTimeKey}" Value="5"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToBigTimeKey}" Value="12"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToSmallTimeKey}" Value="2"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border2" Storyboard.TargetProperty="Width" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border2StartTimeKey}" Value="260"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToSmallTimeKey}" Value="400"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border2StartTimeKey}" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToSmallTimeKey}" Value="0"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <!--外层光圈3-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border3" Storyboard.TargetProperty="StrokeThickness" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border3StartTimeKey}" Value="5"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToBigTimeKey}" Value="12"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToSmallTimeKey}" Value="2"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border3" Storyboard.TargetProperty="Width" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border3StartTimeKey}" Value="260"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToSmallTimeKey}" Value="400"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border3" Storyboard.TargetProperty="Opacity" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border3StartTimeKey}" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToSmallTimeKey}" Value="0"/>
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
             <!--时间刻度旋转动画-->
             <DoubleAnimation Storyboard.TargetName="CircleDotted2" Storyboard.TargetProperty="Angle"
                              From="0" To="360" Duration="0:0:1"
@@ -56,13 +94,37 @@
     </UserControl.Resources>
 
     <Grid Width="422" Height="422">
-        <Ellipse x:Name="CenterEllipse" Width="218" Height="218">
+        <Ellipse x:Name="CenterEllipse" Width="218" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True">
             <Ellipse.Fill>
                 <RadialGradientBrush GradientOrigin="-0.2,0" RadiusX="2">
                     <GradientStop Offset="0.4" Color="#A7C8FB" />
                     <GradientStop Offset="1" Color="#B3F3F6" />
                 </RadialGradientBrush>
             </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse x:Name="Border1" Width="260" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True" StrokeThickness="0">
+            <Ellipse.Stroke>
+                <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
+                    <GradientStop Offset="0.4" Color="#A7C8FB" />
+                    <GradientStop Offset="1" Color="#B3F3F6" />
+                </RadialGradientBrush>
+            </Ellipse.Stroke>
+        </Ellipse>
+        <Ellipse x:Name="Border2" Width="260" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True" StrokeThickness="0">
+            <Ellipse.Stroke>
+                <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
+                    <GradientStop Offset="0.4" Color="#A7C8FB" />
+                    <GradientStop Offset="1" Color="#B3F3F6" />
+                </RadialGradientBrush>
+            </Ellipse.Stroke>
+        </Ellipse>
+        <Ellipse x:Name="Border3" Width="260" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True" StrokeThickness="0">
+            <Ellipse.Stroke>
+                <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
+                    <GradientStop Offset="0.4" Color="#A7C8FB" />
+                    <GradientStop Offset="1" Color="#B3F3F6" />
+                </RadialGradientBrush>
+            </Ellipse.Stroke>
         </Ellipse>
         <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
