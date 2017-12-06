@@ -243,6 +243,9 @@
     <Compile Include="NewCallAnimation\NewCallAnimationWindow.xaml.cs">
       <DependentUpon>NewCallAnimationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewCallAnimation\RotateTimer.xaml.cs">
+      <DependentUpon>RotateTimer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotifyMsgPresenter\MockDataSource.cs" />
     <Compile Include="NotifyMsgPresenter\NotifyMsgItem.xaml.cs">
       <DependentUpon>NotifyMsgItem.xaml</DependentUpon>
@@ -271,7 +274,6 @@
     <Compile Include="Timer\TimerWindow.xaml.cs">
       <DependentUpon>TimerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="WaterMarkDemo\WaterMarkManager.cs" />
     <Compile Include="WaterMarkDemo\WaterMarkDemoWindow.xaml.cs">
       <DependentUpon>WaterMarkDemoWindow.xaml</DependentUpon>
@@ -427,6 +429,10 @@
     <Page Include="NewCallAnimation\NewCallAnimationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewCallAnimation\RotateTimer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NotifyMsgPresenter\NotifyMsgItem.xaml">
       <SubType>Designer</SubType>

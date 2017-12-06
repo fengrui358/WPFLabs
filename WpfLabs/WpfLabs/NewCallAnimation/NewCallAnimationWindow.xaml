@@ -93,7 +93,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid SnapsToDevicePixels="True" Width="780" Height="750">
+    <Grid SnapsToDevicePixels="True" Width="880" Height="750">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
@@ -117,78 +117,8 @@
                         <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
                     </Grid>
-                    <Grid Grid.Column="1" Width="422" Height="422">
-                        <Ellipse x:Name="CenterEllipse" Width="218" Height="218">
-                            <Ellipse.Fill>
-                                <RadialGradientBrush GradientOrigin="-0.2,0" RadiusX="2">
-                                    <GradientStop Offset="0.4" Color="#A7C8FB" />
-                                    <GradientStop Offset="1" Color="#B3F3F6" />
-                                </RadialGradientBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
-                            <Image.RenderTransform>
-                                <RotateTransform x:Name="CircleDotted2" />
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
-                                   Foreground="White" />
-                    </Grid>
-                    <Grid.Resources>
-                        <system:Double x:Key="PowerKey">12</system:Double>
-                        <KeyTime x:Key="ToBigTimeKey">0:0:0.6</KeyTime>
-                        <KeyTime x:Key="TotalTimeKey">0:0:2</KeyTime>
-                    </Grid.Resources>
-                    <Grid.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard options:Freeze="True">
-                                    <!--中心光圈伸缩动画-->
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse" Storyboard.TargetProperty="Width"
-                                                                   RepeatBehavior="Forever">
-                                        <EasingDoubleKeyFrame Value="248"
-                                                              KeyTime="{StaticResource ToBigTimeKey}">
-                                            <EasingDoubleKeyFrame.EasingFunction>
-                                                <PowerEase Power="{StaticResource PowerKey}"
-                                                           EasingMode="EaseIn" />
-                                            </EasingDoubleKeyFrame.EasingFunction>
-                                        </EasingDoubleKeyFrame>
-                                        <EasingDoubleKeyFrame Value="218"
-                                                              KeyTime="{StaticResource TotalTimeKey}">
-                                            <EasingDoubleKeyFrame.EasingFunction>
-                                                <PowerEase Power="{StaticResource PowerKey}"
-                                                           EasingMode="EaseOut" />
-                                            </EasingDoubleKeyFrame.EasingFunction>
-                                        </EasingDoubleKeyFrame>
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse" Storyboard.TargetProperty="Height"
-                                                                   RepeatBehavior="Forever">
-                                        <EasingDoubleKeyFrame Value="248"
-                                                              KeyTime="{StaticResource ToBigTimeKey}">
-                                            <EasingDoubleKeyFrame.EasingFunction>
-                                                <PowerEase Power="{StaticResource PowerKey}"
-                                                           EasingMode="EaseIn" />
-                                            </EasingDoubleKeyFrame.EasingFunction>
-                                        </EasingDoubleKeyFrame>
-                                        <EasingDoubleKeyFrame Value="218"
-                                                              KeyTime="{StaticResource TotalTimeKey}">
-                                            <EasingDoubleKeyFrame.EasingFunction>
-                                                <PowerEase Power="{StaticResource PowerKey}"
-                                                           EasingMode="EaseOut" />
-                                            </EasingDoubleKeyFrame.EasingFunction>
-                                        </EasingDoubleKeyFrame>
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <!--时间刻度旋转动画-->
-                                    <DoubleAnimation Storyboard.TargetName="CircleDotted" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:1"
-                                                     RepeatBehavior="Forever" />
-                                    <DoubleAnimation Storyboard.TargetName="CircleDotted2" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:1"
-                                                     RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Grid.Triggers>
+                    <local:RotateTimer x:Name="RotateTimer" Grid.Column="1"/>
                 </Grid>
-
                 <Grid Margin="0,14,0,0" HorizontalAlignment="Center">
                     <Image Width="30" Height="30" HorizontalAlignment="Left" Stretch="None" Margin="-40,0,0,0"
                            Source="cellphone.png" />
@@ -229,6 +159,6 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Button Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AnswerButtonStyle}" />
+        <Button Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AnswerButtonStyle}" Click="ButtonBase_OnClick"/>
     </Grid>
 </Window>

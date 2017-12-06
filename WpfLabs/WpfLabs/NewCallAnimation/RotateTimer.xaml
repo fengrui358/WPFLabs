@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="WpfLabs.NewCallAnimation.RotateTimer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignHeight="422" d:DesignWidth="422">
+    <UserControl.Resources>
+        <system:Double x:Key="PowerKey">12</system:Double>
+        <KeyTime x:Key="ToBigTimeKey">0:0:0.6</KeyTime>
+        <KeyTime x:Key="TotalTimeKey">0:0:2</KeyTime>
+        <Storyboard x:Key="Rotate">
+            <!--中心光圈伸缩动画-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse"
+                                           Storyboard.TargetProperty="Width"
+                                           RepeatBehavior="Forever">
+                <EasingDoubleKeyFrame Value="248"
+                                      KeyTime="{StaticResource ToBigTimeKey}">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <PowerEase Power="{StaticResource PowerKey}"
+                                   EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame Value="218"
+                                      KeyTime="{StaticResource TotalTimeKey}">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <PowerEase Power="{StaticResource PowerKey}"
+                                   EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse"
+                                           Storyboard.TargetProperty="Height"
+                                           RepeatBehavior="Forever">
+                <EasingDoubleKeyFrame Value="248"
+                                      KeyTime="{StaticResource ToBigTimeKey}">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <PowerEase Power="{StaticResource PowerKey}"
+                                   EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame Value="218"
+                                      KeyTime="{StaticResource TotalTimeKey}">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <PowerEase Power="{StaticResource PowerKey}"
+                                   EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <!--时间刻度旋转动画-->
+            <DoubleAnimation Storyboard.TargetName="CircleDotted2" Storyboard.TargetProperty="Angle"
+                             From="0" To="360" Duration="0:0:1"
+                             RepeatBehavior="Forever" />
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid Width="422" Height="422">
+        <Ellipse x:Name="CenterEllipse" Width="218" Height="218">
+            <Ellipse.Fill>
+                <RadialGradientBrush GradientOrigin="-0.2,0" RadiusX="2">
+                    <GradientStop Offset="0.4" Color="#A7C8FB" />
+                    <GradientStop Offset="1" Color="#B3F3F6" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="CircleDotted2" />
+            </Image.RenderTransform>
+        </Image>
+        <Viewbox Width="160" Height="80">
+            <TextBlock x:Name="Time" Text="00:00" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
+                       Foreground="White" />
+        </Viewbox>
+    </Grid>
+</UserControl>
