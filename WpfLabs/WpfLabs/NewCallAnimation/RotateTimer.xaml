@@ -23,18 +23,38 @@
         <KeyTime x:Key="Border3ToBigTimeKey">0:0:1.133333</KeyTime>
         <KeyTime x:Key="Border3ToSmallTimeKey">0:0:1.4</KeyTime>
 
+        <Style x:Key="OuterEllipseStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="260"/>
+            <Setter Property="Height" Value="260"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="Stroke">
+                <Setter.Value>
+                    <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
+                        <GradientStop Offset="0.4" Color="#A7C8FB" />
+                        <GradientStop Offset="1" Color="#B3F3F6" />
+                    </RadialGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Storyboard x:Key="Rotate">
             <!--中心光圈伸缩动画-->
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipse"
-                                           Storyboard.TargetProperty="Width"
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CenterEllipseScaleTransform"
+                                           Storyboard.TargetProperty="ScaleX"
                                            RepeatBehavior="Forever">
-                <SplineDoubleKeyFrame Value="248" KeySpline="0.83,0,0.99,0.24"
+                <SplineDoubleKeyFrame Value="1.1376" KeySpline="0.83,0,0.99,0.24"
                                       KeyTime="{StaticResource ToBigTimeKey}">
                 </SplineDoubleKeyFrame>
-                <SplineDoubleKeyFrame Value="218" KeySpline="0.16,0.85,0.42,1"
+                <SplineDoubleKeyFrame Value="1" KeySpline="0.16,0.85,0.42,1"
                                       KeyTime="{StaticResource ToSmallTimeKey}">
                 </SplineDoubleKeyFrame>
-                <DiscreteDoubleKeyFrame Value="218" KeyTime="{StaticResource TotalTimeKey}"/>
+                <DiscreteDoubleKeyFrame Value="1" KeyTime="{StaticResource TotalTimeKey}"/>
             </DoubleAnimationUsingKeyFrames>
             <!--外层光圈1-->
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="StrokeThickness" RepeatBehavior="Forever">
@@ -43,9 +63,9 @@
                 <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToSmallTimeKey}" Value="2"/>
                 <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="Width" RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border1StartTimeKey}" Value="260"/>
-                <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToSmallTimeKey}" Value="400"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border1StartTimeKey}" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border1ToSmallTimeKey}" Value="1.5385"/>
                 <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" RepeatBehavior="Forever">
@@ -60,9 +80,9 @@
                 <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToSmallTimeKey}" Value="2"/>
                 <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border2" Storyboard.TargetProperty="Width" RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border2StartTimeKey}" Value="260"/>
-                <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToSmallTimeKey}" Value="400"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border2" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border2StartTimeKey}" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border2ToSmallTimeKey}" Value="1.5385"/>
                 <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" RepeatBehavior="Forever">
@@ -77,9 +97,9 @@
                 <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToSmallTimeKey}" Value="2"/>
                 <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border3" Storyboard.TargetProperty="Width" RepeatBehavior="Forever">
-                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border3StartTimeKey}" Value="260"/>
-                <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToSmallTimeKey}" Value="400"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border3" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" RepeatBehavior="Forever">
+                <DiscreteDoubleKeyFrame KeyTime="{StaticResource Border3StartTimeKey}" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="{StaticResource Border3ToSmallTimeKey}" Value="1.5385"/>
                 <DiscreteDoubleKeyFrame KeyTime="{StaticResource TotalTimeKey}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Border3" Storyboard.TargetProperty="Opacity" RepeatBehavior="Forever">
@@ -96,37 +116,39 @@
     </UserControl.Resources>
 
     <Grid Width="422" Height="422">
-        <Ellipse x:Name="CenterEllipse" Width="218" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True">
+        <Ellipse Width="218" Height="218" SnapsToDevicePixels="True" RenderTransformOrigin="0.5,0.5">
             <Ellipse.Fill>
                 <RadialGradientBrush GradientOrigin="-0.2,0" RadiusX="2">
                     <GradientStop Offset="0.4" Color="#A7C8FB" />
                     <GradientStop Offset="1" Color="#B3F3F6" />
                 </RadialGradientBrush>
             </Ellipse.Fill>
+            <Ellipse.RenderTransform>
+                <ScaleTransform x:Name="CenterEllipseScaleTransform" ScaleX="1" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}"/>
+            </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse x:Name="Border1" Width="260" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True" StrokeThickness="0">
+        <Ellipse x:Name="Border1" Style="{StaticResource OuterEllipseStyle}"/>
+        <Ellipse x:Name="Border2" Width="260" Height="260" SnapsToDevicePixels="True" StrokeThickness="0" RenderTransformOrigin="0.5,0.5">
             <Ellipse.Stroke>
                 <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
                     <GradientStop Offset="0.4" Color="#A7C8FB" />
                     <GradientStop Offset="1" Color="#B3F3F6" />
                 </RadialGradientBrush>
             </Ellipse.Stroke>
+            <Ellipse.RenderTransform>
+                <ScaleTransform x:Name="Border2ScaleTransform" ScaleX="1" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}"/>
+            </Ellipse.RenderTransform>
         </Ellipse>
-        <Ellipse x:Name="Border2" Width="260" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True" StrokeThickness="0">
+        <Ellipse x:Name="Border3" Width="260" Height="260" SnapsToDevicePixels="True" StrokeThickness="0" RenderTransformOrigin="0.5,0.5">
             <Ellipse.Stroke>
                 <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
                     <GradientStop Offset="0.4" Color="#A7C8FB" />
                     <GradientStop Offset="1" Color="#B3F3F6" />
                 </RadialGradientBrush>
             </Ellipse.Stroke>
-        </Ellipse>
-        <Ellipse x:Name="Border3" Width="260" Height="{Binding RelativeSource={RelativeSource Self}, Path=Width, Mode=OneWay}" SnapsToDevicePixels="True" StrokeThickness="0">
-            <Ellipse.Stroke>
-                <RadialGradientBrush GradientOrigin="1.2,0" RadiusX="2">
-                    <GradientStop Offset="0.4" Color="#A7C8FB" />
-                    <GradientStop Offset="1" Color="#B3F3F6" />
-                </RadialGradientBrush>
-            </Ellipse.Stroke>
+            <Ellipse.RenderTransform>
+                <ScaleTransform x:Name="Border3ScaleTransform" ScaleX="1" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}"/>
+            </Ellipse.RenderTransform>
         </Ellipse>
         <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
