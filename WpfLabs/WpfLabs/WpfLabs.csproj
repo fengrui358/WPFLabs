@@ -246,6 +246,7 @@
     <Compile Include="NewCallAnimation\RotateTimer.xaml.cs">
       <DependentUpon>RotateTimer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewCallAnimation\TimeSpanToStringConverter.cs" />
     <Compile Include="NotifyMsgPresenter\MockDataSource.cs" />
     <Compile Include="NotifyMsgPresenter\NotifyMsgItem.xaml.cs">
       <DependentUpon>NotifyMsgItem.xaml</DependentUpon>

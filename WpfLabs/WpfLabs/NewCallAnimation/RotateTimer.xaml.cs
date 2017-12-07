@@ -10,12 +10,23 @@ namespace WpfLabs.NewCallAnimation
     /// </summary>
     public partial class RotateTimer
     {
-        private TimeSpan _timeSpan = new TimeSpan();
         private DispatcherTimer _dispatcherTimer;
 
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
             "IsActive", typeof(bool), typeof(RotateTimer),
             new FrameworkPropertyMetadata(default(bool), OnIsActiveChanged));
+
+        public static readonly DependencyProperty TotalTimeProperty = DependencyProperty.Register(
+            "TotalTime", typeof(TimeSpan), typeof(RotateTimer), new PropertyMetadata(default(TimeSpan)));
+
+        /// <summary>
+        /// 总时间
+        /// </summary>
+        public TimeSpan TotalTime
+        {
+            get { return (TimeSpan) GetValue(TotalTimeProperty); }
+            private set { SetValue(TotalTimeProperty, value); }
+        }
 
         /// <summary>
         /// 是否激活
@@ -41,15 +52,13 @@ namespace WpfLabs.NewCallAnimation
                 storyBoard.Begin();
                 if (rotateTimer._dispatcherTimer == null)
                 {
-                    rotateTimer._timeSpan = new TimeSpan();
-                    rotateTimer.ShowTime();
+                    rotateTimer.TotalTime = new TimeSpan();
 
                     rotateTimer._dispatcherTimer = new DispatcherTimer(TimeSpan.FromSeconds(1),
                         DispatcherPriority.Normal,
                         (sender, args) =>
                         {
-                            rotateTimer._timeSpan = rotateTimer._timeSpan.Add(TimeSpan.FromSeconds(1));
-                            rotateTimer.ShowTime();
+                            rotateTimer.TotalTime = rotateTimer.TotalTime.Add(TimeSpan.FromSeconds(1));
                         },
                         rotateTimer.Dispatcher);
                 }
@@ -62,20 +71,6 @@ namespace WpfLabs.NewCallAnimation
                     rotateTimer._dispatcherTimer.Stop();
                     rotateTimer._dispatcherTimer = null;
                 }
-            }
-        }
-
-        private void ShowTime()
-        {
-            if (_timeSpan.Hours > 0)
-            {
-                Time.Text = string.Format("{0}:{1}:{2}", _timeSpan.Hours.ToString().PadLeft(2, '0'),
-                    _timeSpan.Minutes.ToString().PadLeft(2, '0'), _timeSpan.Seconds.ToString().PadLeft(2, '0'));
-            }
-            else
-            {
-                Time.Text = string.Format("{0}:{1}", _timeSpan.Minutes.ToString().PadLeft(2, '0'),
-                    _timeSpan.Seconds.ToString().PadLeft(2, '0'));
             }
         }
     }

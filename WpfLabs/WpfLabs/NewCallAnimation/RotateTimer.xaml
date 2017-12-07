@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:newCallAnimation="clr-namespace:WpfLabs.NewCallAnimation"
              mc:Ignorable="d"
              d:DesignHeight="422" d:DesignWidth="422">
     <UserControl.Resources>
+        <newCallAnimation:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
         <system:Double x:Key="PowerKey">12</system:Double>
         <KeyTime x:Key="ToBigTimeKey">0:0:0.466667</KeyTime>
         <KeyTime x:Key="ToSmallTimeKey">0:0:0.8</KeyTime>
@@ -132,7 +134,7 @@
             </Image.RenderTransform>
         </Image>
         <Viewbox Width="160" Height="80">
-            <TextBlock x:Name="Time" Text="00:00" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
+            <TextBlock x:Name="Time" Text="{Binding RelativeSource={RelativeSource AncestorType=newCallAnimation:RotateTimer}, Path=TotalTime, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                        Foreground="White" />
         </Viewbox>
     </Grid>

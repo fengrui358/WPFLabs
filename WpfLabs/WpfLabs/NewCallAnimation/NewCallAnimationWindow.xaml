@@ -11,6 +11,7 @@
         Title="NewCallAnimationWindow" Height="1000" Width="1000">
     <Window.Resources>
         <SolidColorBrush x:Key="PressedColor" Color="#00B03D" />
+        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
         <Style x:Key="NormalTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -114,7 +115,7 @@
                                 <RotateTransform x:Name="CircleDotted" />
                             </Image.RenderTransform>
                         </Image>
-                        <TextBlock Text="00:13" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
+                        <TextBlock Text="{Binding ElementName=RotateTimer, Path=TotalTime, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
                                    Foreground="White" />
                     </Grid>
                     <local:RotateTimer x:Name="RotateTimer" Grid.Column="1" IsActive="True"/>
