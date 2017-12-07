@@ -8,7 +8,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="NewCallAnimationWindow" Height="1000" Width="1000">
+        Title="NewCallAnimationWindow" Height="1000" Width="1000" Loaded="NewCallAnimationWindow_OnLoaded" Unloaded="NewCallAnimationWindow_OnUnloaded">
     <Window.Resources>
         <SolidColorBrush x:Key="PressedColor" Color="#00B03D" />
         <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
@@ -160,6 +160,6 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Button Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AnswerButtonStyle}" Click="ButtonBase_OnClick"/>
+        <Button x:Name="ControlBtn" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AnswerButtonStyle}" Click="ButtonBase_OnClick"/>
     </Grid>
 </Window>
