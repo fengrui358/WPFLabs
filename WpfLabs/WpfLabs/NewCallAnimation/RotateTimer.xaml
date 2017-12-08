@@ -157,7 +157,11 @@
         </Image>
         <Viewbox Width="160" Height="80">
             <TextBlock x:Name="Time" Text="{Binding RelativeSource={RelativeSource AncestorType=newCallAnimation:RotateTimer}, Path=TotalTime, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
-                       Foreground="White" />
+                       Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="2" Color="#48CAEF"/>
+                </TextBlock.Effect>    
+            </TextBlock>
         </Viewbox>
     </Grid>
 </UserControl>
