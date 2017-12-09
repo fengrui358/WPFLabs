@@ -13,7 +13,7 @@ namespace WpfLabs.KeyBoardInputDemo
             if (keyEventArgs != null)
             {
                 return
-                    $"Key:{keyEventArgs.Key}--KeyStates:{keyEventArgs.KeyStates}--Modifiers:{keyEventArgs.KeyboardDevice.Modifiers}";
+                    $"Key:{keyEventArgs.Key}--KeyStates:{keyEventArgs.KeyStates}--IsDown:{keyEventArgs.IsDown}--IsRepeat:{keyEventArgs.IsRepeat}--Modifiers:{keyEventArgs.KeyboardDevice.Modifiers}";
             }
 
             return Binding.DoNothing;
