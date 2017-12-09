@@ -28,6 +28,7 @@ using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
 using WpfLabs.FontFamilyDemo;
 using WpfLabs.GifShowDemo;
+using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
 using WpfLabs.MusicPlayer;
@@ -149,6 +150,10 @@ namespace WpfLabs
                 case "FontFamilyDemoWindow":
                     var fontFamilyDemoWindow = new FontFamilyDemoWindow();
                     fontFamilyDemoWindow.ShowDialog();
+                    break;
+                case "KeyBoardInputWindow":
+                    var keyBoardInputWindow = new KeyBoardInputWindow();
+                    keyBoardInputWindow.ShowDialog();
                     break;
             }
 
