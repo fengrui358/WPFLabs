@@ -178,6 +178,9 @@
     </Compile>
     <Compile Include="FontFamilyDemo\FontFamilyDemoWindowViewModel.cs" />
     <Compile Include="FontFamilyDemo\TextFormattingModeConverter.cs" />
+    <Compile Include="FoucsDemo\FoucsDemoWindow.xaml.cs">
+      <DependentUpon>FoucsDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GenerateBitmapDemo\GenerateBitmapDemo.xaml.cs">
       <DependentUpon>GenerateBitmapDemo.xaml</DependentUpon>
     </Compile>
@@ -361,6 +364,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="FontFamilyDemo\FontFamilyDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FoucsDemo\FoucsDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfLabs.FoucsDemo.FoucsDemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.FoucsDemo"
+        mc:Ignorable="d"
+        Title="FoucsDemoWindow" Height="500" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Loaded="FoucsDemoWindow_OnLoaded">
+            <StackPanel>
+                <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                <StackPanel>
+                    <TextBox Width="50" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <Button Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <Button Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <ToggleButton Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <CheckBox Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

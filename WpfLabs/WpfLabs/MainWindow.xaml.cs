@@ -27,6 +27,7 @@ using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
 using WpfLabs.FontFamilyDemo;
+using WpfLabs.FoucsDemo;
 using WpfLabs.GifShowDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
@@ -149,6 +150,10 @@ namespace WpfLabs
                 case "FontFamilyDemoWindow":
                     var fontFamilyDemoWindow = new FontFamilyDemoWindow();
                     fontFamilyDemoWindow.ShowDialog();
+                    break;
+                case "FoucsDemoWindow":
+                    var foucsDemoWindow = new FoucsDemoWindow();
+                    foucsDemoWindow.ShowDialog();
                     break;
             }
 
