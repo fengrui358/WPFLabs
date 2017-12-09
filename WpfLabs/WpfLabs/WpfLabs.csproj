@@ -195,6 +195,10 @@
     </Compile>
     <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="Helper\WPFUriHelper.cs" />
+    <Compile Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml.cs">
+      <DependentUpon>KeyBoardInputWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="KeyBoardInputDemo\KeyEventArgsConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -384,6 +388,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IconDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
