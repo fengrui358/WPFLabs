@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.FoucsDemo"
         mc:Ignorable="d"
-        Title="FoucsDemoWindow" Height="500" Width="600">
+        Title="FoucsDemoWindow" Height="800" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Loaded="FoucsDemoWindow_OnLoaded">
+        <Grid Grid.Column="0" Loaded="FoucsDemoWindow_OnLoaded" PreviewMouseLeftButtonDown="Grid_OnPreviewMouseLeftButtonDown" Background="Transparent">
             <StackPanel>
                 <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
                 <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
@@ -20,11 +20,11 @@
                     <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel>
-                    <Button Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <Button Width="50" Content="弹窗" HorizontalAlignment="Left" Click="ShowWindow_OnClick"/>
                     <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel>
-                    <Button Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <Button Width="50" Content="模态弹窗" HorizontalAlignment="Left" Click="ShowDialog_OnClick"/>
                     <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel>
@@ -36,6 +36,36 @@
                     <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
                 </StackPanel>
             </StackPanel>
+            <!--设置一个隐藏的Button来聚焦，聚焦后面板可以获得焦点-->
+            <Button Tag="HideBtn" Width="0" Height="0"/>
+        </Grid>
+        <Grid Grid.Column="1" Loaded="FoucsDemoWindow_OnLoaded" PreviewMouseLeftButtonDown="Grid_OnPreviewMouseLeftButtonDown" Background="Transparent">
+            <StackPanel>
+                <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                <StackPanel>
+                    <TextBox Width="50" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <Button Width="50" Content="弹窗" HorizontalAlignment="Left" Click="ShowWindow_OnClick"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <Button Width="50" Content="模态弹窗" HorizontalAlignment="Left" Click="ShowDialog_OnClick"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <ToggleButton Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel>
+                    <CheckBox Width="50" Content="*" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+            <!--设置一个隐藏的Button来聚焦，聚焦后面板可以获得焦点-->
+            <Button Tag="HideBtn" Width="0" Height="0"/>
         </Grid>
     </Grid>
 </Window>

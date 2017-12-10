@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace WpfLabs.FoucsDemo
 {
@@ -10,7 +12,7 @@ namespace WpfLabs.FoucsDemo
     /// </summary>
     public partial class FoucsDemoWindow
     {
-        private List<Grid> _rootGrids = new List<Grid>();
+        private readonly List<Grid> _rootGrids = new List<Grid>();
 
         public FoucsDemoWindow()
         {
@@ -25,6 +27,8 @@ namespace WpfLabs.FoucsDemo
 
         private void SubscribeEvent(Grid rootGrid)
         {
+            rootGrid.IsKeyboardFocusWithinChanged += RootGridOnIsKeyboardFocusWithinChanged;
+
             _rootGrids.Add(rootGrid);
             var rootStackPanel = (StackPanel) rootGrid.Children[0];
 
@@ -43,6 +47,21 @@ namespace WpfLabs.FoucsDemo
                 ((Panel) rootStackPanel.Children[i]).Children[0].GotKeyboardFocus += FocusEventHandler;
                 ((Panel) rootStackPanel.Children[i]).Children[0].LostFocus += FocusEventHandler;
                 ((Panel) rootStackPanel.Children[i]).Children[0].LostKeyboardFocus += FocusEventHandler;
+            }
+        }
+
+        private void RootGridOnIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var grid = (Grid) sender;
+
+            var isKeyboardFocusWithin = (bool) dependencyPropertyChangedEventArgs.NewValue;
+            if (isKeyboardFocusWithin)
+            {
+                grid.Background = Brushes.Red;
+            }
+            else
+            {
+                grid.Background = Brushes.Transparent;
             }
         }
 
@@ -88,10 +107,44 @@ namespace WpfLabs.FoucsDemo
                     if (index == 1 && child is TextBlock)
                     {
                         ((TextBlock) child).Text =
-                            $"{DateTime.Now:HH:mm:ss ffff}-{nameof(UIElement.Focusable)}:{uiElement.Focusable}--{nameof(UIElement.IsFocused)}:{uiElement.IsFocused}--{nameof(UIElement.IsKeyboardFocused)}:{uiElement.IsKeyboardFocused}--{nameof(UIElement.IsKeyboardFocusWithin)}:{uiElement.IsKeyboardFocusWithin}";
+                            $"{DateTime.Now:HH:mm:ss ffff}{Environment.NewLine}" +
+                            $"{nameof(UIElement.Focusable)}:{uiElement.Focusable}{Environment.NewLine}" +
+                            $"{nameof(UIElement.IsFocused)}:{uiElement.IsFocused}{Environment.NewLine}" +
+                            $"{nameof(UIElement.IsKeyboardFocused)}:{uiElement.IsKeyboardFocused}{Environment.NewLine}" +
+                            $"{nameof(UIElement.IsKeyboardFocusWithin)}:{uiElement.IsKeyboardFocusWithin}";
                     }
 
                     ++index;
+                }
+            }
+        }
+
+        private void ShowWindow_OnClick(object sender, RoutedEventArgs e)
+        {
+            var w = new FoucsDemoWindow();
+            w.Show();
+        }
+
+        private void ShowDialog_OnClick(object sender, RoutedEventArgs e)
+        {
+            var w = new FoucsDemoWindow();
+            w.ShowDialog();
+        }
+
+        private void Grid_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var grid = (Grid) sender;
+            if (!grid.IsKeyboardFocusWithin)
+            {
+                var children = LogicalTreeHelper.GetChildren(grid);
+
+                //聚焦最后一个Button
+                foreach (FrameworkElement child in children)
+                {
+                    if (child.Tag?.ToString() == "HideBtn" && !child.IsFocused)
+                    {
+                        child.Focus();
+                    }
                 }
             }
         }
