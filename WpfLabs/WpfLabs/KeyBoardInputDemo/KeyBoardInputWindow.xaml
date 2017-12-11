@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfLabs.KeyBoardInputDemo.KeyBoardInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.KeyBoardInputDemo"
+        mc:Ignorable="d"
+        Title="KeyBoardInputWindow" Height="600" Width="800" KeyDown="KeyBoardInputWindow_OnKeyDown">
+    <Window.Resources>
+        <local:KeyEventArgsConverter x:Key="KeyEventArgsConverter"/>
+        <DataTemplate x:Key="InputLeyDataTemplate" DataType="KeyEventArgs">
+            <TextBlock Text="{Binding Converter={StaticResource KeyEventArgsConverter}}"/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <ListView x:Name="Displayer" ItemsSource="{Binding ObservableCollection, Mode=OneWay}" ItemTemplate="{StaticResource InputLeyDataTemplate}"/>
+    </Grid>
+</Window>

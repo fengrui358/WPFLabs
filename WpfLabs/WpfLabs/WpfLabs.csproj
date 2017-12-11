@@ -54,8 +54,8 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NAudio, Version=1.8.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.8.3\lib\net35\NAudio.dll</HintPath>
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -179,6 +179,9 @@
     </Compile>
     <Compile Include="FontFamilyDemo\FontFamilyDemoWindowViewModel.cs" />
     <Compile Include="FontFamilyDemo\TextFormattingModeConverter.cs" />
+    <Compile Include="FoucsDemo\FoucsDemoWindow.xaml.cs">
+      <DependentUpon>FoucsDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GenerateBitmapDemo\GenerateBitmapDemo.xaml.cs">
       <DependentUpon>GenerateBitmapDemo.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
     </Compile>
     <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="Helper\WPFUriHelper.cs" />
+    <Compile Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml.cs">
+      <DependentUpon>KeyBoardInputWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="KeyBoardInputDemo\KeyEventArgsConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -365,6 +372,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FoucsDemo\FoucsDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GenerateBitmapDemo\GenerateBitmapDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +389,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IconDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

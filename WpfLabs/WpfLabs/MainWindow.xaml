@@ -40,6 +40,8 @@
                 <Button Content="展示NewCallAnimationWindow" Command="{Binding ShowControlWindow}" CommandParameter="NewCallAnimationWindow" />
                 <Button Content="展示GenerateBitmapDemo" Command="{Binding ShowControlWindow}" CommandParameter="GenerateBitmapDemo" />
                 <Button Content="展示FontFamilyDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="FontFamilyDemoWindow" />
+                <Button Content="展示FoucsDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="FoucsDemoWindow" />
+                <Button Content="展示KeyBoardInputWindow" Command="{Binding ShowControlWindow}" CommandParameter="KeyBoardInputWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
