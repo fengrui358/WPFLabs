@@ -148,6 +148,7 @@
     <Compile Include="DrawingDemo\DrawingDemoWindow.xaml.cs">
       <DependentUpon>DrawingDemoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DrawingDemo\PathImage\PathImage2.cs" />
     <Compile Include="DrawingDemo\PathImageHelper.cs" />
     <Compile Include="DrawingDemo\PathImage\PathImage.cs" />
     <Compile Include="ExpertPanel2\ExpertPanel2.xaml.cs">
