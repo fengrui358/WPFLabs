@@ -23,6 +23,7 @@ using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.DataGridDetailList;
 using WpfLabs.DrawingDemo;
+using WpfLabs.EllipsisLoading;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
@@ -159,6 +160,10 @@ namespace WpfLabs
                 case "KeyBoardInputWindow":
                     var keyBoardInputWindow = new KeyBoardInputWindow();
                     keyBoardInputWindow.ShowDialog();
+                    break;
+                case "EllipsisLoadingDemoWindow":
+                    var ellipsisLoadingDemoWindow = new EllipsisLoadingDemoWindow();
+                    ellipsisLoadingDemoWindow.ShowDialog();
                     break;
             }
 

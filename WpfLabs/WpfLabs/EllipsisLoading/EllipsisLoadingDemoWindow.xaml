@@ -1,0 +1,40 @@
+﻿<Window x:Class="WpfLabs.EllipsisLoading.EllipsisLoadingDemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.EllipsisLoading"
+        mc:Ignorable="d"
+        Title="EllipsisLoadingDemoWindow" Height="300" Width="300">
+    <Window.Resources>
+        <Style x:Key="TestStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Background="LightCoral">
+            <TextBlock Text="测试" Style="{StaticResource TestStyle}"/>
+            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}">
+                <local:EllipsisLoading.Resources>
+                    <Style BasedOn="{StaticResource TestStyle}" TargetType="TextBlock"/>    
+                </local:EllipsisLoading.Resources>
+            </local:EllipsisLoading>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Background="LightBlue">
+            <TextBlock Text="测试"/>
+            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Background="LightGray">
+            <TextBlock Text="测试"/>
+            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"/>
+        </StackPanel>
+        <Button Grid.Row="3" VerticalAlignment="Bottom" Width="100" Height="50" Click="IsActiveBtn_OnClick" Content="激活"/>
+    </Grid>
+</Window>
