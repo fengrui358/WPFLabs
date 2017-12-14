@@ -41,22 +41,11 @@ namespace WpfLabs.EllipsisLoading
                             DispatcherPriority.Normal, ellipsisLoading.FlashingCallback, Dispatcher.CurrentDispatcher);
                 }
 
-                for (int i = 0; i < ellipsisLoading.EllipsisCount; i++)
-                {
-                    ellipsisLoading.Container.Children.Add(
-                        new TextBlock
-                        {
-                            Text = ".",
-                            Visibility = ellipsisLoading.IsHidePlaceholder ? Visibility.Hidden : Visibility.Collapsed
-                        });
-                }
-
                 ellipsisLoading._dispatcherTimer.Start();
             }
             else
             {
                 ellipsisLoading._dispatcherTimer?.Stop();
-                ellipsisLoading.Container.Children.Clear();
             }
         }
 
@@ -67,6 +56,11 @@ namespace WpfLabs.EllipsisLoading
         /// <param name="eventArgs"></param>
         private void FlashingCallback(object sender, EventArgs eventArgs)
         {
+            if (Container.Children.Count == 0)
+            {
+                return;
+            }
+
             var lastIsVisibleIndex = -1;
 
             for (var i = 0; i < Container.Children.Count; i++)
@@ -103,7 +97,7 @@ namespace WpfLabs.EllipsisLoading
 
         public static readonly DependencyProperty EllipsisCountProperty = DependencyProperty.Register(
             "EllipsisCount", typeof(int), typeof(EllipsisLoading),
-            new FrameworkPropertyMetadata(3), ValidateValueCallback);
+            new FrameworkPropertyMetadata(3, EllipsisCountPropertyChangedCallback), ValidateValueCallback);
 
         /// <summary>
         /// 省略号数量
@@ -112,6 +106,35 @@ namespace WpfLabs.EllipsisLoading
         {
             get { return (int) GetValue(EllipsisCountProperty); }
             set { SetValue(EllipsisCountProperty, value); }
+        }
+
+        private static void EllipsisCountPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var ellipsisLoading = (EllipsisLoading)dependencyObject;
+            var oldValue = (int) dependencyPropertyChangedEventArgs.OldValue;
+            var newValue = (int)dependencyPropertyChangedEventArgs.NewValue;
+
+            if (newValue > oldValue)
+            {
+                //新增
+                for (int i = oldValue; i < newValue; i++)
+                {
+                    ellipsisLoading.Container.Children.Add(
+                        new TextBlock
+                        {
+                            Text = ".",
+                            Visibility = ellipsisLoading.IsHidePlaceholder ? Visibility.Hidden : Visibility.Collapsed
+                        });
+                }
+            }
+            else
+            {
+                //减少
+                for (var i = ellipsisLoading.Container.Children.Count - 1; i >= newValue; i--)
+                {
+                    ellipsisLoading.Container.Children.RemoveAt(i);
+                }
+            }
         }
 
         #endregion
@@ -214,6 +237,16 @@ namespace WpfLabs.EllipsisLoading
         public EllipsisLoading()
         {
             InitializeComponent();
+
+            for (int i = 0; i < EllipsisCount; i++)
+            {
+                Container.Children.Add(
+                    new TextBlock
+                    {
+                        Text = ".",
+                        Visibility = IsHidePlaceholder ? Visibility.Hidden : Visibility.Collapsed
+                    });
+            }
         }
 
         #endregion
