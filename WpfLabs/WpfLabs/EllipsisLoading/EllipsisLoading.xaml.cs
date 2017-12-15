@@ -221,6 +221,11 @@ namespace WpfLabs.EllipsisLoading
                     }
                 }
             }
+
+            if (!ellipsisLoading.IsActive)
+            {
+                ellipsisLoading.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
