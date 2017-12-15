@@ -41,10 +41,12 @@ namespace WpfLabs.EllipsisLoading
                             DispatcherPriority.Normal, ellipsisLoading.FlashingCallback, Dispatcher.CurrentDispatcher);
                 }
 
+                ellipsisLoading.Visibility = Visibility.Visible;
                 ellipsisLoading._dispatcherTimer.Start();
             }
             else
             {
+                ellipsisLoading.Visibility = Visibility.Collapsed;
                 ellipsisLoading._dispatcherTimer?.Stop();
             }
         }
