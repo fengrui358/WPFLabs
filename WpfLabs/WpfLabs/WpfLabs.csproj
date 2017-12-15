@@ -151,6 +151,7 @@
     <Compile Include="DrawingDemo\PathImage\PathImage2.cs" />
     <Compile Include="DrawingDemo\PathImageHelper.cs" />
     <Compile Include="DrawingDemo\PathImage\PathImage.cs" />
+    <Compile Include="EllipsisLoading\ActiveMsgConverter.cs" />
     <Compile Include="EllipsisLoading\EllipsisLoading.xaml.cs">
       <DependentUpon>EllipsisLoading.xaml</DependentUpon>
     </Compile>

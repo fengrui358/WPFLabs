@@ -163,7 +163,7 @@ namespace WpfLabs.EllipsisLoading
             if (ellipsisLoading._dispatcherTimer != null)
             {
                 ellipsisLoading._dispatcherTimer.Interval =
-                    TimeSpan.FromMilliseconds((double)dependencyPropertyChangedEventArgs.NewValue);
+                    TimeSpan.FromMilliseconds((int)dependencyPropertyChangedEventArgs.NewValue);
             }
         }
 

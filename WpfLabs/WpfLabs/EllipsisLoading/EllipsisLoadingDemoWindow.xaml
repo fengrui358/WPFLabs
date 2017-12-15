@@ -8,33 +8,58 @@
         Title="EllipsisLoadingDemoWindow" Height="300" Width="300">
     <Window.Resources>
         <Style x:Key="TestStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="Blue"/>
-            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Foreground" Value="Blue" />
+            <Setter Property="FontStyle" Value="Italic" />
         </Style>
+        <local:ActiveMsgConverter x:Key="ActiveMsgConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Background="LightCoral">
-            <TextBlock Text="测试" Style="{StaticResource TestStyle}"/>
-            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}">
+            <TextBlock Text="测试" Style="{StaticResource TestStyle}" />
+            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"
+                                   IsHidePlaceholder="{Binding ElementName=IsHidePlaceholder, Path=IsChecked, Mode=OneWay}"
+                                   EllipsisCount="{Binding ElementName=EllipsisCount, Path=Value, Mode=OneWay}"
+                                   IntervalMillionSeconds="{Binding ElementName=IntervalMillionSeconds, Path=Value, Mode=OneWay}">
                 <local:EllipsisLoading.Resources>
-                    <Style BasedOn="{StaticResource TestStyle}" TargetType="TextBlock"/>    
+                    <Style BasedOn="{StaticResource TestStyle}" TargetType="TextBlock" />
                 </local:EllipsisLoading.Resources>
             </local:EllipsisLoading>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Background="LightBlue">
-            <TextBlock Text="测试"/>
-            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"/>
+            <TextBlock Text="测试" />
+            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"
+                                   IsHidePlaceholder="{Binding ElementName=IsHidePlaceholder, Path=IsChecked, Mode=OneWay}"
+                                   EllipsisCount="{Binding ElementName=EllipsisCount, Path=Value, Mode=OneWay}"
+                                   IntervalMillionSeconds="{Binding ElementName=IntervalMillionSeconds, Path=Value, Mode=OneWay}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Background="LightGray">
-            <TextBlock Text="测试"/>
-            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"/>
+            <TextBlock Text="测试" />
+            <local:EllipsisLoading IsActive="{Binding IsStart, Mode=OneWay}"
+                                   IsHidePlaceholder="{Binding ElementName=IsHidePlaceholder, Path=IsChecked, Mode=OneWay}"
+                                   EllipsisCount="{Binding ElementName=EllipsisCount, Path=Value, Mode=OneWay}"
+                                   IntervalMillionSeconds="{Binding ElementName=IntervalMillionSeconds, Path=Value, Mode=OneWay}"/>
         </StackPanel>
-        <Button Grid.Row="3" VerticalAlignment="Bottom" Width="100" Height="50" Click="IsActiveBtn_OnClick" Content="激活"/>
+        <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="占位" MinWidth="80"/>
+                <CheckBox x:Name="IsHidePlaceholder" IsChecked="False" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="省略号数量" MinWidth="80"/>
+                <Slider x:Name="EllipsisCount" Width="100" Minimum="1" Maximum="20" Value="3" Interval="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="动画时长" MinWidth="80"/>
+                <Slider x:Name="IntervalMillionSeconds" Width="100" Minimum="100" Maximum="2000" Value="400" />
+            </StackPanel>
+            <Button Width="100" Height="50" Click="IsActiveBtn_OnClick"
+                    Content="{Binding IsStart, Converter={StaticResource ActiveMsgConverter}, Mode=OneWay}" />
+        </StackPanel>
     </Grid>
 </Window>
