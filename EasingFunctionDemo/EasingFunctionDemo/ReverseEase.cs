@@ -17,7 +17,7 @@ namespace EasingFunctionDemo
 
         protected override double EaseInCore(double normalizedTime)
         {
-            return 1 - normalizedTime;
+            return 1 - normalizedTime
         }
     }
 }
