@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media.Animation;
 
 namespace EasingFunctionDemo
@@ -17,7 +12,7 @@ namespace EasingFunctionDemo
 
         protected override double EaseInCore(double normalizedTime)
         {
-            return 1 - normalizedTime
+            return 1 - normalizedTime;
         }
     }
 }
