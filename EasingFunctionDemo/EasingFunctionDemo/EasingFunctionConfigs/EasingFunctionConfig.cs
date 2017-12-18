@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Windows;
 using System.Windows.Media.Animation;
 using GalaSoft.MvvmLight;
@@ -18,8 +17,7 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 if (_configEasingFunction != value)
                 {
                     _configEasingFunction = value;
-                    var ui = ConfigUi as EasingFunctionConfigUi;
-                    if (ui != null)
+                    if (ConfigUi is EasingFunctionConfigUi ui)
                     {
                         ui.ConfigEasingFunctionChanged -=
                             OnConfigEasingFunctionChanged;
@@ -30,11 +28,11 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                         SplineKeyFrameConfig = null;
 
                         var newEasingFunctionConfigUi =
-                            new EasingFunctionConfigUi((EasingFunctionBase)_configEasingFunction);
+                            new EasingFunctionConfigUi((EasingFunctionBase) _configEasingFunction);
                         newEasingFunctionConfigUi.ConfigEasingFunctionChanged += OnConfigEasingFunctionChanged;
                         ConfigUi = newEasingFunctionConfigUi;
                     }
-                    
+
                     RaisePropertyChanged();
                 }
             }
@@ -50,8 +48,7 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
                 if (_splineKeyFrameConfig != value)
                 {
                     _splineKeyFrameConfig = value;
-                    var ui = ConfigUi as SplineKeyFrameConfigUi;
-                    if (ui != null)
+                    if (ConfigUi is SplineKeyFrameConfigUi ui)
                     {
                         ui.ConfigEasingFunctionChanged -=
                             OnConfigEasingFunctionChanged;
@@ -79,8 +76,8 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
 
         public UIElement ConfigUi
         {
-            get { return _configUi; }
-            private set { Set(ref _configUi, value); }
+            get => _configUi;
+            private set => Set(ref _configUi, value);
         }
 
         public void SetEasingFunctionType(Type easingFunctionType)
@@ -99,13 +96,13 @@ namespace EasingFunctionDemo.EasingFunctionConfigs
             {
                 if (ConfigEasingFunction == null)
                 {
-                    ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
+                    ConfigEasingFunction = (IEasingFunction) Activator.CreateInstance(easingFunctionType);
                 }
                 else if (ConfigEasingFunction.GetType() != easingFunctionType)
                 {
-                    ConfigEasingFunction = (IEasingFunction)Activator.CreateInstance(easingFunctionType);
+                    ConfigEasingFunction = (IEasingFunction) Activator.CreateInstance(easingFunctionType);
                 }
-            }            
+            }
         }
 
         public bool IsSplineKeyFrame => SplineKeyFrameConfig != null;

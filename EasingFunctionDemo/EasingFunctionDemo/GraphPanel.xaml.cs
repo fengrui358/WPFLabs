@@ -40,16 +40,17 @@ namespace EasingFunctionDemo
 
         public EasingFunctionConfig EasingFunction
         {
-            get => (EasingFunctionConfig)GetValue(EasingFunctionProperty);
+            get => (EasingFunctionConfig) GetValue(EasingFunctionProperty);
             set => SetValue(EasingFunctionProperty, value);
         }
 
         public static readonly DependencyProperty CurrentProgressProperty = DependencyProperty.Register(
-            "CurrentProgress", typeof(double), typeof(GraphPanel), new FrameworkPropertyMetadata(OnCurrentProgressChanged));
+            "CurrentProgress", typeof(double), typeof(GraphPanel),
+            new FrameworkPropertyMetadata(OnCurrentProgressChanged));
 
         public double CurrentProgress
         {
-            get => (double)GetValue(CurrentProgressProperty);
+            get => (double) GetValue(CurrentProgressProperty);
             set => SetValue(CurrentProgressProperty, value);
         }
 
@@ -75,11 +76,11 @@ namespace EasingFunctionDemo
             {
                 context.BeginFigure(_startPoint, false, false);
                 context.LineTo(_startPoint + xVector, true, false);
-                
+
                 context.BeginFigure(_startPoint, false, false);
                 context.LineTo(_startPoint + yVector, true, false);
             }
-            
+
             cordinate.Data = streamGeometry;
             Container.Children.Add(cordinate);
         }
@@ -91,7 +92,7 @@ namespace EasingFunctionDemo
 
         private static void EasingFunctionPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var graphPanel = (GraphPanel)d;
+            var graphPanel = (GraphPanel) d;
             var oldEasingFunctionConfig = e.OldValue as EasingFunctionConfig;
             var newEasingFunctionConfig = e.NewValue as EasingFunctionConfig;
 
@@ -118,15 +119,16 @@ namespace EasingFunctionDemo
             if (EasingFunction?.ConfigEasingFunction != null || EasingFunction?.SplineKeyFrameConfig != null)
             {
                 var streamGeometry = new StreamGeometry();
-                
+
                 using (var context = streamGeometry.Open())
                 {
                     context.BeginFigure(_startPoint, false, false);
 
                     if (!EasingFunction.IsSplineKeyFrame)
                     {
-                        var easingFunctionBase = EasingFunction.ConfigEasingFunction as EasingFunctionBase;
-                        if (easingFunctionBase != null)
+                        RemoveControlPoints();
+
+                        if (EasingFunction.ConfigEasingFunction is EasingFunctionBase)
                         {
                             foreach (var t in _milliSecondsUnit)
                             {
@@ -157,7 +159,7 @@ namespace EasingFunctionDemo
                             Container.Children.Add(_controlLine1);
                         }
 
-                        Canvas.SetLeft(_controlPoint1, _bezierControlPoint1.X -3);
+                        Canvas.SetLeft(_controlPoint1, _bezierControlPoint1.X - 3);
                         Canvas.SetTop(_controlPoint1, _bezierControlPoint1.Y - 3);
                         _controlLine1.X1 = _bezierControlPoint1.X;
                         _controlLine1.Y1 = _bezierControlPoint1.Y;
@@ -166,15 +168,15 @@ namespace EasingFunctionDemo
 
                         if (_controlPoint2 == null)
                         {
-                            _controlPoint2 = new Ellipse { Width = 6, Height = 6, Fill = Brushes.DarkCyan };
+                            _controlPoint2 = new Ellipse {Width = 6, Height = 6, Fill = Brushes.DarkCyan};
                             Container.Children.Add(_controlPoint2);
 
-                            _controlLine2 = new Line { Stroke = Brushes.DarkCyan, StrokeThickness = 1 };
+                            _controlLine2 = new Line {Stroke = Brushes.DarkCyan, StrokeThickness = 1};
                             Container.Children.Add(_controlLine2);
                         }
 
                         Canvas.SetLeft(_controlPoint2, _bezierControlPoint2.X - 3);
-                        Canvas.SetTop(_controlPoint2, _bezierControlPoint2.Y -3);
+                        Canvas.SetTop(_controlPoint2, _bezierControlPoint2.Y - 3);
                         _controlLine2.X1 = _bezierControlPoint2.X;
                         _controlLine2.Y1 = _bezierControlPoint2.Y;
                         _controlLine2.X2 = _endPoint.X;
@@ -255,15 +257,46 @@ namespace EasingFunctionDemo
 
                     //公式参考：https://www.cnblogs.com/hnfxs/p/3148483.html
                     var value = new Vector(_startPoint.X, _startPoint.Y) * Math.Pow(1 - t, 3) +
-                            3 * new Vector(_bezierControlPoint1.X, _bezierControlPoint1.Y) * t * Math.Pow(1 - t, 2) +
-                            3 * new Vector(_bezierControlPoint2.X, _bezierControlPoint2.Y) * Math.Pow(t, 2) * (1 - t) +
-                            new Vector(_endPoint.X, _endPoint.Y) * Math.Pow(t, 3);
+                                3 * new Vector(_bezierControlPoint1.X, _bezierControlPoint1.Y) * t *
+                                Math.Pow(1 - t, 2) +
+                                3 * new Vector(_bezierControlPoint2.X, _bezierControlPoint2.Y) * Math.Pow(t, 2) *
+                                (1 - t) +
+                                new Vector(_endPoint.X, _endPoint.Y) * Math.Pow(t, 3);
 
                     return new Vector(value.X - _startPoint.X, value.Y - _startPoint.Y);
                 }
             }
 
             return new Vector();
+        }
+
+        /// <summary>
+        /// 清理三次贝塞尔速率曲线的控制点
+        /// </summary>
+        private void RemoveControlPoints()
+        {
+            _bezierControlPoint1 = new Point(0, 0);
+            _bezierControlPoint2 = new Point(0, 0);
+
+            if (_controlPoint1 != null)
+            {
+                Container.Children.Remove(_controlPoint1);
+            }
+
+            if (_controlPoint2 != null)
+            {
+                Container.Children.Remove(_controlPoint2);
+            }
+
+            if (_controlLine1 != null)
+            {
+                Container.Children.Remove(_controlLine1);
+            }
+
+            if (_controlLine2 != null)
+            {
+                Container.Children.Remove(_controlLine2);
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EasingFunctionDemo"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="动画速率可视化" Height="800" Width="800" WindowStartupLocation="CenterScreen">
+        Title="动画速率可视化" Height="700" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate x:Key="EasingFunctionTypeKey" DataType="{x:Type system:Type}">
             <TextBlock Text="{Binding Name}"/>
