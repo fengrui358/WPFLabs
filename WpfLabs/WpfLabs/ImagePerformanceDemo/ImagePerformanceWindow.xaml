@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfLabs.ImagePerformanceDemo.ImagePerformanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.ImagePerformanceDemo"
+        mc:Ignorable="d"
+        Title="ImagePerformanceWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Content="图片数量："/>
+            <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+        </StackPanel>
+        <UniformGrid Grid.Row="1" Rows="2" Columns="2" Button.Click="ShowWindow_OnClick">
+            <Button Width="100" Height="30" Content="Png"/>
+            <Button Width="100" Height="30" Content="Svg"/>
+            <Button Width="100" Height="30" Content="Path"/>
+            <Button Width="100" Height="30" Content="Font"/>
+        </UniformGrid>
+    </Grid>
+</Window>

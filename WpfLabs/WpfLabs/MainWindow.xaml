@@ -43,6 +43,7 @@
                 <Button Content="展示FoucsDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="FoucsDemoWindow" />
                 <Button Content="展示KeyBoardInputWindow" Command="{Binding ShowControlWindow}" CommandParameter="KeyBoardInputWindow" />
                 <Button Content="展示EllipsisLoadingDemoWindow" Command="{Binding ShowControlWindow}" CommandParameter="EllipsisLoadingDemoWindow" />
+                <Button Content="展示ImagePerformanceWindow" Command="{Binding ShowControlWindow}" CommandParameter="ImagePerformanceWindow" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

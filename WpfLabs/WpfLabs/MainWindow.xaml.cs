@@ -30,6 +30,7 @@ using WpfLabs.FlexDataGrid;
 using WpfLabs.FontFamilyDemo;
 using WpfLabs.FoucsDemo;
 using WpfLabs.GifShowDemo;
+using WpfLabs.ImagePerformanceDemo;
 using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
@@ -164,6 +165,10 @@ namespace WpfLabs
                 case "EllipsisLoadingDemoWindow":
                     var ellipsisLoadingDemoWindow = new EllipsisLoadingDemoWindow();
                     ellipsisLoadingDemoWindow.ShowDialog();
+                    break;
+                case "ImagePerformanceWindow":
+                    var imagePerformanceWindow = new ImagePerformanceWindow();
+                    imagePerformanceWindow.ShowDialog();
                     break;
             }
 
