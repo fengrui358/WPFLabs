@@ -23,7 +23,7 @@ namespace WpfLabs.ImagePerformanceDemo
 
         public ImagePerformanceWindow()
         {
-            Count = 10000;
+            Count = 3000;
             InitializeComponent();
 
             DataContext = this;
@@ -42,6 +42,9 @@ namespace WpfLabs.ImagePerformanceDemo
                     break;
                 case "PATH":
                     new PathImages(Count).ShowDialog();
+                    break;
+                case "FONT":
+                    new FontImages(Count).ShowDialog();
                     break;
             }
         }

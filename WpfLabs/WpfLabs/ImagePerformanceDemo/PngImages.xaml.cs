@@ -33,7 +33,7 @@ namespace WpfLabs.ImagePerformanceDemo
                 Container.Children.Add(new Image
                 {
                     Source = new BitmapImage(new Uri(
-                        "pack://application:,,,/WpfLabs;component/ImagePerformanceDemo/Resources/Cheese-WF.png")),
+                        "pack://application:,,,/WpfLabs;component/ImagePerformanceDemo/Resources/timer.png")),
                     Stretch = Stretch.None
                 });
             }

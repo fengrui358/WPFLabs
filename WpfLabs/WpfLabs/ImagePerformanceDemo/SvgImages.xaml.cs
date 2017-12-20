@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using ClipArtViewer;
 
 namespace WpfLabs.ImagePerformanceDemo
 {
@@ -10,40 +12,45 @@ namespace WpfLabs.ImagePerformanceDemo
     /// SvgImages.xaml 的交互逻辑
     /// Svg图片集合
     /// </summary>
-    public partial class SvgImages : Window
+    public partial class SvgImages
     {
+        private long _oldWorkingSet64;
+        private Stopwatch _stopwatch;
+
         public SvgImages(int count)
         {
             InitializeComponent();
 
-            var sw = Stopwatch.StartNew();
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    Container.Children.Add(new Image
-            //    {
-            //        Source = new BitmapImage
-            //        {
-            //            UriSource =
-            //                new Uri(
-            //                    "pack://application:,,,/WpfLabs;component/ImagePerformanceDemo/Resources/Cheese-WF.png", UriKind.RelativeOrAbsolute)
-            //        }
-            //    });
-            //}
+            GC.Collect();
 
-            var bi = new BitmapImage(new Uri("pack://application:,,,/WpfLabs;component/ImagePerformanceDemo/Resources/Cheese-WF.png"));
+            RecordStart();
+            CreateImages(count);
+        }
 
-            var img = new Image
+        private void CreateImages(int count)
+        {
+            for (int i = 0; i < count; i++)
             {
-                Source = bi
-            };
-            Container.Children.Add(img);
-            sw.Stop();
-            Msg.Text = $"耗时：{sw.ElapsedMilliseconds}ms";
+                var svgRender = new SVGRender();
+                var image = svgRender.LoadDrawing("ImagePerformanceDemo/Resources/timer.svg");
+
+                Container.Children.Add(new SVGImage
+                {
+                    ImageSource = image,
+                    SizeType = SVGImage.eSizeType.ContentToSizeNoStretch
+                });
+            }
+        }
+
+        private void RecordStart()
+        {
+            _stopwatch = Stopwatch.StartNew();
         }
 
         private void Window_OnLoaded(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            _stopwatch.Stop();
+            Msg.Text = $"耗时：{_stopwatch.ElapsedMilliseconds}ms";
         }
     }
 }
