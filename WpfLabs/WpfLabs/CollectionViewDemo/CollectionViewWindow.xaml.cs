@@ -10,19 +10,26 @@ namespace WpfLabs.CollectionViewDemo
     public partial class CollectionViewWindow
     {
         private const int Max = 10000;
-        public List<ItemModel> ItemModels { get; set; }
 
         public CollectionViewWindow()
         {
-            ItemModels = new List<ItemModel>(Max);
-            for (int i = 0; i < Max; i++)
-            {
-                ItemModels.Add(ItemModel.GetNewItem());
-            }
-
             InitializeComponent();
 
-            CollectionNormal.ItemModels = ItemModels;
+            var itemModels = new List<ItemModel>(Max);
+            for (int i = 0; i < Max; i++)
+            {
+                itemModels.Add(ItemModel.GetNewItem());
+            }
+
+            CollectionNormal.ItemModels = itemModels;
+
+            itemModels = new List<ItemModel>(Max);
+            for (int i = 0; i < Max; i++)
+            {
+                itemModels.Add(ItemModel.GetNewItem());
+            }
+
+            CollectionView.ItemModels = new ObservableCollection<ItemModel>(itemModels);
         }
     }
 }

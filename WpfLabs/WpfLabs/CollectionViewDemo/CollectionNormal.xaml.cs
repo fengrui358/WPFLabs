@@ -13,7 +13,7 @@ namespace WpfLabs.CollectionViewDemo
     /// </summary>
     public partial class CollectionNormal : INotifyPropertyChanged
     {
-        private Stopwatch _stopwatch = new Stopwatch();
+        private readonly Stopwatch _stopwatch = new Stopwatch();
         public List<ItemModel> ItemModels { get; set; }
 
         private ObservableCollection<ItemModel> _displayItemModels;
@@ -90,8 +90,7 @@ namespace WpfLabs.CollectionViewDemo
 
             if (ItemModels.Any())
             {
-                ItemModels = ItemModels.OrderBy(s => s.Name).ToList();
-                Refresh();
+                DisplayItemModels = new ObservableCollection<ItemModel>(DisplayItemModels.OrderBy(s => s.Name).ToList());
             }
 
             _stopwatch.Stop();
@@ -104,8 +103,7 @@ namespace WpfLabs.CollectionViewDemo
 
             if (ItemModels.Any())
             {
-                ItemModels = ItemModels.OrderByDescending(s => s.Name).ToList();
-                Refresh();
+                DisplayItemModels = new ObservableCollection<ItemModel>(DisplayItemModels.OrderByDescending(s => s.Name).ToList());
             }
 
             _stopwatch.Stop();

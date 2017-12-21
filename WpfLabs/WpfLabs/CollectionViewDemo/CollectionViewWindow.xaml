@@ -12,7 +12,7 @@
                 <local:CollectionNormal x:Name="CollectionNormal"/>
             </TabItem>
             <TabItem Header="视图集合">
-                <!--<local:CollectionView ItemModels="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ItemModels}"/>-->
+                <local:CollectionView x:Name="CollectionView"/>
             </TabItem>
         </TabControl>
     </Grid>
