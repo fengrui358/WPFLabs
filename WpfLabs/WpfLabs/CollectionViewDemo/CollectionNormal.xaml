@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="WpfLabs.CollectionViewDemo.CollectionNormal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfLabs.CollectionViewDemo"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" ItemsSource="{Binding DisplayItemModels}" AutoGenerateColumns="True" CanUserSortColumns="True"/>
+        <WrapPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="筛选Name"/>
+                <TextBox Text="{Binding Key}" MinWidth="100" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button Content="刷新" Click="Refresh_OnClick"/>
+            <Button Content="+1" Click="Add_OnClick"/>
+            <Button Content="-1" Click="Sub_OnClick"/>
+            <Button Content="Name↑" Click="Up_OnClick"/>
+            <Button Content="Name↓" Click="Down_OnClick"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="操作耗时"/>
+                <TextBlock Text="{Binding ElapsedMilliseconds, StringFormat={}{0}ms}" VerticalAlignment="Center"/>
+            </StackPanel>
+        </WrapPanel>
+    </Grid>
+</UserControl>

@@ -4,7 +4,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Generic.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="IconDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="MasterDetailDataGrid/Style/DataGridNormalStyle.xaml"></ResourceDictionary>
+                <!--<ResourceDictionary Source="MasterDetailDataGrid/Style/DataGridNormalStyle.xaml"></ResourceDictionary>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
   </Application.Resources>

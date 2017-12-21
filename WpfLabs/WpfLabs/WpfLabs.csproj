@@ -104,6 +104,16 @@
     <Compile Include="CircularLoading\CircularLoadingWindow.xaml.cs">
       <DependentUpon>CircularLoadingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CollectionViewDemo\CollectionNormal.xaml.cs">
+      <DependentUpon>CollectionNormal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectionViewDemo\CollectionView.xaml.cs">
+      <DependentUpon>CollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectionViewDemo\CollectionViewWindow.xaml.cs">
+      <DependentUpon>CollectionViewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectionViewDemo\ItemModel.cs" />
     <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
@@ -335,6 +345,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CircularLoading\Themes\CircularLoadingStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectionViewDemo\CollectionNormal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectionViewDemo\CollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectionViewDemo\CollectionViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

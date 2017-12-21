@@ -19,6 +19,7 @@ using GalaSoft.MvvmLight.Command;
 using WpfLabs.BindingDemo;
 using WpfLabs.CalloutBorder;
 using WpfLabs.CircularLoading;
+using WpfLabs.CollectionViewDemo;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.DataGridDetailList;
@@ -169,6 +170,10 @@ namespace WpfLabs
                 case "ImagePerformanceWindow":
                     var imagePerformanceWindow = new ImagePerformanceWindow();
                     imagePerformanceWindow.ShowDialog();
+                    break;
+                case "CollectionViewWindow":
+                    var collectionViewWindow = new CollectionViewWindow();
+                    collectionViewWindow.ShowDialog();
                     break;
             }
 
