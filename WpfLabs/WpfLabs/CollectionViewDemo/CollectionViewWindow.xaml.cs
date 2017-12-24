@@ -9,7 +9,7 @@ namespace WpfLabs.CollectionViewDemo
     /// </summary>
     public partial class CollectionViewWindow
     {
-        private const int Max = 10000;
+        private const int Max = 100000;
 
         public CollectionViewWindow()
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -91,16 +92,11 @@ namespace WpfLabs.CollectionViewDemo
             {
                 if (DisplayItemModels.SortDescriptions.Any())
                 {
-                    //怎样高性能的变更排序
                     DisplayItemModels.SortDescriptions.Clear();
-                    //var sortDescription = DisplayItemModels.SortDescriptions[0];
-                    //sortDescription.Direction = ListSortDirection.Ascending;
                 }
-                else
-                {
-                    DisplayItemModels.SortDescriptions.Add(new SortDescription(nameof(ItemModel.Name),
-                        ListSortDirection.Ascending));
-                }
+
+                DisplayItemModels.SortDescriptions.Add(new SortDescription(nameof(ItemModel.Name),
+                    ListSortDirection.Ascending));
             }
 
             _stopwatch.Stop();
@@ -116,14 +112,10 @@ namespace WpfLabs.CollectionViewDemo
                 if (DisplayItemModels.SortDescriptions.Any())
                 {
                     DisplayItemModels.SortDescriptions.Clear();
-                    //var sortDescription = DisplayItemModels.SortDescriptions[0];
-                    //sortDescription.Direction = ListSortDirection.Descending;
                 }
-                else
-                {
-                    DisplayItemModels.SortDescriptions.Add(new SortDescription(nameof(ItemModel.Name),
-                        ListSortDirection.Descending));
-                }
+
+                DisplayItemModels.SortDescriptions.Add(new SortDescription(nameof(ItemModel.Name),
+                    ListSortDirection.Descending));
             }
 
             _stopwatch.Stop();
@@ -134,13 +126,11 @@ namespace WpfLabs.CollectionViewDemo
         {
             if (!string.IsNullOrEmpty(Key))
             {
-                //DisplayItemModels = new ObservableCollection<ItemModel>(ItemModels.Where(s => s.Name.Contains(Key)));
-                //DisplayItemModels = DisplayItemModels.Filter(()=>)
+                DisplayItemModels.Filter = o => ((ItemModel)o).Name.Contains(Key);
             }
             else
             {
                 DisplayItemModels = CollectionViewSource.GetDefaultView(ItemModels);
-                //DisplayItemModels = new ObservableCollection<ItemModel>(ItemModels);
             }
         }
 
@@ -149,6 +139,11 @@ namespace WpfLabs.CollectionViewDemo
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void CollectionView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
         }
     }
 }

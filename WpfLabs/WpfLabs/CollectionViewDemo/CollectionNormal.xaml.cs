@@ -128,5 +128,10 @@ namespace WpfLabs.CollectionViewDemo
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void CollectionNormal_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
     }
 }
