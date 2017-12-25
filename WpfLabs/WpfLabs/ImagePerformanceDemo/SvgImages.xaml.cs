@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using ClipArtViewer;
 
 namespace WpfLabs.ImagePerformanceDemo
@@ -14,7 +11,6 @@ namespace WpfLabs.ImagePerformanceDemo
     /// </summary>
     public partial class SvgImages
     {
-        private long _oldWorkingSet64;
         private Stopwatch _stopwatch;
 
         public SvgImages(int count)

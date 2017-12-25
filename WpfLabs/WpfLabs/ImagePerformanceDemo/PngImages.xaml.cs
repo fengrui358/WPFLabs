@@ -13,7 +13,6 @@ namespace WpfLabs.ImagePerformanceDemo
     /// </summary>
     public partial class PngImages
     {
-        private long _oldWorkingSet64;
         private Stopwatch _stopwatch;
 
         public PngImages(int count)

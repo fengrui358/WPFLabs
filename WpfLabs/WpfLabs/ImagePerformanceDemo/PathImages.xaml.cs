@@ -11,7 +11,6 @@ namespace WpfLabs.ImagePerformanceDemo
     /// </summary>
     public partial class PathImages
     {
-        private long _oldWorkingSet64;
         private Stopwatch _stopwatch;
 
         public PathImages(int count)
