@@ -49,8 +49,9 @@ namespace WpfLabs
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
+        private readonly List<ContentControl> _items = new List<ContentControl>();
         public RelayCommand<string> ShowControlWindow { get; private set; }
 
         public MainWindow()
@@ -151,6 +152,10 @@ namespace WpfLabs
                     var newCallAnimationWindow = new NewCallAnimationWindow();
                     newCallAnimationWindow.ShowDialog();
                     break;
+                case "GenerateBitmapDemo":
+                    var generateBitmapDemo = new GenerateBitmapDemo.GenerateBitmapDemo();
+                    generateBitmapDemo.ShowDialog();
+                    break;
                 case "FontFamilyDemoWindow":
                     var fontFamilyDemoWindow = new FontFamilyDemoWindow();
                     fontFamilyDemoWindow.ShowDialog();
@@ -178,6 +183,36 @@ namespace WpfLabs
             }
 
             this.Effect = null;
+        }
+
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txtBox = (TextBox) sender;
+            List<ContentControl> items;
+
+            if (!string.IsNullOrEmpty(txtBox.Text))
+            {
+                items = _items.Where(s => s.Content.ToString().ToUpper().Contains(txtBox.Text.ToUpper())).ToList();
+            }
+            else
+            {
+                items = _items;
+            }
+
+            Container.Items.Clear();
+            foreach (var contentControl in items)
+            {
+                Container.Items.Add(contentControl);
+            }
+        }
+
+        private void Container_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var itemsControl = (ItemsControl) sender;
+            foreach (var itemsControlItem in itemsControl.Items)
+            {
+                _items.Add((ContentControl) itemsControlItem);
+            }
         }
     }
 }

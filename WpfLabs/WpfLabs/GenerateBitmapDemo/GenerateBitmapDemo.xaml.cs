@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace WpfLabs.GenerateBitmapDemo
 {
@@ -62,13 +64,22 @@ namespace WpfLabs.GenerateBitmapDemo
                 rtbitmap.Render(drawingVisual);
                 JpegBitmapEncoder bitmapEncoder = new JpegBitmapEncoder();
                 bitmapEncoder.Frames.Add(BitmapFrame.Create(rtbitmap));
-                using (System.IO.FileStream fs = new System.IO.FileStream("D:\\mq.jpg", System.IO.FileMode.Create))
+
+                var fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{Guid.NewGuid():N}.jpg");
+                using (System.IO.FileStream fs = new System.IO.FileStream(fileName, System.IO.FileMode.Create))
                 {
-                    //jpeg.Save(fs);
+                    bitmapEncoder.Save(fs);
+
+                    //保存后自动打开
+                    Process.Start(fileName);
                 }
             }
         }
 
+        /// <summary>
+        /// 获取DPI值
+        /// </summary>
+        /// <returns></returns>
         private Tuple<double, double> GetDpi()
         {
             using (ManagementClass mc = new ManagementClass("Win32_DesktopMonitor"))
