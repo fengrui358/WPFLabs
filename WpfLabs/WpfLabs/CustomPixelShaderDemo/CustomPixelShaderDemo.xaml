@@ -6,7 +6,7 @@
         xmlns:converter="clr-namespace:WpfLabs.CustomPixelShaderDemo.Converter"
         mc:Ignorable="d"
         Title="CustomPixelShaderDemo" Loaded="CustomPixelShaderDemo_OnLoaded"
-        WindowStartupLocation="CenterScreen" Width="600" Height="400">
+        WindowStartupLocation="CenterScreen" Width="600" Height="600">
     <Window.Resources>
         <ResourceDictionary>
             <converter:PaintSourceConverter x:Key="PaintSourceConverter"/>
@@ -27,7 +27,7 @@
             <ListBox x:Name="PaintsContainer" ItemsSource="{Binding Paints}"/>
         </StackPanel>
         <Image x:Name="Img" Grid.Column="1" Stretch="Uniform" Source="{Binding ElementName=PaintsContainer, Path=SelectedItem, Converter={StaticResource PaintSourceConverter}, Mode=OneWay}"/>
-        <StackPanel Grid.Column="2" >
+        <StackPanel Grid.Column="2">
             <Button Content="清理" Click="CleanBtn_OnClick"/>
             <ListBox ItemsSource="{Binding Effects}" SelectedItem="{Binding SelectedEffect}" ItemTemplate="{StaticResource EffectToStringDataTemplate}"/>
         </StackPanel>
