@@ -35,22 +35,22 @@ namespace WpfLabs.ImagePerformanceDemo
             switch (btn.Content.ToString().ToUpperInvariant())
             {
                 case "PNG":
-                    new PngImages(Count).ShowDialog();
+                    new PngImages(Count) {Owner = this}.ShowDialog();
                     break;
                 case "SVG":
-                    new SvgImages(Count).ShowDialog();
+                    new SvgImages(Count) { Owner = this }.ShowDialog();
                     break;
                 case "PATHIMAGES":
-                    new PathImages(Count).ShowDialog();
+                    new PathImages(Count) { Owner = this }.ShowDialog();
                     break;
                 case "FONT":
-                    new FontImages(Count).ShowDialog();
+                    new FontImages(Count) { Owner = this }.ShowDialog();
                     break;
                 case "PACKICONMATERIALS":
-                    new PackIconMaterials(Count).ShowDialog();
+                    new PackIconMaterials(Count) { Owner = this }.ShowDialog();
                     break;
                 case "PATH":
-                    new PathImages(Count).ShowDialog();
+                    new PathImages(Count) { Owner = this }.ShowDialog();
                     break;
             }
         }

@@ -33,7 +33,11 @@ namespace WpfLabs.ImagePerformanceDemo
                 {
                     Source = new BitmapImage(new Uri(
                         "pack://application:,,,/WpfLabs;component/ImagePerformanceDemo/Resources/timer.png")),
-                    Stretch = Stretch.None
+                    Stretch = Stretch.Fill,
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 });
             }
         }

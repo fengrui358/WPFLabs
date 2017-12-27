@@ -31,8 +31,10 @@ namespace WpfLabs.ImagePerformanceDemo
                 {
                     Fill = Brushes.Red,
                     Stretch = Stretch.Fill,
-                    Width = 30,
-                    Height = 30
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
 
                 var pathDataBinding = new Binding();

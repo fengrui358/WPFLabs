@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:iconPacks="clr-namespace:WpfLabs.ImagePerformanceDemo.CustomerPackIcons"
+                    xmlns:converter="clr-namespace:MahApps.Metro.IconPacks.Converter;assembly=MahApps.Metro.IconPacks">
+    <Style TargetType="{x:Type iconPacks:CustomerPackIcon}">
+        <Setter Property="FrameworkElement.Height" Value="16"/>
+        <Setter Property="FrameworkElement.Width" Value="16"/>
+        <Setter Property="Control.Padding" Value="0"/>
+        <Setter Property="FrameworkElement.FlowDirection" Value="LeftToRight"/>
+        <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
+        <Setter Property="FrameworkElement.VerticalAlignment" Value="Top"/>
+        <Setter Property="Control.IsTabStop" Value="false"/>
+        <Setter Property="UIElement.SnapsToDevicePixels" Value="false"/>
+        <Setter Property="FrameworkElement.UseLayoutRounding" Value="false"/>
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type iconPacks:CustomerPackIcon}">
+                    <Grid>
+                        <Border Background="{TemplateBinding Control.Background}"
+                    BorderBrush="{TemplateBinding Control.BorderBrush}"
+                    BorderThickness="{TemplateBinding Control.BorderThickness}"
+                    SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                        <Grid x:Name="PART_InnerGrid" RenderTransformOrigin="0.5 0.5"
+                  Margin="{TemplateBinding Control.BorderThickness}">
+                            <UIElement.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform x:Name="FlipTransform"
+                                  ScaleX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Flip, Mode=OneWay, Converter={converter:FlipToScaleXValueConverter}}"
+                                  ScaleY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Flip, Mode=OneWay, Converter={converter:FlipToScaleYValueConverter}}"/>
+                                    <RotateTransform x:Name="RotationTransform"
+                                   Angle="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Rotation, Mode=OneWay}"/>
+                                    <RotateTransform x:Name="SpinTransform"/>
+                                </TransformGroup>
+                            </UIElement.RenderTransform>
+                            <Viewbox Margin="{TemplateBinding Control.Padding}">
+                                <Path Fill="{TemplateBinding Control.Foreground}" Stretch="Uniform" SnapsToDevicePixels="false"
+                      UseLayoutRounding="false"
+                      Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={converter:NullToUnsetValueConverter}}"/>
+                            </Viewbox>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

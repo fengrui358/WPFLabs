@@ -212,6 +212,9 @@
     </Compile>
     <Compile Include="Helper\ThicknessHelper.cs" />
     <Compile Include="Helper\WPFUriHelper.cs" />
+    <Compile Include="ImagePerformanceDemo\CustomerPackIcons\CustomerPackIcon.cs" />
+    <Compile Include="ImagePerformanceDemo\CustomerPackIcons\CustomerPackIconDataFactory.cs" />
+    <Compile Include="ImagePerformanceDemo\CustomerPackIcons\CustomerPackIconKind.cs" />
     <Compile Include="ImagePerformanceDemo\FontImages.xaml.cs">
       <DependentUpon>FontImages.xaml</DependentUpon>
     </Compile>
@@ -482,6 +485,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImagePerformanceDemo\PngImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImagePerformanceDemo\Resources\CustomerPackIconStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

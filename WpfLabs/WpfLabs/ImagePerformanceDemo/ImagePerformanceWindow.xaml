@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.ImagePerformanceDemo"
         mc:Ignorable="d"
-        Title="ImagePerformanceWindow" Height="300" Width="300">
+        Title="ImagePerformanceWindow" Height="300" Width="300" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,20,0,0">
             <Label Content="图片数量："/>
-            <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+            <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="100" VerticalContentAlignment="Center"/>
         </StackPanel>
         <UniformGrid Grid.Row="1" Rows="3" Columns="2" Button.Click="ShowWindow_OnClick">
             <Button Width="100" Height="30" Content="Png"/>

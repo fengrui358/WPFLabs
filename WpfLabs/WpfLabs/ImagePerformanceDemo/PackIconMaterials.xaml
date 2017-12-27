@@ -4,14 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.ImagePerformanceDemo"
+        xmlns:customerPackIcons="clr-namespace:WpfLabs.ImagePerformanceDemo.CustomerPackIcons"
         mc:Ignorable="d"
-        Title="PackIconMaterials" Height="300" Width="300" Loaded="Window_OnLoaded">
+        Title="PackIconMaterials" Height="300" Width="300" Loaded="Window_OnLoaded" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/CustomerPackIconStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock x:Name="Msg" Grid.Row="0" Margin="20" />
-        <Grid x:Name="Container" Grid.Row="1" />
+        <Grid x:Name="Container" Grid.Row="1"/>
     </Grid>
 </Window>

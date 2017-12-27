@@ -33,7 +33,11 @@ namespace WpfLabs.ImagePerformanceDemo
                 Container.Children.Add(new SVGImage
                 {
                     ImageSource = image,
-                    SizeType = SVGImage.eSizeType.ContentToSizeNoStretch
+                    SizeType = SVGImage.eSizeType.SizeToContent,
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 });
             }
         }

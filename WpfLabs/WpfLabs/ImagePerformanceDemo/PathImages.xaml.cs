@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
+using WpfLabs.DrawingDemo.PathImage;
 
 namespace WpfLabs.ImagePerformanceDemo
 {
@@ -27,12 +27,15 @@ namespace WpfLabs.ImagePerformanceDemo
 
             for (int i = 0; i < count; i++)
             {
-                Container.Children.Add(new Image
+                Container.Children.Add(new PathImage2
                 {
                     Source = drawingImage,
                     Stretch = Stretch.Fill,
-                    Width = 30,
-                    Height = 30
+                    Foreground = Brushes.Red,
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 });
             }
         }

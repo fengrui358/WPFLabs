@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.ImagePerformanceDemo"
         mc:Ignorable="d"
-        Title="PathImages" Height="300" Width="300" Loaded="Window_OnLoaded">
+        Title="PathImages" Height="300" Width="300" Loaded="Window_OnLoaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

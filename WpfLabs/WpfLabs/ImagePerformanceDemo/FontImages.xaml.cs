@@ -28,15 +28,19 @@ namespace WpfLabs.ImagePerformanceDemo
         {
             for (int i = 0; i < count; i++)
             {
-                var viewbox = new Viewbox {Width = 30, Height = 30};
+                var viewbox = new Viewbox
+                {
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
 
                 var txtIcon = new TextBlock
                 {
                     Text = "\u3433",
                     Foreground = Brushes.Red,
-                    FontSize = 80,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center
+                    FontSize = 1
                 };
                 viewbox.Child = txtIcon;
 

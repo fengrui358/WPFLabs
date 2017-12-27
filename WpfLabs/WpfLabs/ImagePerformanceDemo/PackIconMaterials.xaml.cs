@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MahApps.Metro.IconPacks;
+using WpfLabs.ImagePerformanceDemo.CustomerPackIcons;
 
 namespace WpfLabs.ImagePerformanceDemo
 {
     /// <summary>
     /// PackIconMaterials.xaml 的交互逻辑
     /// </summary>
-    public partial class PackIconMaterials : Window
+    public partial class PackIconMaterials
     {
         private Stopwatch _stopwatch;
 
@@ -35,12 +24,14 @@ namespace WpfLabs.ImagePerformanceDemo
         {
             for (int i = 0; i < count; i++)
             {
-                Container.Children.Add(new PackIconFontAwesome
+                Container.Children.Add(new CustomerPackIcon
                 {
-                    Kind = PackIconFontAwesomeKind.AccessibleIconBrands,
+                    Kind = CustomerPackIconKind.Gear,
                     Foreground = Brushes.Red,
-                    Width = 30,
-                    Height = 30
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 });
             }
         }
