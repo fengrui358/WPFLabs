@@ -46,6 +46,9 @@
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=2.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.2.0.0\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Microsoft.Expression.Drawing.dll</HintPath>
@@ -218,6 +221,9 @@
     </Compile>
     <Compile Include="ImagePerformanceDemo\ImagePerformanceWindow.xaml.cs">
       <DependentUpon>ImagePerformanceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImagePerformanceDemo\PackIconMaterials.xaml.cs">
+      <DependentUpon>PackIconMaterials.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImagePerformanceDemo\PathImages.xaml.cs">
       <DependentUpon>PathImages.xaml</DependentUpon>
@@ -461,6 +467,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImagePerformanceDemo\ImagePerformanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImagePerformanceDemo\PackIconMaterials.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

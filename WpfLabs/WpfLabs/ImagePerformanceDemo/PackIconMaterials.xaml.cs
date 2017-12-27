@@ -1,24 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using MahApps.Metro.IconPacks;
 
 namespace WpfLabs.ImagePerformanceDemo
 {
     /// <summary>
-    /// FontImages.xaml 的交互逻辑
-    /// 字体图片集合
+    /// PackIconMaterials.xaml 的交互逻辑
     /// </summary>
-    public partial class FontImages
+    public partial class PackIconMaterials : Window
     {
         private Stopwatch _stopwatch;
 
-        public FontImages(int count)
+        public PackIconMaterials(int count)
         {
             InitializeComponent();
-
-            GC.Collect();
 
             RecordStart();
             CreateImages(count);
@@ -28,19 +35,13 @@ namespace WpfLabs.ImagePerformanceDemo
         {
             for (int i = 0; i < count; i++)
             {
-                var viewbox = new Viewbox {Width = 30, Height = 30};
-
-                var txtIcon = new TextBlock
+                Container.Children.Add(new PackIconFontAwesome
                 {
-                    Text = "\u3433",
+                    Kind = PackIconFontAwesomeKind.AccessibleIconBrands,
                     Foreground = Brushes.Red,
-                    FontSize = 80,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center
-                };
-                viewbox.Child = txtIcon;
-
-                Container.Children.Add(viewbox);
+                    Width = 30,
+                    Height = 30
+                });
             }
         }
 

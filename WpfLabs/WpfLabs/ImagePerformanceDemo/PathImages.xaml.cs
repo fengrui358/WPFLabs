@@ -30,7 +30,9 @@ namespace WpfLabs.ImagePerformanceDemo
                 Container.Children.Add(new Image
                 {
                     Source = drawingImage,
-                    Stretch = Stretch.None
+                    Stretch = Stretch.Fill,
+                    Width = 30,
+                    Height = 30
                 });
             }
         }

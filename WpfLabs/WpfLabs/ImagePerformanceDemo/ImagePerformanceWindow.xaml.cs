@@ -46,6 +46,9 @@ namespace WpfLabs.ImagePerformanceDemo
                 case "FONT":
                     new FontImages(Count).ShowDialog();
                     break;
+                case "PACKICONMATERIALS":
+                    new PackIconMaterials(Count).ShowDialog();
+                    break;
             }
         }
     }

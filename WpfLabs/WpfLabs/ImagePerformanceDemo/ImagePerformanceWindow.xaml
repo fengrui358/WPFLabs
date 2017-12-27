@@ -15,11 +15,12 @@
             <Label Content="图片数量："/>
             <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
         </StackPanel>
-        <UniformGrid Grid.Row="1" Rows="2" Columns="2" Button.Click="ShowWindow_OnClick">
+        <UniformGrid Grid.Row="1" Rows="3" Columns="2" Button.Click="ShowWindow_OnClick">
             <Button Width="100" Height="30" Content="Png"/>
             <Button Width="100" Height="30" Content="Svg"/>
             <Button Width="100" Height="30" Content="Path"/>
             <Button Width="100" Height="30" Content="Font"/>
+            <Button Width="100" Height="30" Content="PackIconMaterials"/>
         </UniformGrid>
     </Grid>
 </Window>
