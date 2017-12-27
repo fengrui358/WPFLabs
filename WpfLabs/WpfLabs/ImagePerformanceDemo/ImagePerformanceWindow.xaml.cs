@@ -40,7 +40,7 @@ namespace WpfLabs.ImagePerformanceDemo
                 case "SVG":
                     new SvgImages(Count).ShowDialog();
                     break;
-                case "PATH":
+                case "PATHIMAGES":
                     new PathImages(Count).ShowDialog();
                     break;
                 case "FONT":
@@ -48,6 +48,9 @@ namespace WpfLabs.ImagePerformanceDemo
                     break;
                 case "PACKICONMATERIALS":
                     new PackIconMaterials(Count).ShowDialog();
+                    break;
+                case "PATH":
+                    new PathImages(Count).ShowDialog();
                     break;
             }
         }

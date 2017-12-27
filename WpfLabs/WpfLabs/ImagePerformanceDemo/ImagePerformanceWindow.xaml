@@ -18,9 +18,10 @@
         <UniformGrid Grid.Row="1" Rows="3" Columns="2" Button.Click="ShowWindow_OnClick">
             <Button Width="100" Height="30" Content="Png"/>
             <Button Width="100" Height="30" Content="Svg"/>
-            <Button Width="100" Height="30" Content="Path"/>
+            <Button Width="100" Height="30" Content="PathImages"/>
             <Button Width="100" Height="30" Content="Font"/>
             <Button Width="100" Height="30" Content="PackIconMaterials"/>
+            <Button Width="100" Height="30" Content="Path"/>
         </UniformGrid>
     </Grid>
 </Window>
