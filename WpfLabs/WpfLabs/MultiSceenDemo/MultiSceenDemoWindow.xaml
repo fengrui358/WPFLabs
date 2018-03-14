@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfLabs.MultiSceenDemo.MultiSceenDemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.MultiSceenDemo"
+        mc:Ignorable="d"
+        Title="MultiSceenDemoWindow" Height="450" Width="800" WindowState="Maximized">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="主屏幕" VerticalAlignment="Center" />
+            <Button Content="刷新" Margin="10" Click="Refresh_OnClick" />
+            <ListBox ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ScreenInfos}"
+                     SelectedItem="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=SelectedScreen}"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="True" IsReadOnly="False"
+                  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=SystemParameterScreenPropertyInfos}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="Labels" Grid.Column="0" HorizontalAlignment="Right"/>
+            <StackPanel x:Name="Values" Grid.Column="1" HorizontalAlignment="Left"/>
+        </Grid>
+    </StackPanel>
+</Window>

@@ -35,6 +35,7 @@ using WpfLabs.ImagePerformanceDemo;
 using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
+using WpfLabs.MultiSceenDemo;
 using WpfLabs.MusicPlayer;
 using WpfLabs.MutliUiThreadingDemo;
 using WpfLabs.NewCallAnimation;
@@ -179,6 +180,10 @@ namespace WpfLabs
                 case "CollectionViewWindow":
                     var collectionViewWindow = new CollectionViewWindow();
                     collectionViewWindow.ShowDialog();
+                    break;
+                case "MultiSceenDemoWindow":
+                    var multiSceenDemoWindow = new MultiSceenDemoWindow();
+                    multiSceenDemoWindow.ShowDialog();
                     break;
             }
 

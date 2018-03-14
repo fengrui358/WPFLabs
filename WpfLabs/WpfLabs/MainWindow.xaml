@@ -76,6 +76,8 @@
                             CommandParameter="ImagePerformanceWindow" />
                     <Button Content="展示CollectionViewWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="CollectionViewWindow" />
+                    <Button Content="展示MultiSceenDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="MultiSceenDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

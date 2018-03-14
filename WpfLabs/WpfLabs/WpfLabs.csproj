@@ -281,6 +281,10 @@
       <DependentUpon>MeasureOverrideAndArrangeOverrideWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MeasureOverrideAndArrangeOverride\MessageDisplayer.cs" />
+    <Compile Include="MultiSceenDemo\MultiSceenDemoWindow.xaml.cs">
+      <DependentUpon>MultiSceenDemoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MultiSceenDemo\SystemParameterScreenPropertyInfo.cs" />
     <Compile Include="MusicPlayer\Converters\PlayStateConverter.cs" />
     <Compile Include="MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
@@ -532,6 +536,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MeasureOverrideAndArrangeOverride\MeasureOverrideAndArrangeOverrideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MultiSceenDemo\MultiSceenDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
