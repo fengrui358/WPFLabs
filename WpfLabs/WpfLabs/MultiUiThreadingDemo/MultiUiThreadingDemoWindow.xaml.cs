@@ -10,15 +10,15 @@ using System.Windows.Threading;
 namespace WpfLabs.MutliUiThreadingDemo
 {
     /// <summary>
-    /// MutliUiThreadingDemoWindow.xaml 的交互逻辑
+    /// MultiUiThreadingDemoWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MutliUiThreadingDemoWindow
+    public partial class MultiUiThreadingDemoWindow
     {
         private readonly AutoResetEvent _event = new AutoResetEvent(false);
         private Thread _otherThreading;
         private Dispatcher _otherDispatcher;
 
-        public MutliUiThreadingDemoWindow()
+        public MultiUiThreadingDemoWindow()
         {
             InitializeComponent();
 

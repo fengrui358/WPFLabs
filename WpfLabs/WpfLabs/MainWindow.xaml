@@ -54,8 +54,8 @@
                     <Button Command="{Binding ShowControlWindow}" CommandParameter="WaterMarkDemoWindow">
                         <TextBlock Text="展示WaterMarkDemoWindow" TextDecorations="Strikethrough" />
                     </Button>
-                    <Button Content="展示MutliUiThreadingDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="MutliUiThreadingDemoWindow" />
+                    <Button Content="展示MultiUiThreadingDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="MultiUiThreadingDemoWindow" />
                     <Button Content="展示CustomPixelShaderDemo" Command="{Binding ShowControlWindow}"
                             CommandParameter="CustomPixelShaderDemo" />
                     <Button Content="展示GifShowDemoWindow" Command="{Binding ShowControlWindow}"

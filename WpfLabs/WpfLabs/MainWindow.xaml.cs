@@ -136,8 +136,8 @@ namespace WpfLabs
                     var waterMarkDemoWindow = new WaterMarkDemoWindow();
                     waterMarkDemoWindow.ShowDialog();
                     break;
-                case "MutliUiThreadingDemoWindow":
-                    var mutliUiThreadingDemoWindow = new MutliUiThreadingDemoWindow();
+                case "MultiUiThreadingDemoWindow":
+                    var mutliUiThreadingDemoWindow = new MultiUiThreadingDemoWindow();
                     mutliUiThreadingDemoWindow.ShowDialog();
                     break;
                 case "CustomPixelShaderDemo":

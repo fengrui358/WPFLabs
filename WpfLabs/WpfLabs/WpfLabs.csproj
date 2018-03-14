@@ -291,15 +291,15 @@
     <Compile Include="MusicPlayer\NAudioEngine.cs" />
     <Compile Include="MusicPlayer\SampleAggregator.cs" />
     <Compile Include="MusicPlayer\NAudioSimpleEngine.cs" />
-    <Compile Include="MutliUiThreadingDemo\MutliUiThreadingDemoWindow.xaml.cs">
-      <DependentUpon>MutliUiThreadingDemoWindow.xaml</DependentUpon>
+    <Compile Include="MultiUiThreadingDemo\MultiUiThreadingDemoWindow.xaml.cs">
+      <DependentUpon>MultiUiThreadingDemoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MutliUiThreadingDemo\OtherUiThreadingWindow.xaml.cs">
+    <Compile Include="MultiUiThreadingDemo\OtherUiThreadingWindow.xaml.cs">
       <DependentUpon>OtherUiThreadingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MutliUiThreadingDemo\RunWindowHelper.cs" />
-    <Compile Include="MutliUiThreadingDemo\VisualTargetPresentationSource.cs" />
-    <Compile Include="MutliUiThreadingDemo\VisualWrapper.cs" />
+    <Compile Include="MultiUiThreadingDemo\RunWindowHelper.cs" />
+    <Compile Include="MultiUiThreadingDemo\VisualTargetPresentationSource.cs" />
+    <Compile Include="MultiUiThreadingDemo\VisualWrapper.cs" />
     <Compile Include="NewCallAnimation\NewCallAnimationWindow.xaml.cs">
       <DependentUpon>NewCallAnimationWindow.xaml</DependentUpon>
     </Compile>
@@ -543,11 +543,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MutliUiThreadingDemo\MutliUiThreadingDemoWindow.xaml">
+    <Page Include="MultiUiThreadingDemo\MultiUiThreadingDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MutliUiThreadingDemo\OtherUiThreadingWindow.xaml">
+    <Page Include="MultiUiThreadingDemo\OtherUiThreadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
