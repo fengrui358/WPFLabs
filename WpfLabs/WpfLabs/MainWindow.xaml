@@ -78,6 +78,8 @@
                             CommandParameter="CollectionViewWindow" />
                     <Button Content="展示MultiSceenDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="MultiSceenDemoWindow" />
+                    <Button Content="展示ResourceDictionaryCodeBehindWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="ResourceDictionaryCodeBehindWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

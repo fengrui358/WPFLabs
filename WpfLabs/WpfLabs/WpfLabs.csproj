@@ -328,6 +328,12 @@
     <Compile Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml.cs">
       <DependentUpon>PeopleResourcePanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ResourceDictionaryCodeBehind\CustomizeResourceDictionary\CustomizeResourceDictionary.xaml.cs">
+      <DependentUpon>CustomizeResourceDictionary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml.cs">
+      <DependentUpon>ResourceDictionaryCodeBehindWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RunningProcessSpecialHelper.cs" />
     <Compile Include="SwapImageDemo\SwapImageDemoWindow.xaml.cs">
       <DependentUpon>SwapImageDemoWindow.xaml</DependentUpon>
@@ -584,6 +590,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaryCodeBehind\CustomizeResourceDictionary\CustomizeResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

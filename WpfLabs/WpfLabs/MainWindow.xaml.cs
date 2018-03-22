@@ -41,6 +41,7 @@ using WpfLabs.MutliUiThreadingDemo;
 using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
+using WpfLabs.ResourceDictionaryCodeBehind;
 using WpfLabs.SwapImageDemo;
 using WpfLabs.Timer;
 using WpfLabs.WaterMarkDemo;
@@ -184,6 +185,10 @@ namespace WpfLabs
                 case "MultiSceenDemoWindow":
                     var multiSceenDemoWindow = new MultiSceenDemoWindow();
                     multiSceenDemoWindow.ShowDialog();
+                    break;
+                case "ResourceDictionaryCodeBehindWindow":
+                    var resourceDictionaryCodeBehindWindow = new ResourceDictionaryCodeBehindWindow();
+                    resourceDictionaryCodeBehindWindow.ShowDialog();
                     break;
             }
 
