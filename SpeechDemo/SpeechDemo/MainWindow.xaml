@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeechDemo"
         mc:Ignorable="d"
-        Title="百度语音合成测试" Height="450" Width="800" Loaded="MainWindow_OnLoaded" Unloaded="MainWindow_OnUnloaded">
+        Title="百度语音合成测试" Height="450" Width="850" Loaded="MainWindow_OnLoaded" Unloaded="MainWindow_OnUnloaded">
     <Window.Resources>
         <ResourceDictionary>
             <local:BoolToVisibility x:Key="BoolToVisibility"/>
@@ -15,6 +15,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -23,8 +24,37 @@
                 <TextBlock Text="审核通过前可享受200000次/日的在线语音合成服务，通过审核的应用可无限次使用。审核将在2个工作日内完成。" TextWrapping="Wrap"/>
                 <TextBlock Text="合成文本长度必须小于1024字节，如果本文长度较长，可以采用多次请求的方式。文本长度不可超过限制" TextWrapping="Wrap"/>
             </StackPanel>
-            <TextBox Grid.Row="1" Margin="0,10" Text="{Binding Text}" TextWrapping="Wrap"/>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="语速："/>
+                    <Slider Width="100" Minimum="0" Maximum="9" Interval="1" Value="{Binding Spd}" AutoToolTipPlacement="TopLeft"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="音调："/>
+                    <Slider Width="100" Minimum="0" Maximum="9" Interval="1" Value="{Binding Pit}" AutoToolTipPlacement="TopLeft"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="音量："/>
+                    <Slider Width="100" Minimum="0" Maximum="9" Interval="1" Value="{Binding Vol}" AutoToolTipPlacement="TopLeft"/>
+                </StackPanel>
+                <WrapPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="发音："/>
+                    <RadioButton Content="女声" Margin="5,0" GroupName="Per" Tag="0" IsChecked="True" Checked="ToggleButton_OnChecked"/>
+                    <RadioButton Content="男声" Margin="5,0" GroupName="Per" Tag="1" Checked="ToggleButton_OnChecked"/>
+                    <RadioButton Content="情感合成-度逍遥" Margin="5,0" GroupName="Per" Tag="2" Checked="ToggleButton_OnChecked"/>
+                    <RadioButton Content="情感合成-度丫丫" Margin="5,0" GroupName="Per" Tag="3" Checked="ToggleButton_OnChecked"/>
+                </WrapPanel>
+            </Grid>
+            <TextBox Grid.Row="2" Margin="0,10" Text="{Binding Text}" TextWrapping="Wrap" MaxLength="512"/>
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>

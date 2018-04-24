@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -42,6 +43,41 @@ namespace SpeechDemo
             }
         }
 
+        private int _spd = 5;
+        /// <summary>
+        /// 语速
+        /// </summary>
+        public int Spd
+        {
+            get => _spd;
+            set => _spd = value;
+        }
+
+        private int _pit = 5;
+        /// <summary>
+        /// 音调
+        /// </summary>
+        public int Pit
+        {
+            get => _pit;
+            set => _pit = value;
+        }
+
+        private int _vol = 5;
+        /// <summary>
+        /// 音量
+        /// </summary>
+        public int Vol
+        {
+            get => _vol;
+            set => _vol = value;
+        }
+
+        /// <summary>
+        /// 发音人选择, 0为女声，1为男声，3为情感合成-度逍遥，4为情感合成-度丫丫，默认为普通女
+        /// </summary>
+        private int _per;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,44 +87,10 @@ namespace SpeechDemo
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var APP_ID = "8323646";
-            var API_KEY = "cHR0DX3unmq1GS65FGI3n7FqiX6klqZE";
-            var SECRET_KEY = "oqQd6bD5hatTlYijaGgqyq4Vtt4rFxGr";
-            _client = new Tts(API_KEY, SECRET_KEY);
+            var apiKey = ConfigurationManager.AppSettings["ApiKey"];
+            var secretKey = ConfigurationManager.AppSettings["SecretKey"];
 
-
-            // 可选参数
-            var option = new Dictionary<string, object>()
-            {
-                {"spd", 5}, // 语速
-                {"vol", 7}, // 音量
-                {"per", 4}  // 发音人，4：情感度丫丫童声
-            };
-
-            var errorCount = 0;
-            var successCount = 0;
-
-            var sw = Stopwatch.StartNew();
-
-            var r = Parallel.For(0, 40, async i =>
-            {
-                await Task.Delay(5000);
-
-                var result = await Synthesis(Guid.NewGuid().ToString("N"), option);
-                if (!result.Success)
-                {
-                    Interlocked.Increment(ref errorCount);
-                }
-                else
-                {
-                    Interlocked.Increment(ref successCount);
-                }
-            });
-
-            var yy = r.IsCompleted;
-
-            sw.Stop();
-            var x = sw.ElapsedMilliseconds;
+            _client = new Tts(apiKey, secretKey);
         }
 
         private async Task<TtsResponse> Synthesis(string text, Dictionary<string, object> options = null)
@@ -113,7 +115,16 @@ namespace SpeechDemo
                 {
                     IsBusying = true;
 
-                    var result = await Synthesis(Text);
+                    // 可选参数
+                    var option = new Dictionary<string, object>()
+                    {
+                        {"spd", Spd}, // 语速
+                        {"vol", Vol}, // 音量
+                        {"pit", Pit },//音调
+                        {"per", _per}  // 发音人，4：情感度丫丫童声
+                    };
+
+                    var result = await Synthesis(Text, option);
                     if (result.Success)
                     {
                         _player.Stop();
@@ -156,6 +167,12 @@ namespace SpeechDemo
         {
             _player.Stop();
             _player.Close();
+        }
+
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            var frameworkElement = (FrameworkElement) sender;
+            _per = int.Parse(frameworkElement.Tag.ToString());
         }
     }
 }
