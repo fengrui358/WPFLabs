@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -37,6 +36,11 @@ namespace SpeechDemo
             {
                 if (_isBusying != value)
                 {
+                    if (value)
+                    {
+                        TimeSpan = TimeSpan.Zero;
+                    }
+
                     _isBusying = value;
                     OnPropertyChanged();
                 }
@@ -71,6 +75,24 @@ namespace SpeechDemo
         {
             get => _vol;
             set => _vol = value;
+        }
+
+        private TimeSpan _timeSpan;
+
+        /// <summary>
+        /// 转换耗时
+        /// </summary>
+        public TimeSpan TimeSpan
+        {
+            get => _timeSpan;
+            set
+            {
+                if (_timeSpan != value)
+                {
+                    _timeSpan = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         /// <summary>
@@ -113,6 +135,7 @@ namespace SpeechDemo
             {
                 if (!string.IsNullOrWhiteSpace(Text))
                 {
+                    var sw = Stopwatch.StartNew();
                     IsBusying = true;
 
                     // 可选参数
@@ -138,6 +161,9 @@ namespace SpeechDemo
                             _player.Open(new Uri(mp3FileName));
                             _player.Play();
                         }
+
+                        sw.Stop();
+                        TimeSpan = new TimeSpan(sw.ElapsedTicks);
                     }
                     else
                     {
