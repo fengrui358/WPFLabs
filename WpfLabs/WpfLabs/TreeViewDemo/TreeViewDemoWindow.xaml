@@ -4,9 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.TreeViewDemo"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviors="clr-namespace:WpfLabs.Behaviors"
         mc:Ignorable="d"
         Title="TreeViewDemoWindow" Height="450" Width="800">
     <Grid>
-        
+        <TreeView ItemsSource="{Binding TreeViewItems}">
+            <i:Interaction.Behaviors>
+                <behaviors:TreeViewSelectionBehavior ExpandSelected="False"
+                                                     HierarchyPredicate="{Binding HierarchyPredicate}"
+                                                     SelectedItem="{Binding SelectedItem}" />
+            </i:Interaction.Behaviors>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="TreeViewItem" ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
     </Grid>
 </Window>

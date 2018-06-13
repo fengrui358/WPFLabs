@@ -91,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="Base\RoutedPropertyEventHandler.cs" />
     <Compile Include="Base\TreeHelper.cs" />
+    <Compile Include="Behaviors\TreeViewSelectionBehavior.cs" />
     <Compile Include="BindingDemo\BindingDemoWindow.xaml.cs">
       <DependentUpon>BindingDemoWindow.xaml</DependentUpon>
     </Compile>
@@ -328,6 +329,7 @@
     <Compile Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml.cs">
       <DependentUpon>PeopleResourcePanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ResourceDictionaryCodeBehind\CustomizeResourceDictionary\CustomizeResourceDictionary.xaml.cs">
       <DependentUpon>CustomizeResourceDictionary.xaml</DependentUpon>
     </Compile>

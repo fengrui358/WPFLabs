@@ -80,6 +80,8 @@
                             CommandParameter="MultiSceenDemoWindow" />
                     <Button Content="展示ResourceDictionaryCodeBehindWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="ResourceDictionaryCodeBehindWindow" />
+                    <Button Content="展示TreeViewDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="TreeViewDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WpfLabs.TreeViewDemo
 {
@@ -7,5 +8,11 @@ namespace WpfLabs.TreeViewDemo
         public string Name { get; set; }
 
         public List<TreeViewDemoItem> Children { get; set; }
+
+        public TreeViewDemoItem()
+        {
+            Name = Guid.NewGuid().ToString("N");
+            Children = new List<TreeViewDemoItem>();
+        }
     }
 }

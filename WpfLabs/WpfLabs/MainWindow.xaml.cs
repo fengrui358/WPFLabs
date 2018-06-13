@@ -44,6 +44,7 @@ using WpfLabs.PeopleResourcePanel;
 using WpfLabs.ResourceDictionaryCodeBehind;
 using WpfLabs.SwapImageDemo;
 using WpfLabs.Timer;
+using WpfLabs.TreeViewDemo;
 using WpfLabs.WaterMarkDemo;
 
 namespace WpfLabs
@@ -189,6 +190,10 @@ namespace WpfLabs
                 case "ResourceDictionaryCodeBehindWindow":
                     var resourceDictionaryCodeBehindWindow = new ResourceDictionaryCodeBehindWindow();
                     resourceDictionaryCodeBehindWindow.ShowDialog();
+                    break;
+                case "TreeViewDemoWindow":
+                    var treeViewDemoWindow = new TreeViewDemoWindow();
+                    treeViewDemoWindow.ShowDialog();
                     break;
             }
 
