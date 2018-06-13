@@ -345,6 +345,10 @@
     <Compile Include="Timer\TimerWindow.xaml.cs">
       <DependentUpon>TimerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TreeViewDemo\TreeViewDemoItem.cs" />
+    <Compile Include="TreeViewDemo\TreeViewDemoWindow.xaml.cs">
+      <DependentUpon>TreeViewDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WaterMarkDemo\WaterMarkManager.cs" />
     <Compile Include="WaterMarkDemo\WaterMarkDemoWindow.xaml.cs">
       <DependentUpon>WaterMarkDemoWindow.xaml</DependentUpon>
@@ -616,6 +620,10 @@
     <Page Include="Timer\TimerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TreeViewDemo\TreeViewDemoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="WaterMarkDemo\WaterMarkDemoWindow.xaml">
       <SubType>Designer</SubType>
