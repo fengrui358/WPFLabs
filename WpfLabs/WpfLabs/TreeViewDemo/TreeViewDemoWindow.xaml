@@ -11,8 +11,8 @@
     <Grid>
         <TreeView ItemsSource="{Binding TreeViewItems}">
             <i:Interaction.Behaviors>
-                <behaviors:TreeViewSelectionBehavior ExpandSelected="False"
-                                                     HierarchyPredicate="{Binding HierarchyPredicate}"
+                <behaviors:TreeViewSelectionBehavior ExpandSelected="True"
+                                                     GetAllParentsFun="{Binding GetAllParentsFun}"
                                                      SelectedItem="{Binding SelectedItem}" />
             </i:Interaction.Behaviors>
             <TreeView.ItemTemplate>

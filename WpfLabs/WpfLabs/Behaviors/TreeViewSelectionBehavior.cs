@@ -1,4 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
@@ -7,16 +9,14 @@ namespace WpfLabs.Behaviors
 {
     public class TreeViewSelectionBehavior : Behavior<TreeView>
     {
-        public delegate bool IsChildOfPredicate(object nodeA, object nodeB);
-
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register(nameof(SelectedItem), typeof(object),
                 typeof(TreeViewSelectionBehavior),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                     OnSelectedItemChanged));
 
-        public static readonly DependencyProperty HierarchyPredicateProperty =
-            DependencyProperty.Register(nameof(HierarchyPredicate), typeof(IsChildOfPredicate),
+        public static readonly DependencyProperty GetAllParentsFunProperty =
+            DependencyProperty.Register(nameof(GetAllParentsFun), typeof(Func<object, IEnumerable<object>>),
                 typeof(TreeViewSelectionBehavior),
                 new FrameworkPropertyMetadata(null));
 
@@ -38,7 +38,6 @@ namespace WpfLabs.Behaviors
             behavior._modelHandled = false;
         }
 
-        private readonly EventSetter _treeViewItemEventSetter;
         private bool _modelHandled;
 
         public object SelectedItem
@@ -47,98 +46,214 @@ namespace WpfLabs.Behaviors
             set => SetValue(SelectedItemProperty, value);
         }
 
-        public IsChildOfPredicate HierarchyPredicate
+        public Func<object, IEnumerable<object>> GetAllParentsFun
         {
-            get => (TreeViewSelectionBehavior.IsChildOfPredicate) GetValue(HierarchyPredicateProperty);
-            set => SetValue(HierarchyPredicateProperty, value);
+            get => (Func<object, IEnumerable<object>>) GetValue(GetAllParentsFunProperty);
+            set => SetValue(GetAllParentsFunProperty, value);
         }
 
+        /// <summary>
+        /// 自动展开选中项
+        /// </summary>
         public bool ExpandSelected
         {
             get => (bool) GetValue(ExpandSelectedProperty);
             set => SetValue(ExpandSelectedProperty, value);
         }
 
-        public TreeViewSelectionBehavior()
+        /// <summary>
+        /// 遍历树，自动展开选中项
+        /// </summary>
+        private void UpdateAllTreeViewItems()
         {
-            _treeViewItemEventSetter = new EventSetter(
-                FrameworkElement.LoadedEvent,
-                new RoutedEventHandler(OnTreeViewItemLoaded));
-        }
+            var treeView = AssociatedObject;
 
-        // Update state of all items starting with given, with optional recursion
-        private void UpdateTreeViewItem(TreeViewItem item, bool recurse)
-        {
-            if (SelectedItem == null) return;
-            var model = item.DataContext;
-
-            // If the selected item is this model and is not yet selected - select and return
-            if (SelectedItem == model && !item.IsSelected)
+            if (SelectedItem == null)
             {
-                item.IsSelected = true;
-                if (ExpandSelected)
-                    item.IsExpanded = true;
+                //清空选中项
+                if (treeView.ItemContainerGenerator.ContainerFromItem(treeView.SelectedItem) is TreeViewItem
+                    selectedTreeViewItem)
+                {//todo清空
+                    selectedTreeViewItem.IsSelected = false;
+                }
             }
-            // If the selected item is a parent of this model - expand
             else
             {
-                bool isParentOfModel = HierarchyPredicate?.Invoke(SelectedItem, model) ?? true;
-                if (isParentOfModel)
-                    item.IsExpanded = true;
-            }
-
-            // Recurse into children
-            if (recurse)
-            {
-                foreach (var subitem in item.Items)
+                var isMatch = false;
+                var allParents = GetAllParentsFun?.Invoke(SelectedItem)?.ToList();
+                if (allParents != null && allParents.Any())
                 {
-                    var tvi = item.ItemContainerGenerator.ContainerFromItem(subitem) as TreeViewItem;
-                    if (tvi != null)
-                        UpdateTreeViewItem(tvi, true);
+                    //遍历节点与逻辑父节点进行匹配
+                    foreach (var item in treeView.Items)
+                    {
+                        if (treeView.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem tvi)
+                        {
+                            if (!UpdateTreeViewItem(tvi, allParents, SelectedItem, null, out isMatch))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                //遍历所有可见的展开节点
+                if (!isMatch)
+                {
+                    //遍历UI可见的所有节点
+                    foreach (var item in treeView.Items)
+                    {
+                        if (treeView.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem tvi)
+                        {
+                            if (!UpdateTreeViewItem(tvi, SelectedItem, null))
+                            {
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        // Update state of all items
-        private void UpdateAllTreeViewItems()
+        /// <summary>
+        /// 获取所有的节点路径
+        /// </summary>
+        /// <param name="treeViewItem">树节点</param>
+        /// <param name="allParents">所有的父对象</param>
+        /// <param name="selectedItem">选中节点</param>
+        /// <param name="parenTreeViewItem">父级树节点</param>
+        /// <param name="match">是否匹配中</param>
+        /// <returns>是否继续</returns>
+        private bool UpdateTreeViewItem(TreeViewItem treeViewItem, List<object> allParents, object selectedItem, TreeViewItem parenTreeViewItem, out bool match)
         {
-            var treeView = AssociatedObject;
-            foreach (var item in treeView.Items)
+            match = false;
+
+            if (allParents == null || !allParents.Any())
             {
-                var tvi = treeView.ItemContainerGenerator.ContainerFromItem(item) as TreeViewItem;
-                if (tvi != null)
-                    UpdateTreeViewItem(tvi, true);
+                return false;
             }
+
+            var treeView = AssociatedObject;
+
+            if (treeViewItem != null)
+            {
+                var parentItemContainerGenerator = parenTreeViewItem == null ? treeView.ItemContainerGenerator : parenTreeViewItem.ItemContainerGenerator;
+
+                if (parentItemContainerGenerator
+                        .ContainerFromItem(selectedItem) is TreeViewItem selectedTreeViewItem &&
+                    Equals(selectedTreeViewItem, treeViewItem))
+                {
+                    //已经匹配成功
+                    selectedTreeViewItem.IsSelected = true;
+                    if (ExpandSelected && selectedTreeViewItem.HasItems && !selectedTreeViewItem.IsExpanded)
+                    {
+                        selectedTreeViewItem.IsExpanded = true;
+                    }
+
+                    match = true;
+                    return false;
+                }
+
+                object matchObj = null;
+                TreeViewItem matchTreeViewItem = null;
+
+                foreach (var parent in allParents)
+                {
+                    if (Equals(parent, treeViewItem.DataContext))
+                    {
+                        matchObj = parent;
+                        matchTreeViewItem = parentItemContainerGenerator
+                            .ContainerFromItem(parent) as TreeViewItem;
+                        if (matchTreeViewItem != null && !matchTreeViewItem.IsExpanded)
+                        {
+                            matchTreeViewItem.IsExpanded = true;
+                        }
+
+                        break;
+                    }
+                }
+
+                if (matchObj != null && matchTreeViewItem != null)
+                {
+                    allParents.Remove(matchObj);
+
+                    foreach (var item in matchTreeViewItem.Items)
+                    {
+                        if (matchTreeViewItem.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem tvi)
+                        {
+                            if (!UpdateTreeViewItem(tvi, allParents, SelectedItem, matchTreeViewItem, out match))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
-        // Inject Loaded event handler into ItemContainerStyle
-        private void UpdateTreeViewItemStyle()
+        /// <summary>
+        /// 遍历所有可见的节点
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="selectedItem"></param>
+        /// <param name="parenTreeViewItem"></param>
+        /// <param name="isSelected">匹配后是否选中</param>
+        /// <returns>是否继续</returns>
+        private bool UpdateTreeViewItem(TreeViewItem item, object selectedItem, TreeViewItem parenTreeViewItem, bool isSelected = true)
         {
-            if (AssociatedObject.ItemContainerStyle == null)
-                AssociatedObject.ItemContainerStyle = new Style(
-                    typeof(TreeViewItem),
-                    Application.Current.TryFindResource(typeof(TreeViewItem)) as Style);
+            if (selectedItem == null) return true;
 
-            if (!AssociatedObject.ItemContainerStyle.Setters.Contains(_treeViewItemEventSetter))
-                AssociatedObject.ItemContainerStyle.Setters.Add(_treeViewItemEventSetter);
+            var treeView = AssociatedObject;
+
+            if (item != null)
+            {
+                var parent = parenTreeViewItem == null ? treeView.ItemContainerGenerator : parenTreeViewItem.ItemContainerGenerator;
+                
+                if (parent.ContainerFromItem(selectedItem) is TreeViewItem
+                        selectedTreeViewItem && Equals(selectedTreeViewItem, item))
+                {
+                    if (isSelected)
+                    {
+                        selectedTreeViewItem.IsSelected = true;
+                        if (ExpandSelected && selectedTreeViewItem.HasItems && !selectedTreeViewItem.IsExpanded)
+                        {
+                            selectedTreeViewItem.IsExpanded = true;
+                        }
+                    }
+                    else
+                    {
+                        selectedTreeViewItem.IsSelected = false;
+                    }
+
+                    return false;
+                }
+
+                foreach (var subItem in item.Items)
+                {
+                    if (item.ItemContainerGenerator.ContainerFromItem(subItem) is TreeViewItem tvi)
+                    {
+                        if (!UpdateTreeViewItem(tvi, SelectedItem, item))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
-        private void OnTreeViewItemsChanged(object sender,
-            NotifyCollectionChangedEventArgs args)
-        {
-            UpdateAllTreeViewItems();
-        }
-
+        /// <summary>
+        /// UI选中项变更，通知Model
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> args)
         {
             if (_modelHandled) return;
-            if (AssociatedObject.Items.SourceCollection == null) return;
-            SelectedItem = args.NewValue;
-        }
 
-        private void OnTreeViewItemLoaded(object sender, RoutedEventArgs args)
-        {
-            UpdateTreeViewItem((TreeViewItem) sender, false);
+            SelectedItem = args.NewValue;
         }
 
         protected override void OnAttached()
@@ -146,12 +261,24 @@ namespace WpfLabs.Behaviors
             base.OnAttached();
 
             AssociatedObject.SelectedItemChanged += OnTreeViewSelectedItemChanged;
-            ((INotifyCollectionChanged) AssociatedObject.Items).CollectionChanged += OnTreeViewItemsChanged;
+            AssociatedObject.Loaded += AssociatedObjectOnLoaded;
 
-            UpdateTreeViewItemStyle();
-            _modelHandled = true;
-            UpdateAllTreeViewItems();
-            _modelHandled = false;
+            if (AssociatedObject.SelectedItem != null || SelectedItem != null)
+            {
+                _modelHandled = true;
+                UpdateAllTreeViewItems();
+                _modelHandled = false;
+            }
+        }
+
+        private void AssociatedObjectOnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (AssociatedObject.SelectedItem != null || SelectedItem != null)
+            {
+                _modelHandled = true;
+                UpdateAllTreeViewItems();
+                _modelHandled = false;
+            }
         }
 
         protected override void OnDetaching()
@@ -160,9 +287,8 @@ namespace WpfLabs.Behaviors
 
             if (AssociatedObject != null)
             {
-                AssociatedObject.ItemContainerStyle?.Setters?.Remove(_treeViewItemEventSetter);
                 AssociatedObject.SelectedItemChanged -= OnTreeViewSelectedItemChanged;
-                ((INotifyCollectionChanged) AssociatedObject.Items).CollectionChanged -= OnTreeViewItemsChanged;
+                AssociatedObject.Loaded -= AssociatedObjectOnLoaded;
             }
         }
     }
