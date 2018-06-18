@@ -9,6 +9,13 @@ namespace WpfLabs.Behaviors
 {
     public class TreeViewSelectionBehavior : Behavior<TreeView>
     {
+        private readonly EventSetter _treeViewItemEventSetter;
+
+        /// <summary>
+        /// 为虚拟化节点进行相关缓存
+        /// </summary>
+        private Tuple<TreeViewItem, List<object>, object> _virtualNodesCache;
+
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register(nameof(SelectedItem), typeof(object),
                 typeof(TreeViewSelectionBehavior),
@@ -61,6 +68,13 @@ namespace WpfLabs.Behaviors
             set => SetValue(ExpandSelectedProperty, value);
         }
 
+        public TreeViewSelectionBehavior()
+        {
+            _treeViewItemEventSetter = new EventSetter(
+                FrameworkElement.LoadedEvent,
+                new RoutedEventHandler(OnTreeViewItemLoaded));
+        }
+
         /// <summary>
         /// 遍历树，自动展开选中项
         /// </summary>
@@ -73,7 +87,7 @@ namespace WpfLabs.Behaviors
                 //清空选中项
                 if (treeView.ItemContainerGenerator.ContainerFromItem(treeView.SelectedItem) is TreeViewItem
                     selectedTreeViewItem)
-                {//todo清空
+                {
                     selectedTreeViewItem.IsSelected = false;
                 }
             }
@@ -115,7 +129,7 @@ namespace WpfLabs.Behaviors
         }
 
         /// <summary>
-        /// 获取所有的节点路径
+        /// 获取所有的节点路径(有可能包含虚拟化节点)
         /// </summary>
         /// <param name="treeViewItem">树节点</param>
         /// <param name="allParents">所有的父对象</param>
@@ -127,15 +141,10 @@ namespace WpfLabs.Behaviors
         {
             match = false;
 
-            if (allParents == null || !allParents.Any())
-            {
-                return false;
-            }
-
-            var treeView = AssociatedObject;
-
             if (treeViewItem != null)
             {
+                var treeView = AssociatedObject;
+
                 var parentItemContainerGenerator = parenTreeViewItem == null ? treeView.ItemContainerGenerator : parenTreeViewItem.ItemContainerGenerator;
 
                 if (parentItemContainerGenerator
@@ -149,7 +158,15 @@ namespace WpfLabs.Behaviors
                         selectedTreeViewItem.IsExpanded = true;
                     }
 
+                    //清空缓存
+                    _virtualNodesCache = null;
+
                     match = true;
+                    return false;
+                }
+
+                if (allParents == null || !allParents.Any())
+                {
                     return false;
                 }
 
@@ -183,6 +200,18 @@ namespace WpfLabs.Behaviors
                             if (!UpdateTreeViewItem(tvi, allParents, SelectedItem, matchTreeViewItem, out match))
                             {
                                 return false;
+                            }
+                        }
+                        else
+                        {
+                            //父级节点匹配成功，但是查找下级节点时发现为空，则证明下级节点还在虚拟化当中，暂存节点信息，等实例化完毕后继续
+                            if (_virtualNodesCache == null || _virtualNodesCache.Item3 != selectedItem ||
+                                !Equals(_virtualNodesCache.Item1, matchTreeViewItem) ||
+                                _virtualNodesCache.Item2 != allParents)
+                            {
+                                _virtualNodesCache =
+                                    new Tuple<TreeViewItem, List<object>, object>(matchTreeViewItem, allParents,
+                                        selectedItem);
                             }
                         }
                     }
@@ -253,7 +282,9 @@ namespace WpfLabs.Behaviors
         {
             if (_modelHandled) return;
 
+            _modelHandled = true;
             SelectedItem = args.NewValue;
+            _modelHandled = false;
         }
 
         protected override void OnAttached()
@@ -262,6 +293,7 @@ namespace WpfLabs.Behaviors
 
             AssociatedObject.SelectedItemChanged += OnTreeViewSelectedItemChanged;
             AssociatedObject.Loaded += AssociatedObjectOnLoaded;
+            UpdateTreeViewItemStyle();
 
             if (AssociatedObject.SelectedItem != null || SelectedItem != null)
             {
@@ -287,8 +319,36 @@ namespace WpfLabs.Behaviors
 
             if (AssociatedObject != null)
             {
+                AssociatedObject.ItemContainerStyle?.Setters.Remove(_treeViewItemEventSetter);
+
                 AssociatedObject.SelectedItemChanged -= OnTreeViewSelectedItemChanged;
                 AssociatedObject.Loaded -= AssociatedObjectOnLoaded;
+            }
+        }
+
+        // Inject Loaded event handler into ItemContainerStyle
+        private void UpdateTreeViewItemStyle()
+        {
+            if (AssociatedObject.ItemContainerStyle == null)
+                AssociatedObject.ItemContainerStyle = new Style(
+                    typeof(TreeViewItem),
+                    Application.Current.TryFindResource(typeof(TreeViewItem)) as Style);
+
+            if (!AssociatedObject.ItemContainerStyle.Setters.Contains(_treeViewItemEventSetter))
+                AssociatedObject.ItemContainerStyle.Setters.Add(_treeViewItemEventSetter);
+        }
+
+        /// <summary>
+        /// 当有新的节点从虚拟化到进行真正加载时触发
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void OnTreeViewItemLoaded(object sender, RoutedEventArgs args)
+        {
+            if (_virtualNodesCache != null)
+            {
+                UpdateTreeViewItem((TreeViewItem) sender, _virtualNodesCache.Item2, _virtualNodesCache.Item3,
+                    _virtualNodesCache.Item1, out _);
             }
         }
     }
