@@ -31,6 +31,7 @@ using WpfLabs.FlexDataGrid;
 using WpfLabs.FontFamilyDemo;
 using WpfLabs.FoucsDemo;
 using WpfLabs.GifShowDemo;
+using WpfLabs.GroupExpander;
 using WpfLabs.ImagePerformanceDemo;
 using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
@@ -194,6 +195,10 @@ namespace WpfLabs
                 case "TreeViewDemoWindow":
                     var treeViewDemoWindow = new TreeViewDemoWindow();
                     treeViewDemoWindow.ShowDialog();
+                    break;
+                case "GroupExpanderWindow":
+                    var groupExpanderWindow = new GroupExpanderWindow();
+                    groupExpanderWindow.ShowDialog();
                     break;
             }
 

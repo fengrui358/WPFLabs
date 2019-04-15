@@ -82,6 +82,8 @@
                             CommandParameter="ResourceDictionaryCodeBehindWindow" />
                     <Button Content="展示TreeViewDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="TreeViewDemoWindow" />
+                    <Button Content="展示GroupExpanderWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="GroupExpanderWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

@@ -206,6 +206,12 @@
     <Compile Include="GifShowDemo\GifShowDemoWindow.xaml.cs">
       <DependentUpon>GifShowDemoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GroupExpander\CommandExpander.cs" />
+    <Compile Include="GroupExpander\GroupExpanderWindow.xaml.cs">
+      <DependentUpon>GroupExpanderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GroupExpander\Models\ResourceGroupModel.cs" />
+    <Compile Include="GroupExpander\Models\ResourceGroupSetModel.cs" />
     <Compile Include="Helper\CornerRadiusHelper.cs" />
     <Compile Include="Helper\DebugWriterHelper.cs" />
     <Compile Include="Helper\DoubleUtilHelper.cs" />
@@ -472,6 +478,14 @@
     <Page Include="GifShowDemo\GifShowDemoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GroupExpander\GroupExpanderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GroupExpander\Themes\CommandExpanderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Helper\LogWindow.xaml">
       <SubType>Designer</SubType>
