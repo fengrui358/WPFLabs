@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,8 @@ namespace WpfLabs.FontFamilyDemo
 {
     public class FontFamilyDemoWindowViewModel : ObservableObject
     {
+        public string AliFontPath { get; set; } = "pack://application:,,,/WpfLabs;component/FontFamilyDemo/#阿里巴巴普惠体 R";
+
         private Dictionary<string, FontWeight> _fontWeights;
 
         public Dictionary<string, FontWeight> FontWeights
@@ -72,7 +76,8 @@ namespace WpfLabs.FontFamilyDemo
         public FontFamilyDemoWindowViewModel()
         {
             var tempFontWeights = new Dictionary<string, FontWeight>();
-            var fontWeightProperties = typeof(System.Windows.FontWeights).GetProperties(BindingFlags.Public | BindingFlags.Static);
+            var fontWeightProperties =
+                typeof(System.Windows.FontWeights).GetProperties(BindingFlags.Public | BindingFlags.Static);
             foreach (var propertyInfo in fontWeightProperties)
             {
                 tempFontWeights.Add(propertyInfo.Name, (FontWeight) propertyInfo.GetValue(null));
@@ -83,10 +88,11 @@ namespace WpfLabs.FontFamilyDemo
                 .FirstOrDefault(s => s.Key.Equals("Normal", StringComparison.OrdinalIgnoreCase));
 
             var tempFontStyles = new Dictionary<string, FontStyle>();
-            var fontStylesProperties = typeof(System.Windows.FontStyles).GetProperties(BindingFlags.Public | BindingFlags.Static);
+            var fontStylesProperties =
+                typeof(System.Windows.FontStyles).GetProperties(BindingFlags.Public | BindingFlags.Static);
             foreach (var propertyInfo in fontStylesProperties)
             {
-                tempFontStyles.Add(propertyInfo.Name, (FontStyle)propertyInfo.GetValue(null));
+                tempFontStyles.Add(propertyInfo.Name, (FontStyle) propertyInfo.GetValue(null));
             }
 
             FontStyles = tempFontStyles;
@@ -94,10 +100,11 @@ namespace WpfLabs.FontFamilyDemo
                 .FirstOrDefault(s => s.Key.Equals("Normal", StringComparison.OrdinalIgnoreCase));
 
             var tempFontStretches = new Dictionary<string, FontStretch>();
-            var FontStretchsProperties = typeof(System.Windows.FontStretches).GetProperties(BindingFlags.Public | BindingFlags.Static);
+            var FontStretchsProperties =
+                typeof(System.Windows.FontStretches).GetProperties(BindingFlags.Public | BindingFlags.Static);
             foreach (var propertyInfo in FontStretchsProperties)
             {
-                tempFontStretches.Add(propertyInfo.Name, (FontStretch)propertyInfo.GetValue(null));
+                tempFontStretches.Add(propertyInfo.Name, (FontStretch) propertyInfo.GetValue(null));
             }
 
             FontStretches = tempFontStretches;
@@ -105,6 +112,17 @@ namespace WpfLabs.FontFamilyDemo
                 .FirstOrDefault(s => s.Key.Equals("Normal", StringComparison.OrdinalIgnoreCase));
 
             var tempSystemFontFamilies = new List<FontFamily>();
+
+            //增加自定义字体
+            var aileron = new FontFamily(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                @"FontFamilyDemo\FontFiles\#Aileron"));
+
+            var aliFont = new FontFamily(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                @"FontFamilyDemo\FontFiles\#阿里巴巴普惠体 R"));
+
+            tempSystemFontFamilies.Add(aileron);
+            tempSystemFontFamilies.Add(aliFont);
+
             foreach (var systemFontFamily in Fonts.SystemFontFamilies)
             {
                 tempSystemFontFamilies.Add(systemFontFamily);

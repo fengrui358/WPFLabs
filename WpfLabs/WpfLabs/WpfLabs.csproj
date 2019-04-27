@@ -693,6 +693,17 @@
     <Resource Include="FontFamilyDemo\Aileron-Thin.ttf" />
     <Resource Include="FontFamilyDemo\Aileron-Regular.ttf" />
     <Resource Include="ImagePerformanceDemo\Resources\iconfont.ttf" />
+    <Resource Include="FontFamilyDemo\Alibaba-PuHuiTi-Bold.ttf" />
+    <Resource Include="FontFamilyDemo\Alibaba-PuHuiTi-Heavy.ttf" />
+    <Resource Include="FontFamilyDemo\Alibaba-PuHuiTi-Light.ttf" />
+    <Resource Include="FontFamilyDemo\Alibaba-PuHuiTi-Medium.ttf" />
+    <Resource Include="FontFamilyDemo\Alibaba-PuHuiTi-Regular.ttf" />
+    <None Include="FontFamilyDemo\FontFiles\Aileron-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="FontFamilyDemo\FontFiles\Alibaba-PuHuiTi-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
