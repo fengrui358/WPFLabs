@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PathViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Path路径查看器" Height="450" Width="800">
+    <Border Padding="20">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="0" Margin="20" Stretch="Uniform">
+                    <Path x:Name="PathContainer" Data="M970.8 189.6c-14.9 0-28.4 5.5-38.1 14.4L361 718.5 93 476.7l-0.1 0.1c-9.7-9.8-23.9-16-39.7-16C23.8 460.7 0 482.1 0 508.5c0 14.1 6.8 26.8 17.7 35.6h-0.1L323.2 820l0.2 0.2c9.6 8.8 23 14.2 37.8 14.2 14.8 0 28.2-5.4 37.9-14.2l608.2-547.9c10.3-8.7 16.7-21.1 16.7-34.8 0-26.5-23.8-47.9-53.2-47.9z m0 0" Fill="Red"/>
+                </Viewbox>
+                <TextBox x:Name="InputTextBox" Grid.Column="1" TextWrapping="WrapWithOverflow" TextChanged="TextBox_TextChanged" />
+        </Grid>
     </Grid>
+    </Border>
 </Window>
