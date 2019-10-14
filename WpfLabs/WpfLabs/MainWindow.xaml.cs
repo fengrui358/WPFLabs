@@ -43,6 +43,7 @@ using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.ResourceDictionaryCodeBehind;
+using WpfLabs.ShortCutDemo;
 using WpfLabs.SwapImageDemo;
 using WpfLabs.Timer;
 using WpfLabs.TreeViewDemo;
@@ -199,6 +200,10 @@ namespace WpfLabs
                 case "GroupExpanderWindow":
                     var groupExpanderWindow = new GroupExpanderWindow();
                     groupExpanderWindow.ShowDialog();
+                    break;
+                case "ShortCutDemoWindow":
+                    var shortCutDemoWindow = new ShortCutDemoWindow();
+                    shortCutDemoWindow.ShowDialog();
                     break;
             }
 
