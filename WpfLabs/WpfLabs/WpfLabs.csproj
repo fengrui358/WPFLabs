@@ -59,8 +59,8 @@
     <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
     </Reference>
-    <Reference Include="NetLib.Core.Windows, Version=1.0.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FrHello.NetLib.Core.Windows.1.0.30\lib\net472\NetLib.Core.Windows.dll</HintPath>
+    <Reference Include="NetLib.Core.Windows, Version=1.0.31.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FrHello.NetLib.Core.Windows.1.0.31\lib\net472\NetLib.Core.Windows.dll</HintPath>
     </Reference>
     <Reference Include="NHotkey, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NHotkey.1.2.1\lib\net20\NHotkey.dll</HintPath>

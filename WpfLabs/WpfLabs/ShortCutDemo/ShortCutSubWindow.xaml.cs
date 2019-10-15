@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using FrHello.NetLib.Core.Windows.Windows;
@@ -12,7 +13,7 @@ namespace WpfLabs.ShortCutDemo
     {
         private readonly string _windowId;
 
-        public ShortCutSubWindow(ShortCutDemoWindow window)
+        public ShortCutSubWindow()
         {
             InitializeComponent();
 
@@ -28,10 +29,9 @@ namespace WpfLabs.ShortCutDemo
                 MessageBox.Show("快捷键注册成功，Ctrl+Alt+B");
 
                 //测试移除，如果移除失败则会重复弹出弹窗
-                WindowsApi.HotKeyHelper.RegisterOrReplace("test", Key.H, ModifierKeys.Control | ModifierKeys.Alt,
+                WindowsApi.HotKeyHelper.RegisterOrReplace("test", Key.B, ModifierKeys.Control | ModifierKeys.Alt,
                     Handler);
-                WindowsApi.HotKeyHelper.RegisterOrReplace("test", Key.L, ModifierKeys.Control | ModifierKeys.Alt,
-                    Handler);
+                WindowsApi.HotKeyHelper.Remove("test");
             }
         }
 

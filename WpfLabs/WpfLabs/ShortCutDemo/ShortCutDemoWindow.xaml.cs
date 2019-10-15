@@ -18,7 +18,7 @@ namespace WpfLabs.ShortCutDemo
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var w = new ShortCutSubWindow(this);
+            var w = new ShortCutSubWindow();
             w.Show();
         }
     }
