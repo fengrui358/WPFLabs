@@ -84,6 +84,8 @@
                             CommandParameter="TreeViewDemoWindow" />
                     <Button Content="展示GroupExpanderWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="GroupExpanderWindow" />
+                    <Button Content="展示ShortCutDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="ShortCutDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
