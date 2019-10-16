@@ -366,6 +366,9 @@
       <DependentUpon>ResourceDictionaryCodeBehindWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RunningProcessSpecialHelper.cs" />
+    <Compile Include="ScreenDragDemo\ScreenDragMainWindow.xaml.cs">
+      <DependentUpon>ScreenDragMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShortCutDemo\ShortCutDemoWindow.xaml.cs">
       <DependentUpon>ShortCutDemoWindow.xaml</DependentUpon>
     </Compile>
@@ -647,6 +650,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenDragDemo\ScreenDragMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

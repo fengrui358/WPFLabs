@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfLabs.ScreenDragDemo.ScreenDragMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.ScreenDragDemo"
+        mc:Ignorable="d"
+        Title="ScreenDragMainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl AllowDrop="True">
+            <TabItem Header="主页">
+                <TextBlock Text="主页" />
+            </TabItem>
+            <TabItem Header="测试1">
+                <TextBlock Text="测试1" />
+            </TabItem>
+            <TabItem Header="测试2">
+                <TextBlock Text="测试2" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

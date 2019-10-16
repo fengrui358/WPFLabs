@@ -43,6 +43,7 @@ using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.ResourceDictionaryCodeBehind;
+using WpfLabs.ScreenDragDemo;
 using WpfLabs.ShortCutDemo;
 using WpfLabs.SwapImageDemo;
 using WpfLabs.Timer;
@@ -204,6 +205,10 @@ namespace WpfLabs
                 case "ShortCutDemoWindow":
                     var shortCutDemoWindow = new ShortCutDemoWindow();
                     shortCutDemoWindow.ShowDialog();
+                    break;
+                case "ScreenDragMainWindow":
+                    var screenDragMainWindow = new ScreenDragMainWindow();
+                    screenDragMainWindow.ShowDialog();
                     break;
             }
 

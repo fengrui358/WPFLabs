@@ -86,6 +86,8 @@
                             CommandParameter="GroupExpanderWindow" />
                     <Button Content="展示ShortCutDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="ShortCutDemoWindow" />
+                    <Button Content="展示ScreenDragMainWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="ScreenDragMainWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
