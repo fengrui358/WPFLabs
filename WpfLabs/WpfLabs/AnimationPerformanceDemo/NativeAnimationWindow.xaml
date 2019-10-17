@@ -1,17 +1,15 @@
-﻿<Window x:Class="WpfLabs.NewCallAnimation.NewCallAnimationWindow"
+﻿<Window x:Class="WpfLabs.AnimationPerformanceDemo.NativeAnimationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfLabs.NewCallAnimation"
-        xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:WpfLabs.AnimationPerformanceDemo"
+        xmlns:newCallAnimation="clr-namespace:WpfLabs.NewCallAnimation"
         mc:Ignorable="d"
-        Title="NewCallAnimationWindow" Height="1000" Width="1000" Loaded="NewCallAnimationWindow_OnLoaded" Unloaded="NewCallAnimationWindow_OnUnloaded">
+        Title="NativeAnimationWindow" Height="450" Width="800">
     <Window.Resources>
         <SolidColorBrush x:Key="PressedColor" Color="#00B03D" />
-        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+        <newCallAnimation:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
         <Style x:Key="NormalTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -56,7 +54,7 @@
                                 <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Fill="{StaticResource PressedColor}" />
                                 <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Fill="{StaticResource PressedColor}" />
                             </Grid>
-                            <Image x:Name="AnswerImg" Stretch="None" Source="btn_icon_call.png">
+                            <Image x:Name="AnswerImg" Stretch="None" Source="Assets/btn_icon_call.png">
                                 <Image.RenderTransform>
                                     <TranslateTransform x:Name="AnswerImgTranslateTransform" />
                                 </Image.RenderTransform>
@@ -94,72 +92,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid SnapsToDevicePixels="True" Width="880" Height="750">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" Grid.RowSpan="2" CornerRadius="8" Background="White">
-            <StackPanel>
-                <Grid>
-                    <!--<Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Width="422" Height="422">
-                        <Image gif:ImageBehavior.AnimatedSource="CircularDiffusion.gif"
-                               gif:ImageBehavior.RepeatBehavior="Forever" />
-                        <Image Source="circle_dotted_line.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
-                            <Image.RenderTransform>
-                                <RotateTransform x:Name="CircleDotted" />
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock Text="{Binding ElementName=RotateTimer, Path=TotalTime, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="60"
-                                   Foreground="White" />
-                    </Grid>-->
-                    <local:RotateTimer x:Name="RotateTimer" Grid.Column="1" IsActive="True"/>
-                </Grid>
-                <Grid Margin="0,14,0,0" HorizontalAlignment="Center">
-                    <Image Width="30" Height="30" HorizontalAlignment="Left" Stretch="None" Margin="-40,0,0,0"
-                           Source="cellphone.png" />
-                    <TextBlock FontSize="26" MaxWidth="420" Style="{StaticResource DarkTextBlockStyle}"
-                               Text="138-1866-2735" />
-                </Grid>
-
-                <TextBlock MaxWidth="420" Style="{StaticResource NormalTextBlockStyle}" Margin="0,10,0,0"
-                           Text="Matthew Robertson" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                    <Border Style="{StaticResource SplitLineStyle}" />
-                    <Image Stretch="None" VerticalAlignment="Center" Margin="17,0" Source="location.png" />
-                    <Border Style="{StaticResource SplitLineStyle}" />
-                </StackPanel>
-                <TextBlock MaxWidth="420" Style="{StaticResource NormalTextBlockStyle}" Margin="0,10,0,0"
-                           Text="736 Shawnee Ave, Kansas City, KS 66105" />
-                <StackPanel Margin="0,40,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Grid Width="160" Height="50">
-                        <TextBlock Style="{StaticResource DarkTextBlockStyle}" VerticalAlignment="Top"
-                                   Text="173234323" />
-                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" VerticalAlignment="Bottom"
-                                   Text="Llamada total" />
-                    </Grid>
-                    <Border Style="{StaticResource VerticalSplitLineStyle}" />
-                    <Grid Width="160" Height="50">
-                        <TextBlock Style="{StaticResource DarkTextBlockStyle}" VerticalAlignment="Top"
-                                   Text="91" />
-                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" VerticalAlignment="Bottom"
-                                   Text="Llamada válido" />
-                    </Grid>
-                    <Border Style="{StaticResource VerticalSplitLineStyle}" />
-                    <Grid Width="160" Height="50">
-                        <TextBlock Style="{StaticResource DarkTextBlockStyle}" VerticalAlignment="Top"
-                                   Text="82" />
-                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" VerticalAlignment="Bottom"
-                                   Text="Llamada inválido" />
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-        <Button x:Name="ControlBtn" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AnswerButtonStyle}" Click="ButtonBase_OnClick"/>
+    <Grid>
+        
     </Grid>
 </Window>

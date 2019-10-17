@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
+using WpfLabs.AnimationPerformanceDemo;
 using WpfLabs.BindingDemo;
 using WpfLabs.CalloutBorder;
 using WpfLabs.CircularLoading;
@@ -209,6 +210,10 @@ namespace WpfLabs
                 case "ScreenDragMainWindow":
                     var screenDragMainWindow = new ScreenDragMainWindow();
                     screenDragMainWindow.ShowDialog();
+                    break;
+                case "AnimationPerformanceWindow":
+                    var animationPerformanceWindow = new AnimationPerformanceWindow();
+                    animationPerformanceWindow.ShowDialog();
                     break;
             }
 

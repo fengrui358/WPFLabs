@@ -32,7 +32,7 @@ namespace WpfLabs.NewCallAnimation
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            RotateTimer.IsActive = !RotateTimer.IsActive;
+            //RotateTimer.IsActive = !RotateTimer.IsActive;
         }
 
         private void NewCallAnimationWindow_OnLoaded(object sender, RoutedEventArgs e)

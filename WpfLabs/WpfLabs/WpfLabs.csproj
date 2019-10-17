@@ -112,6 +112,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnimationPerformanceDemo\AnimationPerformanceWindow.xaml.cs">
+      <DependentUpon>AnimationPerformanceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationPerformanceDemo\GifAnimationWindow.xaml.cs">
+      <DependentUpon>GifAnimationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationPerformanceDemo\NativeAnimationWindow.xaml.cs">
+      <DependentUpon>NativeAnimationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationPerformanceDemo\VideoAnimationWindow.xaml.cs">
+      <DependentUpon>VideoAnimationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Base\RoutedPropertyEventHandler.cs" />
     <Compile Include="Base\TreeHelper.cs" />
     <Compile Include="Behaviors\TreeViewSelectionBehavior.cs" />
@@ -394,6 +406,22 @@
       <DependentUpon>WaterMarkDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WaterMarkDemo\WatermarkTextBehavior.cs" />
+    <Page Include="AnimationPerformanceDemo\AnimationPerformanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AnimationPerformanceDemo\GifAnimationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AnimationPerformanceDemo\NativeAnimationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AnimationPerformanceDemo\VideoAnimationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BindingDemo\BindingDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -779,6 +807,13 @@
     <Resource Include="NewCallAnimation\CircularDiffusion.gif" />
     <Resource Include="NewCallAnimation\location.png" />
     <Resource Include="ImagePerformanceDemo\Resources\timer.png" />
+    <Content Include="AnimationPerformanceDemo\Assets\1.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AnimationPerformanceDemo\Assets\2.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="AnimationPerformanceDemo\Assets\Test.gif" />
     <Content Include="ImagePerformanceDemo\Resources\timer.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -88,6 +88,8 @@
                             CommandParameter="ShortCutDemoWindow" />
                     <Button Content="展示ScreenDragMainWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="ScreenDragMainWindow" />
+                    <Button Content="展示AnimationPerformanceWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="AnimationPerformanceWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

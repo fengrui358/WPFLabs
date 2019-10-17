@@ -1,0 +1,26 @@
+﻿<Window x:Class="WpfLabs.AnimationPerformanceDemo.AnimationPerformanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.AnimationPerformanceDemo"
+        mc:Ignorable="d"
+        Title="AnimationPerformanceWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding Count, StringFormat=同时打开{0}个动画窗}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="100" Height="40" Content="原生动画" Click="NativeButton_OnClick"/>
+            <Button Grid.Column="1" Width="100" Height="40" Content="Gif动画" Click="GifButton_OnClick"/>
+            <Button Grid.Column="2" Width="100" Height="40" Content="视频动画" Click="VideoButton_OnClick"/>
+        </Grid>
+    </Grid>
+</Window>
