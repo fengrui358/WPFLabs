@@ -20,7 +20,7 @@ namespace WpfLabs.AnimationPerformanceDemo
     /// </summary>
     public partial class AnimationPerformanceWindow : Window
     {
-        public int Count { get; } = 10;
+        public int Count { get; } = 2;
 
         public AnimationPerformanceWindow()
         {

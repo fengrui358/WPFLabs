@@ -29,6 +29,7 @@ using WpfLabs.EllipsisLoading;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
 using WpfLabs.FlexDataGrid;
+using WpfLabs.FluidLayoutDemo;
 using WpfLabs.FontFamilyDemo;
 using WpfLabs.FoucsDemo;
 using WpfLabs.GifShowDemo;
@@ -214,6 +215,10 @@ namespace WpfLabs
                 case "AnimationPerformanceWindow":
                     var animationPerformanceWindow = new AnimationPerformanceWindow();
                     animationPerformanceWindow.ShowDialog();
+                    break;
+                case "FluidLayoutDemoWindow":
+                    var fluidLayoutDemoWindow = new FluidLayoutDemoWindow();
+                    fluidLayoutDemoWindow.ShowDialog();
                     break;
             }
 

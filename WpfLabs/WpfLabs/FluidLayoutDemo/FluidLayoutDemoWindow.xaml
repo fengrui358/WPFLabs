@@ -1,0 +1,127 @@
+﻿<Window x:Class="WpfLabs.FluidLayoutDemo.FluidLayoutDemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.FluidLayoutDemo"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="FluidLayoutDemoWindow" MaxWidth="1920" MaxHeight="1080" MinWidth="1280" MinHeight="720"
+        WindowState="Maximized">
+    <Window.Resources>
+        <system:Double x:Key="MaxKeyWidth">150</system:Double>
+        <system:Double x:Key="MinContentWidth">420</system:Double>
+        <Thickness x:Key="CommonThickness">15,15,15,15</Thickness>
+        <Thickness x:Key="CommonThickness2">0,0,10,0</Thickness>
+    </Window.Resources>
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.125*" />
+            <ColumnDefinition Width="0.75*" />
+            <ColumnDefinition Width="0.125*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="12.5%" />
+        <WrapPanel Grid.Column="1">
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="{StaticResource CommonThickness}" MinWidth="{StaticResource MinContentWidth}"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MaxWidth="{StaticResource MaxKeyWidth}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Label MaxWidth:100" Margin="{StaticResource CommonThickness2}" />
+                <TextBox Grid.Column="1" Text="TextBox Width:270" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Grid>
+        </WrapPanel>
+        <TextBlock Grid.Column="2" Text="12.5%" />
+    </Grid>
+</Window>

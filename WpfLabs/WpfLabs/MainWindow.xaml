@@ -90,6 +90,8 @@
                             CommandParameter="ScreenDragMainWindow" />
                     <Button Content="展示AnimationPerformanceWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="AnimationPerformanceWindow" />
+                    <Button Content="展示FluidLayoutDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="FluidLayoutDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
