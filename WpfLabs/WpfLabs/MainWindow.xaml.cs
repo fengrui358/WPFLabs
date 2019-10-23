@@ -220,6 +220,10 @@ namespace WpfLabs
                     var fluidLayoutDemoWindow = new FluidLayoutDemoWindow();
                     fluidLayoutDemoWindow.ShowDialog();
                     break;
+                case "DragableTabControlDemo":
+                    var dragableTabControlDemo = new DragableTabControlDemo.DragableTabControlDemo();
+                    dragableTabControlDemo.ShowDialog();
+                    break;
             }
 
             this.Effect = null;

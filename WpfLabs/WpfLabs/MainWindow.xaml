@@ -92,6 +92,8 @@
                             CommandParameter="AnimationPerformanceWindow" />
                     <Button Content="展示FluidLayoutDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="FluidLayoutDemoWindow" />
+                    <Button Content="展示DragableTabControlDemo" Command="{Binding ShowControlWindow}"
+                            CommandParameter="DragableTabControlDemo" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
