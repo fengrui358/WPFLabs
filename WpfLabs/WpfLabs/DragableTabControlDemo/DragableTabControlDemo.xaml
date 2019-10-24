@@ -4,7 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.DragableTabControlDemo"
+        xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
         mc:Ignorable="d"
-        Title="DragableTabControlDemo" Height="450" Width="800">
-    <TabControl x:Name="MyTabControl"/>
+        Title="DragableTabControlDemo" Height="450" Width="800" Loaded="DragableTabControlDemo_OnLoaded" Padding="15">
+    <Window.Resources>
+        <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
+            <Border Padding="5" Background="Aqua">
+                <TextBlock Text="{Binding Name}" />
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems}"
+                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DragHandler="{Binding}" dd:DragDrop.DropHandler="{Binding}"/>
+        <Button Grid.Column="1" Content="弹新窗" Height="50" Click="ButtonBase_OnClick" />
+        <TabControl x:Name="RightTabControl" Grid.Column="2" ItemsSource="{Binding RightItems}"
+                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DragHandler="{Binding}" dd:DragDrop.DropHandler="{Binding}"/>
+    </Grid>
 </Window>
