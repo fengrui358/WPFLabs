@@ -63,6 +63,13 @@ namespace WpfLabs.DragableTabControlDemo
         {
             if (dropInfo.Data is DragableTabItemModel sourceItem && dropInfo.TargetItem is DragableTabItemModel targetItem && dropInfo.Data != dropInfo.TargetItem)
             {
+                var targetCollection = (ObservableCollection<DragableTabItemModel>) dropInfo.TargetCollection;
+                DragableTabItemModel targetPostionItem = null;
+                if (dropInfo.InsertIndex > 0)
+                {
+                    targetPostionItem = targetCollection[dropInfo.InsertIndex - 1];
+                }
+
                 //从来源中移除
                 if (LeftItems1.Contains(sourceItem))
                 {
@@ -81,34 +88,15 @@ namespace WpfLabs.DragableTabControlDemo
                     RightItems2.Remove(sourceItem);
                 }
 
-                var targetIndex = LeftItems1.IndexOf(targetItem);
-                if (targetIndex >= 0)
+                //插入新的位置
+                if (targetPostionItem == null)
                 {
-                    LeftItems1.Insert(targetIndex + 1, sourceItem);
+                    targetCollection.Insert(0, sourceItem);
                 }
                 else
                 {
-                    targetIndex = RightItems1.IndexOf(targetItem);
-                    if (targetIndex >= 0)
-                    {
-                        RightItems1.Insert(targetIndex + 1, sourceItem);
-                    }
-                    else
-                    {
-                        targetIndex = LeftItems2.IndexOf(targetItem);
-                        if (targetIndex >= 0)
-                        {
-                            LeftItems2.Insert(targetIndex + 1, sourceItem);
-                        }
-                        else
-                        {
-                            targetIndex = RightItems2.IndexOf(targetItem);
-                            if (targetIndex >= 0)
-                            {
-                                RightItems2.Insert(targetIndex + 1, sourceItem);
-                            }
-                        }
-                    }
+                    var index = targetCollection.IndexOf(targetPostionItem);
+                    targetCollection.Insert(index + 1, sourceItem);
                 }
 
                 _logger.Info($"Source:{sourceItem.Name} TargetItem:{targetItem.Name}");
