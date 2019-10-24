@@ -203,10 +203,14 @@
       <DependentUpon>DataGridDetailListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataGridDetailList\DataGridDetailType.cs" />
+    <Compile Include="DragableTabControlDemo\DragableTabControlDemo2.xaml.cs">
+      <DependentUpon>DragableTabControlDemo2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DragableTabControlDemo\DragableTabControlDemo.xaml.cs">
       <DependentUpon>DragableTabControlDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="DragableTabControlDemo\DragableTabItemModel.cs" />
+    <Compile Include="DragableTabControlDemo\DragDropViewModel.cs" />
     <Compile Include="DrawingDemo\ControlRowConverter.cs" />
     <Compile Include="DrawingDemo\DrawingDemoWindow.xaml.cs">
       <DependentUpon>DrawingDemoWindow.xaml</DependentUpon>
@@ -493,6 +497,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DefaultStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DragableTabControlDemo\DragableTabControlDemo2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

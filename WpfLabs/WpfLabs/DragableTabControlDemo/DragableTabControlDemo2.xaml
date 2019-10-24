@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfLabs.DragableTabControlDemo.DragableTabControlDemo"
+﻿<Window x:Class="WpfLabs.DragableTabControlDemo.DragableTabControlDemo2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         Title="DragableTabControlDemo" Height="450" Width="800" Padding="15">
     <Window.Resources>
         <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
-            <Border Padding="5" Background="Aqua">
+            <Border Padding="5" Background="BlanchedAlmond">
                 <TextBlock Text="{Binding Name}" />
             </Border>
         </DataTemplate>
@@ -21,11 +21,10 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems1}"
+        <TabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems2}"
                     dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                     dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DropHandler="{Binding}"/>
-        <Button Grid.Column="1" Content="弹新窗" Height="50" Click="ButtonBase_OnClick" />
-        <TabControl x:Name="RightTabControl" Grid.Column="2" ItemsSource="{Binding RightItems1}"
+        <TabControl x:Name="RightTabControl" Grid.Column="2" ItemsSource="{Binding RightItems2}"
                     dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                     dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DropHandler="{Binding}"/>
     </Grid>
