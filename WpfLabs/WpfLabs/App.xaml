@@ -6,7 +6,7 @@
         </ResourceDictionary>
         <ResourceDictionary Source="IconDictionary.xaml">
         </ResourceDictionary>
-                <ResourceDictionary Source="ResourceDictionaryCodeBehind/CustomizeResourceDictionary/CustomizeResourceDictionary.xaml"/>
+        <ResourceDictionary Source="ResourceDictionaryCodeBehind/CustomizeResourceDictionary/CustomizeResourceDictionary.xaml" />
         <!--<ResourceDictionary Source="MasterDetailDataGrid/Style/DataGridNormalStyle.xaml"></ResourceDictionary>-->
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
