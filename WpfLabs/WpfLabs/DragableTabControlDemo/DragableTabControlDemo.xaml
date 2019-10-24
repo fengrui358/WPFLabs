@@ -3,16 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfLabs.DragableTabControlDemo"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="DragableTabControlDemo" Height="450" Width="800" Padding="15">
     <Window.Resources>
-        <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
-            <Border Padding="5" Background="Aqua">
-                <TextBlock Text="{Binding Name}" />
-            </Border>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TabDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
+                <Border Padding="5" Background="Aqua">
+                    <TextBlock Text="{Binding Name}" />
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,12 +25,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems1}"
-                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DropHandler="{Binding}"/>
+        <TabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems1}" Style="{StaticResource MyTabControl}"
+                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding}"
+                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" />
         <Button Grid.Column="1" Content="弹新窗" Height="50" Click="ButtonBase_OnClick" />
         <TabControl x:Name="RightTabControl" Grid.Column="2" ItemsSource="{Binding RightItems1}"
-                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DropHandler="{Binding}"/>
+                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding}"
+                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" />
     </Grid>
 </Window>

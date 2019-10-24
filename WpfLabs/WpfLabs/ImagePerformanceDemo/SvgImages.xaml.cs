@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Media;
 using ClipArtViewer;
 
 namespace WpfLabs.ImagePerformanceDemo
@@ -25,7 +26,7 @@ namespace WpfLabs.ImagePerformanceDemo
 
         private void CreateImages(int count)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < 1; i++)
             {
                 var svgRender = new SVGRender();
                 var image = svgRender.LoadDrawing("ImagePerformanceDemo/Resources/timer.svg");
@@ -37,7 +38,9 @@ namespace WpfLabs.ImagePerformanceDemo
                     Width = 100,
                     Height = 100,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Foreground = Brushes.Red,
+                    Background = Brushes.Red
                 });
             }
         }

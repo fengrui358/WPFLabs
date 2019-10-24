@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using GongSolutions.Wpf.DragDrop;
 using NLog;
@@ -28,7 +29,12 @@ namespace WpfLabs.DragableTabControlDemo
             LeftItems2 = new ObservableCollection<DragableTabItemModel>();
             RightItems2 = new ObservableCollection<DragableTabItemModel>();
 
-            for (int i = 0; i < 3; i++)
+            LeftItems1.CollectionChanged += ItemsOnCollectionChanged;
+            LeftItems2.CollectionChanged += ItemsOnCollectionChanged;
+            RightItems1.CollectionChanged += ItemsOnCollectionChanged;
+            RightItems2.CollectionChanged += ItemsOnCollectionChanged;
+
+            for (int i = 0; i < 4; i++)
             {
                 LeftItems1.Add(new DragableTabItemModel { Name = $"Left1_{i + 1}" });
                 RightItems1.Add(new DragableTabItemModel { Name = $"Right1_{i + 1}" });
@@ -36,6 +42,11 @@ namespace WpfLabs.DragableTabControlDemo
                 LeftItems2.Add(new DragableTabItemModel { Name = $"Left2_{i + 1}" });
                 RightItems2.Add(new DragableTabItemModel { Name = $"Right2_{i + 1}" });
             }
+        }
+
+        private void ItemsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            _logger.Info("此处可以延时记录集合变更信息");
         }
 
         void IDropTarget.DragOver(IDropInfo dropInfo)

@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <Style x:Key="MyTabControl" TargetType="TabControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid Name="templateRoot" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Name="ColumnDefinition0" />
+                            <ColumnDefinition Width="0" Name="ColumnDefinition1" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" Name="RowDefinition0" />
+                            <RowDefinition Height="*" Name="RowDefinition1" />
+                        </Grid.RowDefinitions>
+                        <ScrollViewer Grid.Column="0" Grid.Row="0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                            <TabPanel Background="#00FFFFFF" IsItemsHost="True" Name="HeaderPanel" Margin="2,2,2,0" Panel.ZIndex="1" KeyboardNavigation.TabIndex="1" />
+                        </ScrollViewer>
+                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="ContentPanel" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Column="0" Grid.Row="1">
+                            <ContentPresenter Content="{TemplateBinding TabControl.SelectedContent}" ContentTemplate="{TemplateBinding TabControl.SelectedContentTemplate}" ContentStringFormat="{TemplateBinding TabControl.SelectedContentStringFormat}" ContentSource="SelectedContent" Name="PART_SelectedContentHost" Margin="{TemplateBinding Control.Padding}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                 
+                        <Trigger Property="UIElement.IsEnabled">
+                            <Setter Property="TextElement.Foreground" TargetName="templateRoot">
+                                <Setter.Value>
+                                    <DynamicResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Trigger.Value>
+                                <system:Boolean>False</system:Boolean>
+                            </Trigger.Value>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
