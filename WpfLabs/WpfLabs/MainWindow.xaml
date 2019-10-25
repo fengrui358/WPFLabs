@@ -94,6 +94,8 @@
                             CommandParameter="FluidLayoutDemoWindow" />
                     <Button Content="展示DragableTabControlDemo" Command="{Binding ShowControlWindow}"
                             CommandParameter="DragableTabControlDemo" />
+                    <Button Content="展示DragableListBoxDemo" Command="{Binding ShowControlWindow}"
+                            CommandParameter="DragableListBoxDemo" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

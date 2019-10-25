@@ -1,0 +1,29 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: System.Windows.Input.ModifierKeys
+// Assembly: WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+// MVID: 218E46CE-2398-40EB-9986-C31C8B01146B
+// Assembly location: C:\Windows\Microsoft.NET\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll
+
+using System.ComponentModel;
+using System.Windows.Markup;
+
+namespace System.Windows.Input
+{
+  /// <summary>Specifies the set of modifier keys. </summary>
+  [TypeConverter(typeof (ModifierKeysConverter))]
+  [ValueSerializer(typeof (ModifierKeysValueSerializer))]
+  [Flags]
+  public enum ModifierKeys
+  {
+    /// <summary>No modifiers are pressed. </summary>
+    None = 0,
+    /// <summary>The ALT key. </summary>
+    Alt = 1,
+    /// <summary>The CTRL key. </summary>
+    Control = 2,
+    /// <summary>The SHIFT key. </summary>
+    Shift = 4,
+    /// <summary>The Windows logo key.</summary>
+    Windows = 8,
+  }
+}

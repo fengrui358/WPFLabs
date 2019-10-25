@@ -12,7 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="TabDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate x:Key="TabItemStyle" DataType="dragableTabControlDemo:DynamicTabItem">
+            <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
                 <Border Padding="5" Background="Aqua">
                     <TextBlock Text="{Binding Name}" />
                 </Border>

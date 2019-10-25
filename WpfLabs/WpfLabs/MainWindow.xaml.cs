@@ -224,6 +224,10 @@ namespace WpfLabs
                     var dragableTabControlDemo = new DragableTabControlDemo.DragableTabControlDemo();
                     dragableTabControlDemo.ShowDialog();
                     break;
+                case "DragableListBoxDemo":
+                    var dragableListBoxDemo = new DragableListBoxDemo.DragableListBoxDemo();
+                    dragableListBoxDemo.ShowDialog();
+                    break;
             }
 
             this.Effect = null;
