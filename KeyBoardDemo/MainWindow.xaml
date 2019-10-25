@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyBoardDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_OnLoaded" KeyDown="KeyBoardInputWindow_OnKeyDown">
+        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_OnLoaded" PreviewKeyDown="KeyBoardInputWindow_OnKeyDown">
     <Window.Resources>
         <local:KeyEventArgsConverter x:Key="KeyEventArgsConverter"/>
         <DataTemplate x:Key="InputLeyDataTemplate" DataType="KeyEventArgs">
