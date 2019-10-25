@@ -13,10 +13,11 @@ namespace KeyBoardDemo
             {
                 if (keyEventArgs.KeyboardDevice.Modifiers == ModifierKeys.None)
                 {
-                    return $"{keyEventArgs.Key}";
+                    return $"{keyEventArgs.Key}（Virtual Key:{KeyInterop.VirtualKeyFromKey(keyEventArgs.Key)}）";
                 }
 
-                return $"{keyEventArgs.KeyboardDevice.Modifiers} + {keyEventArgs.Key}";
+                return
+                    $"{keyEventArgs.KeyboardDevice.Modifiers} + {keyEventArgs.Key}（Virtual Key:{KeyInterop.VirtualKeyFromKey(keyEventArgs.Key)}）";
             }
 
             return Binding.DoNothing;

@@ -49,6 +49,14 @@ namespace KeyBoardDemo
                     }
                 }
             }
+
+            var sb = new StringBuilder();
+            foreach (Key key in Enum.GetValues(typeof(Key)))
+            {
+                sb.AppendLine($"{key}({KeyInterop.VirtualKeyFromKey(key)})");
+            }
+
+            VirtualKeys.Text = sb.ToString();
         }
 
         private void KeyBoardInputWindow_OnKeyDown(object sender, KeyEventArgs e)

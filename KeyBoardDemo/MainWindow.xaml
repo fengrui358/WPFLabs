@@ -22,5 +22,8 @@
         <TabItem Header="ModifierKeys键码表">
             <TextBox x:Name="ModifierKeysMapper" IsReadOnly="True" />
         </TabItem>
+        <TabItem Header="虚拟键码表">
+            <TextBox x:Name="VirtualKeys" IsReadOnly="True" />
+        </TabItem>
     </TabControl>
 </Window>
