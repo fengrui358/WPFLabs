@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfLabs.DragableTabControlDemo
 {
@@ -18,6 +19,11 @@ namespace WpfLabs.DragableTabControlDemo
         {
             var dragableTabControlDemo = new DragableTabControlDemo2();
             dragableTabControlDemo.Show();
+        }
+
+        private void LeftTabControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

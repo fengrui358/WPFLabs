@@ -9,5 +9,4 @@
         <ResourceDictionary Source="../DrawingDemo/PathImage/Themes/PathImage.xaml"/>
         <ResourceDictionary Source="../GroupExpander/Themes/CommandExpanderStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

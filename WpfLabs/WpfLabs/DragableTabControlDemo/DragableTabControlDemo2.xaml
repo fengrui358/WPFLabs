@@ -8,11 +8,16 @@
         mc:Ignorable="d"
         Title="DragableTabControlDemo" Height="450" Width="800" Padding="15">
     <Window.Resources>
-        <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
-            <Border Padding="5" Background="BlanchedAlmond">
-                <TextBlock Text="{Binding Name}" />
-            </Border>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TabDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="TabItemStyle" DataType="TabItem">
+                <Border Padding="5" Background="BlanchedAlmond">
+                    <TextBlock Text="{Binding Name}" />
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,11 +26,15 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems2}"
-                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DropHandler="{Binding}"/>
-        <TabControl x:Name="RightTabControl" Grid.Column="2" ItemsSource="{Binding RightItems2}"
-                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                    dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}" dd:DragDrop.DropHandler="{Binding}"/>
+        <local:DynamicTabControl x:Name="LeftTabControl" Grid.Column="0" ItemsSource="{Binding LeftItems2}"
+                                 Style="{StaticResource DynamicTabControl}"
+                                 dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                 dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}"
+                                 dd:DragDrop.DropHandler="{Binding}" />
+        <local:DynamicTabControl x:Name="RightTabControl" Grid.Column="2" ItemsSource="{Binding RightItems2}"
+                                 Style="{StaticResource DynamicTabControl}"
+                                 dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                 dd:DragDrop.UseDefaultDragAdorner="True" ItemTemplate="{StaticResource TabItemStyle}"
+                                 dd:DragDrop.DropHandler="{Binding}" />
     </Grid>
 </Window>
