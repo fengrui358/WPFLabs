@@ -206,6 +206,7 @@
     <Compile Include="DragableListBoxDemo\DragableListBoxDemo.xaml.cs">
       <DependentUpon>DragableListBoxDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DragableListBoxDemo\MenuContainer.cs" />
     <Compile Include="DragableListBoxDemo\MenuUiModel.cs" />
     <Compile Include="DragableTabControlDemo\DragableTabControlDemo2.xaml.cs">
       <DependentUpon>DragableTabControlDemo2.xaml</DependentUpon>

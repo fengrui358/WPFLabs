@@ -17,5 +17,13 @@ namespace WpfLabs.DragableListBoxDemo
             Menus = new ObservableCollection<MenuUiModel>();
             DataContext = this;
         }
+
+        private void DragableListBoxDemo_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Menus.Add(new MenuUiModel{Header = $"Header_{i + 1}"});
+            }
+        }
     }
 }
