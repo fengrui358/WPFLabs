@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfLabs.DragableListBoxDemo.DragableListBoxDemo"
+﻿<Window x:Class="WpfLabs.DragableListBoxDemo.DragableListBoxDemo2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -886,8 +886,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ListBox Grid.Row="0" ItemsSource="{Binding Menus}" ItemTemplate="{StaticResource MenuItemDataTemplate}"
-                 dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.UseDefaultDragAdorner="True"
-                 SelectedItem="{Binding SelectedMenu}" Height="35" Tag="{Binding OrderIndex}">
+                 dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.UseDefaultDragAdorner="True" Tag="{Binding OrderIndex}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" />

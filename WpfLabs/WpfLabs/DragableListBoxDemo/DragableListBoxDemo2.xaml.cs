@@ -6,13 +6,13 @@ namespace WpfLabs.DragableListBoxDemo
     /// <summary>
     /// DragableListBoxDemo.xaml 的交互逻辑
     /// </summary>
-    public partial class DragableListBoxDemo : Window
+    public partial class DragableListBoxDemo2 : Window
     {
         public ObservableCollection<MenuUiModel> Menus { get; set; }
 
-        public int OrderIndex { get; } = 1;
+        public int OrderIndex { get; } = 2;
 
-        public DragableListBoxDemo()
+        public DragableListBoxDemo2()
         {
             InitializeComponent();
 
@@ -26,9 +26,6 @@ namespace WpfLabs.DragableListBoxDemo
             {
                 Menus.Add(new MenuUiModel{Header = $"Header_{i + 1}"});
             }
-
-            var d = new DragableListBoxDemo2();
-            d.Show();
         }
     }
 }
