@@ -96,6 +96,8 @@
                             CommandParameter="DragableTabControlDemo" />
                     <Button Content="展示DragableListBoxDemo" Command="{Binding ShowControlWindow}"
                             CommandParameter="DragableListBoxDemo" />
+                    <Button Content="展示CustomWindowDemo" Command="{Binding ShowControlWindow}"
+                            CommandParameter="CustomWindowDemo" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

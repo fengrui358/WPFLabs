@@ -198,6 +198,10 @@
     <Compile Include="CustomPixelShaderDemo\Effects\ToneMappingEffect.cs" />
     <Compile Include="CustomPixelShaderDemo\Effects\ToonShaderEffect.cs" />
     <Compile Include="CustomPixelShaderDemo\Effects\ZoomBlurEffect.cs" />
+    <Compile Include="CustomWindow\CustomWindowDemo.xaml.cs">
+      <DependentUpon>CustomWindowDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomWindow\UniversalWindowStyle.cs" />
     <Compile Include="DataGridDetailList\Converters\DataGridRowDetailMarginConverter.cs" />
     <Compile Include="DataGridDetailList\DataGridDetailListWindow.xaml.cs">
       <DependentUpon>DataGridDetailListWindow.xaml</DependentUpon>
@@ -494,6 +498,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomPixelShaderDemo\CustomPixelShaderDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomWindow\CustomWindowDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomWindow\Style.Window.Universal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

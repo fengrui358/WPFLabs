@@ -23,6 +23,7 @@ using WpfLabs.CircularLoading;
 using WpfLabs.CollectionViewDemo;
 using WpfLabs.ContactsTreeControl;
 using WpfLabs.ContactsTreeControl.Models;
+using WpfLabs.CustomWindow;
 using WpfLabs.DataGridDetailList;
 using WpfLabs.DrawingDemo;
 using WpfLabs.EllipsisLoading;
@@ -227,6 +228,10 @@ namespace WpfLabs
                 case "DragableListBoxDemo":
                     var dragableListBoxDemo = new DragableListBoxDemo.DragableListBoxDemo();
                     dragableListBoxDemo.ShowDialog();
+                    break;
+                case "CustomWindowDemo":
+                    var customWindowDemo = new CustomWindowDemo();
+                    customWindowDemo.ShowDialog();
                     break;
             }
 

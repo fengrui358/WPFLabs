@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfLabs.CustomWindow.CustomWindowDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.CustomWindow"
+        xmlns:themes="clr-namespace:Walterlv.Themes" Background="#279EDA"
+        mc:Ignorable="d" Style="{StaticResource Style.Window.Universal}"
+        Title="CustomWindowDemo" Height="450" Width="800">
+    <themes:UniversalWindowStyle.TitleBar>
+        <themes:UniversalTitleBar ForegroundColor="White" InactiveForegroundColor="#7FFFFFFF"
+                                  ButtonHoverForeground="White" ButtonHoverBackground="#3FFFFFFF"
+                                  ButtonPressedForeground="#7FFFFFFF" ButtonPressedBackground="#3F000000" />
+    </themes:UniversalWindowStyle.TitleBar>
+
+    <Grid/>
+</Window>
