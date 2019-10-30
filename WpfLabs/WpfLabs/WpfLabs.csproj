@@ -888,6 +888,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="AnimationPerformanceDemo\Assets\Test.gif" />
+    <Resource Include="GifShowDemo\Wizard-Clap-by-Markus-Magnusson.gif" />
     <Content Include="ImagePerformanceDemo\Resources\timer.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
