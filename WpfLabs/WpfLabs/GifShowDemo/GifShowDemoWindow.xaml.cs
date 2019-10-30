@@ -27,6 +27,9 @@ namespace WpfLabs.GifShowDemo
             GifImage.Visibility = Visibility.Collapsed;
             GifImage2.Visibility = Visibility.Visible;
 
+            ImageBehavior.SetAnimatedSource(GifImage, null);
+            
+
             ((Grid) GifImage.Parent).Children.Remove(GifImage);
         }
     }

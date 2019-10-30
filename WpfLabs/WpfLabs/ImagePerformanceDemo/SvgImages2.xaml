@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfLabs.ImagePerformanceDemo.SvgImages2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLabs.ImagePerformanceDemo"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        mc:Ignorable="d"
+        Title="SvgImages" Height="300" Width="300" Loaded="Window_OnLoaded" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Msg" Grid.Row="0" Margin="20" />
+        <Grid x:Name="Container" Grid.Row="1">
+            <!--<Image Source="{Binding SvgPath, Converter={svgc:SvgImageConverter}}" />-->
+            <!--<Image Source="{svgc:SvgImage Source=ImagePerformanceDemo/Resources/timer.svg}" />-->
+        </Grid>
+    </Grid>
+</Window>

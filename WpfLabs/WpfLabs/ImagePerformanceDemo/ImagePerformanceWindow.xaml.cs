@@ -40,6 +40,9 @@ namespace WpfLabs.ImagePerformanceDemo
                 case "SVG":
                     new SvgImages(Count) { Owner = this }.ShowDialog();
                     break;
+                case "SVG2":
+                    new SvgImages2(Count) { Owner = this }.ShowDialog();
+                    break;
                 case "PATHIMAGES":
                     new PathImages(Count) { Owner = this }.ShowDialog();
                     break;

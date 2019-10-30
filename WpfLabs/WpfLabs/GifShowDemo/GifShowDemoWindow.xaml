@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="GifShowDemoWindow" Height="300" Width="300">
     <TabControl>
-        <TabItem Header="普通Image">
+        <!--<TabItem Header="普通Image">
             <Image Source="Test.gif" />
-        </TabItem>
+        </TabItem>-->
         <TabItem Header="WpfAnimatedGif">
             <Grid>
                 <Image x:Name="GifImage" gif:ImageBehavior.AnimatedSource="Wizard-Clap-by-Markus-Magnusson.gif"
