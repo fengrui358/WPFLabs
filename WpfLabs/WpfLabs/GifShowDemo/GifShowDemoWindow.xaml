@@ -11,7 +11,7 @@
             <Image Source="Test.gif"/>
         </TabItem>
         <TabItem Header="WpfAnimatedGif">
-            <Image gif:ImageBehavior.AnimatedSource="Test.gif" />
+            <Image x:Name="GifImage" gif:ImageBehavior.AnimatedSource="Test.gif" gif:ImageBehavior.AnimationCompleted="ImageBehavior_OnAnimationCompleted" />
         </TabItem>
     </TabControl>
 </Window>
