@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
-using ClipArtViewer;
+using SVGImage.SVG;
 
 namespace WpfLabs.ImagePerformanceDemo
 {
@@ -31,10 +31,10 @@ namespace WpfLabs.ImagePerformanceDemo
                 var svgRender = new SVGRender();
                 var image = svgRender.LoadDrawing("ImagePerformanceDemo/Resources/warning.svg");
 
-                Container.Children.Add(new SVGImage
+                Container.Children.Add(new SVGImage.SVG.SVGImage
                 {
                     ImageSource = image,
-                    SizeType = SVGImage.eSizeType.SizeToContent,
+                    SizeType = SVGImage.SVG.SVGImage.eSizeType.SizeToContent,
                     Width = 100,
                     Height = 100,
                     HorizontalAlignment = HorizontalAlignment.Center,

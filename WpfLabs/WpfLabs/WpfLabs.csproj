@@ -41,6 +41,9 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetProjects.SVGImage, Version=2.0.41.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetProjects.SVGImage.2.0.41\lib\net40\DotNetProjects.SVGImage.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -343,18 +346,6 @@
     <Compile Include="ImagePerformanceDemo\SvgImages.xaml.cs">
       <DependentUpon>SvgImages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImagePerformanceDemo\SvgImage\Fill.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\PaintServer.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\PathShape.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\Shapes.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\ShapeUtil.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\Stroke.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\SVGImage.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\SVGReader.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\SVGTags.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\Text.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\TextRender.cs" />
-    <Compile Include="ImagePerformanceDemo\SvgImage\TextStyle.cs" />
     <Compile Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml.cs">
       <DependentUpon>KeyBoardInputWindow.xaml</DependentUpon>
     </Compile>
