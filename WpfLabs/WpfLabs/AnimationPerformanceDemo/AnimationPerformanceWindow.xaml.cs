@@ -37,6 +37,15 @@ namespace WpfLabs.AnimationPerformanceDemo
             }
         }
 
+        private void VideoButton2_OnClick(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                var videoDrawingAnimationWindow = new VideoDrawingAnimationWindow();
+                videoDrawingAnimationWindow.Show();
+            }
+        }
+
         private void GifButton_OnClick(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < Count; i++)

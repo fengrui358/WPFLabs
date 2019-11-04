@@ -17,10 +17,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Width="100" Height="40" Content="原生动画" Click="NativeButton_OnClick"/>
             <Button Grid.Column="1" Width="100" Height="40" Content="Gif动画" Click="GifButton_OnClick"/>
             <Button Grid.Column="2" Width="100" Height="40" Content="视频动画" Click="VideoButton_OnClick"/>
+            <Button Grid.Column="3" Width="100" Height="40" Content="视频画刷动画" Click="VideoButton2_OnClick"/>
         </Grid>
     </Grid>
 </Window>
