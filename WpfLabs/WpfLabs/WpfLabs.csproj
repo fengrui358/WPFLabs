@@ -169,6 +169,9 @@
     <Compile Include="AnimationPerformanceDemo\VideoAnimationWindow.xaml.cs">
       <DependentUpon>VideoAnimationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AnimationPerformanceDemo\VideoDrawingAnimationWindow.xaml.cs">
+      <DependentUpon>VideoDrawingAnimationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Base\RoutedPropertyEventHandler.cs" />
     <Compile Include="Base\TreeHelper.cs" />
     <Compile Include="Behaviors\TreeViewSelectionBehavior.cs" />
@@ -484,6 +487,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AnimationPerformanceDemo\VideoAnimationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AnimationPerformanceDemo\VideoDrawingAnimationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
