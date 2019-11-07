@@ -98,6 +98,8 @@
                             CommandParameter="DragableListBoxDemo" />
                     <Button Content="展示CustomWindowDemo" Command="{Binding ShowControlWindow}"
                             CommandParameter="CustomWindowDemo" />
+                    <Button Content="展示AdornerControlWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="AdornerControlWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

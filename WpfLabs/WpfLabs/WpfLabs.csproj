@@ -153,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdornerDemo\AdornerControlWindow.xaml.cs">
+      <DependentUpon>AdornerControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdornerDemo\BorderAdorner.cs" />
     <Compile Include="AnimationPerformanceDemo\AnimationPerformanceWindow.xaml.cs">
       <DependentUpon>AnimationPerformanceWindow.xaml</DependentUpon>
     </Compile>
@@ -463,6 +467,10 @@
       <DependentUpon>WaterMarkDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WaterMarkDemo\WatermarkTextBehavior.cs" />
+    <Page Include="AdornerDemo\AdornerControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AnimationPerformanceDemo\AnimationPerformanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
+using WpfLabs.AdornerDemo;
 using WpfLabs.AnimationPerformanceDemo;
 using WpfLabs.BindingDemo;
 using WpfLabs.CalloutBorder;
@@ -232,6 +233,10 @@ namespace WpfLabs
                 case "CustomWindowDemo":
                     var customWindowDemo = new CustomWindowDemo();
                     customWindowDemo.ShowDialog();
+                    break;
+                case "AdornerControlWindow":
+                    var adornerControlWindow = new AdornerControlWindow();
+                    adornerControlWindow.ShowDialog();
                     break;
             }
 
