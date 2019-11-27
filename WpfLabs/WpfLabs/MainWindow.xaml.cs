@@ -37,6 +37,7 @@ using WpfLabs.FoucsDemo;
 using WpfLabs.GifShowDemo;
 using WpfLabs.GroupExpander;
 using WpfLabs.ImagePerformanceDemo;
+using WpfLabs.ItemsControlWithTimeline;
 using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
@@ -237,6 +238,10 @@ namespace WpfLabs
                 case "AdornerControlWindow":
                     var adornerControlWindow = new AdornerControlWindow();
                     adornerControlWindow.ShowDialog();
+                    break;
+                case "ItemsControlWithTimelineWindow":
+                    var itemsControlWithTimelineWindow = new ItemsControlWithTimelineWindow();
+                    itemsControlWithTimelineWindow.ShowDialog();
                     break;
             }
 

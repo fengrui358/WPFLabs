@@ -44,6 +44,9 @@
     <Reference Include="DotNetProjects.SVGImage, Version=2.0.41.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetProjects.SVGImage.2.0.41\lib\net40\DotNetProjects.SVGImage.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.5.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -62,11 +65,29 @@
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Expression.Drawing.3.0.0\lib\net45\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross, Version=6.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.6.4.1\lib\net461\MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platforms.Wpf, Version=6.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Platforms.Wpf.6.4.1\lib\net461\MvvmCross.Platforms.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="NetLib.Core, Version=1.0.46.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FrHello.NetLib.Core.1.0.46\lib\net472\NetLib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NetLib.Core.Reflection, Version=1.0.17.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FrHello.NetLib.Core.Reflection.1.0.17\lib\net472\NetLib.Core.Reflection.dll</HintPath>
+    </Reference>
     <Reference Include="NetLib.Core.Windows, Version=1.0.41.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FrHello.NetLib.Core.Windows.1.0.41\lib\net472\NetLib.Core.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="NetLib.Core.Wpf, Version=1.1.33.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FrHello.NetLib.Core.Wpf.1.1.33\lib\net472\NetLib.Core.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -117,7 +138,16 @@
       <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Runtime.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
@@ -126,8 +156,8 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -352,6 +382,13 @@
     </Compile>
     <Compile Include="ImagePerformanceDemo\SvgImages.xaml.cs">
       <DependentUpon>SvgImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ItemsControlWithTimeline\ItemsControlWithTimelineWindow.xaml.cs">
+      <DependentUpon>ItemsControlWithTimelineWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ItemsControlWithTimeline\ShowBelowConverter.cs" />
+    <Compile Include="ItemsControlWithTimeline\TimelineNode.xaml.cs">
+      <DependentUpon>TimelineNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml.cs">
       <DependentUpon>KeyBoardInputWindow.xaml</DependentUpon>
@@ -695,6 +732,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ImagePerformanceDemo\SvgImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ItemsControlWithTimeline\ItemsControlWithTimelineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ItemsControlWithTimeline\TimelineNode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
