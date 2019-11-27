@@ -20,7 +20,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <local:TimelineNode HorizontalAlignment="Center" Margin="0,-2"
-                                                ShowAbove="False">
+                                                ShowAbove="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=AlternationIndex, Converter={x:Static uiConverters:SuperConverterProvider.SuperConverter}}">
                                 <local:TimelineNode.ShowBelow>
                                     <MultiBinding Converter="{StaticResource ShowBelowConverter}">
                                         <Binding RelativeSource="{RelativeSource AncestorType=DataGridRow}" Path="AlternationIndex" Mode="OneWay" />
