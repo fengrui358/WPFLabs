@@ -8,5 +8,6 @@
         <ResourceDictionary Source="../CircularLoading/Themes/CircularLoadingStyle.xaml"/>
         <ResourceDictionary Source="../DrawingDemo/PathImage/Themes/PathImage.xaml"/>
         <ResourceDictionary Source="../GroupExpander/Themes/CommandExpanderStyle.xaml"/>
+        <ResourceDictionary Source="../LoadingControl/Themes/LoadingControlStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

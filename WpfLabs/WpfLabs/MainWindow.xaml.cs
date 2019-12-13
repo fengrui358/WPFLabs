@@ -131,6 +131,10 @@ namespace WpfLabs
                     var circularLoadingWindow = new CircularLoadingWindow();
                     circularLoadingWindow.ShowDialog();
                     break;
+                case "LoadingControlWindow":
+                    var loadingControlWindow = new LoadingControl.LoadingControlWindow();
+                    loadingControlWindow.ShowDialog();
+                    break;
                 case "CalloutBorderStyleWindow":
                     var calloutBorderStyleWindow = new CalloutBorderStyleWindow();
                     calloutBorderStyleWindow.ShowDialog();
