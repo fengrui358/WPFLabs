@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyBoardDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_OnLoaded" PreviewKeyDown="KeyBoardInputWindow_OnKeyDown">
+        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_OnLoaded"
+        PreviewKeyDown="KeyBoardInputWindow_OnKeyDown">
     <Window.Resources>
-        <local:KeyEventArgsConverter x:Key="KeyEventArgsConverter"/>
+        <local:KeyEventArgsConverter x:Key="KeyEventArgsConverter" />
         <DataTemplate x:Key="InputLeyDataTemplate" DataType="KeyEventArgs">
-            <TextBlock Text="{Binding Converter={StaticResource KeyEventArgsConverter}}"/>
+            <TextBlock Text="{Binding Converter={StaticResource KeyEventArgsConverter}}" />
         </DataTemplate>
     </Window.Resources>
     <TabControl>
         <TabItem x:Name="KeyTest" Header="按键测试">
-            <ListView x:Name="Displayer" ItemsSource="{Binding ObservableCollection, Mode=OneWay}" ItemTemplate="{StaticResource InputLeyDataTemplate}" IsHitTestVisible="False"/>
+            <ListView x:Name="Displayer" ItemsSource="{Binding ObservableCollection, Mode=OneWay}"
+                      ItemTemplate="{StaticResource InputLeyDataTemplate}" IsHitTestVisible="False" />
         </TabItem>
         <TabItem Header="Key键码表">
             <TextBox x:Name="KeyMapper" IsReadOnly="True" />
@@ -24,6 +26,9 @@
         </TabItem>
         <TabItem Header="虚拟键码表">
             <TextBox x:Name="VirtualKeys" IsReadOnly="True" />
+        </TabItem>
+        <TabItem Header="PreProcessInput">
+            <Button Content="Show" Click="ButtonBase_OnClick" />
         </TabItem>
     </TabControl>
 </Window>
