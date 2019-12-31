@@ -104,6 +104,8 @@
                             CommandParameter="AdornerControlWindow" />
                     <Button Content="展示ItemsControlWithTimelineWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="ItemsControlWithTimelineWindow" />
+                    <Button Content="展示IsSynchronizedWithCurrentItemWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="IsSynchronizedWithCurrentItemWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

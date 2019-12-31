@@ -383,6 +383,9 @@
     <Compile Include="ImagePerformanceDemo\SvgImages.xaml.cs">
       <DependentUpon>SvgImages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IsSynchronizedWithCurrentItemDemo\IsSynchronizedWithCurrentItemWindow.xaml.cs">
+      <DependentUpon>IsSynchronizedWithCurrentItemWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ItemsControlWithTimeline\ItemsControlWithTimelineWindow.xaml.cs">
       <DependentUpon>ItemsControlWithTimelineWindow.xaml</DependentUpon>
     </Compile>
@@ -736,6 +739,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ImagePerformanceDemo\SvgImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IsSynchronizedWithCurrentItemDemo\IsSynchronizedWithCurrentItemWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
