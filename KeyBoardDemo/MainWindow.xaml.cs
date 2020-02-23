@@ -69,5 +69,11 @@ namespace KeyBoardDemo
                 Displayer.ScrollIntoView(ObservableCollection.Last());
             }
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var w = new PreProcessInputTestWindow();
+            w.Show();
+        }
     }
 }

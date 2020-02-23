@@ -37,6 +37,7 @@ using WpfLabs.FoucsDemo;
 using WpfLabs.GifShowDemo;
 using WpfLabs.GroupExpander;
 using WpfLabs.ImagePerformanceDemo;
+using WpfLabs.IsSynchronizedWithCurrentItemDemo;
 using WpfLabs.ItemsControlWithTimeline;
 using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
@@ -130,6 +131,10 @@ namespace WpfLabs
                 case "CircularLoadingWindow":
                     var circularLoadingWindow = new CircularLoadingWindow();
                     circularLoadingWindow.ShowDialog();
+                    break;
+                case "LoadingControlWindow":
+                    var loadingControlWindow = new LoadingControl.LoadingControlWindow();
+                    loadingControlWindow.ShowDialog();
                     break;
                 case "CalloutBorderStyleWindow":
                     var calloutBorderStyleWindow = new CalloutBorderStyleWindow();
@@ -242,6 +247,10 @@ namespace WpfLabs
                 case "ItemsControlWithTimelineWindow":
                     var itemsControlWithTimelineWindow = new ItemsControlWithTimelineWindow();
                     itemsControlWithTimelineWindow.ShowDialog();
+                    break;
+                case "IsSynchronizedWithCurrentItemWindow":
+                    var isSynchronizedWithCurrentItemWindow = new IsSynchronizedWithCurrentItemWindow();
+                    isSynchronizedWithCurrentItemWindow.ShowDialog();
                     break;
             }
 

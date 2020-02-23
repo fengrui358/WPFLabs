@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:loadingControl="clr-namespace:WpfLabs.LoadingControl">
+    <Color x:Key="C1">#FF4277EB</Color>
+    <Color x:Key="C2">#004277EB</Color>
+    <RadialGradientBrush x:Key="RadialGradientBrush" GradientOrigin="1.2,0.5" Center="1.2,0.5" RadiusX="1.2"
+                         RadiusY="1">
+        <GradientStop Offset="0" Color="{StaticResource C1}" />
+        <GradientStop Offset="1" Color="{StaticResource C2}" />
+    </RadialGradientBrush>
+
+    <Style TargetType="{x:Type loadingControl:LoadingControl}">
+        <Setter Property="Width" Value="344" />
+        <Setter Property="Height" Value="120" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground.Normal1}" />
+        <Setter Property="LoadingMessage" Value="Loading" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type loadingControl:LoadingControl}">
+                    <Viewbox Stretch="Fill">
+                        <Border Background="{TemplateBinding Background}"
+                                Width="344" Height="120"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Image Source="../bg_loading.png" />
+                                <Grid Width="304" Height="80">
+                                    <Rectangle x:Name="LoadingRec" Width="5" Height="5" Margin="0,0,0,20"
+                                               Fill="{StaticResource RadialGradientBrush}" HorizontalAlignment="Left">
+                                        <Rectangle.RenderTransform>
+                                            <TranslateTransform X="12" />
+                                        </Rectangle.RenderTransform>
+                                    </Rectangle>
+                                    <Grid Margin="0,50,0,0" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock FontSize="12" HorizontalAlignment="Center"
+                                                   Text="{TemplateBinding LoadingMessage}"
+                                                   Foreground="White" />
+                                        <TextBlock x:Name="LoadingText" FontSize="12" HorizontalAlignment="Left"
+                                                   Grid.Column="1" Foreground="White" Width="10" />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ActiveStates">
+                                <VisualState x:Name="Inactive" />
+                                <VisualState x:Name="Active">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <!--控制Loading文本-->
+                                        <StringAnimationUsingKeyFrames Storyboard.TargetName="LoadingText"
+                                                                       Storyboard.TargetProperty="Text">
+                                            <DiscreteStringKeyFrame Value="." KeyTime="0:0:0.4" />
+                                            <DiscreteStringKeyFrame Value=".." KeyTime="0:0:0.8" />
+                                            <DiscreteStringKeyFrame Value="..." KeyTime="0:0:1.2" />
+                                            <DiscreteStringKeyFrame Value="" KeyTime="0:0:1.6" />
+                                        </StringAnimationUsingKeyFrames>
+
+                              
+
+                                        <!--控制矩形条长度-->
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
+                                                                       Storyboard.TargetProperty="Width">
+                                            <LinearDoubleKeyFrame Value="150" KeyTime="0:0:0.4" />
+                                            <LinearDoubleKeyFrame Value="5" KeyTime="0:0:0.8" />
+                                            <LinearDoubleKeyFrame Value="150" KeyTime="0:0:1.2" />
+                                            <LinearDoubleKeyFrame Value="5" KeyTime="0:0:1.6" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <!--控制矩形条位置-->
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
+                                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
+                                            <DiscreteDoubleKeyFrame Value="12" KeyTime="0:0:0.4" />
+                                            <LinearDoubleKeyFrame Value="287" KeyTime="0:0:0.8" />
+                                            <LinearDoubleKeyFrame Value="125" KeyTime="0:0:1.2" />
+                                            <LinearDoubleKeyFrame Value="12" KeyTime="0:0:1.6" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <!--控制颜色翻转-->
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
+                                                                      Storyboard.TargetProperty="(Rectangle.Fill).(RadialGradientBrush.GradientOrigin)">
+                                            <DiscretePointKeyFrame Value="-0.2,0.5" KeyTime="0:0:0.8" />
+                                            <DiscretePointKeyFrame Value="1.2,0.5" KeyTime="0:0:1.6" />
+                                        </PointAnimationUsingKeyFrames>
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
+                                                                      Storyboard.TargetProperty="(Rectangle.Fill).(RadialGradientBrush.Center)">
+                                            <DiscretePointKeyFrame Value="-0.2,0.5" KeyTime="0:0:0.8" />
+                                            <DiscretePointKeyFrame Value="1.2,0.5" KeyTime="0:0:1.6" />
+                                        </PointAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

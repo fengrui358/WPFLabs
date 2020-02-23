@@ -387,6 +387,9 @@
     <Compile Include="ImagePerformanceDemo\SvgImages.xaml.cs">
       <DependentUpon>SvgImages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IsSynchronizedWithCurrentItemDemo\IsSynchronizedWithCurrentItemWindow.xaml.cs">
+      <DependentUpon>IsSynchronizedWithCurrentItemWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ItemsControlWithTimeline\ItemsControlWithTimelineWindow.xaml.cs">
       <DependentUpon>ItemsControlWithTimelineWindow.xaml</DependentUpon>
     </Compile>
@@ -398,6 +401,10 @@
       <DependentUpon>KeyBoardInputWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="KeyBoardInputDemo\KeyEventArgsConverter.cs" />
+    <Compile Include="LoadingControl\LoadingControl.cs" />
+    <Compile Include="LoadingControl\LoadingControlWindow.xaml.cs">
+      <DependentUpon>LoadingControlWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -743,6 +750,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="IsSynchronizedWithCurrentItemDemo\IsSynchronizedWithCurrentItemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ItemsControlWithTimeline\ItemsControlWithTimelineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -752,6 +763,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="KeyBoardInputDemo\KeyBoardInputWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadingControl\LoadingControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadingControl\Themes\LoadingControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -985,6 +1004,7 @@
     <None Include="ImagePerformanceDemo\Resources\warning.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="LoadingControl\bg_loading.png" />
     <Content Include="paint\01.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
