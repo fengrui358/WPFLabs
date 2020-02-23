@@ -227,6 +227,10 @@
       <DependentUpon>CollectionViewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CollectionViewDemo\ItemModel.cs" />
+    <Compile Include="ColorfulTextBlock\ColorfulTextBlock.cs" />
+    <Compile Include="ColorfulTextBlock\ColorfulTextBlockWindow.xaml.cs">
+      <DependentUpon>ColorfulTextBlockWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ContactsTreeControl\ContactsTreeWindow.xaml.cs">
       <DependentUpon>ContactsTreeWindow.xaml</DependentUpon>
     </Compile>
@@ -556,6 +560,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CollectionViewDemo\CollectionViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorfulTextBlock\ColorfulTextBlockWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
