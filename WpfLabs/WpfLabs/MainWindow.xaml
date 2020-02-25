@@ -106,6 +106,8 @@
                             CommandParameter="ItemsControlWithTimelineWindow" />
                     <Button Content="展示IsSynchronizedWithCurrentItemWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="IsSynchronizedWithCurrentItemWindow" />
+                    <Button Content="展示ColorfulTextBlockWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="ColorfulTextBlockWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

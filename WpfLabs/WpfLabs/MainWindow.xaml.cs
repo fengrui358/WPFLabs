@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using WpfLabs.AdornerDemo;
 using WpfLabs.AnimationPerformanceDemo;
@@ -22,8 +10,8 @@ using WpfLabs.BindingDemo;
 using WpfLabs.CalloutBorder;
 using WpfLabs.CircularLoading;
 using WpfLabs.CollectionViewDemo;
+using WpfLabs.ColorfulTextBlock;
 using WpfLabs.ContactsTreeControl;
-using WpfLabs.ContactsTreeControl.Models;
 using WpfLabs.CustomWindow;
 using WpfLabs.DataGridDetailList;
 using WpfLabs.DrawingDemo;
@@ -251,6 +239,10 @@ namespace WpfLabs
                 case "IsSynchronizedWithCurrentItemWindow":
                     var isSynchronizedWithCurrentItemWindow = new IsSynchronizedWithCurrentItemWindow();
                     isSynchronizedWithCurrentItemWindow.ShowDialog();
+                    break;
+                case "ColorfulTextBlockWindow":
+                    var colorfulTextBlockWindow = new ColorfulTextBlockWindow();
+                    colorfulTextBlockWindow.ShowDialog();
                     break;
             }
 

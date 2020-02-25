@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:WpfLabs.ColorfulTextBlock"
         mc:Ignorable="d"
         Title="ColorfulTextBlockWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <local:ColorfulTextBlock Foreground="Red" FontSize="18" Text="{Binding Text1}">
+            <local:ColorfulTextBlock.InnerParam0>
+                <Run Text="{Binding Param0, Mode=OneWay}" Foreground="Blue" FontSize="14" />
+            </local:ColorfulTextBlock.InnerParam0>
+            <local:ColorfulTextBlock.InnerParam2>
+                <Run Text="{Binding Param2, Mode=OneWay}" Foreground="Green" FontSize="18" />
+            </local:ColorfulTextBlock.InnerParam2>
+        </local:ColorfulTextBlock>
+    </StackPanel>
 </Window>

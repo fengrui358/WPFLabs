@@ -19,9 +19,15 @@ namespace WpfLabs.ColorfulTextBlock
     /// </summary>
     public partial class ColorfulTextBlockWindow : Window
     {
+        public string Text1 { get; } = "wasd{0}asdada{2}dsaada{1}s{2}a";
+
+        public string Param0 { get; } = "Param0";
+        public string Param2 { get; } = "Param2";
+
         public ColorfulTextBlockWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
     }
 }
