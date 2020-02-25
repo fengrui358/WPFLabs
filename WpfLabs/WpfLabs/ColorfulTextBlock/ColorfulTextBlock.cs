@@ -89,7 +89,11 @@ namespace WpfLabs.ColorfulTextBlock
                     var paramIndex = int.Parse(match.Value.Substring(1, match.Value.Length - 2));
                     if (runs.ContainsKey(paramIndex))
                     {
-                        inlines.Add(new Run(t));
+                        if (!string.IsNullOrEmpty(t))
+                        {
+                            inlines.Add(new Run(t));
+                        }
+                        
                         inlines.Add(runs[paramIndex]);
 
                         lastMatchIndex = match.Index + match.Length;
