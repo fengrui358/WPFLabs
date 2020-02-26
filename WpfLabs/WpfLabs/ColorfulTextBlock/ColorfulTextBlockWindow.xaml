@@ -7,13 +7,8 @@
         mc:Ignorable="d"
         Title="ColorfulTextBlockWindow" Height="450" Width="800">
     <StackPanel>
-        <local:ColorfulTextBlock Foreground="Red" FontSize="18" Text="{Binding Text1}">
-            <local:ColorfulTextBlock.InnerParam0>
-                <Run Text="{Binding Param0, Mode=OneWay}" Foreground="Blue" FontSize="14" />
-            </local:ColorfulTextBlock.InnerParam0>
-            <local:ColorfulTextBlock.InnerParam2>
-                <Run Text="{Binding Param2, Mode=OneWay}" Foreground="Green" FontSize="18" />
-            </local:ColorfulTextBlock.InnerParam2>
-        </local:ColorfulTextBlock>
+        <local:ColorfulTextBlock Foreground="Red" FontSize="18" TextFormat="{Binding Text1}"
+                                 InnerParam0="{Binding Param0}" ForegroundParam0="Blue" InnerParam1="{Binding Param2}"
+                                 ForegroundParam1="Green" />
     </StackPanel>
 </Window>

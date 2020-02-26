@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Effects;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using WpfLabs.AdornerDemo;
 using WpfLabs.AnimationPerformanceDemo;
 using WpfLabs.BindingDemo;
@@ -60,6 +62,18 @@ namespace WpfLabs
 
             DataContext = this;
             ShowControlWindow = new RelayCommand<string>(OnShowControlWindow);
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(2000);
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    var x = new ColorfulTextBlockWindow();
+                    x.ShowDialog();
+                });
+                
+            });
         }
 
         private void OnShowControlWindow(string controlName)
@@ -242,7 +256,7 @@ namespace WpfLabs
                     break;
                 case "ColorfulTextBlockWindow":
                     var colorfulTextBlockWindow = new ColorfulTextBlockWindow();
-                    colorfulTextBlockWindow.ShowDialog();
+                    colorfulTextBlockWindow.Show();
                     break;
             }
 
