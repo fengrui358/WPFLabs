@@ -4,14 +4,13 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace WpfLabs.ColorfulTextBlock
 {
     public class ColorfulTextBlock : ContentControl
     {
-        private readonly StackPanel _stackPanel;
+        private readonly WrapPanel _wrapPanel;
 
         #region Param0
 
@@ -109,17 +108,14 @@ namespace WpfLabs.ColorfulTextBlock
 
         public ColorfulTextBlock()
         {
-            _stackPanel = new StackPanel
-            {
-                Orientation = Orientation.Horizontal
-            };
+            _wrapPanel = new WrapPanel();
 
-            Content = _stackPanel;
+            Content = _wrapPanel;
         }
 
         private void ChangeInlines()
         {
-            _stackPanel.Children.Clear();
+            _wrapPanel.Children.Clear();
 
             if (!string.IsNullOrEmpty(TextFormat))
             {
@@ -188,14 +184,9 @@ namespace WpfLabs.ColorfulTextBlock
 
                 foreach (var textBlock in inlines)
                 {
-                    _stackPanel.Children.Add(textBlock);
+                    _wrapPanel.Children.Add(textBlock);
                 }
             }
-        }
-
-        private void Clear()
-        {
-            _stackPanel.Children.Clear();
         }
     }
 }
