@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using CefSharp;
 using CefSharp.Wpf;
@@ -38,6 +34,9 @@ namespace WpfCefSharpDemo
             CefSharpSettings.ShutdownOnExit = false;
 
             var settings = new CefSettings();
+            
+            //Set language
+            //settings.Locale = Thread.CurrentThread.CurrentCulture.ToString();
 
             // Set BrowserSubProcessPath based on app bitness at runtime
             settings.BrowserSubprocessPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
