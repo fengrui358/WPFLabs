@@ -26,7 +26,11 @@
 
             //boundAsync.writeData([1,2,3]);
             //boundAsync.writeData(actualResult);
-            boundAsync.writeStringData("测试输入字符串", "sadfasf");
+
+            var s = JSON.stringify(actualResult);
+            alert(s);
+
+            boundAsync.writeStringData("测试输入字符串", s);
 
             alert("type:" + Object.prototype.toString.call(actualResult));
         });
