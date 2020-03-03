@@ -34,6 +34,7 @@ namespace WpfCefSharpDemo
             CefSharpSettings.ShutdownOnExit = false;
 
             var settings = new CefSettings();
+            settings.CachePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "cache");
             
             //Set language
             //settings.Locale = Thread.CurrentThread.CurrentCulture.ToString();

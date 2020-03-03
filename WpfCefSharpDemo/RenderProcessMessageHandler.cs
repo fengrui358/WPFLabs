@@ -14,18 +14,23 @@ namespace WpfCefSharpDemo
             const string script = @"
                         document.addEventListener('DOMContentLoaded', function()
                         { 
-                            //alert('DomLoaded');
-                            test('你好吗？');
+                            alert('DomLoaded');
+                            //test('你好吗？');
                         });
                         ";
 
-            //frame.ExecuteJavaScriptAsync(script);
-            var task = frame.EvaluateScriptAsync(script);
+            frame.ExecuteJavaScriptAsync(script);
+            //await frame.EvaluateScriptAsync(script);
 
-            //task.ContinueWith(t =>
+            //const string scriptWithReturn = @"
+            //            test('测试返回');";
+            //var task = frame.EvaluateScriptAsync(scriptWithReturn);
+            //await task.ContinueWith(async t =>
             //{
             //    if (!t.IsFaulted)
             //    {
+            //        await Task.Delay(5000);
+
             //        var response = t.Result;
             //        var x = response.Success ? (response.Result ?? "null") : response.Message;
 

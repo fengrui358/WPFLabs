@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button id="testBtn">测试按钮</button>
+</div>
+
+<script>
+    function test(str) {
+        alert("测试" + str);
+        return "load方法运行完毕！" + str;
+    }
+
+    //test("你好");
+    document.getElementById("testBtn").onclick = function() {
+        boundAsync.add(16, 2).then(function (actualResult)
+        {
+            alert("相加结果" + actualResult);
+        });
+    };
+
+    (async function()
+    {
+        await CefSharp.BindObjectAsync("boundAsync");
+
+        //The default is to camel case method names (the first letter of the method name is changed to lowercase)
+        boundAsync.add(16, 2).then(function (actualResult)
+        {
+            const expectedResult = 18;
+            alert("相加结果" + actualResult);
+            assert.equal(expectedResult, actualResult, "Add 16 + 2 resulted in " + expectedResult);
+        });
+    })();
+
+</script>
