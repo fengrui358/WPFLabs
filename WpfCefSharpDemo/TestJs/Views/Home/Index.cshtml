@@ -14,11 +14,32 @@
         return "load方法运行完毕！" + str;
     }
 
+    function testBytes(fileBytes) {
+        alert(fileBytes);
+    }
+
     //test("你好");
-    document.getElementById("testBtn").onclick = function() {
+    document.getElementById("testBtn").onclick = function () {
+
+        boundAsync.getBytes().then(function(actualResult) {
+            alert(actualResult[0]);
+
+            //boundAsync.writeData([1,2,3]);
+            //boundAsync.writeData(actualResult);
+            boundAsync.writeStringData("测试输入字符串", "sadfasf");
+
+            alert("type:" + Object.prototype.toString.call(actualResult));
+        });
+      
+        boundAsync.WriteStringData("我来了，我是js");
+
         boundAsync.add(16, 2).then(function (actualResult)
         {
-            alert("相加结果" + actualResult);
+            alert("相加结果12" + actualResult);
+        });
+
+        boundAsync.getData().then(function(actualResult) {
+            alert("Data" + actualResult);
         });
     };
 

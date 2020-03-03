@@ -71,7 +71,7 @@ namespace WpfCefSharpDemo
                 if (args.Frame.IsMain)
                 {
                     const string scriptWithReturn = @"
-                                test('测试返回');";
+                                testBytes('测试返回');";
                     var task = args.Frame.EvaluateScriptAsync(scriptWithReturn);
                     await task.ContinueWith(t =>
                     {
