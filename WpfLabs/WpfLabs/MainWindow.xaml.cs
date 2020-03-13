@@ -62,18 +62,6 @@ namespace WpfLabs
 
             DataContext = this;
             ShowControlWindow = new RelayCommand<string>(OnShowControlWindow);
-
-            Task.Run(async () =>
-            {
-                await Task.Delay(2000);
-
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                {
-                    var x = new ColorfulTextBlockWindow();
-                    x.ShowDialog();
-                });
-                
-            });
         }
 
         private void OnShowControlWindow(string controlName)
@@ -256,7 +244,7 @@ namespace WpfLabs
                     break;
                 case "ColorfulTextBlockWindow":
                     var colorfulTextBlockWindow = new ColorfulTextBlockWindow();
-                    colorfulTextBlockWindow.Show();
+                    colorfulTextBlockWindow.ShowDialog();
                     break;
             }
 
