@@ -32,6 +32,7 @@ using WpfLabs.ItemsControlWithTimeline;
 using WpfLabs.KeyBoardInputDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
+using WpfLabs.MediaPlayer;
 using WpfLabs.MultiSceenDemo;
 using WpfLabs.MusicPlayer;
 using WpfLabs.MutliUiThreadingDemo;
@@ -89,6 +90,10 @@ namespace WpfLabs
                 case "MusicPlayer":
                     var musicPlayerWindow = new MusicPlayerWindow();
                     musicPlayerWindow.ShowDialog();
+                    break;
+                case "MediaPlayer":
+                    var mediaPlayerWindow = new MediaPlayerWindow();
+                    mediaPlayerWindow.ShowDialog();
                     break;
                 case "PeopleResourcePanel":
                     var peopleResourcePanelWindow = new PeopleResourcePanelWindow();

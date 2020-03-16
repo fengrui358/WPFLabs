@@ -9,5 +9,6 @@
         <ResourceDictionary Source="../DrawingDemo/PathImage/Themes/PathImage.xaml"/>
         <ResourceDictionary Source="../GroupExpander/Themes/CommandExpanderStyle.xaml"/>
         <ResourceDictionary Source="../LoadingControl/Themes/LoadingControlStyle.xaml"/>
+        <ResourceDictionary Source="../MediaPlayer/Themes/MediaRecordPlayerStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

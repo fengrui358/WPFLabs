@@ -28,7 +28,7 @@ namespace WpfLabs.AnimationPerformanceDemo
 
         private void VideoDrawingAnimationWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var player = new MediaPlayer();
+            var player = new System.Windows.Media.MediaPlayer();
             player.MediaEnded += PlayerOnMediaEnded;
 
             player.Open(new Uri(@"AnimationPerformanceDemo\Assets\1.mp4", UriKind.RelativeOrAbsolute));
@@ -43,7 +43,7 @@ namespace WpfLabs.AnimationPerformanceDemo
 
         private void PlayerOnMediaEnded(object sender, EventArgs e)
         {
-            var player = ((MediaPlayer)sender);
+            var player = ((System.Windows.Media.MediaPlayer)sender);
 
             if (!_isSwitch)
             {

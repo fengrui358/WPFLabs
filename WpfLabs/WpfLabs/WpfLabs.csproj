@@ -434,6 +434,10 @@
       <DependentUpon>MeasureOverrideAndArrangeOverrideWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MeasureOverrideAndArrangeOverride\MessageDisplayer.cs" />
+    <Compile Include="MediaPlayer\MediaRecordPlayer.cs" />
+    <Compile Include="MediaPlayer\MediaPlayerWindow.xaml.cs">
+      <DependentUpon>MediaPlayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MultiSceenDemo\MultiSceenDemoWindow.xaml.cs">
       <DependentUpon>MultiSceenDemoWindow.xaml</DependentUpon>
     </Compile>
@@ -802,6 +806,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MeasureOverrideAndArrangeOverride\MeasureOverrideAndArrangeOverrideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MediaPlayer\MediaPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MediaPlayer\Themes\MediaRecordPlayerStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
