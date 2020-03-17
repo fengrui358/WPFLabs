@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -42,6 +40,8 @@ namespace WpfLabs.MediaPlayer
     [TemplatePart(Name = "PART_PauseButton", Type = typeof(Button))]
     public class MediaRecordPlayer : Control
     {
+        private bool _currentSecondsInnerChange;
+
         private DispatcherTimer _timer;
         private Button _playButton;
         private Button _stopBtn;
@@ -68,9 +68,83 @@ namespace WpfLabs.MediaPlayer
             set => SetValue(IsPlayingProperty, value);
         }
 
+        public static readonly DependencyProperty TotalSecondsProperty = DependencyProperty.Register(
+            "TotalSeconds", typeof(double?), typeof(MediaRecordPlayer), new PropertyMetadata(default(double?)));
+
+        public double? TotalSeconds
+        {
+            get => (double?) GetValue(TotalSecondsProperty);
+            set => SetValue(TotalSecondsProperty, value);
+        }
+
+        public static readonly DependencyProperty CurrentSecondsProperty = DependencyProperty.Register(
+            "CurrentSeconds", typeof(double?), typeof(MediaRecordPlayer), new PropertyMetadata(default(double?), CurrnetSecondsPropertyChangedCallback));
+
+        private static void CurrnetSecondsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var mediaRecordPlayer = (MediaRecordPlayer)d;
+            if (!mediaRecordPlayer._currentSecondsInnerChange && mediaRecordPlayer.CurrentSeconds != null)
+            {
+                if (mediaRecordPlayer.CurrentSeconds.Value < 0)
+                {
+                    mediaRecordPlayer.CurrentSeconds = 0;
+                    return;
+                }
+
+                if (mediaRecordPlayer.CurrentSeconds.Value > mediaRecordPlayer.TotalSeconds)
+                {
+                    mediaRecordPlayer.CurrentSeconds = mediaRecordPlayer.TotalSeconds;
+                    return;
+                }
+
+                if (mediaRecordPlayer._mediaPlayer != null)
+                {
+                    if (mediaRecordPlayer.IsPlaying)
+                    {
+                        mediaRecordPlayer._mediaPlayer.Position =
+                            TimeSpan.FromSeconds(mediaRecordPlayer.CurrentSeconds.Value);
+                    }
+                    else
+                    {
+                        mediaRecordPlayer._mediaPlayer.Position =
+                            TimeSpan.FromSeconds(mediaRecordPlayer.CurrentSeconds.Value);
+                    }
+                }
+            }
+        }
+
+        public double? CurrentSeconds
+        {
+            get => (double?) GetValue(CurrentSecondsProperty);
+            set => SetValue(CurrentSecondsProperty, value);
+        }
+
         static MediaRecordPlayer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MediaRecordPlayer), new FrameworkPropertyMetadata(typeof(MediaRecordPlayer)));
+        }
+
+        public MediaRecordPlayer()
+        {
+            Unloaded += OnUnloaded;
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer = null;
+            }
+
+            if (_mediaPlayer != null)
+            {
+                _mediaPlayer.Stop();
+                _mediaPlayer.Close();
+                _mediaPlayer = null;
+            }
+
+            IsPlaying = false;
         }
 
         public override void OnApplyTemplate()
@@ -90,7 +164,6 @@ namespace WpfLabs.MediaPlayer
         private static void UrlPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var mediaRecordPlayer = (MediaRecordPlayer) d;
-
             mediaRecordPlayer._mediaPlayer?.Stop();
         }
 
@@ -156,7 +229,6 @@ namespace WpfLabs.MediaPlayer
                     else
                     {
                         _mediaPlayer.Open(new Uri(Url, UriKind.Absolute));
-                        _timer.Start();
                     }
                 }
                 else if(_currentPlayingStatus == PlayingStatus.Pause)
@@ -170,7 +242,7 @@ namespace WpfLabs.MediaPlayer
                     _mediaPlayer?.Stop();
                     _mediaPlayer?.Close();
 
-                    //todo:清空时间
+                    CurrentSeconds = null;
                 }
 
                 switch (_currentPlayingStatus)
@@ -197,6 +269,10 @@ namespace WpfLabs.MediaPlayer
                 var total = _mediaPlayer.NaturalDuration;
                 var value = _mediaPlayer.Position;
 
+                _currentSecondsInnerChange = true;
+                CurrentSeconds = value.TotalSeconds;
+                _currentSecondsInnerChange = false;
+
                 Debug.WriteLine($"{value}/{total}");
             }
         }
@@ -211,6 +287,14 @@ namespace WpfLabs.MediaPlayer
             _mediaPlayer.MediaOpened += (sender, args) =>
             {
                 _mediaPlayer.Play();
+                TotalSeconds = _mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+
+                if (CurrentSeconds != null)
+                {
+                    _mediaPlayer.Position = TimeSpan.FromSeconds(CurrentSeconds.Value);
+                }
+
+                _timer.Start();
             };
             _mediaPlayer.MediaEnded += (sender, args) => { IsPlaying = false; };
         }
