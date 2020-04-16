@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -228,7 +229,16 @@ namespace WpfLabs.MediaPlayer
                     }
                     else
                     {
-                        _mediaPlayer.Open(new Uri(Url, UriKind.Absolute));
+                        if (File.Exists(Url))
+                        {
+
+                        }
+
+                        var x = $"pack://siteoforigin:,,,{Url}";
+                        var uri = new Uri(@"C:\WorkSpace\WPFLabs\WpfLabs\WpfLabs\bin\Debug\测试 - 沙漠骆驼.mp3", UriKind.Relative);
+                        //var xx = uri.LocalPath;
+
+                        _mediaPlayer.Open(new Uri(Url, UriKind.Relative));
                     }
                 }
                 else if(_currentPlayingStatus == PlayingStatus.Pause)
@@ -283,7 +293,12 @@ namespace WpfLabs.MediaPlayer
         private void InitInnerMediaPlayer()
         {
             _mediaPlayer = new System.Windows.Media.MediaPlayer();
-            _mediaPlayer.MediaFailed += (sender, args) => { IsPlaying = false; };
+            _mediaPlayer.MediaFailed += (sender, args) =>
+            {
+                IsPlaying = false;
+                _mediaPlayer.Stop();
+                _mediaPlayer.Close();
+            };
             _mediaPlayer.MediaOpened += (sender, args) =>
             {
                 _mediaPlayer.Play();

@@ -11,7 +11,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <local:MediaRecordPlayer Grid.Column="0" Url="http://tigo-public-1251827262.cos.ap-chengdu.myqcloud.com/003%20%E9%83%AD%E9%A1%B6%20-%20%E6%B0%B4%E6%98%9F%E8%AE%B0.mp3" />
+        <local:MediaRecordPlayer Grid.Column="0" Url="C:\WorkSpace\CAD3.0\Client\Src\bin\Debug\AppData\Files\%E6%B5%8B%E8%AF%95%20-%20%E6%B2%99%E6%BC%A0%E9%AA%86%E9%A9%BC.mp3" />
         <local:MediaRecordPlayer Grid.Column="1" Url="http://tigo-public-1251827262.cos.ap-chengdu.myqcloud.com/%E6%B5%8B%E8%AF%95%20-%20%E6%B2%99%E6%BC%A0%E9%AA%86%E9%A9%BC.mp3" />
         <!--<MediaElement LoadedBehavior="Play" Source="http://tigo-public-1251827262.cos.ap-chengdu.myqcloud.com/003%20%E9%83%AD%E9%A1%B6%20-%20%E6%B0%B4%E6%98%9F%E8%AE%B0.mp3"/>-->
         <!--<MediaElement LoadedBehavior="Play"  Grid.Column="1" Source="http://tigo-public-1251827262.cos.ap-chengdu.myqcloud.com/%E6%B5%8B%E8%AF%95%20-%20%E6%B2%99%E6%BC%A0%E9%AA%86%E9%A9%BC.mp3"/>-->
