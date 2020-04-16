@@ -1,0 +1,18 @@
+﻿<Window x:Class="WpfCefSharpDemo.TabWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCefSharpDemo"
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d" WindowState="Maximized"
+        Title="TabWindow" Height="450" Width="800">
+    <TabControl>
+        <TabItem Header="1">
+            <wpf:ChromiumWebBrowser x:Name="Browser" Address="https://www.jianshu.com/p/cf59471f7068"/>
+        </TabItem>
+        <TabItem Header="2">
+            <wpf:ChromiumWebBrowser x:Name="Browser2" Address="https://www.jianshu.com/p/cf59471f7068"/>
+        </TabItem>
+    </TabControl>
+</Window>

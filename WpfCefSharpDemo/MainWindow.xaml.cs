@@ -45,7 +45,8 @@ namespace WpfCefSharpDemo
 
             //Url = "http://10.15.9.113:81/appeal-analysis?lang=zh-CN";
             //Url = "http://10.15.9.113:81/appeal-analysis?lang=en";
-            Url = "https://localhost:44399/";
+            //Url = "https://localhost:44399/";
+            Url = "https://www.echartsjs.com/zh/index.html";
 
             //Task.Run(async () =>
             //{
