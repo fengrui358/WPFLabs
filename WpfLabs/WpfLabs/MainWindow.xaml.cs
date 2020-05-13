@@ -40,6 +40,7 @@ using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.ResourceDictionaryCodeBehind;
+using WpfLabs.RouteEventDemo;
 using WpfLabs.ScreenDragDemo;
 using WpfLabs.ShortCutDemo;
 using WpfLabs.SwapImageDemo;
@@ -250,6 +251,10 @@ namespace WpfLabs
                 case "ColorfulTextBlockWindow":
                     var colorfulTextBlockWindow = new ColorfulTextBlockWindow();
                     colorfulTextBlockWindow.ShowDialog();
+                    break;
+                case "RouteEventDemoWindow":
+                    var routeEventDemoWindow = new RouteEventDemoWindow();
+                    routeEventDemoWindow.ShowDialog();
                     break;
             }
 

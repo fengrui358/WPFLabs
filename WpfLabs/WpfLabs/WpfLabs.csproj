@@ -492,6 +492,12 @@
     <Compile Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml.cs">
       <DependentUpon>ResourceDictionaryCodeBehindWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RouteEventDemo\RouteEventDemoControl.xaml.cs">
+      <DependentUpon>RouteEventDemoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RouteEventDemo\RouteEventDemoWindow.xaml.cs">
+      <DependentUpon>RouteEventDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RunningProcessSpecialHelper.cs" />
     <Compile Include="ScreenDragDemo\ScreenDragMainWindow.xaml.cs">
       <DependentUpon>ScreenDragMainWindow.xaml</DependentUpon>
@@ -870,6 +876,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RouteEventDemo\RouteEventDemoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RouteEventDemo\RouteEventDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

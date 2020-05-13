@@ -109,6 +109,8 @@
                             CommandParameter="IsSynchronizedWithCurrentItemWindow" />
                     <Button Content="展示ColorfulTextBlockWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="ColorfulTextBlockWindow" />
+                    <Button Content="展示RouteEventDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="RouteEventDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
