@@ -21,7 +21,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="筛选："/>
-            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextChanged="TextBoxBase_OnTextChanged"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextChanged="TextBoxBase_OnTextChanged" MaxLength="30"/>
         </Grid>
         <ScrollViewer Grid.Row="1">
             <ItemsControl x:Name="Container" Loaded="Container_OnLoaded">
@@ -111,6 +111,8 @@
                             CommandParameter="ColorfulTextBlockWindow" />
                     <Button Content="展示RouteEventDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="RouteEventDemoWindow" />
+                    <Button Content="展示RichTextBoxDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="RichTextBoxDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

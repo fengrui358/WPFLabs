@@ -40,6 +40,7 @@ using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
 using WpfLabs.ResourceDictionaryCodeBehind;
+using WpfLabs.RichTextBoxDemo;
 using WpfLabs.RouteEventDemo;
 using WpfLabs.ScreenDragDemo;
 using WpfLabs.ShortCutDemo;
@@ -255,6 +256,10 @@ namespace WpfLabs
                 case "RouteEventDemoWindow":
                     var routeEventDemoWindow = new RouteEventDemoWindow();
                     routeEventDemoWindow.ShowDialog();
+                    break;
+                case "RichTextBoxDemoWindow":
+                    var richTextBoxDemoWindow = new RichTextBoxDemoWindow();
+                    richTextBoxDemoWindow.ShowDialog();
                     break;
             }
 

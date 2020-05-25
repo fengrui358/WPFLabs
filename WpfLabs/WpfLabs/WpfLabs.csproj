@@ -494,6 +494,10 @@
     <Compile Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml.cs">
       <DependentUpon>ResourceDictionaryCodeBehindWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RichTextBoxDemo\ChatRichTextBox.cs" />
+    <Compile Include="RichTextBoxDemo\RichTextBoxDemoWindow.xaml.cs">
+      <DependentUpon>RichTextBoxDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RouteEventDemo\RouteEventDemoControl.xaml.cs">
       <DependentUpon>RouteEventDemoControl.xaml</DependentUpon>
     </Compile>
@@ -878,6 +882,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionaryCodeBehind\ResourceDictionaryCodeBehindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RichTextBoxDemo\RichTextBoxDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
