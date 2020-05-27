@@ -113,6 +113,8 @@
                             CommandParameter="RouteEventDemoWindow" />
                     <Button Content="展示RichTextBoxDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="RichTextBoxDemoWindow" />
+                    <Button Content="展示ScreenCaptureDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="ScreenCaptureDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

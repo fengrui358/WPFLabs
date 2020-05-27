@@ -42,6 +42,7 @@ using WpfLabs.PeopleResourcePanel;
 using WpfLabs.ResourceDictionaryCodeBehind;
 using WpfLabs.RichTextBoxDemo;
 using WpfLabs.RouteEventDemo;
+using WpfLabs.ScreenCaptureDemo;
 using WpfLabs.ScreenDragDemo;
 using WpfLabs.ShortCutDemo;
 using WpfLabs.SwapImageDemo;
@@ -260,6 +261,10 @@ namespace WpfLabs
                 case "RichTextBoxDemoWindow":
                     var richTextBoxDemoWindow = new RichTextBoxDemoWindow();
                     richTextBoxDemoWindow.ShowDialog();
+                    break;
+                case "ScreenCaptureDemoWindow":
+                    var screenCaptureDemoWindow = new ScreenCaptureDemoWindow();
+                    screenCaptureDemoWindow.ShowDialog();
                     break;
             }
 

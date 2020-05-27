@@ -113,6 +113,12 @@
     <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenCvSharp4.4.1.1.20191021\lib\net461\OpenCvSharp.UserInterface.dll</HintPath>
     </Reference>
+    <Reference Include="ShareX.HelpersLib">
+      <HintPath>..\Libs\ShareX\ShareX.HelpersLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ShareX.ScreenCaptureLib">
+      <HintPath>..\Libs\ShareX\ShareX.ScreenCaptureLib.dll</HintPath>
+    </Reference>
     <Reference Include="SharpVectors.Converters.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b532964b8548be77, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpVectors.Reloaded.1.5.0\lib\net40\SharpVectors.Converters.Wpf.dll</HintPath>
     </Reference>
@@ -505,6 +511,25 @@
       <DependentUpon>RouteEventDemoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RunningProcessSpecialHelper.cs" />
+    <Compile Include="ScreenCaptureDemo\ScreenCaptureDemoWindow.xaml.cs">
+      <DependentUpon>ScreenCaptureDemoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenCaptureDemo\ShareX\ApplicationConfig.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureActiveMonitor.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureActiveWindow.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureBase.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureCustomRegion.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureFullscreen.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureLastRegion.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureMonitor.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureRegion.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\CaptureHelpers\CaptureWindow.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\Enums.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\ImageData.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\ImageInfo.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\Option.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\TaskHelpers.cs" />
+    <Compile Include="ScreenCaptureDemo\ShareX\TaskSettings.cs" />
     <Compile Include="ScreenDragDemo\ScreenDragMainWindow.xaml.cs">
       <DependentUpon>ScreenDragMainWindow.xaml</DependentUpon>
     </Compile>
@@ -894,6 +919,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RouteEventDemo\RouteEventDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenCaptureDemo\ScreenCaptureDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
