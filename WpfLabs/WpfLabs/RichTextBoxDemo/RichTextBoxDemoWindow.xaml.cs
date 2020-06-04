@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace WpfLabs.RichTextBoxDemo
 {
@@ -19,9 +20,19 @@ namespace WpfLabs.RichTextBoxDemo
     /// </summary>
     public partial class RichTextBoxDemoWindow : Window
     {
+        public RelayCommand SendCommand { get; private set; }
+
         public RichTextBoxDemoWindow()
         {
             InitializeComponent();
+            DataContext = this;
+
+            SendCommand = new RelayCommand(SendCommandHandler);
+        }
+
+        private void SendCommandHandler()
+        {
+
         }
     }
 }

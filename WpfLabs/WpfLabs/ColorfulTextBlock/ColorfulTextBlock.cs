@@ -1,16 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace WpfLabs.ColorfulTextBlock
 {
-    public class ColorfulTextBlock : ContentControl
+    [TemplatePart(Name = InnerTextBlockName, Type = typeof(TextBlock))]
+    public class ColorfulTextBlock : Control
     {
-        private readonly WrapPanel _wrapPanel;
+        /// <summary>
+        /// 内置显示控件名称。
+        /// </summary>
+        public const string InnerTextBlockName = "PART_TextBlock";
+
+        /// <summary>
+        /// 内置显示文本控件。
+        /// </summary>
+        private TextBlock _innerTextBlock;
+
+        static ColorfulTextBlock()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorfulTextBlock), new FrameworkPropertyMetadata(typeof(ColorfulTextBlock)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            _innerTextBlock = GetTemplateChild(InnerTextBlockName) as TextBlock;
+            ProcessHighlight();
+        }
 
         #region Param0
 
@@ -103,90 +124,137 @@ namespace WpfLabs.ColorfulTextBlock
         private static void ParamsChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var colorfulTextBlock = (ColorfulTextBlock) d;
-            colorfulTextBlock.ChangeInlines();
+            colorfulTextBlock.ProcessHighlight();
         }
 
-        public ColorfulTextBlock()
+        /// <summary>
+        /// 处理高亮显示。
+        /// </summary>
+        private void ProcessHighlight()
         {
-            _wrapPanel = new WrapPanel();
+            if (_innerTextBlock == null)
+                return;
 
-            Content = _wrapPanel;
-        }
+            _innerTextBlock.Inlines.Clear();
 
-        private void ChangeInlines()
-        {
-            _wrapPanel.Children.Clear();
-
-            if (!string.IsNullOrEmpty(TextFormat))
+            if (TextFormat != null)
             {
-                var properties = typeof(ColorfulTextBlock).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(s => s.Name.StartsWith("InnerParam")).OrderBy(s => s.Name);
-                var runs = new Dictionary<int, TextBlock>();
+                var paramModels = GetParamModels();
+                var texts = TextFormat.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+                _innerTextBlock.Inlines.Remove(_innerTextBlock.Inlines.LastInline);
 
-                foreach (var propertyInfo in properties)
+                foreach (var text in texts)
                 {
-                    var propertyValue = (string) propertyInfo.GetValue(this);
-                    if (!string.IsNullOrEmpty(propertyValue))
+                    _innerTextBlock.Inlines.AddRange(GenerateRunsFromText(text, paramModels));
+                }
+
+                _innerTextBlock.Inlines.Add(new LineBreak());
+            }
+        }
+
+        /// <summary>
+        /// 根据文本和关键字获取文本显示Run集合。
+        /// </summary>
+        /// <param name="text">文本</param>
+        /// <param name="paramModels">参数</param>
+        /// <returns></returns>
+        private IEnumerable<Run> GenerateRunsFromText(string text, List<ParamModel> paramModels)
+        {
+            List<Run> runList = new List<Run>();
+            if (string.IsNullOrEmpty(text))
+                return runList;
+
+            if (paramModels == null || !paramModels.Any())
+            {
+                runList.Add(new Run(text));
+            }
+            else
+            {
+                while (!string.IsNullOrEmpty(text))
+                {
+                    var foundIndexs = paramModels.Select(s => new
+                        {index = text.IndexOf(s.SearchKey, StringComparison.OrdinalIgnoreCase), paramModel = s}).Where(s => s.index != -1);
+
+                    if (foundIndexs.Any())
                     {
-                        var i = int.Parse(propertyInfo.Name.Remove(0, "InnerParam".Length));
-                        var foregroundPropertyInfo =
-                            typeof(ColorfulTextBlock).GetProperty($"ForegroundParam{i}",
-                                BindingFlags.Public | BindingFlags.Instance);
+                        var minIndex = foundIndexs.Min(s => s.index);
+                        var f = foundIndexs.First(s => s.index == minIndex);
 
-                        var textBlock = new TextBlock
+                        //增添空白文本
+                        runList.Add(new Run(text.Substring(0, f.index)));
+
+                        runList.Add(new Run(f.paramModel.Text)
                         {
-                            Text = propertyValue
-                        };
+                            Foreground = f.paramModel.Foreground
+                        });
 
-                        if (foregroundPropertyInfo != null)
-                        {
-                            var foreground = (Brush) foregroundPropertyInfo.GetValue(this);
-                            if (foreground != null)
-                            {
-                                textBlock.Foreground = foreground;
-                            }
-                        }
-
-                        runs.Add(i, textBlock);
+                        //剩下的文本继续查找
+                        text = text.Substring(f.index + f.paramModel.SearchKey.Length);
                     }
-                }
-
-                var inlines = new List<TextBlock>();
-                var text = TextFormat;
-                var lastMatchIndex = 0;
-
-                var matchs = Regex.Matches(text, "{\\d+}");
-
-                foreach (Match match in matchs)
-                {
-                    //非参数字符串
-                    var t = $"{text.Substring(lastMatchIndex, match.Index - lastMatchIndex)}";
-
-                    var paramIndex = int.Parse(match.Value.Substring(1, match.Value.Length - 2));
-                    if (runs.ContainsKey(paramIndex))
+                    else
                     {
-                        if (!string.IsNullOrEmpty(t))
-                        {
-                            inlines.Add(new TextBlock {Text = t});
-                        }
+                        runList.Add(new Run(text.Substring(0, text.Length)));
 
-                        inlines.Add(runs[paramIndex]);
-
-                        lastMatchIndex = match.Index + match.Length;
+                        //将最后的数据加入，返回
+                        break;
                     }
-                }
-
-                var last = text.Substring(lastMatchIndex, text.Length - lastMatchIndex);
-                if (!string.IsNullOrEmpty(last))
-                {
-                    inlines.Add(new TextBlock {Text = last});
-                }
-
-                foreach (var textBlock in inlines)
-                {
-                    _wrapPanel.Children.Add(textBlock);
                 }
             }
+
+            return runList;
+        }
+
+        /// <summary>
+        /// 根据传入参数获取对应的参数结构化信息
+        /// </summary>
+        /// <returns></returns>
+        private List<ParamModel> GetParamModels()
+        {
+            var properties = typeof(ColorfulTextBlock).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(s => s.Name.StartsWith("InnerParam")).OrderBy(s => s.Name).ToList();
+
+            var result = new List<ParamModel>();
+            for (var i = 0; i < properties.Count; i++)
+            {
+                var propertyValue = (string) properties[i].GetValue(this);
+                if (!string.IsNullOrEmpty(propertyValue))
+                {
+                    var foregroundProperty =
+                        typeof(ColorfulTextBlock).GetProperty($"ForegroundParam{i}", BindingFlags.Public | BindingFlags.Instance);
+                    var foreground = (Brush) foregroundProperty?.GetValue(this) ?? _innerTextBlock.Foreground;
+
+                    result.Add(new ParamModel(propertyValue, i, foreground));
+                }
+            }
+
+            return result;
+        }
+
+        private class ParamModel
+        {
+            public ParamModel(string text, int index, Brush foreground)
+            {
+                Foreground = foreground;
+                Text = text;
+                Index = index;
+            }
+
+            /// <summary>
+            /// 参数索引
+            /// </summary>
+            public int Index { get; }
+
+            public string SearchKey => $"{{{Index}}}";
+
+            /// <summary>
+            /// 参数文本
+            /// </summary>
+            public string Text { get; }
+
+            /// <summary>
+            /// 前景色
+            /// </summary>
+            public Brush Foreground { get; }
         }
     }
 }

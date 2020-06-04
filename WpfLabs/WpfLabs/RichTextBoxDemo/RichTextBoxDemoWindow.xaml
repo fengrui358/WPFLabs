@@ -12,7 +12,16 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <local:ChatRichTextBox Grid.Row="0" />
+        <!--<local:ChatRichTextBox Grid.Row="0">
+            <local:ChatRichTextBox.InputBindings>
+                <KeyBinding Modifiers="Control" Key="Enter" Command="{Binding ChatRichTextBox}" />
+            </local:ChatRichTextBox.InputBindings>
+        </local:ChatRichTextBox>-->
+        <RichTextBox>
+            <RichTextBox.InputBindings>
+                <KeyBinding Modifiers="Control" Key="Enter" Command="{Binding ChatRichTextBox}" />
+            </RichTextBox.InputBindings>
+        </RichTextBox>
         <TextBlock Grid.Row="1" />
         <Button Grid.Row="2" HorizontalAlignment="Right" Content="发送"></Button>
     </Grid>
