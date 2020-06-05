@@ -2,13 +2,17 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLabs.ColorfulTextBlock"
-        mc:Ignorable="d"
-        Title="ColorfulTextBlockWindow" Height="450" Width="800">
-    <StackPanel>
-        <local:ColorfulTextBlock Foreground="Red" FontSize="18" TextFormat="{Binding Text1}"
-                                 InnerParam0="{Binding Param0}" ForegroundParam0="Blue" InnerParam1="{Binding Param2}"
-                                 ForegroundParam1="Green" />
-    </StackPanel>
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="ColorfulTextBlockWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Grid>
+        <local:ColorfulTextBlock VerticalContentAlignment="Center" FontSize="18" Foreground="Red"
+                                 ForegroundParam0="Blue" ForegroundParam1="Green"
+                                 InnerParam0="{Binding Param0}"
+                                 InnerParam1="{Binding Param2}"
+                                 TextFormat="{Binding Text1}" />
+    </Grid>
 </Window>
