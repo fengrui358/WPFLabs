@@ -274,6 +274,9 @@
     <Compile Include="CustomPixelShaderDemo\Effects\ToneMappingEffect.cs" />
     <Compile Include="CustomPixelShaderDemo\Effects\ToonShaderEffect.cs" />
     <Compile Include="CustomPixelShaderDemo\Effects\ZoomBlurEffect.cs" />
+    <Compile Include="CustomScrollViewerDemo\CustomScrollViewerDemoWindow.xaml.cs">
+      <DependentUpon>CustomScrollViewerDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomWindow\CustomWindowDemo.xaml.cs">
       <DependentUpon>CustomWindowDemo.xaml</DependentUpon>
     </Compile>
@@ -628,6 +631,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomPixelShaderDemo\CustomPixelShaderDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomScrollViewerDemo\CustomScrollViewerDemoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

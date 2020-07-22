@@ -115,6 +115,8 @@
                             CommandParameter="RichTextBoxDemoWindow" />
                     <Button Content="展示ScreenCaptureDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="ScreenCaptureDemoWindow" />
+                    <Button Content="展示CustomScrollViewerDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="CustomScrollViewerDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

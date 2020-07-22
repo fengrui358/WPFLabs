@@ -14,6 +14,7 @@ using WpfLabs.CircularLoading;
 using WpfLabs.CollectionViewDemo;
 using WpfLabs.ColorfulTextBlock;
 using WpfLabs.ContactsTreeControl;
+using WpfLabs.CustomScrollViewerDemo;
 using WpfLabs.CustomWindow;
 using WpfLabs.DataGridDetailList;
 using WpfLabs.DrawingDemo;
@@ -265,6 +266,10 @@ namespace WpfLabs
                 case "ScreenCaptureDemoWindow":
                     var screenCaptureDemoWindow = new ScreenCaptureDemoWindow();
                     screenCaptureDemoWindow.ShowDialog();
+                    break;
+                case "CustomScrollViewerDemoWindow":
+                    var customScrollViewerDemoWindow = new CustomScrollViewerDemoWindow();
+                    customScrollViewerDemoWindow.ShowDialog();
                     break;
             }
 
