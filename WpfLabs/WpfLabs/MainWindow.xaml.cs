@@ -18,6 +18,7 @@ using WpfLabs.CustomScrollViewerDemo;
 using WpfLabs.CustomWindow;
 using WpfLabs.DataGridDetailList;
 using WpfLabs.DrawingDemo;
+using WpfLabs.EditableDataGridDemo;
 using WpfLabs.EllipsisLoading;
 using WpfLabs.ExpertPanel;
 using WpfLabs.ExpertPanel2;
@@ -270,6 +271,10 @@ namespace WpfLabs
                 case "CustomScrollViewerDemoWindow":
                     var customScrollViewerDemoWindow = new CustomScrollViewerDemoWindow();
                     customScrollViewerDemoWindow.ShowDialog();
+                    break;
+                case "EditableDataGridDemoWindow":
+                    var editableDataGridDemoWindow = new EditableDataGridDemoWindow();
+                    editableDataGridDemoWindow.ShowDialog();
                     break;
             }
 

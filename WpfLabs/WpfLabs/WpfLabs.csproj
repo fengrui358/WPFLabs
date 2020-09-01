@@ -310,6 +310,10 @@
     <Compile Include="DrawingDemo\PathImage\PathImage2.cs" />
     <Compile Include="DrawingDemo\PathImageHelper.cs" />
     <Compile Include="DrawingDemo\PathImage\PathImage.cs" />
+    <Compile Include="EditableDataGridDemo\DataGridModel.cs" />
+    <Compile Include="EditableDataGridDemo\EditableDataGridDemoWindow.xaml.cs">
+      <DependentUpon>EditableDataGridDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EllipsisLoading\ActiveMsgConverter.cs" />
     <Compile Include="EllipsisLoading\EllipsisLoading.xaml.cs">
       <DependentUpon>EllipsisLoading.xaml</DependentUpon>
@@ -685,6 +689,10 @@
     <Page Include="DrawingDemo\PathImage\Themes\PathImage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="EditableDataGridDemo\EditableDataGridDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EllipsisLoading\EllipsisLoading.xaml">
       <SubType>Designer</SubType>

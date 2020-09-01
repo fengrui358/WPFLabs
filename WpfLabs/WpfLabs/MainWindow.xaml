@@ -117,6 +117,8 @@
                             CommandParameter="ScreenCaptureDemoWindow" />
                     <Button Content="展示CustomScrollViewerDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="CustomScrollViewerDemoWindow" />
+                    <Button Content="展示EditableDataGridDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="EditableDataGridDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
