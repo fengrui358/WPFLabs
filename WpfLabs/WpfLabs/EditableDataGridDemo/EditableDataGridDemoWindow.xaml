@@ -6,7 +6,29 @@
         xmlns:local="clr-namespace:WpfLabs.EditableDataGridDemo"
         mc:Ignorable="d"
         Title="EditableDataGridDemoWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="TextBlock.DataGridCell" TargetType="TextBlock">
+            <Setter Property="TextTrimming" Value="WordEllipsis" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        <DataGrid ItemsSource="{Binding DataGridModels}" />
+        <DataGrid ItemsSource="{Binding DataGridModels}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" IsReadOnly="True"
+                                    Binding="{Binding Id}" ElementStyle="{DynamicResource TextBlock.DataGridCell}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="ID" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="120"
+                                    Binding="{Binding Name}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Name" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
