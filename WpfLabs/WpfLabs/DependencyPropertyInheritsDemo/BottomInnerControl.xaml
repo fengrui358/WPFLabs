@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WpfLabs.DependencyPropertyInheritsDemo.UserBottomControl"
+﻿<UserControl x:Class="WpfLabs.DependencyPropertyInheritsDemo.BottomInnerControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,6 @@
              d:DesignWidth="800"
              mc:Ignorable="d">
     <Grid>
-        <!--<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=local:UserBottomControl}, Path=Target.Test}" />-->
-        <local:BottomInnerControl TestString="{Binding RelativeSource={RelativeSource AncestorType=local:UserBottomControl}, Path=Target.Test}" />
+        <TextBlock Foreground="Red" Text="{Binding RelativeSource={RelativeSource AncestorType=local:BottomInnerControl}, Path=TestString}" />
     </Grid>
 </UserControl>
