@@ -17,6 +17,7 @@ using WpfLabs.ContactsTreeControl;
 using WpfLabs.CustomScrollViewerDemo;
 using WpfLabs.CustomWindow;
 using WpfLabs.DataGridDetailList;
+using WpfLabs.DependencyPropertyInheritsDemo;
 using WpfLabs.DrawingDemo;
 using WpfLabs.EditableDataGridDemo;
 using WpfLabs.EllipsisLoading;
@@ -275,6 +276,10 @@ namespace WpfLabs
                 case "EditableDataGridDemoWindow":
                     var editableDataGridDemoWindow = new EditableDataGridDemoWindow();
                     editableDataGridDemoWindow.ShowDialog();
+                    break;
+                case "DependencyPropertyInheritsDemoWindow":
+                    var dependencyPropertyInheritsDemoWindow = new DependencyPropertyInheritsDemoWindow();
+                    dependencyPropertyInheritsDemoWindow.ShowDialog();
                     break;
             }
 

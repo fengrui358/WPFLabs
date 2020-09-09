@@ -286,6 +286,19 @@
       <DependentUpon>DataGridDetailListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataGridDetailList\DataGridDetailType.cs" />
+    <Compile Include="DependencyPropertyInheritsDemo\DependencyPropertyInheritsDemoWindow.xaml.cs">
+      <DependentUpon>DependencyPropertyInheritsDemoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DependencyPropertyInheritsDemo\DependencyProperties.cs" />
+    <Compile Include="DependencyPropertyInheritsDemo\UserBottomControl.xaml.cs">
+      <DependentUpon>UserBottomControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DependencyPropertyInheritsDemo\UserMiddleControl.xaml.cs">
+      <DependentUpon>UserMiddleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DependencyPropertyInheritsDemo\UserTopControl.xaml.cs">
+      <DependentUpon>UserTopControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DragableListBoxDemo\DragableListBoxDemo2.xaml.cs">
       <DependentUpon>DragableListBoxDemo2.xaml</DependentUpon>
     </Compile>
@@ -661,6 +674,22 @@
     <Page Include="DefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DependencyPropertyInheritsDemo\DependencyPropertyInheritsDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DependencyPropertyInheritsDemo\UserBottomControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DependencyPropertyInheritsDemo\UserMiddleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DependencyPropertyInheritsDemo\UserTopControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DragableListBoxDemo\DragableListBoxDemo2.xaml">
       <Generator>MSBuild:Compile</Generator>

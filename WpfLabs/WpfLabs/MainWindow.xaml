@@ -119,6 +119,8 @@
                             CommandParameter="CustomScrollViewerDemoWindow" />
                     <Button Content="展示EditableDataGridDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="EditableDataGridDemoWindow" />
+                    <Button Content="展示DependencyPropertyInheritsDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="DependencyPropertyInheritsDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>
