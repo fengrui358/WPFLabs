@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.CommandWpf;
+using Newtonsoft.Json;
 using WpfLabs.MasterDetailDataGrid.Models;
 
 namespace WpfLabs.MasterDetailDataGrid
@@ -30,13 +33,24 @@ namespace WpfLabs.MasterDetailDataGrid
         /// </summary>
         public IEnumerable<AlarmTransferModel> ItemsSource
         {
-            get { return (IEnumerable<AlarmTransferModel>) GetValue(ItemSourcesProperty); }
-            set { SetValue(ItemSourcesProperty, value); }
+            get => (IEnumerable<AlarmTransferModel>) GetValue(ItemSourcesProperty);
+            set => SetValue(ItemSourcesProperty, value);
         }
+
+        public AlarmTransferModel SelectedItem { get; set; }
+
+        public RelayCommand TestDoubleClickCommand { get; private set; }
 
         public MasterDetailDataGrid()
         {
             InitializeComponent();
+
+            TestDoubleClickCommand = new RelayCommand(DoubleClickCommandHandler, SelectedItem != null);
+        }
+
+        private void DoubleClickCommandHandler()
+        {
+            Debug.WriteLine(JsonConvert.SerializeObject(SelectedItem));
         }
     }
 }

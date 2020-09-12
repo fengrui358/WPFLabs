@@ -22,7 +22,11 @@
     </UserControl.Resources>
     <Grid>
         <DataGrid Margin="0,5"  ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType={x:Type masterDetailDataGrid:MasterDetailDataGrid}}}"
-                  RowDetailsTemplate="{StaticResource RowDetailTemplate}">
+                  SelectedItem="{Binding RelativeSource={RelativeSource AncestorType=masterDetailDataGrid:MasterDetailDataGrid}, Path=SelectedItem}"
+                  RowDetailsTemplate="{StaticResource RowDetailTemplate}" IsReadOnly="True">
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType= masterDetailDataGrid:MasterDetailDataGrid},Path=TestDoubleClickCommand}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="0.3*">
                     <DataGridTemplateColumn.CellTemplate>
