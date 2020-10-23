@@ -436,6 +436,10 @@
     <Compile Include="LoadingControl\LoadingControlWindow.xaml.cs">
       <DependentUpon>LoadingControlWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LostFocusDemo\LostFocusControl.cs" />
+    <Compile Include="LostFocusDemo\LostFocusControlDemoWindow.xaml.cs">
+      <DependentUpon>LostFocusControlDemoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MasterDetailDataGrid\Converters\DataGridConverter.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumDisposalResult.cs" />
     <Compile Include="MasterDetailDataGrid\Enum\EnumEventGrade.cs" />
@@ -867,6 +871,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoadingControl\Themes\LoadingControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LostFocusDemo\LostFocusControlDemoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LostFocusDemo\Themes\LostFocusControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

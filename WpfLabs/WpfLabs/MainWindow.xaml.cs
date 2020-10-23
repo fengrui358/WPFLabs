@@ -33,6 +33,7 @@ using WpfLabs.ImagePerformanceDemo;
 using WpfLabs.IsSynchronizedWithCurrentItemDemo;
 using WpfLabs.ItemsControlWithTimeline;
 using WpfLabs.KeyBoardInputDemo;
+using WpfLabs.LostFocusDemo;
 using WpfLabs.MasterDetailDataGrid;
 using WpfLabs.MeasureOverrideAndArrangeOverride;
 using WpfLabs.MediaPlayer;
@@ -148,7 +149,7 @@ namespace WpfLabs
                 case "DrawingDemoWindow":
                     var drawingDemoWindow = new DrawingDemoWindow();
                     drawingDemoWindow.ShowDialog();
-                    break; 
+                    break;
                 case "WaterMarkDemoWindow":
                     var waterMarkDemoWindow = new WaterMarkDemoWindow();
                     waterMarkDemoWindow.ShowDialog();
@@ -280,6 +281,10 @@ namespace WpfLabs
                 case "DependencyPropertyInheritsDemoWindow":
                     var dependencyPropertyInheritsDemoWindow = new DependencyPropertyInheritsDemoWindow();
                     dependencyPropertyInheritsDemoWindow.ShowDialog();
+                    break;
+                case "LostFocusControlDemoWindow":
+                    var lostFocusControlDemoWindow = new LostFocusControlDemoWindow();
+                    lostFocusControlDemoWindow.ShowDialog();
                     break;
             }
 

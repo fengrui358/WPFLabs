@@ -121,6 +121,8 @@
                             CommandParameter="EditableDataGridDemoWindow" />
                     <Button Content="展示DependencyPropertyInheritsDemoWindow" Command="{Binding ShowControlWindow}"
                             CommandParameter="DependencyPropertyInheritsDemoWindow" />
+                    <Button Content="展示LostFocusControlDemoWindow" Command="{Binding ShowControlWindow}"
+                            CommandParameter="LostFocusControlDemoWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

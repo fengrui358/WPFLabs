@@ -11,5 +11,6 @@
         <ResourceDictionary Source="../LoadingControl/Themes/LoadingControlStyle.xaml"/>
         <ResourceDictionary Source="../MediaPlayer/Themes/MediaRecordPlayerStyle.xaml"/>
         <ResourceDictionary Source="../ColorfulTextBlock/Themes/ColorfulTextBlockStyle.xaml"/>
+        <ResourceDictionary Source="../LostFocusDemo/Themes/LostFocusControlStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
