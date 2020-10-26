@@ -23,5 +23,15 @@ namespace WpfLabs.LostFocusDemo
         {
             InitializeComponent();
         }
+
+        private void UIElement_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            TextContainer.Text = $"{TextContainer.Text}{Environment.NewLine}{DateTime.Now.Ticks} {sender.GetType().Name} GotFocus";
+        }
+
+        private void UIElement_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            TextContainer.Text = $"{TextContainer.Text}{Environment.NewLine}{DateTime.Now.Ticks} {sender.GetType().Name} LostFocus";
+        }
     }
 }

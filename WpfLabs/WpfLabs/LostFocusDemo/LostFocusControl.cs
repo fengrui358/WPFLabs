@@ -59,13 +59,13 @@ namespace WpfLabs.LostFocusDemo
         {
             LostFocus += (sender, args) =>
             {
-                _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}LostFocus.";
+                _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}{DateTime.Now.Ticks} LostFocus.";
                 _toggleButton.IsChecked = false;
             };
 
             GotFocus += (sender, args) =>
             {
-                _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}GotFocus.";
+                _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}{DateTime.Now.Ticks} GotFocus.";
             };
         }
 
@@ -78,12 +78,12 @@ namespace WpfLabs.LostFocusDemo
             {
                 textBox.LostFocus += (sender, args) =>
                 {
-                    _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}InnerTextBox LostFocus.";
+                    _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}{DateTime.Now.Ticks} InnerTextBox LostFocus.";
                 };
 
                 textBox.GotFocus += (sender, args) =>
                 {
-                    _msgTextBlock.Text = $"{_msgTextBlock.Text}{Environment.NewLine}InnerTextBox GotFocus.";
+                    _msgTextBlock.Text = $"{DateTime.Now.Ticks} {_msgTextBlock.Text}{Environment.NewLine}{DateTime.Now.Ticks} InnerTextBox GotFocus.";
                 };
             }
 
