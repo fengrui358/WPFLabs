@@ -1,45 +1,47 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:WpfLabs.CircularLoading"
-                    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing">
+                    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+                    xmlns:local="clr-namespace:WpfLabs.CircularLoading">
     <Style TargetType="{x:Type local:CircularLoading}">
-        <Setter Property="ShortSegmentBrush" Value="#8F3BC0C3" />
-        <Setter Property="LongSegmentBrush" Value="#433BC0C3" />
-        <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="100" />
+        <Setter Property="LongSegmentBrush" Value="#433BC0C3" />
+        <Setter Property="ShortSegmentBrush" Value="#8F3BC0C3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CircularLoading}">
-                    <Viewbox x:Name="Container" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                             Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+                    <Viewbox x:Name="Container"
+                             Width="{TemplateBinding Width}"
+                             Height="{TemplateBinding Height}"
+                             RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
                         <Viewbox.RenderTransform>
                             <RotateTransform x:Name="ContainerAngle" Angle="0" />
                         </Viewbox.RenderTransform>
                         <Grid>
-                            <ed:Arc ArcThickness="100" SnapsToDevicePixels="True" ArcThicknessUnit="Pixel"
-                                    EndAngle="360" Fill="{TemplateBinding LongSegmentBrush}" Height="1000" Stretch="None" Stroke="Transparent"
-                                    StrokeThickness="1" StartAngle="0" Width="1000" />
-                            <ed:Arc ArcThickness="100" SnapsToDevicePixels="True" ArcThicknessUnit="Pixel"
-                                    EndAngle="60" Fill="{TemplateBinding ShortSegmentBrush}" Height="1000" Stretch="None" Stroke="White"
-                                    StrokeThickness="1" StartAngle="-30" Width="1000" />
+                            <ed:Arc Width="1000" Height="1000" ArcThickness="100"
+                                    ArcThicknessUnit="Pixel" EndAngle="360"
+                                    Fill="{TemplateBinding LongSegmentBrush}"
+                                    SnapsToDevicePixels="True" StartAngle="0" Stretch="None"
+                                    Stroke="Transparent" StrokeThickness="1" />
+                            <ed:Arc Width="1000" Height="1000" ArcThickness="100"
+                                    ArcThicknessUnit="Pixel" EndAngle="60"
+                                    Fill="{TemplateBinding ShortSegmentBrush}"
+                                    SnapsToDevicePixels="True" StartAngle="-30" Stretch="None"
+                                    Stroke="White" StrokeThickness="1" />
                         </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ActiveStates">
                                 <VisualState x:Name="Inactive" />
                                 <VisualState x:Name="Active">
                                     <Storyboard RepeatBehavior="Forever">
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Container"
-                                                                       Storyboard.TargetProperty="Visibility"
-                                                                       Duration="0">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Container" Storyboard.TargetProperty="Visibility" Duration="0">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation Storyboard.TargetName="ContainerAngle"
-                                                         Storyboard.TargetProperty="Angle" From="0" To="360"
-                                                         Duration="0:0:1" />
+                                        <DoubleAnimation Storyboard.TargetName="ContainerAngle" Storyboard.TargetProperty="Angle" From="0"
+                                                         To="360" Duration="0:0:1" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -48,5 +50,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Width" Value="100" />
     </Style>
 </ResourceDictionary>

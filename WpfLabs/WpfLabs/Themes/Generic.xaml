@@ -1,16 +1,16 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:WpfLabs"
-    xmlns:groupExpander="clr-namespace:WpfLabs.GroupExpander">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:groupExpander="clr-namespace:WpfLabs.GroupExpander"
+                    xmlns:local="clr-namespace:WpfLabs">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="../NotifyMsgPresenter/Themes/NotifyMsgPresenter.xaml"/>
-        <ResourceDictionary Source="../CircularLoading/Themes/CircularLoadingStyle.xaml"/>
-        <ResourceDictionary Source="../DrawingDemo/PathImage/Themes/PathImage.xaml"/>
-        <ResourceDictionary Source="../GroupExpander/Themes/CommandExpanderStyle.xaml"/>
-        <ResourceDictionary Source="../LoadingControl/Themes/LoadingControlStyle.xaml"/>
-        <ResourceDictionary Source="../MediaPlayer/Themes/MediaRecordPlayerStyle.xaml"/>
-        <ResourceDictionary Source="../ColorfulTextBlock/Themes/ColorfulTextBlockStyle.xaml"/>
+        <ResourceDictionary Source="../NotifyMsgPresenter/Themes/NotifyMsgPresenter.xaml" />
+        <ResourceDictionary Source="../CircularLoading/Themes/CircularLoadingStyle.xaml" />
+        <ResourceDictionary Source="../DrawingDemo/PathImage/Themes/PathImage.xaml" />
+        <ResourceDictionary Source="../GroupExpander/Themes/CommandExpanderStyle.xaml" />
+        <ResourceDictionary Source="../LoadingControl/Themes/LoadingControlStyle.xaml" />
+        <ResourceDictionary Source="../MediaPlayer/Themes/MediaRecordPlayerStyle.xaml" />
+        <ResourceDictionary Source="../ColorfulTextBlock/Themes/ColorfulTextBlockStyle.xaml" />
         <ResourceDictionary Source="../LostFocusDemo/Themes/LostFocusControlStyle.xaml" />
+        <ResourceDictionary Source="../PopupTextBox/Themes/PopupTextBoxStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

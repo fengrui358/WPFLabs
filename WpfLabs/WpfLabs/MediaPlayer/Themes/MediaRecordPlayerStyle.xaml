@@ -20,7 +20,8 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" />
-                                <Slider Grid.Column="1" Maximum="{TemplateBinding TotalSeconds}"
+                                <Slider Grid.Column="1"
+                                        Maximum="{TemplateBinding TotalSeconds}"
                                         Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentSeconds}" />
                                 <TextBlock Grid.Column="2" />
                             </Grid>

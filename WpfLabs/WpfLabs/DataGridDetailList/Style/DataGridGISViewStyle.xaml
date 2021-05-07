@@ -3,44 +3,44 @@
                     xmlns:converters="clr-namespace:WpfLabs.DataGridDetailList.Converters">
     <converters:DataGridRowDetailMarginConverter x:Key="DataGridRowDetailMarginConverter" />
     <Style TargetType="DataGrid">
-        <!--网格线颜色-->
-        <Setter Property="CanUserResizeColumns" Value="false" />
         <Setter Property="AutoGenerateColumns" Value="false" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="CanUserSortColumns" Value="false" />
-        <Setter Property="CanUserResizeRows" Value="false" />
-        <Setter Property="CanUserReorderColumns" Value="false" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="CanUserAddRows" Value="false" />
         <Setter Property="CanUserDeleteRows" Value="false" />
-        <Setter Property="IsReadOnly" Value="False" />
-        <Setter Property="Background" Value="{x:Null}" />
-        <Setter Property="BorderBrush" Value="{x:Null}" />
-        <Setter Property="Foreground" Value="{StaticResource DgBorderSelectedBgColor}" />
+        <Setter Property="CanUserReorderColumns" Value="false" />
+        <!--  网格线颜色  -->
+        <Setter Property="CanUserResizeColumns" Value="false" />
+        <Setter Property="CanUserResizeRows" Value="false" />
+        <Setter Property="CanUserSortColumns" Value="false" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource DgBorderSelectedBgColor}" />
         <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}" />
-        <Setter Property="VerticalGridLinesBrush" Value="{x:Null}" />
-        <Setter Property="RowHeight" Value="41" />
+        <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="RowHeight" Value="41" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="VerticalGridLinesBrush" Value="{x:Null}" />
     </Style>
 
-    <!--标题栏样式-->
+    <!--  标题栏样式  -->
     <Style TargetType="DataGridColumnHeader">
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{StaticResource TbLabelFgColor}" />
-        <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource TbLabelFgColor}" />
         <Setter Property="Height" Value="41" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridColumnHeader">
-                    <!--<Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1" 
-                             BorderBrush="{x:Null}" 
+                    <!--<Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1"
+                             BorderBrush="{x:Null}"
                               Width="Auto">-->
                     <Grid>
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                     <!--</Border>-->
                 </ControlTemplate>
@@ -48,27 +48,26 @@
         </Setter>
     </Style>
 
-    <!--行样式触发-->
-    <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+    <!--  行样式触发  -->
+    <!--  背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式  -->
     <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="{StaticResource DgRowNormalBgColor}" />
         <Setter Property="BorderBrush" Value="{StaticResource DgBorderNormalBbColor}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Background" Value="{StaticResource DgRowNormalBgColor}" />
         <Setter Property="Foreground" Value="{StaticResource TbContentFgColor}" />
         <Setter Property="Margin" Value="0,6" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Grid>
                         <Grid x:Name="DGR_Grid" SnapsToDevicePixels="True">
-                            <Border CornerRadius="5,4,4,5" Background="#FF57BDDE" HorizontalAlignment="Stretch">
-                                <Border x:Name="DGR_Border"
+                            <Border HorizontalAlignment="Stretch" Background="#FF57BDDE" CornerRadius="5,4,4,5">
+                                <Border x:Name="DGR_Border" Margin="0,0,0,0"
+                                        Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="0,4,4,0" Margin="0,0,0,0">
+                                        CornerRadius="0,4,4,0">
                                     <SelectiveScrollingGrid>
                                         <SelectiveScrollingGrid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
@@ -82,23 +81,18 @@
                                                                 ItemsPanel="{TemplateBinding ItemsPanel}"
                                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                                        <DataGridRowHeader Grid.RowSpan="2"
-                                                           SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                        <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
                                                            Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                     </SelectiveScrollingGrid>
                                 </Border>
 
                             </Border>
                         </Grid>
-                        <DataGridDetailsPresenter
-                            SelectiveScrollingGrid.SelectiveScrollingOrientation="Both"
-                            Visibility="{TemplateBinding DetailsVisibility}">
+                        <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="Both" Visibility="{TemplateBinding DetailsVisibility}">
                             <DataGridDetailsPresenter.Margin>
                                 <MultiBinding Converter="{StaticResource DataGridRowDetailMarginConverter}">
-                                    <Binding Path="RowHeight"
-                                             RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
-                                    <Binding Path="Margin"
-                                             RelativeSource="{RelativeSource AncestorType={x:Type DataGridRow}}" />
+                                    <Binding Path="RowHeight" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                    <Binding Path="Margin" RelativeSource="{RelativeSource AncestorType={x:Type DataGridRow}}" />
                                 </MultiBinding>
                             </DataGridDetailsPresenter.Margin>
                         </DataGridDetailsPresenter>
@@ -115,9 +109,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
-    <!--单元格样式触发-->
+    <!--  单元格样式触发  -->
     <Style TargetType="DataGridCell">
         <Setter Property="Template">
             <Setter.Value>

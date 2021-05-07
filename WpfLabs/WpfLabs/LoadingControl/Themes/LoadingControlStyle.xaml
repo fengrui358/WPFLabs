@@ -3,30 +3,29 @@
                     xmlns:loadingControl="clr-namespace:WpfLabs.LoadingControl">
     <Color x:Key="C1">#FF4277EB</Color>
     <Color x:Key="C2">#004277EB</Color>
-    <RadialGradientBrush x:Key="RadialGradientBrush" GradientOrigin="1.2,0.5" Center="1.2,0.5" RadiusX="1.2"
-                         RadiusY="1">
+    <RadialGradientBrush x:Key="RadialGradientBrush" Center="1.2,0.5" GradientOrigin="1.2,0.5" RadiusX="1.2" RadiusY="1">
         <GradientStop Offset="0" Color="{StaticResource C1}" />
         <GradientStop Offset="1" Color="{StaticResource C2}" />
     </RadialGradientBrush>
 
     <Style TargetType="{x:Type loadingControl:LoadingControl}">
-        <Setter Property="Width" Value="344" />
-        <Setter Property="Height" Value="120" />
         <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground.Normal1}" />
+        <Setter Property="Height" Value="120" />
         <Setter Property="LoadingMessage" Value="Loading" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type loadingControl:LoadingControl}">
                     <Viewbox Stretch="Fill">
-                        <Border Background="{TemplateBinding Background}"
-                                Width="344" Height="120"
+                        <Border Width="344" Height="120"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <Image Source="../bg_loading.png" />
                                 <Grid Width="304" Height="80">
-                                    <Rectangle x:Name="LoadingRec" Width="5" Height="5" Margin="0,0,0,20"
-                                               Fill="{StaticResource RadialGradientBrush}" HorizontalAlignment="Left">
+                                    <Rectangle x:Name="LoadingRec" Width="5" Height="5"
+                                               Margin="0,0,0,20" HorizontalAlignment="Left"
+                                               Fill="{StaticResource RadialGradientBrush}">
                                         <Rectangle.RenderTransform>
                                             <TranslateTransform X="12" />
                                         </Rectangle.RenderTransform>
@@ -36,11 +35,10 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock FontSize="12" HorizontalAlignment="Center"
-                                                   Text="{TemplateBinding LoadingMessage}"
-                                                   Foreground="White" />
-                                        <TextBlock x:Name="LoadingText" FontSize="12" HorizontalAlignment="Left"
-                                                   Grid.Column="1" Foreground="White" Width="10" />
+                                        <TextBlock HorizontalAlignment="Center" FontSize="12" Foreground="White"
+                                                   Text="{TemplateBinding LoadingMessage}" />
+                                        <TextBlock x:Name="LoadingText" Grid.Column="1" Width="10"
+                                                   HorizontalAlignment="Left" FontSize="12" Foreground="White" />
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -50,43 +48,38 @@
                                 <VisualState x:Name="Inactive" />
                                 <VisualState x:Name="Active">
                                     <Storyboard RepeatBehavior="Forever">
-                                        <!--控制Loading文本-->
-                                        <StringAnimationUsingKeyFrames Storyboard.TargetName="LoadingText"
-                                                                       Storyboard.TargetProperty="Text">
-                                            <DiscreteStringKeyFrame Value="." KeyTime="0:0:0.4" />
-                                            <DiscreteStringKeyFrame Value=".." KeyTime="0:0:0.8" />
-                                            <DiscreteStringKeyFrame Value="..." KeyTime="0:0:1.2" />
-                                            <DiscreteStringKeyFrame Value="" KeyTime="0:0:1.6" />
+                                        <!--  控制Loading文本  -->
+                                        <StringAnimationUsingKeyFrames Storyboard.TargetName="LoadingText" Storyboard.TargetProperty="Text">
+                                            <DiscreteStringKeyFrame KeyTime="0:0:0.4" Value="." />
+                                            <DiscreteStringKeyFrame KeyTime="0:0:0.8" Value=".." />
+                                            <DiscreteStringKeyFrame KeyTime="0:0:1.2" Value="..." />
+                                            <DiscreteStringKeyFrame KeyTime="0:0:1.6" Value="" />
                                         </StringAnimationUsingKeyFrames>
 
-                              
 
-                                        <!--控制矩形条长度-->
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
-                                                                       Storyboard.TargetProperty="Width">
-                                            <LinearDoubleKeyFrame Value="150" KeyTime="0:0:0.4" />
-                                            <LinearDoubleKeyFrame Value="5" KeyTime="0:0:0.8" />
-                                            <LinearDoubleKeyFrame Value="150" KeyTime="0:0:1.2" />
-                                            <LinearDoubleKeyFrame Value="5" KeyTime="0:0:1.6" />
+
+                                        <!--  控制矩形条长度  -->
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec" Storyboard.TargetProperty="Width">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4" Value="150" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.8" Value="5" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:1.2" Value="150" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:1.6" Value="5" />
                                         </DoubleAnimationUsingKeyFrames>
-                                        <!--控制矩形条位置-->
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
-                                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
-                                            <DiscreteDoubleKeyFrame Value="12" KeyTime="0:0:0.4" />
-                                            <LinearDoubleKeyFrame Value="287" KeyTime="0:0:0.8" />
-                                            <LinearDoubleKeyFrame Value="125" KeyTime="0:0:1.2" />
-                                            <LinearDoubleKeyFrame Value="12" KeyTime="0:0:1.6" />
+                                        <!--  控制矩形条位置  -->
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="12" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.8" Value="287" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:1.2" Value="125" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:1.6" Value="12" />
                                         </DoubleAnimationUsingKeyFrames>
-                                        <!--控制颜色翻转-->
-                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
-                                                                      Storyboard.TargetProperty="(Rectangle.Fill).(RadialGradientBrush.GradientOrigin)">
-                                            <DiscretePointKeyFrame Value="-0.2,0.5" KeyTime="0:0:0.8" />
-                                            <DiscretePointKeyFrame Value="1.2,0.5" KeyTime="0:0:1.6" />
+                                        <!--  控制颜色翻转  -->
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec" Storyboard.TargetProperty="(Rectangle.Fill).(RadialGradientBrush.GradientOrigin)">
+                                            <DiscretePointKeyFrame KeyTime="0:0:0.8" Value="-0.2,0.5" />
+                                            <DiscretePointKeyFrame KeyTime="0:0:1.6" Value="1.2,0.5" />
                                         </PointAnimationUsingKeyFrames>
-                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec"
-                                                                      Storyboard.TargetProperty="(Rectangle.Fill).(RadialGradientBrush.Center)">
-                                            <DiscretePointKeyFrame Value="-0.2,0.5" KeyTime="0:0:0.8" />
-                                            <DiscretePointKeyFrame Value="1.2,0.5" KeyTime="0:0:1.6" />
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="LoadingRec" Storyboard.TargetProperty="(Rectangle.Fill).(RadialGradientBrush.Center)">
+                                            <DiscretePointKeyFrame KeyTime="0:0:0.8" Value="-0.2,0.5" />
+                                            <DiscretePointKeyFrame KeyTime="0:0:1.6" Value="1.2,0.5" />
                                         </PointAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -96,5 +89,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Width" Value="344" />
     </Style>
 </ResourceDictionary>

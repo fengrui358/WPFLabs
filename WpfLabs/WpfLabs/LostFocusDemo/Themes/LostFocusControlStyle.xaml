@@ -19,15 +19,17 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="PART_TextBox" Grid.Column="0" />
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
                                     <Button Content="x" Focusable="False" />
-                                    <ToggleButton x:Name="PART_ToggleButton" Content="d" Focusable="False"/>
+                                    <ToggleButton x:Name="PART_ToggleButton" Content="d" Focusable="False" />
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Row="1">
                                 <TextBlock x:Name="PART_Msg" TextWrapping="Wrap" />
-                                <Popup StaysOpen="True" Height="350" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
-                                       IsOpen="{Binding ElementName=PART_ToggleButton, Path=IsChecked}">
+                                <Popup Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
+                                       Height="350"
+                                       IsOpen="{Binding ElementName=PART_ToggleButton, Path=IsChecked}"
+                                       StaysOpen="True">
                                     <Grid Background="Red" />
                                 </Popup>
                             </Grid>

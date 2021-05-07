@@ -1,9 +1,12 @@
 ﻿<Window x:Class="WpfLabs.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:wpfLabs="clr-namespace:WpfLabs"
         xmlns:contactsTreeControl="clr-namespace:WpfLabs.ContactsTreeControl"
-        Title="MainWindow" Height="600" Width="400" WindowStartupLocation="CenterScreen">
+        xmlns:wpfLabs="clr-namespace:WpfLabs"
+        Title="MainWindow"
+        Width="400"
+        Height="600"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5" />
@@ -17,112 +20,123 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="0,20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="筛选："/>
-            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextChanged="TextBoxBase_OnTextChanged" MaxLength="30"/>
+            <TextBlock Grid.Column="0" Text="筛选：" />
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" MaxLength="30"
+                     TextChanged="TextBoxBase_OnTextChanged" />
         </Grid>
         <ScrollViewer Grid.Row="1">
             <ItemsControl x:Name="Container" Loaded="Container_OnLoaded">
                 <ItemsControl.Items>
-                    <Button Content="展示通讯录树" Command="{Binding ShowControlWindow}" CommandParameter="ContactsTree" />
-                    <Button Content="展示专家面板" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel" />
-                    <Button Content="展示专家面板2" Command="{Binding ShowControlWindow}" CommandParameter="ExpertPanel2" />
-                    <Button Content="展示计时器面板" Command="{Binding ShowControlWindow}" CommandParameter="Timer" />
-                    <Button Content="展示音频播放器" Command="{Binding ShowControlWindow}" CommandParameter="MusicPlayer" />
-                    <Button Content="展示MediaPlayer" Command="{Binding ShowControlWindow}" CommandParameter="MediaPlayer" />
-                    <Button Content="展示人员列表" Command="{Binding ShowControlWindow}" CommandParameter="PeopleResourcePanel" />
-                    <Button Content="通知窗体" Command="{Binding ShowControlWindow}" CommandParameter="NotifyMsgPresenter" />
-                    <Button Content="展示MasterDetailDataGrid" Command="{Binding ShowControlWindow}"
-                            CommandParameter="MasterDetailDataGrid" />
-                    <Button Content="展示FlexDataGrid" Command="{Binding ShowControlWindow}"
-                            CommandParameter="FlexDataGrid" />
-                    <Button Content="展示DataGridDetailListWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="DataGridDetailListWindow" />
-                    <Button Content="展示BindingDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="BindingDemoWindow" />
-                    <Button Content="展示SwapImageDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="SwapImageDemoWindow" />
-                    <Button Content="展示CircularLoadingWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="CircularLoadingWindow" />
-                    <Button Content="展示LoadingControlWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="LoadingControlWindow" />
-                    <Button Content="展示CalloutBorderStyleWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="CalloutBorderStyleWindow" />
-                    <Button Content="展示MeasureOverrideAndArrangeOverrideWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="MeasureOverrideAndArrangeOverrideWindow" />
-                    <Button Content="展示DrawingDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="DrawingDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ContactsTree" Content="展示通讯录树" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ExpertPanel" Content="展示专家面板" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ExpertPanel2" Content="展示专家面板2" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="Timer" Content="展示计时器面板" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="MusicPlayer" Content="展示音频播放器" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="MediaPlayer" Content="展示MediaPlayer" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="PeopleResourcePanel" Content="展示人员列表" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="NotifyMsgPresenter" Content="通知窗体" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="MasterDetailDataGrid" Content="展示MasterDetailDataGrid" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="FlexDataGrid" Content="展示FlexDataGrid" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="DataGridDetailListWindow" Content="展示DataGridDetailListWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="BindingDemoWindow" Content="展示BindingDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="SwapImageDemoWindow" Content="展示SwapImageDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="CircularLoadingWindow" Content="展示CircularLoadingWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="LoadingControlWindow" Content="展示LoadingControlWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="CalloutBorderStyleWindow" Content="展示CalloutBorderStyleWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="MeasureOverrideAndArrangeOverrideWindow" Content="展示MeasureOverrideAndArrangeOverrideWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="DrawingDemoWindow" Content="展示DrawingDemoWindow" />
                     <Button Command="{Binding ShowControlWindow}" CommandParameter="WaterMarkDemoWindow">
                         <TextBlock Text="展示WaterMarkDemoWindow" TextDecorations="Strikethrough" />
                     </Button>
-                    <Button Content="展示MultiUiThreadingDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="MultiUiThreadingDemoWindow" />
-                    <Button Content="展示CustomPixelShaderDemo" Command="{Binding ShowControlWindow}"
-                            CommandParameter="CustomPixelShaderDemo" />
-                    <Button Content="展示GifShowDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="GifShowDemoWindow" />
-                    <Button Content="展示NewCallAnimationWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="NewCallAnimationWindow" />
-                    <Button Content="展示GenerateBitmapDemo" Command="{Binding ShowControlWindow}"
-                            CommandParameter="GenerateBitmapDemo" />
-                    <Button Content="展示FontFamilyDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="FontFamilyDemoWindow" />
-                    <Button Content="展示FoucsDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="FoucsDemoWindow" />
-                    <Button Content="展示KeyBoardInputWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="KeyBoardInputWindow" />
-                    <Button Content="展示EllipsisLoadingDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="EllipsisLoadingDemoWindow" />
-                    <Button Content="展示ImagePerformanceWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ImagePerformanceWindow" />
-                    <Button Content="展示CollectionViewWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="CollectionViewWindow" />
-                    <Button Content="展示MultiSceenDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="MultiSceenDemoWindow" />
-                    <Button Content="展示ResourceDictionaryCodeBehindWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ResourceDictionaryCodeBehindWindow" />
-                    <Button Content="展示TreeViewDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="TreeViewDemoWindow" />
-                    <Button Content="展示GroupExpanderWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="GroupExpanderWindow" />
-                    <Button Content="展示ShortCutDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ShortCutDemoWindow" />
-                    <Button Content="展示ScreenDragMainWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ScreenDragMainWindow" />
-                    <Button Content="展示AnimationPerformanceWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="AnimationPerformanceWindow" />
-                    <Button Content="展示FluidLayoutDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="FluidLayoutDemoWindow" />
-                    <Button Content="展示DragableTabControlDemo" Command="{Binding ShowControlWindow}"
-                            CommandParameter="DragableTabControlDemo" />
-                    <Button Content="展示DragableListBoxDemo" Command="{Binding ShowControlWindow}"
-                            CommandParameter="DragableListBoxDemo" />
-                    <Button Content="展示CustomWindowDemo" Command="{Binding ShowControlWindow}"
-                            CommandParameter="CustomWindowDemo" />
-                    <Button Content="展示AdornerControlWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="AdornerControlWindow" />
-                    <Button Content="展示ItemsControlWithTimelineWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ItemsControlWithTimelineWindow" />
-                    <Button Content="展示IsSynchronizedWithCurrentItemWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="IsSynchronizedWithCurrentItemWindow" />
-                    <Button Content="展示ColorfulTextBlockWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ColorfulTextBlockWindow" />
-                    <Button Content="展示RouteEventDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="RouteEventDemoWindow" />
-                    <Button Content="展示RichTextBoxDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="RichTextBoxDemoWindow" />
-                    <Button Content="展示ScreenCaptureDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="ScreenCaptureDemoWindow" />
-                    <Button Content="展示CustomScrollViewerDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="CustomScrollViewerDemoWindow" />
-                    <Button Content="展示EditableDataGridDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="EditableDataGridDemoWindow" />
-                    <Button Content="展示DependencyPropertyInheritsDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="DependencyPropertyInheritsDemoWindow" />
-                    <Button Content="展示LostFocusControlDemoWindow" Command="{Binding ShowControlWindow}"
-                            CommandParameter="LostFocusControlDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="MultiUiThreadingDemoWindow" Content="展示MultiUiThreadingDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="CustomPixelShaderDemo" Content="展示CustomPixelShaderDemo" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="GifShowDemoWindow" Content="展示GifShowDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="NewCallAnimationWindow" Content="展示NewCallAnimationWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="GenerateBitmapDemo" Content="展示GenerateBitmapDemo" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="FontFamilyDemoWindow" Content="展示FontFamilyDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="FoucsDemoWindow" Content="展示FoucsDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="KeyBoardInputWindow" Content="展示KeyBoardInputWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="EllipsisLoadingDemoWindow" Content="展示EllipsisLoadingDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ImagePerformanceWindow" Content="展示ImagePerformanceWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="CollectionViewWindow" Content="展示CollectionViewWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="MultiSceenDemoWindow" Content="展示MultiSceenDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ResourceDictionaryCodeBehindWindow" Content="展示ResourceDictionaryCodeBehindWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="TreeViewDemoWindow" Content="展示TreeViewDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="GroupExpanderWindow" Content="展示GroupExpanderWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ShortCutDemoWindow" Content="展示ShortCutDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ScreenDragMainWindow" Content="展示ScreenDragMainWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="AnimationPerformanceWindow" Content="展示AnimationPerformanceWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="FluidLayoutDemoWindow" Content="展示FluidLayoutDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="DragableTabControlDemo" Content="展示DragableTabControlDemo" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="DragableListBoxDemo" Content="展示DragableListBoxDemo" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="CustomWindowDemo" Content="展示CustomWindowDemo" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="AdornerControlWindow" Content="展示AdornerControlWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ItemsControlWithTimelineWindow" Content="展示ItemsControlWithTimelineWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="IsSynchronizedWithCurrentItemWindow" Content="展示IsSynchronizedWithCurrentItemWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ColorfulTextBlockWindow" Content="展示ColorfulTextBlockWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="RouteEventDemoWindow" Content="展示RouteEventDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="RichTextBoxDemoWindow" Content="展示RichTextBoxDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="ScreenCaptureDemoWindow" Content="展示ScreenCaptureDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="CustomScrollViewerDemoWindow" Content="展示CustomScrollViewerDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="EditableDataGridDemoWindow" Content="展示EditableDataGridDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="DependencyPropertyInheritsDemoWindow" Content="展示DependencyPropertyInheritsDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="LostFocusControlDemoWindow" Content="展示LostFocusControlDemoWindow" />
+                    <Button Command="{Binding ShowControlWindow}"
+                            CommandParameter="PopupTextBoxWindow" Content="展示PopupTextBoxWindow" />
                 </ItemsControl.Items>
             </ItemsControl>
         </ScrollViewer>

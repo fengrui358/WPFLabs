@@ -520,6 +520,11 @@
     <Compile Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml.cs">
       <DependentUpon>PeopleResourcePanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PopupTextBox\PopupTextBox.cs" />
+    <Compile Include="PopupTextBox\PopupTextBoxWindow.xaml.cs">
+      <DependentUpon>PopupTextBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupTextBox\PopupVerticalOffsetConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ResourceDictionaryCodeBehind\CustomizeResourceDictionary\CustomizeResourceDictionary.xaml.cs">
       <DependentUpon>CustomizeResourceDictionary.xaml</DependentUpon>
@@ -966,6 +971,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PeopleResourcePanel\PeopleResourcePanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupTextBox\PopupTextBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupTextBox\Themes\PopupTextBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

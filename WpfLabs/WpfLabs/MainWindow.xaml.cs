@@ -43,6 +43,7 @@ using WpfLabs.MutliUiThreadingDemo;
 using WpfLabs.NewCallAnimation;
 using WpfLabs.NotifyMsgPresenter;
 using WpfLabs.PeopleResourcePanel;
+using WpfLabs.PopupTextBox;
 using WpfLabs.ResourceDictionaryCodeBehind;
 using WpfLabs.RichTextBoxDemo;
 using WpfLabs.RouteEventDemo;
@@ -285,6 +286,10 @@ namespace WpfLabs
                 case "LostFocusControlDemoWindow":
                     var lostFocusControlDemoWindow = new LostFocusControlDemoWindow();
                     lostFocusControlDemoWindow.ShowDialog();
+                    break;
+                case "PopupTextBoxWindow":
+                    var popupTextBoxWindow = new PopupTextBoxWindow();
+                    popupTextBoxWindow.ShowDialog();
                     break;
             }
 

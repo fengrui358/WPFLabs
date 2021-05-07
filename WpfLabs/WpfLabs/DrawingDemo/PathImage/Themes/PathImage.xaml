@@ -8,7 +8,9 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Image x:Name="PART_Img" Stretch="{TemplateBinding Stretch}" StretchDirection="{TemplateBinding StretchDirection}"/>
+                        <Image x:Name="PART_Img"
+                               Stretch="{TemplateBinding Stretch}"
+                               StretchDirection="{TemplateBinding StretchDirection}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

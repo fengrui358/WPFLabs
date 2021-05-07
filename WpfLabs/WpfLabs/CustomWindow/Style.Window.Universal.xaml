@@ -1,4 +1,4 @@
-﻿<!-- Window.Universal.xaml -->
+﻿<!--  Window.Universal.xaml  -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:themes="clr-namespace:Walterlv.Themes">
@@ -11,115 +11,112 @@
             <SolidColorBrush x:Key="Brush.TitleBar.ButtonPressedForeground" Color="{Binding Path=(themes:UniversalWindowStyle.TitleBar).ButtonPressedForeground, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
             <SolidColorBrush x:Key="Brush.TitleBar.ButtonPressedBackground" Color="{Binding Path=(themes:UniversalWindowStyle.TitleBar).ButtonPressedBackground, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
         </Style.Resources>
-        <Setter Property="themes:UniversalWindowStyle.TitleBar">
-            <Setter.Value>
-                <themes:UniversalTitleBar />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="WindowChrome.WindowChrome">
-            <Setter.Value>
-                <WindowChrome GlassFrameThickness="0 64 0 0" NonClientFrameEdges="Left,Bottom,Right" UseAeroCaptionButtons="False" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
-                    <Border Padding="4 1 4 4">
+                    <Border Padding="4,1,4,4">
                         <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
-                            <Grid x:Name="TitleBarPanel" VerticalAlignment="Top" Height="31">
+                            <Grid x:Name="TitleBarPanel" Height="31" VerticalAlignment="Top">
                                 <FrameworkElement.Resources>
                                     <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Width" Value="46"/>
+                                        <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderThickness" Value="0" />
                                         <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.Foreground}" />
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
                                         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+                                        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
                                         <Setter Property="Stylus.IsTapFeedbackEnabled" Value="False" />
                                         <Setter Property="Stylus.IsTouchFeedbackEnabled" Value="False" />
-                                        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Name="OverBorder" BorderThickness="0 1 0 0" Background="{TemplateBinding Background}">
-                                                        <TextBlock x:Name="MinimizeIcon"
-                                                                   Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Content}"
-                                                                   FontSize="10" FontFamily="Segoe MDL2 Assets"
-                                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    <Border Name="OverBorder"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderThickness="0,1,0,0">
+                                                        <TextBlock x:Name="MinimizeIcon" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                   FontFamily="Segoe MDL2 Assets" FontSize="10"
+                                                                   Foreground="{TemplateBinding Foreground}"
+                                                                   Text="{TemplateBinding Content}" />
                                                     </Border>
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter Property="Width" Value="46" />
+                                        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
                                         <Style.Triggers>
                                             <MultiTrigger>
-                                                <!-- When the pointer is over the button. -->
+                                                <!--  When the pointer is over the button.  -->
                                                 <MultiTrigger.Conditions>
                                                     <Condition Property="IsMouseOver" Value="True" />
                                                     <Condition Property="IsStylusOver" Value="False" />
                                                 </MultiTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.ButtonHoverForeground}" />
                                                 <Setter Property="Background" Value="{StaticResource Brush.TitleBar.ButtonHoverBackground}" />
+                                                <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.ButtonHoverForeground}" />
                                             </MultiTrigger>
-                                            <!-- When the pointer is pressed. -->
+                                            <!--  When the pointer is pressed.  -->
                                             <MultiTrigger>
                                                 <MultiTrigger.Conditions>
                                                     <Condition Property="IsPressed" Value="True" />
                                                     <Condition Property="AreAnyTouchesOver" Value="False" />
                                                 </MultiTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.ButtonPressedForeground}" />
                                                 <Setter Property="Background" Value="{StaticResource Brush.TitleBar.ButtonPressedBackground}" />
+                                                <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.ButtonPressedForeground}" />
                                             </MultiTrigger>
-                                            <!-- When the touch device is pressed. -->
+                                            <!--  When the touch device is pressed.  -->
                                             <MultiTrigger>
                                                 <MultiTrigger.Conditions>
                                                     <Condition Property="IsPressed" Value="True" />
                                                     <Condition Property="AreAnyTouchesOver" Value="True" />
                                                 </MultiTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.ButtonPressedForeground}" />
                                                 <Setter Property="Background" Value="{StaticResource Brush.TitleBar.ButtonPressedBackground}" />
+                                                <Setter Property="Foreground" Value="{StaticResource Brush.TitleBar.ButtonPressedForeground}" />
                                             </MultiTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                    <Style x:Key="Style.Button.Close" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Style x:Key="Style.Button.Close"
+                                           BasedOn="{StaticResource {x:Type Button}}"
+                                           TargetType="Button">
                                         <Style.Triggers>
                                             <MultiTrigger>
-                                                <!-- When the pointer is over the button. -->
+                                                <!--  When the pointer is over the button.  -->
                                                 <MultiTrigger.Conditions>
                                                     <Condition Property="IsMouseOver" Value="True" />
                                                     <Condition Property="IsStylusOver" Value="False" />
                                                 </MultiTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="White" />
                                                 <Setter Property="Background" Value="#E81123" />
+                                                <Setter Property="Foreground" Value="White" />
                                             </MultiTrigger>
-                                            <!-- When the pointer is pressed. -->
+                                            <!--  When the pointer is pressed.  -->
                                             <MultiTrigger>
                                                 <MultiTrigger.Conditions>
                                                     <Condition Property="IsPressed" Value="True" />
                                                     <Condition Property="AreAnyTouchesOver" Value="False" />
                                                 </MultiTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="Black" />
                                                 <Setter Property="Background" Value="#F1707A" />
+                                                <Setter Property="Foreground" Value="Black" />
                                             </MultiTrigger>
-                                            <!-- When the touch device is pressed. -->
+                                            <!--  When the touch device is pressed.  -->
                                             <MultiTrigger>
                                                 <MultiTrigger.Conditions>
                                                     <Condition Property="IsPressed" Value="True" />
                                                     <Condition Property="AreAnyTouchesOver" Value="True" />
                                                 </MultiTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="Black" />
                                                 <Setter Property="Background" Value="#F1707A" />
+                                                <Setter Property="Foreground" Value="Black" />
                                             </MultiTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </FrameworkElement.Resources>
-                                <TextBlock x:Name="TitleTextBlock" FontSize="12" Text="{TemplateBinding Title}"
-                                           Margin="12 0 156 0" VerticalAlignment="Center" Foreground="{StaticResource Brush.TitleBar.Foreground}" />
-                                <StackPanel x:Name="TitleBarButtonPanel" Orientation="Horizontal"
-                                            Margin="0 -1 0 0" HorizontalAlignment="Right">
-                                    <Button x:Name="MinimizeButton" Content="&#xE921;" themes:UniversalWindowStyle.TitleBarButtonState="Minimized" />
-                                    <Button x:Name="RestoreButton" Content="&#xE923;" themes:UniversalWindowStyle.TitleBarButtonState="Normal" />
-                                    <Button x:Name="MaximizeButton" Content="&#xE922;" themes:UniversalWindowStyle.TitleBarButtonState="Maximized" />
-                                    <Button x:Name="CloseButton" Content="&#xE106;" Style="{StaticResource Style.Button.Close}" themes:UniversalWindowStyle.IsTitleBarCloseButton="True" />
+                                <TextBlock x:Name="TitleTextBlock" Margin="12,0,156,0" VerticalAlignment="Center"
+                                           FontSize="12"
+                                           Foreground="{StaticResource Brush.TitleBar.Foreground}"
+                                           Text="{TemplateBinding Title}" />
+                                <StackPanel x:Name="TitleBarButtonPanel" Margin="0,-1,0,0" HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                    <Button x:Name="MinimizeButton" themes:UniversalWindowStyle.TitleBarButtonState="Minimized" Content="&#xE921;" />
+                                    <Button x:Name="RestoreButton" themes:UniversalWindowStyle.TitleBarButtonState="Normal" Content="&#xE923;" />
+                                    <Button x:Name="MaximizeButton" themes:UniversalWindowStyle.TitleBarButtonState="Maximized" Content="&#xE922;" />
+                                    <Button x:Name="CloseButton" themes:UniversalWindowStyle.IsTitleBarCloseButton="True" Content="&#xE106;"
+                                            Style="{StaticResource Style.Button.Close}" />
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator>
@@ -129,9 +126,9 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="RootGrid" Property="Margin" Value="4 7 4 4" />
-                            <Setter TargetName="TitleBarPanel" Property="Height" Value="32" />
                             <Setter TargetName="MaximizeButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="RootGrid" Property="Margin" Value="4,7,4,4" />
+                            <Setter TargetName="TitleBarPanel" Property="Height" Value="32" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">
                             <Setter TargetName="RestoreButton" Property="Visibility" Value="Collapsed" />
@@ -140,14 +137,24 @@
                             <Setter TargetName="MinimizeButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
+                            <Setter TargetName="CloseButton" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
+                            <Setter TargetName="MaximizeButton" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
                             <Setter TargetName="MinimizeButton" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
                             <Setter TargetName="RestoreButton" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
-                            <Setter TargetName="MaximizeButton" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
-                            <Setter TargetName="CloseButton" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
+                            <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{StaticResource Brush.TitleBar.InactiveForeground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome GlassFrameThickness="0 64 0 0" NonClientFrameEdges="Left,Bottom,Right" UseAeroCaptionButtons="False" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="themes:UniversalWindowStyle.TitleBar">
+            <Setter.Value>
+                <themes:UniversalTitleBar />
             </Setter.Value>
         </Setter>
     </Style>
