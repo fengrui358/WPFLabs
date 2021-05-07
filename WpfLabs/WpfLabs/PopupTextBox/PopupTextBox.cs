@@ -39,6 +39,7 @@ namespace WpfLabs.PopupTextBox
     {
         private bool _isTabKeyDown;
         private Popup _popup;
+        private TextBox _singleTextBox;
         private TextBox _multiTextBox;
 
         public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register(nameof(MaxLength), typeof(int), typeof(PopupTextBox),
@@ -80,6 +81,7 @@ namespace WpfLabs.PopupTextBox
         public override void OnApplyTemplate()
         {
             _popup = (Popup) GetTemplateChild("Popup");
+            _singleTextBox = (TextBox) GetTemplateChild("SingleTextBox");
             _multiTextBox = (TextBox) GetTemplateChild("MultiTextBox");
 
             if (_multiTextBox != null)
@@ -90,6 +92,16 @@ namespace WpfLabs.PopupTextBox
 
             GotFocus += OnGotFocus;
             LostFocus += OnLostFocus;
+
+            MouseEnter += (sender, args) =>
+            {
+                var x = IsMouseOver;
+            };
+
+            _singleTextBox.MouseEnter += (sender, args) =>
+            {
+                var x = IsMouseOver;
+            };
 
             base.OnApplyTemplate();
         }
